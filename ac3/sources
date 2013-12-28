@@ -1,0 +1,27 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxac3
+TARGETTYPE=DRIVER_LIBRARY
+
+TARGETLIBS=$(SDK_LIB_PATH)\ntoskrnl.lib\
+        $(SDK_LIB_PATH)\libcntpr.lib\
+        $(SDK_LIB_PATH)\libcmtd.lib
+
+C_DEFINES=$(C_DEFINES) -DKX_INTERNAL -DKX_DEBUG_FUNC=state->debug_func -DAC3_EXPORTS
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+INCLUDES=..\h
+
+SOURCES=  bit_allocate.c   bitstream.c      coeff.c \
+	crc.c             decode.c         dither.c \
+	exponent.c       imdct.c           \
+	parse.c          rematrix.c       sanity_check.c   stats.c
+
+
+#	driver.cpp wdm.rc downmix.c

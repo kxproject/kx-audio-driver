@@ -1,0 +1,20 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kx
+TARGETTYPE=DRIVER_LIBRARY
+
+C_DEFINES=$(C_DEFINES) -DKX_INTERNAL -DKX_DEBUG_FUNC=hw->cb.debug_func
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=kx.h
+
+INCLUDES=..\h
+
+SOURCES= mpu.cpp state.cpp hal.cpp calc.cpp init.cpp dbdetect.cpp\
+	ecard.cpp bufmgr.cpp \
+        irq.cpp pci.cpp timer.cpp ac97.cpp wave.cpp voice.cpp midi.cpp \
+        rec.cpp synth.cpp soundfont.cpp dsp.cpp mtr.cpp microcode.cpp p16v.cpp multichn.cpp

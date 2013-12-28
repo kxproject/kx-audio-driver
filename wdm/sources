@@ -1,0 +1,46 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kx
+TARGETTYPE=DRIVER
+
+NTTARGETFILE2=install_sign pdb install_sysdir_sys sync
+
+TARGETLIBS=$(OBJ_PATH)\..\driver\$O\kx.lib \
+	$(OBJ_PATH)\..\ac3\$O\kxac3.lib \
+    $(OBJ_PATH)\..\krnlguids\$O\krnlguids.lib \
+        $(SDK_LIB_PATH)\portcls.lib\
+        $(SDK_LIB_PATH)\ntoskrnl.lib\
+        $(SDK_LIB_PATH)\libcntpr.lib\
+        $(SDK_LIB_PATH)\ksguid.lib\
+        $(SDK_LIB_PATH)\ntstrsafe.lib \
+        $(SDK_LIB_PATH)\Rtlver.lib 
+
+C_DEFINES=-DKX_INTERNAL -DKX_DEBUG_FUNC=1 $(C_DEFINES)
+
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=common.h
+
+INCLUDES=..\h
+
+SOURCES=Wdm.rc Wdm.cpp  \
+        adapter.cpp     \
+        comkrnl.cpp	\
+        miniuart.cpp	\
+        minitopo.cpp	\
+        miniwave.cpp	\
+        minisynth.cpp	\
+        property.cpp	\
+        asio.cpp	\
+        miniwavein.cpp	\
+        miniwaveout.cpp \
+        minictrl.cpp \
+        gsif.cpp \
+        miniwave_p16v.cpp \
+        lmem.cpp \
+        guids.cpp \
+        CDmaChannel.cpp
