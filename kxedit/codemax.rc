@@ -1,0 +1,616 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define CODEMAX_RC
+#include "codemax.h"
+#include <windows.h>
+#include <WINRESRC.H>
+#include "codemax.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define CODEMAX_RC\r\n"
+    "#include ""codemax.h""\r\n"
+    "#include <windows.h>\r\n"
+    "#include <WINRESRC.H>\r\n"
+    "#include ""codemax.rc2""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDR_HSPLIT              CURSOR  DISCARDABLE     "hsplit.cur"
+IDR_VSPLIT              CURSOR  DISCARDABLE     "vsplit.cur"
+IDR_HVSPLIT             CURSOR  DISCARDABLE     "hvsplit.cur"
+IDR_RECORD_MACRO        CURSOR  DISCARDABLE     "recmacro.cur"
+IDR_LEFT_MARGIN         CURSOR  DISCARDABLE     "leftmarg.cur"
+IDC_URLHAND             CURSOR  DISCARDABLE     "cursor1.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_END_MACRO_RECORD    BITMAP  DISCARDABLE     "endmrec.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GOTO_LINE DIALOG DISCARDABLE  0, 0, 149, 47
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Go To Line"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Line:",-1,8,17,16,8
+    EDITTEXT        IDC_LINENO,28,15,54,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,92,7,50,14,BS_MULTILINE
+    PUSHBUTTON      "Cancel",IDCANCEL,92,26,50,14
+END
+
+IDD_RECORD_MACRO DIALOG DISCARDABLE  0, 0, 61, 29
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Record Macro"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Done...",IDOK,12,6,38,17,BS_BITMAP | BS_MULTILINE | NOT 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "Done...",IDOK2,12,6,38,17
+END
+
+IDD_SAVE_MACRO DIALOGEX 0, 0, 261, 86
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Macro"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "Press new &shortcut key:",-1,6,7,192,47
+    CONTROL         "",IDC_HOTKEY,"CMHotKey",WS_TABSTOP,12,18,182,14,
+                    WS_EX_NOPARENTNOTIFY | WS_EX_CLIENTEDGE
+    LTEXT           "",IDC_HOTKEY_ASSIGNMENT,12,36,179,12
+    LTEXT           "S&ave As:",-1,7,56,30,8
+    COMBOBOX        IDC_MACROS,7,66,186,110,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,204,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,204,24,50,14
+END
+
+IDD_FIND DIALOG DISCARDABLE  0, 0, 237, 67
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "W&hat:",-1,7,9,20,8
+    COMBOBOX        IDC_FIND_TEXT,36,7,135,56,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Match &whole word only",IDC_WHOLE_WORD,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,7,29,89,10
+    CONTROL         "Match &case",IDC_MATCH_CASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,41,53,10
+    CONTROL         "Regular &expression",IDC_REG_EXP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,53,76,10
+    GROUPBOX        "Direction",-1,109,24,62,39,WS_GROUP
+    CONTROL         "&Up",IDC_UP,"Button",BS_AUTORADIOBUTTON | WS_GROUP | 
+                    WS_TABSTOP,116,35,25,10
+    CONTROL         "&Down",IDC_DOWN,"Button",BS_AUTORADIOBUTTON,116,48,35,
+                    10
+    DEFPUSHBUTTON   "&Find",IDOK,180,7,50,14,WS_GROUP
+    PUSHBUTTON      "&Mark  All",IDC_MARK_ALL,180,27,50,14
+    PUSHBUTTON      "C&lose",IDCANCEL,180,47,50,14
+END
+
+IDD_REPLACE DIALOG DISCARDABLE  0, 0, 237, 98
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find & Replace"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "F&ind:",-1,7,9,16,8
+    COMBOBOX        IDC_FIND_TEXT,60,7,111,56,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Re&place with:",-1,7,25,44,8
+    COMBOBOX        IDC_REPLACE_TEXT,60,23,111,56,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Match &whole word only",IDC_WHOLE_WORD,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,7,43,89,10
+    CONTROL         "Match &case",IDC_MATCH_CASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,55,53,10
+    CONTROL         "Regular &expression",IDC_REG_EXP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,67,76,10
+    CONTROL         "Preser&ve case",IDC_PRESERVE_CASE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,80,61,10
+    GROUPBOX        "Replace in",-1,103,41,67,42,WS_GROUP
+    CONTROL         "&Selection",IDC_SELECTION,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,112,53,45,10
+    CONTROL         "E&ntire buffer",IDC_BUFFER,"Button",BS_AUTORADIOBUTTON,
+                    112,67,54,10
+    DEFPUSHBUTTON   "&Find Next",IDOK,180,7,50,14,WS_GROUP
+    PUSHBUTTON      "&Replace",IDC_REPLACE,180,25,50,14
+    PUSHBUTTON      "Replace &All",IDC_REPLACE_ALL,180,45,50,14
+    PUSHBUTTON      "Cl&ose",IDCANCEL,180,64,50,14
+END
+
+IDD_REPEAT_COUNT DIALOGEX 0, 0, 172, 47
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Repeat Count"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "&Repeat the next command",-1,7,5,99,32
+    EDITTEXT        IDC_REPEAT_COUNT,18,18,26,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "times.",-1,47,21,19,8
+    DEFPUSHBUTTON   "OK",IDOK,115,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,115,24,50,14
+END
+
+IDD_PROPPAGE_TABS DIALOG DISCARDABLE  0, 0, 210, 154
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Language/Tabs"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Auto indentation style",-1,7,7,161,47,WS_GROUP
+    CONTROL         "&Off",IDC_OFF,"Button",BS_AUTORADIOBUTTON | WS_GROUP | 
+                    WS_TABSTOP,15,17,25,10
+    CONTROL         "Follow language &scoping",IDC_SCOPE,"Button",
+                    BS_AUTORADIOBUTTON,15,28,94,10
+    CONTROL         "&Copy from previous line",IDC_COPY_PREV,"Button",
+                    BS_AUTORADIOBUTTON,15,40,89,10
+    GROUPBOX        "Tabs",-1,7,58,162,46,WS_GROUP
+    LTEXT           "&Tab size:",-1,15,72,30,8
+    EDITTEXT        IDC_TAB_SIZE,52,69,24,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Con&vert tabs to spaces while typing",IDC_EXPAND_TABS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,88,127,10
+    LTEXT           "&Language:",-1,7,110,35,8
+    COMBOBOX        IDC_LANGUAGE,7,121,102,84,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Fixup text case while typing language keywords",
+                    IDC_NORM_CASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,
+                    138,165,10
+END
+
+IDD_PROPPAGE_KEYBOARD DIALOGEX 0, 0, 210, 154
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Keyboard"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "&Command:",-1,3,2,34,8
+    LISTBOX         IDC_COMMANDS,3,12,96,101,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Key Assignments:",-1,103,2,60,8
+    LISTBOX         IDC_HOTKEYS,103,12,104,33,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "A&ssign",IDC_ASSIGN,103,50,32,14,WS_GROUP
+    PUSHBUTTON      "&Remove",IDC_REMOVE,139,50,32,14
+    PUSHBUTTON      "Re&set",IDC_RESET,175,50,32,14
+    LTEXT           "New k&ey assignment:",-1,104,67,81,8
+    CONTROL         "",IDC_HOTKEY,"CMHotKey",WS_TABSTOP | 0x1000,103,77,104,
+                    14,WS_EX_NOPARENTNOTIFY | WS_EX_CLIENTEDGE
+    LTEXT           "",IDC_ASSIGNED_TO,103,93,104,20,SS_NOPREFIX | SS_SUNKEN
+    LTEXT           "Description:",-1,3,116,38,8
+    LTEXT           "",IDC_DESCRIPTION,3,126,204,21,SS_NOPREFIX | SS_SUNKEN
+END
+
+IDD_PROPPAGE_COLORFONT DIALOG DISCARDABLE  0, 0, 210, 154
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Color/Font"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Color",-1,5,3,200,95
+    LTEXT           "&Item:",-1,15,14,16,8
+    LISTBOX         IDC_COLOR_ITEM,15,24,96,68,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Color:",-1,123,15,19,8
+    COMBOBOX        IDC_FORE_COMBO,123,25,73,61,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Background:",IDC_BACK_LABEL,123,42,42,8
+    COMBOBOX        IDC_BACK_COMBO,123,52,73,63,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Font style",IDC_FONT_STYLE_LABEL,123,69,31,8
+    COMBOBOX        IDC_FONT_STYLE,123,79,73,63,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Font",-1,5,102,200,49
+    CTEXT           "AaBbCcDdEe",IDC_PREVIEW,9,110,144,39,SS_CENTERIMAGE
+    PUSHBUTTON      "C&hange...",IDC_FONT,160,110,38,14
+END
+
+IDD_PROPPAGE_MISC DIALOG DISCARDABLE  0, 0, 210, 154
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Misc"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "&Smooth scrolling",IDC_SMOOTH_SCROLL,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,3,6,67,10
+    CONTROL         "Show &left margin",IDC_LEFT_MARGIN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,3,19,68,10
+    CONTROL         "Line &tooltips on scroll",IDC_LINE_TOOLTIP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,3,32,87,10
+    CONTROL         "Allow &drag and drop",IDC_DRAG_DROP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,3,45,79,10
+    CONTROL         "Allow &column selection",IDC_COLUMN_SEL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,3,58,87,10
+    CONTROL         "Confine caret to te&xt",IDC_SEL_BOUNDS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,3,71,79,10
+    CONTROL         "Color syntax h&ighlighting",IDC_COLOR_SYNTAX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,6,91,10
+    CONTROL         "Show &horizontal scrollbar",IDC_H_SCROLL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,19,94,10
+    CONTROL         "Show &vertical scrollbar",IDC_V_SCROLL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,32,87,10
+    CONTROL         "Allow h&orizontal splitting",IDC_H_SPLIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,45,90,10
+    CONTROL         "Allow v&ertical splitting",IDC_V_SPLIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,58,83,10
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | WS_GROUP,0,87,210,
+                    1
+    GROUPBOX        "Line num&bering",IDC_STATIC,6,98,90,52,WS_GROUP
+    LTEXT           "St&yle:",IDC_STATIC,12,112,18,8
+    COMBOBOX        IDC_NUMSTYLE,43,110,47,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Sta&rt at:",IDC_STATIC,10,131,26,8
+    EDITTEXT        IDC_NUMSTART,43,130,47,14,ES_AUTOHSCROLL | ES_NUMBER
+    GROUPBOX        "Max undoable actions:",IDC_STATIC,109,98,97,53,WS_GROUP
+    CONTROL         "&Unlimited",IDC_UNLIMITED,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,124,114,45,10
+    CONTROL         "Li&mited to:",IDC_LIMITED,"Button",BS_AUTORADIOBUTTON,
+                    124,131,46,10
+    EDITTEXT        IDC_MAX_UNDO,173,129,28,14,ES_AUTOHSCROLL | ES_NUMBER | 
+                    WS_GROUP
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,102,0,1,87
+END
+
+IDD_ABOUT DIALOG DISCARDABLE  0, 0, 202, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About CodeMax"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Close",IDOK,145,50,50,14
+    ICON            "IDI_OCX",IDC_STATIC,13,9,20,20
+    LTEXT           "CodeMax",IDC_ABOUT_TITLE,40,9,67,11
+    LTEXT           "Copyright 1997-2000, WinMain Software",IDC_STATIC,7,46,
+                    128,8
+    LTEXT           "http://www.winmain.com",IDC_ABOUT_URL,7,56,80,8,
+                    SS_NOTIFY
+    LTEXT           "Version: ",IDC_ABOUT_VERSION,7,36,104,8
+    LTEXT           "Powerful Code Editing in a Win32 Control",IDC_STATIC,40,
+                    20,130,8
+    GROUPBOX        "",IDC_STATIC,7,2,188,30
+END
+
+IDD_ABORTPRINT DIALOG DISCARDABLE  0, 0, 177, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Print"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,61,25,50,14
+    LTEXT           "Printing File...",IDC_STATIC,7,7,43,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 195
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 64
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_WORDUPPERCASE       "Makes the current word uppercase"
+    CMD_WORDTRANSPOSE       "Swaps the current and previous words"
+    CMD_WORDRIGHTEXTEND     "Extends the selection forward to the start of the next word"
+    CMD_WORDRIGHT           "Moves forward to the start of the next word"
+    CMD_WORDENDRIGHT        "Moves forward to the end of the next word"
+    CMD_WORDENDRIGHTEXTEND  "Extends the selection forward to the start of the next word"
+    CMD_WORDLOWERCASE       "Makes the current word lowercase"
+    CMD_WORDLEFTEXTEND      "Extends the selection backward to the start of the previous word"
+    CMD_WORDLEFT            "Moves backward to the start of the previous word"
+    CMD_WORDENDLEFT         "Moves backward to the end of the previous word"
+    CMD_WORDENDLEFTEXTEND   "Extends the selection backward to the end of the previous word"
+    CMD_WORDDELETETOSTART   "Deletes a word to the left"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_WORDDELETETOEND     "Deletes a word to the right"
+    CMD_WORDCAPITALIZE      "Makes the first character uppercase"
+    CMD_WINDOWSTART         "Moves to the top of the text window"
+    CMD_WINDOWSCROLLUP      "Scrolls the file contents up one line"
+    CMD_WINDOWSCROLLTOTOP   "Scrolls the line to the top of the window"
+    CMD_WINDOWSCROLLTOCENTER "Scrolls the line to the center of the window"
+    CMD_WINDOWSCROLLTOBOTTOM "Scrolls the line to the bottom of the window"
+    CMD_WINDOWSCROLLRIGHT   "Scrolls the window to the right"
+    CMD_WINDOWSCROLLLEFT    "Scrolls the window to the left"
+    CMD_WINDOWSCROLLDOWN    "Scrolls the file contents down one line"
+    CMD_WINDOWRIGHTEDGE     "Moves to the right edge of the text window"
+    CMD_WINDOWLEFTEDGE      "Moves to the left edge of the text window"
+    CMD_WINDOWEND           "Moves to the bottom of the text window"
+    CMD_UPPERCASESELECTION  "Makes the selection all uppercase"
+    CMD_UNTABIFYSELECTION   "Replaces tabs with spaces in the selection"
+    CMD_UNINDENTSELECTION   "Indents the selected text left one tab stop"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_UNDOCHANGES         "Undoes the last action, ignoring movement commands"
+    CMD_UNDO                "Undoes the last action"
+    CMD_TABIFYSELECTION     "Replaces spaces with tabs in the selection"
+    CMD_SENTENCERIGHT       "Moves to the beginning of the next sentence"
+    CMD_SENTENCELEFT        "Moves to the beginning of the previous sentence"
+    CMD_SENTENCECUT         "Deletes the remainder of the sentence"
+    CMD_SELECTSWAPANCHOR    "Swaps the anchor and the cursor in a selection"
+    CMD_SELECTPARA          "Selects the current paragraph"
+    CMD_SELECTLINE          "Selects lines of text"
+    CMD_SELECTALL           "Selects the entire document"
+    CMD_REDOCHANGES         "Redoes the last action, ignoring movement commands"
+    CMD_REDO                "Redoes the previously undone action"
+    CMD_PASTE               "Inserts the clipboard contents at the insertion point"
+    CMD_PARAUP              "Moves to the beginning of the previous paragraph"
+    CMD_PARADOWN            "Moves to the beginning of the next paragraph"
+    CMD_PAGEUPEXTEND        "Extends the selection up one page"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_PAGEUP              "Moves the cursor up one page"
+    CMD_PAGEDOWNEXTEND      "Extends the selection down one page"
+    CMD_PAGEDOWN            "Moves the cursor down one page"
+    CMD_LOWERCASESELECTION  "Makes the selection all lowercase"
+    CMD_LINEUPEXTEND        "Extends the selection up one line"
+    CMD_LINEUP              "Moves the cursor up one line"
+    CMD_LINETRANSPOSE       "Swaps current and previous lines"
+    CMD_LINESTART           "Moves to the start of the current line"
+    CMD_LINEOPENBELOW       "Opens a new line below the cursor"
+    CMD_LINEOPENABOVE       "Opens a new line above the cursor"
+    CMD_LINEENDEXTEND       "Extends the selection to the end of the current line"
+    CMD_LINEEND             "Moves the cursor to the end of the current line"
+    CMD_LINEDOWNEXTEND      "Extends the selection down one line"
+    CMD_LINEDOWN            "Moves the cursor down one line"
+    CMD_LINEDELETETOSTART   "Deletes to the beginning of the current line"
+    CMD_LINEDELETETOEND     "Deletes to the end of the current line"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_LINEDELETE          "Deletes the selected line"
+    CMD_LINECUT             "Deletes the selected lines and places the text on the clipboard"
+    CMD_INDENTTOPREV        "Indents to the position of the next text on the previous line"
+    CMD_INDENTSELECTION     "Indents the selected text right one tab stop"
+    CMD_HOMEEXTEND          "Extends the selection to either the start of the current line or the start of the text on that line"
+    CMD_HOME                "Moves to either the start of the current line or the start of the text on that line"
+    CMD_GOTOMATCHBRACE      "Finds the matching brace"
+    CMD_GOTOINDENTATION     "Moves to the end of the indentation"
+    CMD_GOTOLINE            "Moves to a user-specified line"
+    CMD_FINDREPLACE         "Displays the find & replace dialog box"
+    CMD_REPLACE             "Replaces the first occurrence of the find text after the current position with the replace text and finds the next occurrence of the find text"
+    CMD_REPLACEALLINBUFFER  "Replaces the find text with the replace text in the entire buffer"
+    CMD_REPLACEALLINSELECTION 
+                            "Replaces the find text with the replace text in the selection"
+    CMD_FINDPREVWORD        "Finds the previous occurrence of the selected text"
+    CMD_FINDPREV            "Finds the previous occurrence of the specified text"
+    CMD_FINDNEXTWORD        "Finds the next occurrence of the selected text"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_FINDNEXT            "Finds the next occurrence of the specified text"
+    CMD_FINDMARKALL         "Finds the specified text and sets a bookmark at the found locations"
+    CMD_FIND                "Finds the specified text"
+    CMD_SETFINDTEXT         "Sets the text to search for in subsequent find commands"
+    CMD_SETREPLACETEXT      "Sets the text to substitute for the find text in subsequent find & replace commands"
+    CMD_TOGGLEPRESERVECASE  "Toggles intelligent case preservation when replacing text"
+    CMD_TOGGLEWHOLEWORD     "Toggles whole word searching on and off"
+    CMD_TOGGLECASESENSITIVE "Toggles case sensitive searching on and off"
+    CMD_END                 "Moves to the end of the current line, bottom of the text window, or end of the file"
+    CMD_TOGGLEWHITESPACEDISPLAY "Shows or hides whitespace indicators"
+    CMD_TOGGLEOVERTYPE      "Toggles between inserting and replacing text"
+    CMD_SETREPEATCOUNT      "Sets the repeat count for the next command"
+    CMD_DOCUMENTSTARTEXTEND "Extends the selection to the beginning of the file"
+    CMD_DOCUMENTSTART       "Moves to the beginning of the file"
+    CMD_DOCUMENTENDEXTEND   "Extends the selection to the end of the file"
+    CMD_DOCUMENTEND         "Moves to the end of the file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_PROPERTIES          "Displays the properties dialog"
+    CMD_BEGINUNDO           "Starts an undo transaction"
+    CMD_ENDUNDO             "Ends an undo transaction"
+    CMD_TOGGLEREGEXP        "Toggles regular expression searching on and off"
+    CMD_CLEARSELECTION      "Empties the selection"
+    CMD_REGEXPON            "Turns on regular expression searching"
+    CMD_REGEXPOFF           "Turns off regular expression searching"
+    CMD_WHOLEWORDON         "Turns on whole word searching"
+    CMD_WHOLEWORDOFF        "Turns off whole word searching"
+    CMD_PRESERVECASEON      "Turns on case preservation when replacing text"
+    CMD_PRESERVECASEOFF     "Turns off case preservation when replacing text"
+    CMD_CASESENSITIVEON     "Turns on case sensitive searching"
+    CMD_CASESENSITIVEOFF    "Turns off case sensitive searching"
+    CMD_WHITESPACEDISPLAYON "Turns on whitespace display"
+    CMD_WHITESPACEDISPLAYOFF "Turns off whitespace display"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_DELETEHORIZONTALSPACE "Deletes the spaces and tabs around the cursor"
+    CMD_DELETEBLANKLINES    "Deletes the blank lines adjacent to the cursor"
+    CMD_DELETEBACK          "Deletes the selection or, if there is no selection, the character to the left of the cursor"
+    CMD_DELETE              "Deletes the selection"
+    CMD_CUTSELECTION        "Cuts the selection and puts it on the clipboard"
+    CMD_CUT                 "Cuts the selection and puts it on the clipboard"
+    CMD_COPY                "Copies the selection to the clipboard"
+    CMD_CHARTRANSPOSE       "Swap characters around the insertion point"
+    CMD_CHARRIGHTEXTEND     "Extends the selection one character to the right"
+    CMD_CHARRIGHT           "Moves the cursor one character to the right"
+    CMD_CHARLEFTEXTEND      "Extends the selection one character to the left"
+    CMD_CHARLEFT            "Moves the cursor one character to the left"
+    CMD_BOOKMARKTOGGLE      "Toggles a bookmark for the current line on and off"
+    CMD_BOOKMARKPREV        "Moves to the line containing the previous bookmark"
+    CMD_BOOKMARKNEXT        "Moves to the line containing the next bookmark"
+    CMD_BOOKMARKCLEARALL    "Clears all bookmarks in the window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_BOOKMARKJUMPTOFIRST "Moves to the first line containing a bookmark"
+    CMD_BOOKMARKJUMPTOLAST  "Moves to the last line containing a bookmark"
+    CMD_APPENDNEXTCUT       "Adds the next cut text to end of the clipboard"
+    CMD_INSERTCHAR          "Inserts a character at the current location"
+    CMD_NEWLINE             "Inserts a new-line character at the current location"
+    CMD_RECORDMACRO         "Begins/ends keystroke macro-recording"
+    CMD_PLAYMACRO1          "Plays keystroke macro 1"
+    CMD_PLAYMACRO2          "Plays keystroke macro 2"
+    CMD_PLAYMACRO3          "Plays keystroke macro 3"
+    CMD_PLAYMACRO4          "Plays keystroke macro 4"
+    CMD_PLAYMACRO5          "Plays keystroke macro 5"
+    CMD_PLAYMACRO6          "Plays keystroke macro 6"
+    CMD_PLAYMACRO7          "Plays keystroke macro 7"
+    CMD_PLAYMACRO8          "Plays keystroke macro 8"
+    CMD_PLAYMACRO9          "Plays keystroke macro 9"
+    CMD_PLAYMACRO10         "Plays keystroke macro 10"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CMD_OVERTYPEON          "Turns on overtype mode"
+    CMD_OVERTYPEOFF         "Turns off overtype mode"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PLAYBACK_CANCELED   "Macro could not be completed."
+    IDS_MACRO_ERROR         "Macro Error"
+    IDS_MENU_CUT            "Cut"
+    IDS_MENU_COPY           "Copy"
+    IDS_MENU_PASTE          "Paste"
+    IDS_MENU_FIND           "Find..."
+    IDS_MENU_FINDREPLACE    "Replace..."
+    IDS_MENU_TOGGLEWHITESPACEDISPLAY "Show Whitespace"
+    IDS_MENU_UPPERCASESELECTION "Make Uppercase"
+    IDS_MENU_LOWERCASESELECTION "Make Lowercase"
+    IDS_MENU_TABIFYSELECTION "Tabify"
+    IDS_MENU_UNTABIFYSELECTION "Untabify"
+    IDS_MENU_UNDO           "Undo"
+    IDS_MENU_REDO           "Redo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MENU_PROPERTIES     "Properties..."
+    IDS_ACTIVEX_WIN_TEXT    "(code)"
+    IDS_NUM_KEY             "Num "
+    IDS_SHIFT               "Shift"
+    IDS_CTRL                "Ctrl"
+    IDS_ALT                 "Alt"
+    IDS_END_RECORDING       "End Recording"
+    IDS_UNASSIGNED          "<unassigned>"
+    IDS_ERR_HOTKEY_RESERVED "This hotkey is already reserved for recording macros"
+    IDS_ERROR               "Error"
+    IDS_DELETE_DUPE_MACRO   "This hotkey was previously assigned to a different macro.\nWould you like to delete the old macro now?"
+    IDS_SAVE_MACRO          "Save Macro"
+    IDS_CURRENTLY_ASSIGNED_TO "Currently assigned to: "
+    IDS_LINE_TIP_PREFIX     "Line "
+    IDS_DEFAULT             "Default"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NONE                "<none>"
+    IDS_CURRENTLY_ASSIGNED_TO_CR "Currently assigned to:\n     "
+    IDS_BINARY              "Binary"
+    IDS_OCTAL               "Octal"
+    IDS_DECIMAL             "Decimal"
+    IDS_HEX                 "Hex"
+    IDS_CUSTOM              "<Custom>"
+    IDS_WIN_PROPS           "Window Properties"
+    IDS_PROP_BOOKMARK       "Bookmarks"
+    IDS_PROP_COMMENT        "Comments"
+    IDS_PROP_HDIVIDERLINES  "Horz Divider Lines"
+    IDS_PROP_VDIVIDERLINES  "Vert Divider Lines"
+    IDS_PROP_HIGHLIGHTEDLINE "Highlighted Line"
+    IDS_PROP_KEYWORD        "Keywords"
+    IDS_PROP_LMARGIN        "Left Margin"
+    IDS_PROP_LINENUMBER     "Line Numbers"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROP_NUMBER         "Numbers"
+    IDS_PROP_OPERATOR       "Operators"
+    IDS_PROP_SCOPEKEYWORD   "Scope Keywords"
+    IDS_PROP_STRING         "Strings"
+    IDS_PROP_TAGELEMNAME    "Tag Element Names"
+    IDS_PROP_TAGENT         "Tag Entities"
+    IDS_PROP_TAGATTRNAME    "Tag Attribute Names"
+    IDS_PROP_TEXT           "Text"
+    IDS_PROP_WINDOW         "Window"
+    IDS_PROP_TAGTEXT        "Tag Text"
+    IDS_FONT_NORMAL         "Normal"
+    IDS_FONT_BOLD           "Bold"
+    IDS_FONT_ITALIC         "Italic"
+    IDS_FONT_BOLDITALIC     "Bold + Italic"
+    IDS_FONT_UNDERLINE      "Underline"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PRINT_JOB_TITLE     "Source Code"
+    IDS_PAGENUM_OF          "Page %d of %d"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+

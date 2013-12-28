@@ -1,0 +1,95 @@
+<title>Routage ASIO et écoute</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><b><font size="3">kX ASIO Routage et lecture [OUTDATED]</font></b></p>
+<hr>
+<p><b><font size="2">G&eacute;n&eacute;ralit&eacute;s</font></b></p>
+<p><b></b><font size="2">La section lecture ASIO consiste en 16 bus mono situ&eacute;s 
+  sur le FXBus sur les sorties de 0 &agrave; 15 dans l'&Eacute;cran<a href="dspguide.htm"> 
+  DSP kX</a>. Par d&eacute;faut les bus sont partag&eacute;s avec les autres flux 
+  sonores comme l'audio, le synth&eacute;tiseur et les effets. Vous avez toujours 
+  la possibilit&eacute; de cr&eacute;er votre propre routage ASIO, et de le configurer 
+  pour votre usage personnel. Cela peut comporter l'utilisation d'effets internes 
+  au DSP et/ou un mixage au niveau de la spatialisation.</font></p>
+<p><b><font size="2"><a name="asioroute">Routeur kX ASIO </a></font></b></p>
+<p><font size="2">Les fonctions du routeur ASIO kX sont identiques &agrave; celle 
+  de l'&Eacute;cran<a href="kxrouter.htm"> de routage kX</a>.</font></p>
+<table width="100%"  cellpadding="4">
+  <tr>
+    <td width="31%" align="center" valign="middle"><img src="images/asioroute.gif" ></td>
+    <td width="69%" valign="top">
+      <p><font size="2">Le routeur ASIO s'ouvre en s&eacute;lection de bouton 
+        kX ASIO dans le <a href="mixer.htm">Mixeur kX</a>. Chaque bus mono dispose 
+        des ses param&egrave;tres de routage et peut &ecirc;tre rout&eacute; simultan&eacute;ment 
+        vers un total de <b>quatre</b> bus. (Une sortie st&eacute;r&eacute;o dans 
+        votre h&ocirc;te ASIO consiste en <b>deux</b> FXbus associ&eacute;s par 
+        une paire de nombres [paire/impaire]).</font></p>
+      <p><font size="2">Un bus ne peut<b> pas</b> &ecirc;tre rout&eacute; vers 
+        le m&ecirc;me bus plus d'une fois.</font></p>
+      <p><font size="2">Le niveau du signal est r&eacute;gl&eacute; pour chaque 
+        flux en ajustant la valeur du curseur.</font></p>
+      <p><font size="2">Dans l'exemple &agrave; gauche kxOUT00 est rout&eacute; 
+        vers les bus 0, 15, 13 et 14, et seuls les bus 0 et 14 sont activ&eacute;s. 
+        Dans ce cas le bus 0 est le signal d'origine, pendant que le bus 14 est 
+        connect&eacute; aux chorus st&eacute;r&eacute;o qui fonctionne comme un 
+        effet aller/retour. </font></p>
+      <p><font size="2">Note: Cela d&eacute;pend de vos <a href="dspguide.htm">param&egrave;tres 
+        DSP actuels</a>.</font></p>
+    </td>
+  </tr>
+</table>
+<p><font size="2">Pour utiliser diff&eacute;rents bus dans votre programme h&ocirc;te 
+  ASIO vous devez :</font></p>
+<ul>
+  <li><font size="2">V&eacute;rifiez que les sorties soient activ&eacute;es dans 
+    le(s) logiciel(s) ASIO h&ocirc;te,</font></li>
+  <li><font size="2">S&eacute;lectionnez la sortie correspondant (mono or st&eacute;r&eacute;o) 
+    dans votre logiciel.</font></li>
+</ul>
+<p><b><font size="2">Panneau de contr&ocirc;le ASIO </font></b></p>
+<table width="550"  cellpadding="5">
+  <tr> 
+    <td width="39%" align="center" valign="middle" height="131"><img src="images/asiosetup.gif" ></td>
+    <td width="61%" valign="top" height="131"> 
+      <p><font size="2">L'&eacute;cran de configuration ASIO peut &ecirc;tre ouvert 
+        &agrave; partir de votre programme h&ocirc;te ASIO. Utilisez cette fen&ecirc;tre 
+        pour ajuster la latence ASIO...</font></p>
+      <p><font size="2">Le bouton ASIO kX ouvre la <a href="#asioroute">fen&ecirc;tre 
+        routage ASIO</a>.</font></p>
+      <p>&nbsp;</p>
+      </td>
+  </tr>
+</table>
+<p><font size="2">Augmenter le temps de latence peut s'av&eacute;rer utile si 
+  vous entendez des craquements dans vos enregistrements audio ou lors de l'utilisation 
+  d'un synth&eacute;tiseur. La valeur minimale de latence pouvant &ecirc;tre obtenue 
+  d&eacute;pend de votre mat&eacute;riel, des ressources syst&egrave;me et de 
+  la charge du syst&egrave;me.</font></p>
+<p><font size="2">Le pilote ASIO supporte des temps de latence dans l'intervalle 
+  du 'presque temps r&eacute;el' 2.66 ms &agrave; 341.33 ms.</font></p>
+<p><font size="2">En raison de limitation mat&eacute;rielle le pilote ASIO kX 
+  est <b>fig&eacute;</b> sur la fr&eacute;quence d'&eacute;chantillonnage de <b>48kHz</b>.</font></p>
+<p><b><font size="3">Trucs et astuces.</font></b></p>
+<p><font size="2">Cubase VST vous permet uniquement une sortie st&eacute;r&eacute;o 
+  par d&eacute;faut (la 'Master'). De nouvelles sorties peuvent &ecirc;tre activ&eacute;es 
+  dans le mixeur Cubase. Il faut &eacute;tendre la fen&ecirc;tre pour faire appara&icirc;tre 
+  un total de 8 sorties st&eacute;r&eacute;o. Elles sont activ&eacute;es en pressant 
+  'Activer' pour chaque bus que vous souhaitez utiliser. La paire de bus FX kX 
+  peut &ecirc;tre s&eacute;lectionn&eacute;e sous chacun des curseurs. </font><font size="2">Les 
+  nouvelles sorties sont accessibles dans le mixeur VST pour chacun des canaux.</font></p>
+<p><font size="2">Logic Audio autorise automatiquement toutes les entr&eacute;es/sorties 
+  ASIO quand ce type de pilote est s&eacute;lectionn&eacute;. Les entr&eacute;es/sorties 
+  peuvent &ecirc;tre s&eacute;lectionn&eacute;es &agrave; partir du mixeur Audio. 
+  Vous pouvez diminuer le nombre d'E/S ASIO dans l'<i>Audio Hardware and Drivers 
+  setup</i> de Logic.</font></p>
+<p><font size="2">Logic Audio Platinum configure automatiquement quatre haut-parleurs 
+  pour un mixage spatialis&eacute; &agrave; travers les sorties 1-4 (FXBus 0-3) 
+  - mais il peut aussi &ecirc;tre configur&eacute; pour mixer un total de 9 haut-parleurs 
+  (8 canaux + l'effet basse fr&eacute;quence).</font></p>
+<p><font size="2">Pour plus d'information concernant l'utilisation et la configuration 
+  ASIO, consultez la documentation sp&eacute;cifique de vos logiciels.</font></p>
+<hr>
+<p><font size="1"> Cubase et VST sont des marques d&eacute;pos&eacute;es et ASIO 
+  est une marque commerciale de Steinberg Media Technologies AG.</font></p>

@@ -1,0 +1,25 @@
+microeffects v1.0
+
+incuding:
+
+microphaser_v1.0.da 
+matrix4x4_m_v1.0.da 
+microbit_v1.0.da 
+microchorus_v2.0.da 
+microdelay_m_v1.0.da 
+microdelay_x_v1.0.da 
+micropan_v1.0.da 
+space_80_v1.5.da 
+microwah-wah_v1.0.da
+matrix4x4_routing.jpg 
+this readme
+
+explainations to the delay time adjustment can be found in the microcode
+by rightclicking on the plugin and open the effects editor (open source).
+
+update 14.01.2008, 22.33 
+- made some saver temporary input registers
+- added dry_wet slider to microwah-wah
+- changes in space'80 (more effect on freq_comp)
+
+2007. stylus, http://stylus.siteboard.de

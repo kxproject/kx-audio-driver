@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="KS Source Files">
+      <UniqueIdentifier>{75f5d7b8-4ca5-41e1-ba53-d0cd15ed28c3}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="KS Header Files">
+      <UniqueIdentifier>{1ad83f74-adb4-4b42-8723-9f0d526f933a}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ASIO Source Files">
+      <UniqueIdentifier>{097c9ef3-7da8-4bf7-b296-b5eb4cdda42a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ASIO Header Files">
+      <UniqueIdentifier>{609e01aa-cac6-4be5-8a6d-2f4bea659a40}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AsioDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DevDesc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DsDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetCaps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KsDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KxDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kxtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kxtestDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MmDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\audfilter.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\audpin.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\enum.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\filter.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\irptgt.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\node.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\pin.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ks\util.cpp">
+      <Filter>KS Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="asio\asiolist.cpp">
+      <Filter>ASIO Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DevDesc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="driver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kxtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kxtestDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\audfilter.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\audpin.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\enum.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\filter.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\irptgt.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\ks.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\node.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\pin.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\tlist.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ks\util.h">
+      <Filter>KS Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\asio.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\asiodrivers.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\asiolist.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\asiosys.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\combase.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\ginclude.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\iasiodrv.h">
+      <Filter>ASIO Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\kxtest.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="kxtest.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\kxtest.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

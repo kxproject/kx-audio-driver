@@ -1,0 +1,67 @@
+; New microcode
+	name "HQ Crossover"
+	copyright "Copyright (c) 2004.";
+	created "04/20/2005";
+	engine "KX";
+	comment "by ColHQ";
+	guid "dc2b5ea6-f5b6-4b48-9b20-961ff6ebde66";
+	
+; REGISTERS	
+	
+input in_l, in_r
+output L_high, R_high, L_low, R_low
+control Cutoff_F=0.1
+static K=1
+temp   tl_1,   tl_2,   tl_3,   tl_4,   tl_5,   tl_6,   tl_7,   tl_8,   tl_9, tl_10
+temp   tl_11,   tl_12,   tl_13,   tl_14,   tl_15,   tl_16,   tl_17,   tl_18,   tl_19
+temp   tr_1,   tr_2,   tr_3,   tr_4,   tr_5,   tr_6,   tr_7,   tr_8,   tr_9, tr_10
+temp   tr_11,   tr_12,   tr_13,   tr_14,   tr_15,   tr_16,   tr_17,   tr_18,   tr_19
+; CODE
+
+interp tl_1,   tl_1,   Cutoff_F, in_l
+interp tl_2,   tl_2,   Cutoff_F, tl_1
+interp tl_3,   tl_3,   Cutoff_F, tl_2
+interp tl_4,   tl_4,   Cutoff_F, tl_3
+interp tl_5,   tl_5,   Cutoff_F, tl_4
+interp tl_6,   tl_6,   Cutoff_F, tl_5
+interp tl_7,   tl_7,   Cutoff_F, tl_6
+interp tl_8,   tl_8,   Cutoff_F, tl_7
+interp tl_9,   tl_9,   Cutoff_F, tl_8
+interp tl_10,  tl_10,  Cutoff_F, tl_9
+
+interp tl_11,   tl_11,   Cutoff_F, tl_10
+interp tl_12,   tl_12,   Cutoff_F, tl_11
+interp tl_13,   tl_13,   Cutoff_F, tl_12
+interp tl_14,   tl_14,   Cutoff_F, tl_13
+interp tl_15,   tl_15,   Cutoff_F, tl_14
+interp tl_16,   tl_16,   Cutoff_F, tl_15
+interp tl_17,   tl_17,   Cutoff_F, tl_16
+interp tl_18,   tl_18,   Cutoff_F, tl_17
+interp tl_19,   tl_19,   Cutoff_F, tl_18
+interp L_low,   L_low,   Cutoff_F, tl_19
+macsn  L_high,   in_l,      L_low, K
+
+interp tr_1,   tr_1,   Cutoff_F, in_r
+interp tr_2,   tr_2,   Cutoff_F, tr_1
+interp tr_3,   tr_3,   Cutoff_F, tr_2
+interp tr_4,   tr_4,   Cutoff_F, tr_3
+interp tr_5,   tr_5,   Cutoff_F, tr_4
+interp tr_6,   tr_6,   Cutoff_F, tr_5
+interp tr_7,   tr_7,   Cutoff_F, tr_6
+interp tr_8,   tr_8,   Cutoff_F, tr_7
+interp tr_9,   tr_9,   Cutoff_F, tr_8
+interp tr_10,  tr_10,  Cutoff_F, tr_9
+
+interp tr_11,   tr_11,   Cutoff_F, tr_10
+interp tr_12,   tr_12,   Cutoff_F, tr_11
+interp tr_13,   tr_13,   Cutoff_F, tr_12
+interp tr_14,   tr_14,   Cutoff_F, tr_13
+interp tr_15,   tr_15,   Cutoff_F, tr_14
+interp tr_16,   tr_16,   Cutoff_F, tr_15
+interp tr_17,   tr_17,   Cutoff_F, tr_16
+interp tr_18,   tr_18,   Cutoff_F, tr_17
+interp tr_19,   tr_19,   Cutoff_F, tr_18
+interp R_low,   R_low,   Cutoff_F, tr_19
+macsn  R_high,   in_r,      R_low, K
+
+end

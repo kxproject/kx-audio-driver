@@ -1,0 +1,34 @@
+HKCR
+{
+	CodeMax.Control.2 = s 'CodeMax Edit Control 2.0'
+	{
+		CLSID = s '{ECEDB941-AC41-11d2-AB20-000000000000}'
+		'Insertable'
+	}
+	CodeMax.Control = s 'CodeMax Edit Control 2.0'
+	{
+		CLSID = s '{ECEDB941-AC41-11d2-AB20-000000000000}'
+		CurVer = s 'CodeMax.Control.2'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECEDB941-AC41-11d2-AB20-000000000000} = s 'CodeMax Edit Control 2.0'
+		{
+			ProgID = s 'CodeMax.Control.2'
+			VersionIndependentProgID = s 'CodeMax.Control'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			ForceRemove 'Control'
+			ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 2'
+			'MiscStatus' = s '0'
+			{
+			    '1' = s '131473'
+			}
+			'TypeLib' = s '{ECEDB943-AC41-11d2-AB20-000000000000}'
+			'Version' = s '2.0'
+		}
+	}
+}

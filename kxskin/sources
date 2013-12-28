@@ -1,0 +1,26 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+SKIN=aqua
+
+TARGETNAME=parser
+TARGETTYPE=PROGRAM
+
+NTTARGETFILE2=skin
+
+SOURCES=parser.cpp
+
+USE_MFC=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+MSC_WARNING_LEVEL=-W4
+C_DEFINES=$(C_DEFINES) /D"_MBCS" /D"_CONSOLE"
+
+UMTYPE=console
+UMBASE=0x400000
+UMENTRY=-entry:mainCRTStartup

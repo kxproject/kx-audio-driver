@@ -1,0 +1,58 @@
+<i>Introduction</i><br>
+
+
+<p>In December 2000 VIA announced their new 686B Southbridge, in conjunction with the KT133A chipset. 
+The new Southbridge differed from its predecessor by including native support for ATA100. 
+</p>
+
+<p>
+With the new Southbridge and KT133A motherboards, 
+various users started experiencing data corruption problems as well as system instability 
+when transferring files, listening to music, or anything that utilized the PCI bus. 
+Typically, users with a KT133A chipset, 686B Southbridge and a Creative Labs Sound Blaster 
+Live sound card were affected.
+</p>
+
+<p>Our tests show that this problem is not limited to the SBLive!, but that systems with an Audigy soundcard can also be affected.
+Even worse, with an affected system, kX Drivers may not be recognized by VIA 4in1 driver package,
+indicating that the VIA fix may not be installed correctly. 
+</p>
+
+<p>Fixes provided by BIOS manufacturers and by VIA do not completely solve this problem. 
+Even after solving data corruption issues you may still experience sound
+clicks and distortion while copying files, burning CDs, transferring data via network.
+</p>
+
+<p>However we've found a solution that completely solves this problem. This solution
+consists of the following steps:<br>
+<ul>
+ <li>Go to your motherboard manufacturer's website and download the latest BIOS for your motherboard</li>
+ <li>Go to the VIA site and download the latest Via 4in1 drivers</li>
+ <li>Install George's PCI Latency patch (this is the only way of solving problems related to this issue in some cases)</li>
+</ul>
+</p>
+
+
+<i>Who needs this patch</i><br>
+<p>
+ Anyone using a 686B-based motherboard, regardless of Operation System.
+</p>
+
+<i>Conclusion</i><br>
+<p>
+ We recommend using George's PCI Latency version 0.19 available 
+ <a href=http://download.viahardware.com/vlatency_v019.zip class=fade target=_new>here</a> or
+ <a href=http://www.georgebreese.com/net/software/ class=fade target=_new>here</a>*.<br>
+ You should also install the latest VIA drivers available <a href=http://www.via.com.tw class=fade target=_blank>here</a> and
+ update your System BIOS.
+ <br><br>
+
+<i>References</i><br>
+<p>
+ <a href=http://www.viahardware.com/686b_1.shtm class=fade  target=_blank>http://www.viahardware.com/686b_1.shtm</a>
+</p>
+
+<h5>
+<hr>
+* Link is supposed to be correct, however you might need to go to 
+<a href=http://www.viahardware.com class=fade target=_blank>www.viahardware.com</a> to find this file.

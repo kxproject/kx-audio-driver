@@ -1,0 +1,55 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxfxpack
+TARGETTYPE=DYNLINK
+TARGETEXT=kxl
+
+NTTARGETFILE2=install install_timebalance_kxs
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -D"_MBCS" -D"_AFXDLL" -D"_USRDLL" -D"_WINDLL"
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+USE_STL=1
+
+INCLUDES=..\h
+
+TARGETLIBS=\
+	$(OBJ_PATH)\..\kxapi\$O\kxapi.lib \
+	$(OBJ_PATH)\..\kxgui\$O\kxgui.lib \
+	$(SDK_LIB_PATH)\oldnames.lib \
+	$(SDK_LIB_PATH)\newdev.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\setupapi.lib \
+    $(SDK_LIB_PATH)\winmm.lib\
+    $(SDK_LIB_PATH)\advapi32.lib\
+    $(SDK_LIB_PATH)\dsound.lib \
+    $(SDK_LIB_PATH)\dxguid.lib \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib \
+    $(SDK_LIB_PATH)\shell32.lib
+
+
+SOURCES=fxlib.rc fxlib.cpp debug.cpp \
+        autowah.cpp flanger.cpp 3dsound.cpp apsfuzz.cpp \
+        eq_bandpass.cpp EQ_Highpass.cpp EQ_Highshelf.cpp EQ_Lowpass.cpp EQ_Lowshelf.cpp \
+        EQ_Notch.cpp EQ_peaking.cpp Freq_Splitter.cpp  \
+        apscomp.cpp Phat_EQ_Mono.cpp Phat_EQ_Stereo.cpp wavegen.cpp everb.cpp  \
+        decimator.cpp wavegen2.cpp pitch.cpp \
+        apscompsc.cpp mx6.cpp crossfade.cpp gain.cpp amp.cpp stmix.cpp\
+        wavegen3.cpp apsexp.cpp apsexp_plus.cpp  \
+        dynamica.cpp NoiseGate2T.cpp NoiseGate2Ts.cpp cleax4reverb.cpp info.cpp \
+        Cross_2nd.cpp Cross_4th.cpp osc.cpp OScopeCtrl.cpp TheDelay.cpp TheSmallDelay.cpp \
+        TimeBalanceV2.cpp Phaser.cpp morebass.cpp ReverbEax2.cpp
+# total: 43 .cpp-based effects

@@ -1,0 +1,38 @@
+name "microwidth v1.0";
+copyright "2009. stylus, http://stylus.siteboard.de"
+created "";
+engine "kX";
+comment "spatial enhancer (0% = mono, 50% = orig, 100% = more stereo)";
+guid "381eb23f-4fe2-4102-82e5-95e7d44f353c";
+
+; typical spatial enhancer, which adds the channel- difference
+; to the inputs. additionally the full mono signal can heared.
+; 0% = mono, 50% = original (reconstructed), 100% = more stereo
+
+; registers
+input inl, inr
+output outl, outr
+static u, r, s, v
+control width=0.8 
+
+; code
+
+; in/2
+macs r, 0, inl, 0.5
+macs s, 0, inr, 0.5
+
+; mono
+macs v, r, s, 1 
+
+; channel difference
+macsn u, r, s, 1 ; (inl-inr)/2
+
+; add difference to input
+macs r, r, u, 1
+macs s, s, u, -1 ; inverted u
+
+; out
+interp outl, v, width, r
+interp outr, v, width, s
+
+end

@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+
+echo === Uninstalling kX Audio Driver
+
+./package/scripts/preupgrade_kext
+./package/scripts/preupgrade_app
+./package/scripts/preupgrade_cmdline
+
+# update KEXT cache:
+sudo rm -R /System/Library/Extensions.kextcache
+sudo rm -R /System/Library/Extensions.mkext
+sudo touch /System/Library/Extensions

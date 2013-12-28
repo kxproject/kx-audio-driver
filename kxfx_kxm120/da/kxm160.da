@@ -1,0 +1,22 @@
+name "kxm 160";
+copyright "2007. stylus";
+created "01/09/2008";
+engine "kx"; 
+comment "4x multiplier (kxm 160 v1.1)"
+guid "67a8296f-54ab-4fad-a6c9-d923f9147ad3";  
+
+; 50% = 1 octave up, 75% = 2 octaves up ..
+
+input in
+output out
+control multiply=1 
+static a
+  
+; trim sliders 
+interp a, 0x1, multiply, 0x5
+
+; divide 
+macints out, 0, in, a
+
+end
+

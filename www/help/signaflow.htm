@@ -1,0 +1,29 @@
+<title>kX I/O Signal Flow Diagram</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX Input/Output Signal Flow Diagram</h2>
+<hr>
+
+<h4>
+
+<p style="text-align:justify;tab-stops:369.0pt">
+<img  src="images/signaf2.gif" width="571" height="512" ></p>
+<p><b>In Analogue mode</b> (default for non-10k2 cards):<o:p></o:p></p>
+<p>PCM Volume is const (=0 – no attenuation); Master Volume is const (=0); Surround Volume is const (=0); it is possible to record / monitor one analoguesource only via <i>'Rec Source'</i>; all ac97 input volumes are set to <i>'mute'</i>; if unmuted they go directly to Front Speakers. Using 'StereoMix' mode or unmuting ac97 outputs is not recommended. Volume is controlled via DSP ac97in (in0/in1).<o:p></o:p></p>
+<p><b>In “Digital Output Only” mode</b></p>
+<p>AC97 PCM, Surround and Master Volumes are muted; “Rec Source' is 'StereoMix'; this allows multiple analogue sources to be recorded / monitored (with or without PCM – depending on kX DSP settings); input volumes can be controlled separately. One should unmute desired AC97 analogue inputs. Volume is controlled by ac97 source volume and DSP's ac97in (in0/in1). <o:p></o:p></p>
+<p>The 10k2 is capable of recording multiple analogue sources when its PCM volume is set to 'muted' and front output goes to I2S codec directly; AC97 output is muted by default; input volumes can be controlled separately; DigitalOutputOnly does not influence AC97 codec; there is no AC97 'surround' output – I2S is used instead.</p>
+<p>The Audigy2-based boards use AC97 codec for recording only. That's why the default
+   signal routing is different compared to 10k1 and 10k2 (Audigy) boards.
+   The AC97 codec outputs are always muted, thus, not affecting front/rear/center+lfe outputs.
+   The 'i2s codec' shown on the diagram above (marked '10k2 only') is used for <b>all</b> the
+   analog outputs.</p>
+
+<img src="images/signaf4.gif">
+
+<p>Audigy2-based boards also have a special 24/96 unit called 'P16V'. More details
+can be found in <a href='p16v.htm'>here</a>.</p>
+
+</h4>

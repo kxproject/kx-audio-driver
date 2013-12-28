@@ -1,0 +1,67 @@
+name "PitchShift";
+copyright "Copyright 1997 E-mu Systems/Creative Technology, Ltd.";
+engine "EMU10K1_A0";
+created "Fri Jul 13 12:59:02 2001 ";
+guid "441a09a7-3d0b-11d6-a4c7-8fae6d701845";
+	itramsize 2048
+; Registers
+	
+	control wet8002=0x7fffffff; 0.0 to 1.0
+	static sti8003=0x200;
+	static sti8004=0x800;
+	static sti8005=0x1ff800;
+	static dyn8006=0x0;			//pitch 1 0x15c
+	static dyn8007=0x0;			//pitch 2 0c15d
+	static dyn8008=0x0;			dyn
+	static dyn8009=0x0;			dyn
+	static sti800a=0x0;			dyn		
+	static sti800b=0x7fffffff;	dyn
+	static sti800c=0x80000000;	dyn
+
+; Internal TRAM delay line (2048 samples; ~0.042667 msec)
+
+	idelay write itr800d at 0x0;  0x265 at 0x0160e
+	idelay read itr800f at 0x400; 0x266 at 0x01a0e 1024samp = 0x400
+	idelay read itr8011 at 0x400; 0x267 at 0x019a2 916	= 0x394 \\0x400
+	idelay read itr8013 at 0x401; 0x268 at 0x019a3 917	= 0x395 \\0x401
+	idelay read itr8015 at 0x400; 0x269 at 0x01da2 1940	= 0x794 \\0x400
+	idelay read itr8017 at 0x401; 0x26a at 0x01da3 1941	= 0x795 \\0x401
+;
+	input in0;
+	input in1;
+	output out0;
+	output out1;
+
+	temp tmp8019;
+	temp tmp801a;
+	temp tmp801b;	
+	temp tmp801c;
+
+; Code
+	 macs		tmp801b,	in0,		0x0,		0x0;
+	 macs		tmp801c,	in1,		0x0,		0x0;
+	 macs		0x0,	0x0,		tmp801b,	0x5a7ef9db;
+	 macs		itr800d,	ACCUM,		tmp801c,	0x5a7ef9db;
+	 macwn		sti800c,	sti800c,	dyn8007,	0x80000000;
+	 skip		0x0,		ccr,		sti8003,	0x2;
+	 macs		sti800a,	0x0,		0x0,		0x0;
+	 macints	sti800b,	0x0,		sti800b,	0x7fffffff;
+	 macs		sti800a,	sti800a,	dyn8006,	sti800b ;
+	 macsn		sti800b,	sti800b,	dyn8006,	sti800a ;
+	 interp		tmp8019,	itr8011,	dyn8008,	itr8013 ;
+	 interp		dyn8008,	itr8015,	dyn8009,	itr8017 ;
+	 macs		0x0,	0x0,		tmp8019,	sti800a ;
+	 macs		tmp8019,	ACCUM,		dyn8008,	sti800b ;
+	 interp		out0,		tmp801b,	wet8002,	tmp8019 ;
+	 interp		out1,		tmp801c,	wet8002,	tmp8019 ;
+	 macs		tmp8019,	&itr800f,	sti800c,	sti8005 ;
+	 macs		&itr8011,	tmp8019,	0x0,		0x0;
+	 macsn		&itr8013,	&itr8011,	sti8004,	0x80000000;
+	 macintw	dyn8008,	0x0,		tmp8019,	0x00100000;
+	 macw		tmp8019,	sti800c,	0x80000000, 	0x80000000;
+	 macs		tmp8019,	&itr800f,	tmp8019,	sti8005 ;
+	 macs		&itr8015,	tmp8019,	0x0,		0x0;
+	 macsn		&itr8017,	&itr8015,	sti8004,	0x80000000;
+	 macintw	dyn8009,	0x0,		tmp8019,	0x00100000;
+
+end

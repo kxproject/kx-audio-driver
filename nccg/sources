@@ -1,0 +1,29 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=nccg
+TARGETTYPE=PROGRAM
+
+NTTARGETFILE2=install_sign
+
+UMTYPE=console
+UMBASE=0x400000
+UMENTRY=mainCRTStartup
+
+INCLUDES=..\h
+
+SOURCES=nccg.cpp
+
+USE_STL=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+MSC_WARNING_LEVEL=-W4 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+C_DEFINES=$(C_DEFINES) /D"_MBCS" /D"_CONSOLE"

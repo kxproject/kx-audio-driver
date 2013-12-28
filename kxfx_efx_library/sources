@@ -1,0 +1,39 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxefx
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -D"_MBCS" -D"_AFXDLL" -D"_USRDLL" -D"_WINDLL" -D"kGUI_INTERNAL"
+MSC_WARNING_LEVEL=-W2 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+INCLUDES=..\h;..\kxfxlib
+
+TARGETLIBS=\
+	$(OBJ_PATH)\..\kxapi\$O\kxapi.lib \
+	$(OBJ_PATH)\..\kxgui\$O\kxgui.lib \
+	$(SDK_LIB_PATH)\oldnames.lib \
+	$(SDK_LIB_PATH)\newdev.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\setupapi.lib \
+    $(SDK_LIB_PATH)\winmm.lib\
+    $(SDK_LIB_PATH)\advapi32.lib\
+    $(SDK_LIB_PATH)\dsound.lib \
+    $(SDK_LIB_PATH)\dxguid.lib \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib
+
+SOURCES=3DBar.cpp CMKnob.cpp fxlib.rc StaticCounter.cpp

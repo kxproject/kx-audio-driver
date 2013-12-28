@@ -1,0 +1,61 @@
+name "kxm 900";
+engine "kX";
+copyright "2007. stylus, http://stylus.siteboard.de"
+comment "unisono module (kxm 900 v1.1)";
+guid "24dac7b1-ca6c-4cf4-b0d8-68c98360aba4";
+
+; registers
+input in
+output out
+const rd_shifted=0x1e0000 ; 960*0x800 
+static in_half, fx, t, sin1, cos1, y, a, c
+static sin=0, cos=0.25
+control speed=0.3
+control depth=0.3
+control dry_wet=1
+
+; itram
+itramsize 960 ; 20 ms
+idelay write wrt1 at 0
+idelay read rd11 at 960 
+idelay read rd12 at 960 
+
+; sinoid lfo
+macs y, 0, speed, 0.0005 ; max. ~4 Hz 
+macs sin,  sin,  y,  cos
+macsn cos,  cos,  y,  sin
+macs sin1, 0.5, sin, 1 ; dc offset +0.5    
+macs cos1, 0.5, cos, 1 ; get 0..+1
+
+; half input 
+macs in_half, 0, in, 0.5 
+
+; modulated delayline 
+
+; interpolation coeff.
+macintw t, 0, t, 0x100000 ; 20 bit shift to get the "address part" of the 32 bit (delay) gpr 
+
+; linear interpolated delay line 
+interp a, rd11, t, rd12 ; relax the 2 "in order" readouts 
+
+; depth 
+macsn c, 1, 1, depth
+macs sin1, c, sin1, depth
+
+; calculate address offset "t" 
+macs t, &wrt1, rd_shifted, sin1 
+
+; 2 "in order" delay readout´s
+macints &rd11, t, 0x800, 0x1
+macints &rd12, t, 0x800, 0x2 
+
+; fill delay line
+macs wrt1, in, 0, 0 ; fill should be after the tricky adress calculation
+
+; mix with in_half
+macs fx, in_half, a, 0.5 
+
+; dry/wet
+interp out, in, dry_wet, fx 
+    
+end

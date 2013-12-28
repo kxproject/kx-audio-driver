@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+
+sudo echo === removing control panel applications...
+sudo rm -rf "/Applications/Utilities/kX/kX Manager.app"
+sudo rm -rf "/Applications/Utilities/kX/kX AC97.app"
+sudo rm -d  "/Applications/Utilities/kX/"
+
+sudo echo === removing legacy applications...
+sudo rm -rf "/Applications/Utilities/kX Manager.app"
+
+exit 0

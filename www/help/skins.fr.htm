@@ -1,0 +1,77 @@
+<!--
+<? echo "--"; echo ">"; if(0) { echo "<!--"; ?>
+-->
+
+<title>Sélecteurs d'apparence</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>S&eacute;lecteur d'apparence (skins)</h3>
+
+<h4>
+
+<p><font size="2">Diff&eacute;rentes apparences peuvent &ecirc;tre utilis&eacute;es 
+  par le mixeur kX.</font></p>
+
+<!-- <? echo "--"; echo ">"; } echo "<!--"; ?>-->
+
+<p>L'architecture de gestion des apparences a &eacute;t&eacute; &eacute;tudi&eacute;e 
+  en vue de faciliter la cr&eacute;ation de nouvelles apparences pour le mixeur 
+  kX. La proc&eacute;dure pour cr&eacute;er de nouvelles apparences est la suivante 
+  :<br>
+
+<ul>
+  <li> Si vous n'avez pas l'intention d'ajouter ou de d&eacute;placer certains 
+    contr&ocirc;les, alors vous pouvez simplement cr&eacute;er votre fichier .zip 
+    avec des images .jpg ou .gif, puis cr&eacute;er un fichier kxskin.ini personnalis&eacute; 
+    avec seulement une section, appel&eacute;e '[skin]', qui d&eacute;crira votre 
+    nouvelle apparence. N'oubliez pas d'ajouter le fichier kxskin.ini &agrave; 
+    votre archive zip. Votre nouveau fichier zip peut &ecirc;tre situ&eacute; 
+    n'importe o&ugrave; sur votre disque dur. Son nom ne doit pas &ecirc;tre kxskin.zip 
+    et vous devez remplacer la cha&icirc;ne 'GUID' par une nouvelle, g&eacute;n&eacute;r&eacute;e 
+    par le mixeur (Configuration ->G&eacute;n&eacute;rer un Guid). (La signification 
+    de GUID est IDentifieur Globalement Unique/Globally Unique IDentifier). </li>
+  <li>Si votre apparence n&eacute;cessite de changer la taille des fen&ecirc;tres 
+    ou leur emplacement, vous devez cr&eacute;er un fichier kxskin.ini plus sophistiqu&eacute;. 
+    Pour plus de d&eacute;tails regarder l'exemple de kxskin.ini inclus. Cependant, 
+    si certains param&eacute;trages sont omis dans votre apparence, ils seront 
+    automatiquement remplac&eacute;s par les valeurs par d&eacute;faut du kxskin.ini 
+    int&eacute;gr&eacute; avec le mixeur kX. De cette mani&egrave;re, vous n'&ecirc;tes 
+    tenu que de fournir les parties sp&eacute;cifiques &agrave; votre apparence 
+    dans votre fichier kxskin.ini (avec au minimum la section [skin]'). Les images 
+    (.jpg/.gif files) et fichiers son (.wav) <b>sont dor&eacute;navant automatiquement 
+    r&eacute;cup&eacute;r&eacute;s</b> &agrave; partir du fichier kxskin.zip quand 
+    vous utilisez un mixeur personnalis&eacute; (depuis la version 3514). </li>
+  <li> D'une mani&egrave;re g&eacute;n&eacute;rale, les <b>noms de fichiers</b> 
+    image et son r&eacute;f&eacute;renc&eacute;s par le kxskin.ini ne doivent 
+    pas &ecirc;tre modifi&eacute;s, vous de ne devez pas, de la m&ecirc;me mani&egrave;re, 
+    modifier la cha&icirc;ne de texte (en fait, vous pouvez les omettre dans votre 
+    kxskin.ini personnalis&eacute;). Cependant, si vous envisagez de faire une 
+    version dans un langage particulier prenez contact avec nous par courrier 
+    &eacute;lectronique. </li>
+  <li> Une fois vos images r&eacute;alis&eacute;es, celles ci doivent &ecirc;tre 
+    compress&eacute;es (format ZIP) avec votre kxskin.ini personnalis&eacute; 
+    vers un fichier unique ainsi qu'avec un GUID unique. Pour utiliser la nouvelle 
+    apparence, cliquer sur 'S&eacute;lecteur d'apparence -&gt; Nouvelle apparence'. 
+  </li>
+  <li> Notez &eacute;galement que le nom de l'apparence doit &eacute;galement 
+    &ecirc;tre unique. </li>
+  <li> Pour utiliser les modules d'apparence vous devez avoir au minimum la <b>version 
+    3509</b> du logiciel kX. </li> <li> Depuis la version 3521 vous pouvez utiliser des archives de type RAR &agrave; 
+    la place du type ZIP. Cependant, &eacute;viter les archives de type 'solides' 
+    qui sont susceptibles de r&eacute;duite les performances globales. </li>
+  <li> Depuis la version 3523 les informations concernant les param&egrave;tres 
+    r&eacute;gionaux sont stock&eacute;es dans le fichier <b>lang.ini</b>. N'ajouter 
+    pas ce fichier dans vos apparences personnalis&eacute;es. </li>
+  <li> Rappelez vous que tous les fichiers non trouv&eacute;s dans votre fichier 
+    personnalis&eacute; sont extraits du fichier par d&eacute;faut. Par exemple 
+    vous pouvez tout &agrave; fait ne pas inclure de fichiers .wav dans votre 
+    apparence personnalis&eacute;e. </li>
+</ul>	
+
+ Si vous &ecirc;tes int&eacute;ress&eacute;s par la cr&eacute;ations de modules 
+d'apparence personnalis&eacute;s, ou si vous en avez d&eacute;j&agrave; r&eacute;alis&eacute;, 
+prenez contact avec nous par courrier &eacute;lectronique &agrave; <!-- <? echo("--"); echo(">"); contact_link(); echo("<!--"); ?>-->. 
+
+</h4>

@@ -1,0 +1,20 @@
+HKCR
+{
+	CodeMax.HotKey = s 'HotKey Class'
+	{
+		CLSID = s '{ECEDB946-AC41-11d2-AB20-000000000000}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECEDB946-AC41-11d2-AB20-000000000000} = s 'HotKey Class'
+		{
+			ProgID = s 'CodeMax.HotKey'
+			VersionIndependentProgID = s 'CodeMax.HotKey'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

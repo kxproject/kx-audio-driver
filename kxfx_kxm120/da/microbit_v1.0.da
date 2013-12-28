@@ -1,0 +1,54 @@
+name "microbit v1.0";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "10/25/2007";
+engine "kX";
+comment "bit crusher (max. 8 bit, min. 1 bit), allways go in with full amplitude for correct calculations!";
+guid "702c9fa2-3d97-47fe-8f1e-f4e229b00628";
+    
+; registers
+
+  input in1, in2
+  output out1, out2
+  control resolution=1
+  control gain_comp=0.01
+  control dry_wet=1 
+  static a, b, c, d, dry1, dry2, tin1, tin2
+
+; temp input register
+  macs tin1, in1, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  macs tin2, in2, 0, 0
+  
+; norm resolution
+
+  macs c, 0.000000000466,resolution, 0.0000000596 ; div by 24 bit (results in max. 8bit) 
+
+; norm gain
+
+  macs d, 0.000000000466, gain_comp, 0.0000000037 ; 16x
+
+; crush inputs
+
+  macs a, 0, tin1, c
+  macs b, 0, tin2, c
+
+; bring up the squares :) 
+
+  macints a, 0, a, 16777216 ; mult. with 24 bit 
+  macints b, 0, b, 16777216  
+
+; gain it steppy 
+
+  macints a, 0, a, d ; gain compensation   
+  macints b, 0, b, d 
+
+; dry_wet
+
+  macsn dry1, tin1, tin1, dry_wet ; make a dry register 
+  macsn dry2, tin2, tin2, dry_wet 
+
+; out it! 
+
+  macs out1, dry1, a, dry_wet ; wet the signal here
+  macs out2, dry2, b, dry_wet 
+
+end

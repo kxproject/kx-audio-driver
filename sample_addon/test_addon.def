@@ -1,0 +1,3 @@
+LIBRARY			test_addon
+;DESCRIPTION		'kX Driver Sample Add-On'
+EXPORTS	

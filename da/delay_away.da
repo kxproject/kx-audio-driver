@@ -1,0 +1,54 @@
+name "Delay Away";
+copyright "Copyright (c) 2004 Eugeniy Sokol.";
+engine "kX";
+created "01/15/2004";
+comment "v0.3 for beta-testers";
+guid "2b914bff-32ee-4a3e-a640-9150abd60e83";
+itramsize 102
+xtramsize 0x18000
+; Registers
+input L, R;
+output L1, R1, L2;
+output R2, L3, R3;
+control Mix=0.5, Fb=0.8, LP1=0.9;
+control LP2=0.3, Shift=0.05, Time=0.5; 
+static rlp=0x0, llp=0x0, mono=0x0;
+static maxsize=0x6000000;
+static maxsize2=0x9000000;
+static maxshift=0x32000 ;
+temp lt, rt;
+
+idelay write iw at 0;
+idelay read ir at 50;
+xdelay write xlw at 0x0;
+xdelay read xlr at 20000;
+xdelay read xl2r at 30000;
+xdelay write xrw at 30002;
+xdelay read xrr at 50002;
+xdelay read xr2r at 60002;
+; Code
+interp mono, l, 0.5, r;
+interp llp, llp, LP1, xlr;
+macs lt, mono, llp, Fb;
+interp rlp, rlp, LP2, xrr;
+macs rt, mono, rlp, Fb;
+macs xlw, lt, 0x0, 0x0;
+macs xrw, ir, 0x0, 0x0;
+macs iw, rt, 0x0, 0x0;
+interp l1, mono, Mix, xlr;
+interp r1, mono, Mix, xrr;
+acc3 lt, xlr, xr2r, 0x0;
+acc3 rt, xrr, xl2r, 0x0;
+interp l3, l, Mix, lt;
+interp r3, r, Mix, rt;
+macs lt, xlr, xrr, 1;
+interp l2, l, Mix, lt;
+macsn rt, xlr, xrr, 1;
+interp r2, r, Mix, rt;
+macs &ir, &iw, maxshift, shift;
+macs &xlr, &xlw, maxsize, Time;
+macs &xl2r, &xlw, maxsize2, Time;
+acc3 &xrw, &xl2r, 0x1000, 0x0;
+macs &xrr, &xrw, maxsize, Time;
+macs &xr2r, &xrw, maxsize2, Time;
+end

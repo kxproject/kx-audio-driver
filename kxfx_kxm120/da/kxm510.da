@@ -1,0 +1,39 @@
+name "kxm 510"
+copyright "2007. stylus, http://stylus.siteboard.de"
+engine "kX"
+created "11/20/2007"  
+comment "state variable filter -12 db/oct (kxm 510 v1.1)"
+guid "ba3eb715-c31b-4910-93b8-e8f0f832fcf6"
+
+; state variable filter (-12 db/oct) that outputs lowpass, highpass, bandpass, notch
+ 
+; registers
+input in, envelope, lfo_1, lfo_2, cv
+output hp, lp, bp, no
+control cutoff=0.2, emphasis=0, contour=0, keytrack=0
+static a, b, c, d, e, f, g, h
+ 
+; trim sliders
+interp g, 0x0, keytrack, 0xf
+interp  d, 1, emphasis, 0    
+  
+; adjust controls
+macs e, 0, envelope, contour 
+macints f, 0, cv, g
+
+; cutoff modulation
+acc3 b, cutoff, e, f ; add cutoff, envelope, keytrack
+acc3 b, b, lfo_1, lfo_2 ; add lfos
+limit b, b, b, 0 ; cutoff must be greater or equal 0, if b>0 b=b else b=0
+
+; state variable filter
+macsn   no, in, d, a
+macs    lp, c, b, a
+macsn   hp, no, 1, lp
+macs    bp, a, b, hp
+
+; y(n-1) registers
+macs    a, bp, 0, 0
+macs    c, lp, 0, 0
+
+end

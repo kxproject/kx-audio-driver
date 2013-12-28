@@ -1,0 +1,18 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2004-2014
+# All rights reserved
+# Author: Eugene Gavrilov
+
+TARGETNAME=kstream
+TARGETTYPE=LIBRARY
+
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+USE_MSVCRT=1
+# USE_NATIVE_EH=1
+
+INCLUDES=..\h
+
+SOURCES=audfilter.cpp audpin.cpp enum.cpp filter.cpp irptgt.cpp node.cpp pin.cpp util.cpp

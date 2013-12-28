@@ -1,0 +1,53 @@
+
+; resources
+name "FRC_EAUDIGY"  
+guid "d3dd1aa0-6e20-11d6-bfbc-444553540000";
+itramsize 32;
+
+; registers
+input in1, in2
+output out1, out2     
+
+const k = -0.0110; try -0.0115...-0.0105
+
+idelay write wl at 0;
+idelay read rl at 13;     
+
+idelay write wr at 16;
+idelay read rr at 29; 
+
+; 100 - 6, 10 - 4 
+; b = 1.00000000000000  -0.99882259643903
+; a = 1.00000000000000  -0.99941112483253  
+
+;static sl, sr;            
+;const b = -0.99882259643903;
+;const a = -0.99941112483253;
+
+temp t;
+                                                                 
+;***********************
+; code (not optimized)
+
+; left lf correction
+;macs	t, sl, in1, 1;
+;macs	sl, 0, in1, b;
+;macsn	sl, accum, t, a;  
+
+; left hf combs correction 
+macs	t, in1, rl, k;
+macs	wl, t, 0, 0;
+macs	out1, t, 0, 0;        
+
+; right lf correction
+;macs	t, sr, in2, 1;
+;macs	sr, 0, in2, b;
+;macsn	sr, accum, t, a;  
+
+; right hf combs correction 
+macs	t, in2, rr, k;
+macs	wr, t, 0, 0;
+macs	out2, t, 0, 0;  
+   
+;end
+end;

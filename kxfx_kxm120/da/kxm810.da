@@ -1,0 +1,39 @@
+name "kxm 810";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/19/2007";
+engine "kX";  
+comment "multi waveshaper (kxm 810 v1.0)"
+guid "73474233-0245-4a81-932b-5bb133f6278b";
+; waveshaper with transfer functions: logaritmic, exponential, cut
+
+; registers
+input in
+output log_, exp_, cut 
+control gain=0, level=0.5, cut_limit=0
+static c, d, e, f, g, h, i, j  
+
+;trim sliders
+interp d, 0x0, gain, 0x40  
+interp h, 0, cut_limit, 0.5 ; pos. limit
+interp i, 0, cut_limit, -0.5 ; neg. limit   
+interp j, 0x1, level, 0x8
+  
+; gain
+macints c, in, in, d 
+
+; lin > log
+log e, c, 0x3, 0 
+  
+; lin > exp
+exp f, c, 0x3, 0   
+
+; lin > cut
+limitn g, h, h, in ;if in> pos. limit, g= pos. limit; else g= in
+limit g, i, i, g ;if g< neg. limit , g= neg. limit ; else g= g
+
+; output
+macs log_, 0, e, level
+macs exp_, 0, f, level
+macints cut, 0, g, j
+
+end

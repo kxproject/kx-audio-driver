@@ -1,0 +1,52 @@
+<title>Known Issues</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Issues</h3>
+
+<h4>
+
+<p class=Darken>General</p>
+<ul>
+ <li>Front and Rear speakers are swapped by default (this is intentional) - explanation why <!-- <? echo("--"); echo(">"); klink("rear"); echo("<!--"); ?>-->here</a>.</li>
+ <li>The default speaker configuration is 'Stereo' (2.0) -- you can change this setting by tweaking the 'Surrounder' options.</li>
+ <li>EAX/EAX2.0/EAX3.0 not fully supported.</li>
+ <li>MIDI synth volume control may not function in realtime.</li>
+ <li>If you have ACPI-aware system you may need to disable it. Refer to <!-- <? echo("--"); echo(">"); klink("acpi"); echo("<!--"); ?>-->ACPI guide</a> for details.</li>
+ <li>You may experience certain audio artifacts in 3-D games - in order to solve this issue select 'Wave 4/5' device as default or turn off hardware acceleration in your application.</li>
+ <li>Certain hardware configurations can cause constant beeping instead of sound - please review our forum for details.</li>
+</ul>
+
+<p class=Darken>SoundFonts</p>
+<ul>
+  <li>Maximum single sample size for SoundFonts may be limited by OS memory settings. Review our <!-- <? echo("--"); echo(">"); klink("faq"); echo ("<!--"); ?> -->FAQ</a> for details</li>
+</ul>
+
+<p class=Darken>Hardware-Dependent</p>
+<ul>
+  <li>Settings for phases, levels, etc. may not be optimized for uncommon AC97 codec versions.</li>
+  <li>SB006x / SB010x cards have an issue with ASIO input and output mappings that can't be fixed (a hardware problem).</li>
+  <li>SB020x cards (Dell OEM SB Live!) contain different EMU10k1 chips and they aren't supported at the moment.</li>
+</ul>
+
+<p class=Darken>OS-Dependent</p>
+<ul>
+  <li>Special adjustment of control panel settings may be required for Win2k (refer to installation guide).</li>
+  <li>There might be phantom CD-Audio and Wave controls in the Windows Mixer.</li>
+  <li>The system might fail to go into Stand-by / Suspend modes based on inactivity timer.</li>
+  <li>Media players may hang if the PC is resumed from a StandBy/Suspend modes with audio files being played.</li>
+  <li><strike>Windows 98 and Windows ME users may experience problem with additional '-6dB' attenuation. Use 'Wave 8/9' device in order to fix this.</strike></li>
+  <li>It is highly recommended you do NOT use Windows Mixer (sndvol32) application and tweak the volume only via the kX Mixer.</li>
+</ul>
+
+<p class=Darken>Other Software</p>
+<ul>
+  <li>Use of optional third-party skins may cause resource leakage.</li>
+  <li>Some DVD Players may fail to change the volume when playing AC-3 or multichannel content.</li>
+  <li>Some TV-Tuner software (e.g. from ATI) may conflict with the kX Audio Driver. See <a href='http://www.ati.com/support/infobase/4008.html' target=_blank>ATI support site</a> for details.</li>
+  <li>You may experience shutdown problems. See <a href='http://support.microsoft.com/default.aspx?scid=kb;EN-US;q262575' target=_blank>Microsoft support site</a> for details.</li>
+  <li>When playing back AC-3 content using kX Driver decoder or in 'AC-3 Passthru' mode, the volume control is not available.</li>
+</ul>
+
+</h4>

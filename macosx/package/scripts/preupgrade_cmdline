@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+
+sudo echo === removing command-line tools...
+
+sudo rm -rf "/usr/bin/edspctrl"
+sudo rm -rf "/usr/bin/kxctrl"
+sudo rm -rf "/usr/lib/kXAPI.dylib"
+
+exit 0

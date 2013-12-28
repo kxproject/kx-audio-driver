@@ -1,0 +1,14 @@
+name "AD";
+copyright "Copyright (c) LeMury, 2003-2004. All rights reserved.";
+engine "kX";
+created "03/01/2005";
+comment "Analog Inputs (10k2 UDA + AC97) v1.0 $nobypass";
+guid "9a35a629-3467-4fbe-bab9-99fa62fc2a73";
+
+; Registers
+	output AC97_Left, AC97_Right;
+
+; Code
+	macs	AC97_Left,   0x0,  0x0,  0x0;
+	macs	AC97_Right,  0x0,  0x0,  0x0;
+end;

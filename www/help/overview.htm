@@ -1,0 +1,65 @@
+<title>kX Audio Driver Overview</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX Audio Driver Overview</h2>
+<hr>
+
+<h4>
+
+<p>The kX Audio Driver is a WDM (Windows Driver Model) driver, designed to be used with any <a href="glossary.htm#kX Compatible">kX-compatible</a> PCI sound-card (notably the Creative Labs SoundBlaster Live! and Audigy series of cards, and E-mu Systems' Audio Production Studio sound-card).</p>
+<p>The following features are either fully or partially supported by the kX Audio Driver:</p>
+<ul>
+  <li>Wave Playback &amp; Recording</li>
+  <li>MIDI Synthesizer (Synth Engine)</li>
+  <li>MIDI UART In/Out</li>
+  <li>DirectSound 2D</li>
+  <li>DirectSound 3D / EAX</li>
+  <li>SoundFonts</li>
+  <li>ASIO Playback &amp; Recording</li>
+  <li>DSP Microcode Loading/Unloading/Editing</li>
+  <li>Full AC97 I/O control</li>
+  <li>Software AC-3 Decoding</li>
+  <li>GSIF support</li>
+</ul>
+<p>Note that the kX Audio Driver conforms to the WDM specification and so it is only compatible with the following Microsoft Windows operating systems: Windows 98 (Second Edition), Windows Me, Windows 2000 and Windows XP.</p>
+<hr>
+<p>kX Control Applets</p>
+<p>The following kX control applets can be accessed from the <a href="menu.htm">kX Menu</a> (via the system tray icon or from within the <a href="mixer.htm">kX Mixer</a> window):</p>
+<table cellpadding="5" width="99%" height="112">
+  <tr>
+    <td width="12%" valign="top" align="left" height="25"><a href="mixer.htm">kX Mixer</a></td>
+    <td width="88%" valign="top" align="left" height="25">The main application used for controlling the kX Audio Driver. Includes <a href="master.htm">Master</a> levels and switches, <a href="insnouts.htm">Inputs and Outputs</a>, <a href="recording.htm">Recording Levels</a>, <a href="ac97.htm">AC97 Codec</a>, <a href="fxlevels.htm">Effects Levels</a>, <a href="soundfonts.htm">SoundFonts</a> and <a href="analyser.htm">Analyser</a>, as well as providing access to the other kX control applets.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="26"><a href="dspguide.htm">kX DSP</a></td>
+    <td width="88%" valign="top" align="left" height="26">DSP Control applet for effect loading, unloading and patching. This applet also provides access to the kX Editor and to the DSP plug-in  interfaces (for tweaking effects settings).</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="11"><a href="kxrouter.htm">kX Router</a></td>
+    <td width="88%" valign="top" align="left" height="11">Control applet providing access to the routing of the software input channels, including PCM Wave, AC3, and MIDI Synth (16 channels) and 16 kX ASIO channels (it is merged with previously known kX ASIO).</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="10"><a href="editor.htm">kX Editor</a></td>
+    <td width="88%" valign="top" align="left" height="10">DSP microcode editor. Accessible from within the <a href="dspguide.htm"> kX DSP</a> control applet or directly from the the <a href="menu.htm"> kX Menu</a>.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="automation.htm">kX Automation</a></td>
+    <td width="88%" valign="top" align="left" height="1">Control applet in which MIDI controls can be assigned to parameters.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="10"><a href="remote.htm">kX Remote</a></td>
+    <td width="88%" valign="top" align="left" height="10">Remote Controller for kX. It has no buttons at the moment, but they are coming in the future.</td>
+  </tr>  
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="soundfonts.htm">kX SoundFont</a></td>
+    <td width="88%" valign="top" align="left" height="1">kX SoundFont loader. Provides loading of SoundFonts for MIDI Synth playback.</td></h4>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="spktest.htm">kX Speaker Test</a></td>
+    <td width="88%" valign="top" align="left" height="1">Utility for testing and trouble-shooting speaker setup.</td></h4>
+  </tr>
+  </table>
+
+</h4>

@@ -1,0 +1,31 @@
+module list v1.2
+
+kxm 100 - 3 octaves keyboard unit (midi support)
+kxm 110 - full range keyboard unit (midi support), thanks russ
+kxm 120 - fast midi keyboard unit with choosing options, thanks for help russ
+kxm 150 - universal divider (usefull as octave divider)
+kxm 160 - universal 4x multiplier (usefull as octave multiplier)
+kxm 170 - universal 16x multiplier (usefull to create really high frequencies for ringmodulation (fm- modulation)
+kxm 180 - dc value 0..1
+kxm 190 - inverter
+kxm 200 - multi vco saw, spaced saw, triangle, square, pulsewidthed square (aliasing)
+kxm 210 - multi vco saw, triangle, square, pulsewidthed square (aliasingfree!)
+kxm 220 - white & pink noise
+kxm 300 - 4 channel mixer module
+kxm 310 - 8 channel mixer module 
+kxm 320 - 6 channel mixer module
+kxm 330 - 2 channel mixer module
+kxm 400 - adsr envelope
+kxm 500 - MOOG Lowpass -24 db/oct vcf
+kxm 510 - state variable filter -12 db/oct vcf
+kxm 520 - double MOOG lowpass -48 db/oct vcf
+kxm 550 - -6db/oct lowpass filter
+kxm 560 - -6db/oct highpass filter
+kxm 600 - standard vca
+kxm 700 - multi lfo saw, spaced saw, triangle, square, pulsewidthed square
+kxm 800 - resampler 1-24 khz
+kxm 810 - waveshaper logaritmic, exponential, cut
+kxm 820 - ring modulator 
+kxm 830 - bit crusher 8..1 bit
+kxm 900 - unisono module
+kxm 910 - phaser module

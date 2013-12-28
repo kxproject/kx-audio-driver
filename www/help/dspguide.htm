@@ -1,0 +1,107 @@
+<title>A guide to the kX DSP window</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX DSP Guide</h2>
+<hr>
+
+<h4>
+
+<p><b>Overview</b><br>The kX DSP applet represents the internal connections of the kX driver graphically, and is one of the most powerful features of the <i>kX Audio Driver</i>. Signal routing is done by connecting virtual inputs and outputs with virtual cables in which the digital sound streams are being transmitted, in the same fashion as you would use patch cords to connect different units in a sound studio or in a home stereo setup.</p>
+<p>The DSP window consists of four main objects:</p>
+<p><a href="#fxbus">FXBus</a><br>
+  <a href="#prolog">Prolog</a><br>
+  <a href="#xrouting">XRouting</a><br>
+  <a href="#epilog">Epilog</a></p>
+<p>Other objects (DSP effects such as, EQs, etc.) can be added or removed as required.</p>
+<p><b>Connections</b><br>It is possible to display the current input and output connector assignments by placing the mouse over the connector box (inputs are red and outputs are blue). This activates a small popup window, which shows the label of the connector. Many of the default connections may not be needed for your personal setup, but are enabled by default to ensure that as many of your soundcards functions as possible are activated. This includes both analog and digital input connectors as well as analog and digital output connectors.</p>
+<p><b>Connecting and Disconnecting</b><br>Connections are made by clicking/holding on a connector and dragging with the mouse to the desired destination. Inputs are always located on the left side of the objects while outputs are on the right side. Outputs can be connected to multiple inputs, however inputs can only be connected to a single output, and you cannot connect inputs to inputs or outputs to outputs. To disconnect any input or output, simply right-click on its connection point and select Disconnect. <b>3538 and later</b> versions provide additional features: multiple inputs/outputs are connected by default. In order to connect a <i>single</i> input/output, hold the 'Alt' button. By right-clicking on an input/output, you can 'attach' an effect you wish. You can also 'replace' one effect by another by right-clicking on it.</p>
+<p><b>Resetting the DSP</b><br>The DSP window can be cleared and reinitialized by right-clicking on the background canvas and selecting the appropriate function from the pop-up menu. <i>Clear DSP</i> removes all effects and objects.
+<i><b>Reinitialize DSP</b></i> restores default settings.
+<i><b>Re-align plugins</b></i> restores default positions of DSP objects.</p>
+<p><a name="Adding Objects and Effects"><b>Adding Objects and Effects</b></a><br>New DSP objects and effects can be added into the DSP window by right-clicking on the window background and selecting 'Add Effect / Plugin' from the pop-up menu. You may choose from the objects and effects listed, download additional effects from the kX Project website, or create your own. Note that effects must be registered before they can be used in the DSP window. Choose 'Register Plugin (Dane/RIFX/DLL...)' from the pop-up menu and select the desired effect file or plug-in. Upon successful registration, any new effects will be displayed in the list of available objects.</p>
+<p>When a new object is added into the DSP window the driver automatically allocates all the necessary hardware resources. In 'Advanced mode' the effect appears in a red frame. In this case objects must be translated manually before they can be patched-in and used (translation is required to allocate physical resources; microcode memory, TRAM and registers). Right-click, select 'Translate' and press the 'ok' check mark. Note that the default microcode position of &quot;Don't Care&quot; is normally used, however, in the future it will be possible to select the physical location of the effect/plug-in in the microcode memory - this may be important for correct routing under certain circumstances. If sufficient resources are available, the object will be translated - the frame color will change to light blue (note that the availability of resources such as TRAM, microcode memory, registers, etc., depend both on the model of your soundcard and on the size and quantity of loaded objects and effects). Connect source and destination to the object. Activate the object by right-clicking and choosing 'Enable'.</p>
+<p><a name="Tweaking DSP Settings"><b>Tweaking DSP Settings</b></a><br>If the DSP object has adjustable settings, you can tweak these by selecting 'Tweak' from the object menu (right-click). The settings can also be accessed from the kX Menu (displayed by right-clicking on either the main kX Mixer or the system tray icon). The settings are found in the 'Effects' submenu. To reset the object settings, select 'Reset Settings' from the object menu in the DSP window.</p>
+<p><IMG src="images/stchorus.gif" width="540" height="251"><br>
+<i>Example: Effect settings for the Stereo Chorus effect in version 3531</i></p>
+<p><b>Unloading and removing DSP objects</b><br>DSP objects can be disabled and unloaded by selecting the appropriate commands from the object menu in the DSP window (right-click). Disabling an object simply disables its output; objects must be <i>untranslated</i> or <em>unloaded</em>in order to be cleared from DSP memory. The <em>Untranslate</em> command will free hardware resources associated with an object without unloading the object from system memory. An object can be unloaded completely, freeing up all driver allocated resources, by selecting the <em>Unload</em> command.</p>
+<p><b>Aditional options</b><br>DSP objects can be muted or bypassed by selecting mute <img src="images/mute.gif" width="20" height="20"> or bypass <img src="images/bypass.gif" width="20" height="20"> command in the effect settings.<br>Effect settings can be reset with the reset button. <img src="images/reset.gif" width="20" height="20"></p>
+<p><b>Device selection in the DSP window</b><br>DSP settings are unique to each installed kX-compatible soundcard. This current soundcard is displayed (and selectable) in the lower right corner of the DSP window.</p>
+<hr>
+<p><b>Basic Object Blocks</b></p>
+<p>When the kX DSP window is first opened, the DSP objects that are loaded by default will be displayed. These include the <a href="#fxbus">FxBus</a>, <a href="#prolog">Prolog</a>, <a href="#routing">Routing</a>, and <a href="#epilog">Epilog</a> objects. These are the basic objects used to represent and connect hardware and software inputs and outputs.</p>
+<p><a name="fxbus"><b>FXBus</b></a></p>
+<table width="550" >
+  <tr>
+    <td width="10%" align="left" valign="top">
+    <IMG src="images/fxbus.gif" width="47" height="370"></td>
+    <td width="90%" align="left" valign="top">
+      <p>The FXBusses are virtual 'streams' from the inside of the soundcard to the DSP window. All sound that is generated inside the computer by players and sequencer programs comes out of one or more of these (mostly 2 in stereo pairs).</p>
+      <p>Default settings:</p>
+      <p>WaveOut Left and Right are at FXBus0 and FXBus1.<br>MIDI Synth Out Left and Right are at FXBus02 and FXBus03.<br>Surround (AC3) and <b>DirectSound 3-D</b> streams are located at FXBusses04 to 09.</p>
+      <p><b>Reverb</b> and <b>Chorus</b> effects are connected to Wave, MIDI synth and FXBus13/14. The direct stereo connections to Wave/MIDI synth makes it possible to adjust stereo reverb and chorus directly from the FX window in the <i>kX Mixer</i>.<br>The connections to FXBus 13 and 14 are general mono send return connections to the effects. <i>Be aware that it is possible to route twice to the effects thus adding effects twice to the signals.</i></p>
+      <p>The default routings can be changed for every source. This is described in the <a href="kxrouter.htm"> kX Routing</a> and <a href="asio.htm"> kX ASIO</a> sections.</p>
+    </td>
+  </tr>
+</table>
+<p><a name="prolog"><b>Prolog</b></a></p>
+<table width="550" >
+  <tr>
+    <td width="10%" align="left" valign="top" height="282">
+    <IMG src="images/prolog.gif" width="49" height="172"></td>
+    <td width="90%" align="left" valign="top" height="282">
+      <p>The inputs on the soundcard are located in the <i>prolog</i> object. The outputs on the <i>prolog</i> represent the physical inputs on your soundcard (and on the front bay drives, daughter cards or external input drives connected to the card). These connectors are stereo pairs and correspond to the lower row of faders located on the <a href="insnouts.htm">Inputs and Outputs</a> page of the <a href="mixer.htm">kX Mixer</a>.</p>
+      <p>Note that these faders do not affect the normal recording mix, but <i>do</i> affect the ASIO levels.</p>
+      <div align="left">
+        <p>On a 10k1 card the prolog represents the following input signals (7 stereo pairs):</p>
+      </div>
+      <blockquote>
+        <DIV align=left>In0/1:AC97 in L/R<br>
+          In2/3: CD Digital in L/R<br>
+          In4/5: Unknown 1<br>
+          In6/7: Coaxial / Optical in L/R (LiveDrive/Daughter Card)<br>
+          In8/9: Line 2/mic 2 in L/R (LiveDrive)<br>
+          In10/11: Unknown 2<br>
+          In12/13: AUX 2 in L/R (LiveDrive)</DIV>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<p><a name="xrouting"><b>XRouting</b></a></p>
+<table width="550" >
+  <tr>
+    <td width="55" align="left" valign="top">
+    <IMG src="images/xrouting.gif" width="60" height="371"></td>
+    <td width="479" align="left" valign="top">
+      <p>(X)Routing is the object that takes care of mixing the signals together and sending them to the correct outputs. It mixes the prolog inputs with the FXBus signals and routes these to different outputs depending on your mixer settings, including front, rear, center, sub, headphones and last but not least <i>recording</i> (but not ASIO  recording).</p>
+      <p>More information can be found <a href="routings.htm">here</a>.</p>
+    </td>
+  </tr>
+</table>
+<p><a name="epilog"><b>Epilog</b></a></p>
+<table width="550" >
+  <tr>
+    <td width="10%" align="left" valign="top">
+    <IMG src="images/epilog.gif" width="47" height="348"></td>
+    <td width="90%" align="left" valign="top">
+      <p>The epilog represents the physical outputs on the soundcard, the recording input, and the 16 <a href="asiorec.htm"> ASIO recording</a> inputs.</p>
+      <p>Normally all outputs are connected, but in some cases (e.g. two speaker setups) you actually only need one pair of cables that connects to the output on which you have connected your speakers.</p>
+      <p>The recording mix is done according to the settings in the <a href="recording.htm">Recording</a> page of the <a href="mixer.htm">kX Mixer</a>. Note that these settings only affect actual recording and not what you hear. Also, they do not affect ASIO recording.</p>
+      <p>The last 16 channels are the <a href="asiorec.htm"> ASIO recording</a> inputs. They are bundled in stereo pairs (even/odd equals left/right) when the ASIO recording host is set up for stereo recording.</p>
+      <p>You can connect any output from any object to these inputs.</p>
+    </td>
+  </tr>
+</table>
+<p><b>Tips and tricks</b></p>
+<p>You should get familiar with DSP window by moving (and removing) some cables and objects and observe the influence on the <a href="mixer.htm">kX Mixer</a>. Deleting any of the basic DSP objects will result in decreased mixer functionality and will remove the associated faders in the kX Mixer.</p>
+<p>The <a href="#routing">routing</a> object can be bypassed by connecting an FXBus directly to an output (<a href="#epilog">epilog</a>). This can be useful for setting up surround mixing in an ASIO host, such as Emagic Logic Platinum or Steinberg Nuendo.</p>
+<p>When (or if) your DSP routing gets out of hand, or you loose control, you can either clear and reinitialize the DSP or load a previously saved setup (from the main mixer menu or system tray <a href="menu.htm">menu</a>).</p>
+<br>
+<p><b>An example of kX DSP configuration</b></p>
+<img src=images/dsp.gif width="700" height="500">
+
+<p>Please review <a href='dane.htm'>A Beginner's Practical Guide to Programming Digital Audio Effects on the E-MU10kx family of DSPs</a>, if you are interested in developing your own DSP effects.</p>
+<p>Please review kX Project <a href='http://www.kxproject.com/links.php'>Links</a> section for some additional kX DSP resources.</p>
+
+</h4>

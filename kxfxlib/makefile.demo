@@ -1,0 +1,18 @@
+demo.kxl: demo.dll
+	copy /b demo.dll demo.kxl
+
+fxlib.res: fxlib.rc
+	rc -I..\h fxlib.rc
+
+demo.dll: demo.cpp simple.cpp debug.cpp stdafx.cpp fxlib.res
+	cl -MDd -LDd -D"_MBCS" -D"_DEBUG" -D"_AFXDLL" -W4 -WX /YX"stdafx.h" demo.cpp simple.cpp debug.cpp StdAfx.cpp -I..\h ..\lib\%TARGET_CPU%\kxgui.lib ..\lib\%TARGET_CPU%\kxapi.lib fxlib.res
+
+clean:
+	del *.obj
+	del *.pch
+	del *.dll
+	del *.lib
+	del *.kxl
+	del *.exp
+	del *.res
+

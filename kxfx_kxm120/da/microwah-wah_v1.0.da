@@ -1,0 +1,47 @@
+name "microwah-wah v1.0";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "11/20/2007";
+engine "kX";
+guid "e193f6ce-f3f0-42f9-81a5-030183f59203";
+
+; registers
+  input in
+  output bp, lp, hp
+  control speed=0.6, resonance=0.8, depth=0.2, offset=0, dry_wet=1
+  static sin, cos=0.25, sin1, y ; cos starts at 0.25, this is the 90° (pre)phaseshift of cos
+  static a, b, c, d, tin, bp_, lp_, hp_
+
+; temp input register
+  macs tin, in, 0, 0 ; this should be done with all inputs to let run save the microcode 
+
+; sinoid lfo
+  macs y, 0, speed, 0.0010 ; max. ~8 Hz 
+  macs sin,  sin,  y,  cos ; sin -0.5..0.5
+  macsn cos,  cos,  y,  sin ; cos -0.5..0.5
+  macs sin1, 0.5, sin, 1 ; offset to get 0..1    
+
+; norm resonance
+  interp  c, 1, resonance, 0 ; fade between 1..0 (flip resonance control)
+
+; norm offset
+  interp d, 0, offset, 0.5 ; fade between 0..0.5  
+  
+; set depth & offset
+  macs sin1, d, sin1, depth ; trim the sin lfo
+
+; state variable filter (bandpass, lowpass, highpass)
+  macs    lp_, b, sin1, bp_ ; yl(n)=f*yb(n)+yl(n-1),  f=sin1
+  macsn   hp_, tin, lp_, 1 ; yh(n)=x(n)-yl(n)-q*yb(n),  q=c
+  macsn   hp_, hp_, bp_, c ; ""
+  macs    bp_, a, sin1, hp_ ; yb(n)=f*yh(n)+yb(n-1)
+
+; y(n-1) registers
+  macs    a, bp_, 0, 0 ; store bandpass output for next samplecycle
+  macs    b, lp_, 0, 0 ; store lowpass output for next samplecycle
+
+; output
+  interp bp, tin, dry_wet, bp_ 
+  interp lp, tin, dry_wet, lp_
+  interp hp, tin, dry_wet, hp_
+  
+end

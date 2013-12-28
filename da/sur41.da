@@ -1,0 +1,71 @@
+name "sc41" 
+guid "370c2592-dd87-4c5a-a1ea-213bf2b759b8"     
+
+; regs
+
+input 	iL, iR, ifL, ifR, isL, isR, iC, iW
+output	fL, fR, sL, sR, C, W 
+
+control CK = 0.5
+control SK1 = 0.66
+control SK2 = 0.33       
+
+static	lb, rb;	
+
+static 	wfa = 0.00067289
+static 	wfy = 0.96298
+static	wfb = -0.963653   
+static 	wfzl, wfzr; 
+
+static	vWl, vWr;       
+
+; 20ms delays for rear  
+itramsize 0x00784
+idelay	write dwL at 0x00000, dwR at 0x003C2 
+idelay	read  drL at 0x003C0, drR at 0x00782  
+
+; code   
+
+; WOOFER
+; .........................   
+    
+macsn	lb, iL, vWl, 0 
+macsn	rb, iR, vWr, 0 
+acc3	W, iW, vWl, vWr  
+
+macs	0, vWl, wfzl, wfb      
+macmv	wfzl, vWl, vWl, wfy
+macs	vWl, accum, iL, wfa   
+
+macs	0, vWr, wfzr, wfb      
+macmv	wfzr, vWr, vWr, wfy
+macs	vWr, accum, iR, wfa   
+
+; LEFT
+; .........................
+; matrix   
+macs	0, 0, lb, SK1
+macsn	dwL, accum, rb, SK2 
+macs	lb, lb, iC, CK
+
+; output    
+macs	fL, ifL, lb, 1
+macs	sL, isL, drL, 1    
+
+; REFT
+; .........................
+; matrix   
+macs	0, 0, rb, SK1
+macsn	dwR, accum, lb, SK2 
+macs	rb, rb, iC, CK
+
+; output    
+macs	fR, ifR, rb, 1
+macs	sR, isR, drR, 1   
+
+; CENTER
+; .........................
+; output    
+macs	C, 0, 0, 0
+
+end   

@@ -1,0 +1,22 @@
+[Sep'2003]
+
+All filters:
+* Frequency is represented logarithmicly in all filters now making it easier to automate the filters with simple MIDI CC.
+* Minor fixes in the MIDI automation for some filters.
+
+Filters using 'Width':
+* The musical term for Width (Octave) is replaced with the commonly used term 'Q'. A Q setting of 0.7 should mean the same as the old Octave setting of 1.0. Lower Q equals flatter response and visa versa (This is the opposite behavior of Octave).
+
+The shelving filters: 
+* The frequency range is increased (from 12k to 6k) for Highshelf.
+* All shelving filters now have 'the missing' Slope setting.
+* All shelving filters now have a -18 -> +12 dB Gain range.
+
+Peaking Filter:
+* A small bug was fixed so that it now is possible to have a low Q filter in the high range (above 12kHz).
+
+Phat EQ (Mono and Stereo)
+* All filter types are now selectable with MIDI automation.
+* Bugfix: An unwanted 3dB attenuation was located  in the microcode and removed.
+
+(by Soeren Bovbjerg)

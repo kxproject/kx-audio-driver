@@ -1,0 +1,131 @@
+; kX Driver / kX Driver Interface / kX Driver Effects Library
+; Copyright (c) Eugene Gavrilov, LeMury 2003.
+; All rights reserved
+
+; This program is free software; you can redistribute it and/or
+; modify it under the terms of the 
+; EUGENE GAVRILOV KX DRIVER SOFTWARE DEVELOPMENT KIT LICENSE AGREEMENT
+
+; Written by: LeMury
+;mx6.da
+;Dynamicly Apply Microcode changes on Switches
+;----------------------------------------------
+name "mx6";
+copyright "Kx-Project(c)2003 -by LeMury";
+created "09/26/2003";
+engine "kX";
+comment "Mixer v1.12; $nobypass";
+guid "1175058b-a0df-4960-bdfb-0d4d2b3fd750";
+
+; inputs
+	input	In1L, In1R		;input1
+	input	In2L, In2R		;input2
+	input	In3L, In3R		;input3
+	input	In4L, In4R		;input4	
+	input	In5L, In5R		;in5
+	input	In6L, In6R		;in6
+; outputs
+	output	MainL, MainR		;main out bus
+	output	RecL, RecR		;rec out bus
+	output	Send1L, Send1R		;fx1 send bus
+	output	Send2L, Send2R		;fx2 send bus
+; level faders
+	static	vol1, vol2		;input sliders
+	static	vol3, vol4		;input sliders
+	static	vol5, vol6		;input sliders
+	static	S1a, S1b		;fx send sliders
+	static	S2a, S2b		;fx send sliders
+	static	S3a, S3b		;fx send sliders
+	static	S4a, S4b		;fx send sliders
+	static	S5a, S5b		;fx send sliders
+	static	S6a, S6b		;fx send sliders
+
+; peak statics
+	static result_l=0, result_r=0, res=0x1f; VU statics
+	temp	a, m, rc, fx1, fx2
+
+; all switches RS, MS and MON are Dynamicly Applied Microcode changes!!!
+;-----------------------------------------------------------
+; _L_INSTR	0
+;mix left channels
+	macs	a, 0, in1l, vol1	;read in IN1
+	macs	m, 0, a, 0		;1- MS1
+	macs	rc, 0, a, 0		;2- RS1
+	macs	fx1, 0, a, S1a		;add to send bus1
+	macs	fx2, 0, a, S1b		;add to send bus2
+	macs	a, 0, in2l, vol2	;read in IN2
+	macs	m, m, a, 0		;6- MS2
+	macs	rc, rc, a, 0		;7- RS2
+	macs	fx1, fx1, a, S2a	;add to send bus1
+	macs	fx2, fx2, a, S2b	;add to send bus2
+	macs	a, 0, in3l, vol3	;read in IN3
+	macs	m, m, a, 0		;11- MS3
+	macs	rc, rc, a, 0		;12- RS3
+	macs	fx1, fx1, a, S3a	;add to send bus1
+	macs	fx2, fx2, a, S3b	;add to send bus2
+	macs	a, 0, in4l, vol4	;read in IN4
+	macs	m, m, a, 0		;16- MS4
+	macs	rc, rc, a, 0		;17- RS4
+	macs	fx1, fx1, a, S4a	;add to send bus1
+	macs	fx2, fx2, a, S4b	;add to send bus2
+	macs	a, 0, in5l, vol5	;read in IN5
+	macs	m, m, a, 0		;21- MS5
+	macs	rc, rc, a, 0		;22- RS5
+	macs	fx1, fx1, a, S5a	;add to send bus1
+	macs	fx2, fx2, a, S5b	;add to send bus2
+	macs	a, 0, in6l, vol6	;read in IN6
+	macs	m, m, a, 0		;26- MS6
+	macs	rc, rc, a, 0		;27- RS6
+	macs	Send1L, fx1, a, S6a	;add to send bus1 and output
+	macs	Send2L, fx2, a, S6b	;add to send bus2 and output
+
+; Left output stage
+	interp	MainL, m, 0, rc		;30- MON
+	interp	RecL, rc, 0, m		;31- MON
+
+; vu peak left	
+	log 	 a,  rc,  res,  0x1 	;32- VUSEL
+	limit 	 result_l,  a,  a,  result_l;
+;---------------------------------------------------------------
+; _R_INSTR	34	//OFFSET from 	_L_INSTR	0
+;mix right channels
+	macs	a, 0, in1r, vol1	;read in IN1
+	macs	m, 0, a, 0		;35- MS1
+	macs	rc, 0, a, 0		;36- RS1
+	macs	fx1, 0, a, S1a		;add to send bus1
+	macs	fx2, 0, a, S1b		;add to send bus2
+	macs	a, 0, in2r, vol2	;read in IN2
+	macs	m, m, a, 0		;add to main bus
+	macs	rc, rc, a, 0		;add to rec bus
+	macs	fx1, fx1, a, S2a	;add to send bus1
+	macs	fx2, fx2, a, S2b	;add to send bus2
+	macs	a, 0, in3r, vol3	;read in IN3
+	macs	m, m, a, 0		;add to main bus
+	macs	rc, rc, a, 0		;add to rec bus
+	macs	fx1, fx1, a, S3a	;add to send bus1
+	macs	fx2, fx2, a, S3b	;add to send bus2
+	macs	a, 0, in4r, vol4	;read in IN4
+	macs	m, m, a, 0		;add to main bus
+	macs	rc, rc, a, 0		;add to rec bus
+	macs	fx1, fx1, a, S4a	;add to send bus1
+	macs	fx2, fx2, a, S4b	;add to send bus2
+	macs	a, 0, in5r, vol5	;read in IN5
+	macs	m, m, a, 0		;add to main bus
+	macs	rc, rc, a, 0		;add to rec bus
+	macs	fx1, fx1, a, S5a	;add to send bus1
+	macs	fx2, fx2, a, S5b	;add to send bus2
+	macs	a, 0, in6r, vol6	;read in IN6
+	macs	m, m, a, 0		;add to main bus
+	macs	rc, rc, a, 0		;add to rec bus
+	macs	Send1R, fx1, a, S6a	;add to send bus1 and output
+	macs	Send2R, fx2, a, S6b	;add to send bus2 and output
+
+; Right output stage	
+	interp	MainR, m, 0, rc		;MON
+	interp	RecR, rc, 0, m		;MON
+
+;peak vu right
+	log 	 a,  rc,  res,  0x1;
+	limit 	 result_r,  a,  a,  result_r;
+;------------------------------------------------------------------
+end;

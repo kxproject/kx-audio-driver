@@ -1,0 +1,16 @@
+# build script
+
+TARGETNAME=vstgui
+TARGETTYPE=LIBRARY
+
+MSC_WARNING_LEVEL=-W3 -WX
+
+USE_MSVCRT=1
+# USE_NATIVE_EH=1
+386_STDCALL=0
+NOT_LEAN_AND_MEAN=1
+
+INCLUDES=..\h;..\vstlib
+
+SOURCES=aeffguieditor.cpp cfileselector.cpp cscrollview.cpp ctabview.cpp  \
+        vstcontrols.cpp vstgui.cpp

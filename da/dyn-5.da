@@ -1,0 +1,215 @@
+; (c) eYagos, 2003-2004. All rights reserved
+name "dynamica";
+copyright "by eYagos - Copyright (c) 2003.";
+engine "EMU10K1_A0";
+created "11/01/2003";
+comment "Dynamics Processor v1.0. Take a look at pressets";
+guid "88bbe0dc-d6d5-4468-86f1-eb5a2658ed42";
+	itramsize 400
+; Registers
+	input   in0, in1, in2, in3
+	output  out0, out1
+	;output  Monitor
+	static  Res=0x1f
+	static  AttackL=0x70facd17
+	static  ReleaseL=0x7ff92f09
+	static  Attack=0x7f3420d0
+	static  Release=0x7ff5c6b1
+	static  Thres1=0.935718067
+	static  Thres2=0.416305342
+	
+	static  Rat1=0
+	static  Rat1i=0x1
+	static  Rat1s=1
+	
+	static  Rat2=0.3333333333
+	static  Rat2i=0x0
+	static  Rat2s=1
+	
+	static  Rat3=0
+	static  Rat3i=0x5
+	static  Rat3s=1
+	
+	static  Offset=0.762580492
+	static  GAIN_I=0x1
+	static  GAIN_F=0x0
+	static  Level=0x0
+	static  GaindB=0x0
+	static  soft_long=0x28
+	static  v_medio1=0x0
+	static  v_medio2=0x0
+	static  min=0.0000001            
+	
+	static  gainCLIP=1
+	static  incCLIP = 0.1087490619    
+	
+	static  mon_OUT=0
+	static  mon_IN=0      
+	
+	static  m1 = 0.1045
+	static  m2 = 0xA     
+	
+	;2583.519600*(v-.5326320540e-2)*(v-.2365656064e-1)*(v^2-.9454410654e-1*v+.5425726184e-2)
+	;static  d1=0x20  
+    ;static  d2=0x4000000
+    ;static  d3=0.09597828152
+    ;static  d4=0.005550919473  
+    ;static  d5=0.02365551176  
+    ;static  d6=0.005327088447  
+    ;static  d7=0x9DB
+    
+    static  d1=0x20  
+    static  d2=0x4000000
+    static  d3=0.09454410654
+    static  d4=0.005425726184  
+    static  d5=0.02365656064  
+    static  d6=0.005326320540  
+    static  d7=0xA18        
+    
+    
+    
+	temp    tmp1, tmp2, tmp3, tmp4, tmp5
+	
+; Internal TRAM delay line (400 samples; ~0.008333 msec)
+	idelay write delW1 at 0x0;
+	idelay read delR1 at 0x92;
+	idelay write delW2 at 0xc8;
+	idelay read delR2 at 0x15a;     
+	
+; Code
+	;;-- INPUT
+    macs 	    tmp1,in0,0,0
+	macs 	    tmp2,in1,0,0
+	 
+	;;-- RETARD
+	macs 	    delW1,tmp1,0,0
+	macs 	    delW2,tmp2,0,0
+	 
+	;;-- LEVEL
+	tstneg 	tmp1,tmp1,tmp1,0;-------- Valor absoluto de las entradas
+	tstneg 	tmp2,tmp2,tmp2,0
+	interp 	tmp1,tmp1,0.5,tmp2;------ Media aritmética de las entradas 
+	limit      mon_IN,tmp1,tmp1,mon_IN; -- Monitor In
+	log 	    tmp1,tmp1,Res,0x0;------- Escala logarítmica
+	;LOG APROXIMATION
+	    macs    tmp2,0,tmp1,d1 ;exponente
+        macints tmp2,0,tmp2,d2      
+        macsn   tmp2,tmp1,tmp2,1 ; mantisa
+        ;2522.696160*(v-.5327088447e-2)*(v-.2365551176e-1)*(v^2-.9597828152e-1*v+.5550919473e-2)
+        ;2583.519600*(v-.5326320540e-2)*(v-.2365656064e-1)*(v^2-.9454410654e-1*v+.5425726184e-2)
+        macs    tmp3,0,tmp2,tmp2
+        macsn   tmp3,tmp3,d3,tmp2
+        macs    tmp3,tmp3,d4,1
+        macsn   tmp4,tmp2,d5,1
+        macsn   tmp5,tmp2,d6,1  
+        macs    tmp3,0,tmp3,tmp4
+        macs    tmp3,0,tmp3,tmp5
+        macints tmp3,0,tmp3,d7  
+        macsn   tmp1,tmp1,tmp3,1
+	 
+	 tstneg 	tmp2,tmp1,AttackL,Level;- Hace el ataque positivo o negativo 
+	 limit 	    tmp2,0,ReleaseL,tmp2;---- si el ataque es negativo lo sustituye por el release 
+	 interp 	Level,tmp1,tmp2,Level;--- Calcula el nivel interpolando la entrada con el ataque/release 
+	 	 
+	 ;;-- THRESHOLDS
+	 ;Diff1
+	 macsn 	    tmp4,Level,Thres1,1 
+	    ;Ratio 1
+	    tstneg     tmp1,Rat1s,tmp4,0;-------- sign of ratio
+	    macints    tmp2,Thres1,tmp1,Rat1i
+	    macs 	   tmp2,tmp2,tmp1,Rat1 
+	    limit      tmp2,tmp2,tmp2,min 
+	    ;Ratio 2
+	    tstneg     tmp1,Rat2s,tmp4,0;-------- sign of ratio
+	    macints    tmp3,Thres1,tmp1,Rat2i
+	    macs 	   tmp3,tmp3,tmp1,Rat2 
+	    limit      tmp3,tmp3,tmp3,min 
+	    ;Choose
+	    tstneg 	   tmp1,tmp4,tmp2,0
+	    limit 	   tmp1,0,tmp3,tmp1;-------- tmp1 = out1
+	 ;Diff2
+	 macsn      tmp5,Level,Thres2,1  
+	    ;Ratio 3
+	    tstneg     tmp2,Rat3s,tmp5,0;-------- sign of ratio
+	    macints    tmp3,Offset,tmp2,Rat3i
+	    macs 	   tmp3,tmp3,tmp2,Rat3
+	    limit      tmp3,tmp3,tmp3,min     
+	    ;Choose
+	    tstneg 	   tmp2,tmp5,tmp1,0
+	    limit 	   tmp2,0,tmp3,tmp2;-------- tmp2 = out2 
+	 
+	 ;;-- SOFT KNEE
+	 ;for th1
+  	 tstneg 	tmp3,tmp4,tmp4,0;--------- x = abs(diff1)
+	 macints 	tmp3,-1,tmp3,soft_long;--- x = x * soft_long - 1
+	 limitn 	tmp3,tmp3,tmp3,0;--------- x = 0 si es >0
+	 macs 	    tmp3,0,tmp3,tmp3;--------- x = x^2
+	 macsn 	    tmp2,tmp2,v_medio1,tmp3;-- tmp2 = Diff2a = Diff2 - v_medio1 * x
+     ;for th2
+     tstneg 	tmp3,tmp5,tmp5,0;--------- x = abs(diff2)
+	 macints 	tmp3,-1,tmp3,soft_long;--- x = x * soft_long - 1
+	 limitn 	tmp3,tmp3,tmp3,0;--------- x = 0 si es >0
+	 macs 	    tmp3,0,tmp3,tmp3;--------- x = x^2
+	 macsn 	    tmp2,tmp2,v_medio2,tmp3;-- tmp2 = Diff2b = Diff2a - v_medio2 * x    
+	 
+	 ;;-- INSTANTANEOUS GAIN (logarithmic)
+	 macsn 	    tmp1,tmp2,Level,1
+	 ;if tmp1<0 =>atenuate
+	 ;if tmp1>0 =>amplify       
+     
+     ;;-- ATTACK/RELEASE  
+	 tstneg 	tmp2,0,tmp1,tmp1
+	 tstneg 	tmp3,0,GaindB,GaindB
+	 tstneg 	tmp3,tmp2,Release,tmp3;-- Release if zero
+	 limit 	    tmp3,0,Attack,tmp3;------ Attack if not zero
+	 interp 	GaindB,tmp1,tmp3,GaindB;- Interpolated Gain
+	 
+    ;Paso de ganacia a escala lineal
+    macints tmp2,0x1,0x0,0x0    ;-- inicializa la parte entera
+    ;--
+    macs    tmp1,GaindB,0,0     
+    skip    ccr,ccr,0x4,0x2     ;-- si es menor que cero salta, si no sube la escala hasta +20dB
+    macints tmp2,0,tmp2,m2      ;-- multiplica la parte entera por 10  (m2)
+    macsn   tmp1,tmp1,m1,1      ;-- resta ln(10)/20  (m1)
+    skip    ccr,ccr,0x4,0x2     ;-- si es menor que cero salta, si no sube la escala hasta +40dB
+    macints tmp2,0,tmp2,m2      ;-- multiplica la parte entera por 10  (m2)
+    macsn   tmp1,tmp1,m1,1      ;-- resta ln(10)/20  (m1)
+    skip    ccr,ccr,0x4,0x2     ;-- si es menor que cero salta, si no sube la escala hasta +60dB
+    macints tmp2,0,tmp2,m2      ;-- multiplica la parte entera por 10  (m2)
+    macsn   tmp1,tmp1,m1,1
+    skip    ccr,ccr,0x4,0x2     ;-- si es menor que cero salta, si no sube la escala hasta +80dB
+    macints tmp2,0,tmp2,m2      ;-- multiplica la parte entera por 10  (m2)
+    macsn   tmp1,tmp1,m1,1      ;-- resta ln(10)/20  (m1)  
+    ;--
+    macs    tmp1,tmp1,1,1       ; necesario
+    exp     tmp1,tmp1,res,0x0   ; pasa a escala lineal
+    
+    ;aplica la ganacia calculada
+    macs    tmp3,0,delR1,tmp1   ;-- multiplica por un fracional
+    macints tmp3,0,tmp3 ,tmp2   ;-- multiplica por la escala entera
+    macs    tmp4,0,delR2,tmp1
+    macints tmp4,0,tmp4 ,tmp2
+    
+    ;;-- MAKE UP GAIN
+	macints 	tmp1,0,tmp3,GAIN_I
+	macs 	    tmp1,tmp1,tmp3,GAIN_F
+	macints 	tmp2,0,tmp4,GAIN_I
+	macs 	    tmp2,tmp2,tmp4,GAIN_F  
+	
+	;;-- CLIP DETECT
+	tstneg      tmp3,tmp1,tmp1,0
+	tstneg      tmp4,tmp2,tmp2,0
+	limit       tmp3,tmp3,tmp3,tmp4  
+	macs        tmp3,0,tmp3, gainCLIP
+	macsn       tmp3,tmp3,0.25,1
+    skip        ccr, ccr, 0x4, 0x1;
+    macsn       gainCLIP,gainCLIP,gainCLIP,incCLIP; Desactivada por defecto. Para activala poner F
+		   	
+	;;-- OUTPUT
+	macs        out0,0,tmp1,gainCLIP
+	macs        out1,0,tmp2,gainCLIP
+	
+	;;-- OUTPUT MONITOR
+	interp 	    tmp1,out0,0.5,out1
+	limit       mon_OUT,tmp1,tmp1,mon_OUT; -- Monitor Out
+end

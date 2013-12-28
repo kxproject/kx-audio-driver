@@ -1,0 +1,120 @@
+name "kxm 100";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/05/2007";
+engine "kX";
+comment "keyboard unit with cv and gate, midi controlled (kxm 100 v1.0)"
+guid "6aa3aae5-84e8-47ed-aff8-74f2180808ce";  
+; keyboard unit that provides gate and cv
+; exponential source for lineal vco. notes are midi triggered.
+; exp.value(normed to 1) = (2^(1/12))^n /(2^(1/12)^128 
+; n.. note number as integer  
+
+;registers
+output cv, gate_
+control note=0 ; midi controlled note
+control gate=0 ; midi controlled gate
+static c3=0.00492, cc3=0.00521, d3=0.00552, dc3=0.00585
+static e3=0.0062, f3=0.00657, fc3=0.00696, g3=0.00737
+static gc3=0.00781, a3=0.00828, ac3=0.00877, b3=0.00929 ; exp. values
+static c4=0.00984, cc4=0.01043, d4=0.01105, dc4=0.01171
+static e4=0.0124, f4=0.01314, fc4=0.01392, g4=0.01475
+static gc4=0.01562, a4=0.01655, ac4=0.01754, b4=0.01858 
+static c5=0.01969, cc5=0.02086, d5=0.0221, dc5=0.02341
+static e5=0.0248, f5=0.02628, fc5=0.02784, g5=0.0295
+static gc5=0.03125, a5=0.03311, ac5=0.03508, b5=0.03716 
+static rd_max=0x40000 ; max. readaddress  128*0x800
+static r 
+
+; itramsize 
+itramsize 128  
+
+; itram write & read´s
+idelay write wrt0 at 0
+idelay write wrt1 at 1 
+idelay write wrt2 at 2
+idelay write wrt3 at 3
+idelay write wrt4 at 4
+idelay write wrt5 at 5
+idelay write wrt6 at 6
+idelay write wrt7 at 7
+idelay write wrt8 at 8
+idelay write wrt9 at 9
+idelay write wrt10 at 10
+idelay write wrt11 at 11
+idelay write wrt12 at 12 
+idelay write wrt13 at 13 
+idelay write wrt14 at 14
+idelay write wrt15 at 15
+idelay write wrt16 at 16
+idelay write wrt17 at 17
+idelay write wrt18 at 18
+idelay write wrt19 at 19
+idelay write wrt20 at 20
+idelay write wrt21 at 21
+idelay write wrt22 at 22
+idelay write wrt23 at 23
+idelay write wrt24 at 24 
+idelay write wrt25 at 25 
+idelay write wrt26 at 26
+idelay write wrt27 at 27
+idelay write wrt28 at 28
+idelay write wrt29 at 29
+idelay write wrt30 at 30
+idelay write wrt31 at 31
+idelay write wrt32 at 32
+idelay write wrt33 at 33
+idelay write wrt34 at 34
+idelay write wrt35 at 35
+idelay write wrt36 at 36
+idelay read rd at 1
+
+; fill lookup table
+macs wrt0, 0, 0, 0
+macs wrt1, c3, 0, 0
+macs wrt2, cc3, 0, 0
+macs wrt3, d3, 0, 0
+macs wrt4, dc3, 0, 0
+macs wrt5, e3, 0, 0
+macs wrt6, f3, 0, 0
+macs wrt7, fc3, 0, 0
+macs wrt8, g3, 0, 0
+macs wrt9, gc3, 0, 0
+macs wrt10, a3, 0, 0
+macs wrt11, ac3, 0, 0
+macs wrt12, b3, 0, 0 
+macs wrt13, c4, 0, 0
+macs wrt14, cc4, 0, 0
+macs wrt15, d4, 0, 0
+macs wrt16, dc4, 0, 0
+macs wrt17, e4, 0, 0
+macs wrt18, f4, 0, 0
+macs wrt19, fc4, 0, 0
+macs wrt20, g4, 0, 0
+macs wrt21, gc4, 0, 0
+macs wrt22, a4, 0, 0
+macs wrt23, ac4, 0, 0
+macs wrt24, b4, 0, 0 
+macs wrt25, c5, 0, 0
+macs wrt26, cc5, 0, 0
+macs wrt27, d5, 0, 0
+macs wrt28, dc5, 0, 0
+macs wrt29, e5, 0, 0
+macs wrt30, f5, 0, 0
+macs wrt31, fc5, 0, 0
+macs wrt32, g5, 0, 0
+macs wrt33, gc5, 0, 0
+macs wrt34, a5, 0, 0
+macs wrt35, ac5, 0, 0
+macs wrt36, b5, 0, 0
+
+; calculate read address
+macs &rd, &wrt2, rd_max, note ; why wrt2? but it works´s :D 
+
+; check gate
+tstneg r, gate, 1, 0.00001 ; if gate>0.00001 r=1 else r=-0.00001 
+
+; output 
+macs cv, rd, 0, 0
+macs gate_, r, 0, 0
+
+end

@@ -1,0 +1,48 @@
+name "kxm 200";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/05/2007";
+engine "kX";  
+comment "aliasing multi voltage controlled oscillator (kxm 200 v1.1)" 
+guid "4e5959ed-9b83-4c66-ad6b-36a938ddfdae";
+
+; multi vco provides aliasing saw, spaced saw, triangle, 
+; square, pulsewidthed square
+
+;registers
+input cv ; exponential control voltage 0..1
+output saw, triangle, square
+static a, b, c, d, e, f, sw, tri, sqr
+control finetune=0.5, semitune=0.5, octave=0, saw_space=0, pulsewidth=0
+  
+; trim sliders
+interp e, 0.48, finetune, 0.52  
+interp d, 0.5, semitune, 1
+interp c, 0x1, octave, 0x3 
+interp f, -1, saw_space, 1
+
+; tune
+macs b, 0, cv, 0.18466 ; match note "c" (base is 0,554)
+macs b, 0, b, e ; finetune +/- ~10%  
+macs b, 0, b, d ; semitones + 12 
+macints b, 0, b, c ; octave switch 1..2
+
+; base saw
+macw a, a, b, 1 ; base saw osc
+   
+; saw & spaced saw  
+limit sw, a, a, f ; if a>f sw=a else sw=f
+
+; triangle
+tstneg tri, a, a, 0 ; if a>0 tri=a else tri=-a    
+macs tri, -0.5, tri, 1 ; dc offset -0,5 
+macints tri, 0, tri, 0x2 ; gain x2
+ 
+; square & pulsewidthed square
+tstneg  sqr,  a,  1,  pulsewidth ; if a>pulsewidth sqr=1 else -1 
+  
+; output
+macs saw, 0, sw, 0.25 ; saw & spaced saw
+macs triangle, 0, tri, 0.25 ; triangle
+macs square, 0, sqr, 0.25 ; square & pulsewidthed square
+      
+end

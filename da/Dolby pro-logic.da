@@ -1,0 +1,28 @@
+; New microcode
+	name "Prologic";
+	copyright "Copyright (c) 2004.";
+	created "12/17/2007";
+	engine "kX";
+	comment "Dolby Prologic encoder";
+	guid "c3cbd3ac-b3bc-4022-b18d-5b157b305838";
+	; -- generated GUID
+
+
+; itramsize 0
+; xtramsize 0
+
+; code
+      
+input L,R,Ls,Rs,C
+output Lt,Rt
+temp tL,tr
+macs tL,L,C,.707
+macsn tL,tL,ls,.707
+macsn tL,tL,Rs,.707
+macs tr,R,C,.707
+macs tr,tr,Ls,.707
+macs tr,tr,Rs,.707
+macs Lt,tL,0,0
+macs Rt,tr,0,0
+end
+end

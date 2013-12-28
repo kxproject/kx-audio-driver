@@ -1,0 +1,48 @@
+; New microcode
+	name "FxRouter";
+	copyright "Copyright (c) Russ, 2005";
+	created "08/21/2005";
+	engine "kX 3538i";
+	; comment "Dynamic effects router; $nobypass";
+	guid "c31a13c0-3ede-4b1b-98aa-3aad164cc8df";
+	; -- generated GUID
+
+
+; itramsize 0
+; xtramsize 0
+input in_left, in_right              
+input ret1_l, ret1_r
+input ret2_l, ret2_r              
+input ret3_l, ret3_r              
+input ret4_l, ret4_r              
+input ret5_l, ret5_r              
+input ret6_l, ret6_r              
+input ret7_l, ret7_r                            
+output out_left, out_right                    
+output send1_l, send1_r
+output send2_l, send2_r              
+output send3_l, send3_r              
+output send4_l, send4_r              
+output send5_l, send5_r              
+output send6_l, send6_r              
+output send7_l, send7_r
+
+; code
+macs send1_l, in_left, 0, 0
+macs send2_l, ret1_l, 0, 0
+macs send3_l, ret2_l, 0, 0
+macs send4_l, ret3_l, 0, 0
+macs send5_l, ret4_l, 0, 0
+macs send6_l, ret5_l, 0, 0
+macs send7_l, ret6_l, 0, 0
+macs out_left, ret7_l, 0, 0
+macs send1_r, in_right, 0, 0
+macs send2_r, ret1_r, 0, 0
+macs send3_r, ret2_r, 0, 0
+macs send4_r, ret3_r, 0, 0
+macs send5_r, ret4_r, 0, 0
+macs send6_r, ret5_r, 0, 0
+macs send7_r, ret6_r, 0, 0
+macs out_right, ret7_r, 0, 0  
+ 
+end

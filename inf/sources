@@ -1,0 +1,9 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETTYPE=NOTARGET
+NTTARGETFILE1=inf
+NTTARGETFILE2=cat

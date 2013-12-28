@@ -1,0 +1,43 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxaddons
+TARGETTYPE=DYNLINK
+TARGETEXT=kxa
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -D"_MBCS" -D"_AFXDLL" -D"_USRDLL" -D"_WINDLL"
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+INCLUDES=..\h;..\edspctrl
+
+TARGETLIBS=\
+	$(OBJ_PATH)\..\kxapi\$O\kxapi.lib \
+	$(OBJ_PATH)\..\kxgui\$O\kxgui.lib \
+	$(OBJ_PATH)\..\kxmixer\$O\kxmixer.lib \
+	$(SDK_LIB_PATH)\oldnames.lib \
+	$(SDK_LIB_PATH)\newdev.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\setupapi.lib \
+        $(SDK_LIB_PATH)\winmm.lib\
+        $(SDK_LIB_PATH)\advapi32.lib\
+        $(SDK_LIB_PATH)\dsound.lib \
+        $(SDK_LIB_PATH)\dxguid.lib \
+        $(SDK_LIB_PATH)\kernel32.lib \
+        $(SDK_LIB_PATH)\gdi32.lib
+
+SOURCES=addon.rc addon.cpp debug.cpp sample.cpp edsp.cpp
+
+

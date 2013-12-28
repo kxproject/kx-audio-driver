@@ -1,0 +1,62 @@
+<h3>Progetto kX: Guida per le traduzioni</h3>
+
+<h4>
+
+<p>Ci sono due aree fondamentali di lavoro: la traduzione della Documentazione kX e quella 
+dell'interfaccia del Driver Audio kX. Potete scegliere di lavorare su ognuna di loro.
+Se desiderate tradurre la documentazione, siete invitati ad andare sul nostro 
+<? klink("forums"); ?>Support Forum</a> al <i>topic</i> relativo alle
+traduzioni della documentazione.</p>
+
+<p>Se volete localizzare il Driver Audio kX, fate come indicato di seguito:</p>
+
+<ul>
+ <li>inviate un messaggio a <? contact_link(); ?> per ottenere l'ultima release (oppure verificate nel 
+ <? klink("forums"); ?>Support Forum</a> 
+ per l'ultima release di sviluppo attualmente disponibile)</li>
+ <li>aggiungete (o aggiornate) la traduzione per la vostra lingua nativa seguendo la procedura 
+ qui sotto indicata</li>
+</ul>
+
+<p>Dopo aver scaricato la release pi&ugrave recente, lanciate il programma di installazione - verranno
+estratti i file del Progetto kX (normalmente, nella cartella C:\Program Files\kX Project\35xx).
+Nota: non occorre <b>installare</b> il driver, &egrave sufficiente decomprimere i file di installazione!
+A questo punto dovreste trovare il file 'kxskin.kxs': attualmente si tratta di un archivio WinRar.
+Rinominate il file come 'kxskin.rar' e usate <a href='http://www.rarsoft.com' target=_blank class=fade>WinRar</a> 
+per decomprimerlo. Vi serve solamente -un- file di questo archivio, 'lang.ini'. Dopo aver estratto questo 
+file, apritelo con un qualsiasi editor di testo (come NotePad) e aggiungete (o aggiornate) la traduzione 
+nel modo seguente:
+<pre>
+
+/// un esempio:
+
+function=Event:
+function.222='qui la traduzione'
+
+</pre>
+
+<p>
+ <i>Nota:</i> in luogo di '222' dovreste usare il vostro numero di localizzazione.<br>
+Ad esempio, per il russo &egrave '419', per il tedesco &egrave '407', per l'italiano &egrave '410', 
+e cos&igrave via.<br> La lista completa dei codici di lingua &egrave disponibile 
+<a href="http://www.microsoft.com/globaldev/winxp/xp-lcid.asp" target=_blank>qui</a>
+o <a href=http://www.microsoft.com/globaldev/reference/winxp/xp-lcid.mspx target=_new>qui</a>.
+</p>
+
+<p>Non dimenticate di indicare sia il vostro nome che l'indirizzo e-mail nell'intestazione del file 'lang.ini', 
+cos&igrave da poter essere menzionati nella nostra pagina dei <i>'credits'</i>.</p>
+
+<p>Potete testare la vostra traduzione 'aggiornando' l'archivio 'kxskin.kxs' col vostro nuovo
+file 'lang.ini'. Tuttavia, potrebbe essere che non siate comunque in grado di vedere il risultato 
+fintanto che la vostra lingua non risulti supportata come voce 'Language' nel men&ugrave del mixer.</p>
+
+<p>Quando la vostra traduzione &egrave pronta, inviateci tramite e-mail il file lang.ini personalizzato, 
+cos&igrave che possa essere incluso nella prossima release del Driver Audio kX (<b>usate WinRar 
+o WinZip per evitare problemi di codifica!</b>).</p>
+
+</h4>
+
+<h5>
+ -- testo originale:  kX Project<br> 
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>

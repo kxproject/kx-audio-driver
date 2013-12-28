@@ -1,0 +1,1337 @@
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h4>
+
+ <ul>
+
+    <li><a name='3551'></a><i>12/18/2010 - Version 5.00.3551 (ALPHA) released</i><br><br>
+        Fixed issue with Wave HQ unsupported in Windows 7 (should work with all p16v-compatible cards now). p17-based cards will NOT support Wave HQ (as usual)<br>
+        Fixed mapping for Audigy2 ZS notebook side outputs<br>
+        Fixed kX Mixer memory leak (system hangs while HDD activity is high, kxmixer allocates a lot of memory), specific to Windows 7<br>
+        Fixed kX Mixer combo boxes showing no settings, empty lists (SPDIF and similar options), specific to Windows 7<br>
+        Added support for 32/64 ASIO clients under x64 OS (new feature)<br>
+        Improved 32/64-bit installer with support for UAC<br>
+        Fixed ASIO registration issues under x64 OS<br>
+        Fixed issue with ASIO driver not showing correct device names (you may see a UAC message when starting kX Mixer, this is OK)<br>
+        Installer updated, removed several shortcuts, added new ones, simplified installing, removed legacy code<br>
+        Fixed AC3 decoding not working under x64 OS<br>
+        Fixed AC3 passthrough problem introduced in 3543, should work fine now for Audigy/Audigy2<br>
+        <b>SDK changes:</b><br>
+        License agreement is GPL now<br>
+        Changed Сchar *Т to Уconst char *Ф in most places, some plugins might no longer load, need to update and re-compile them<br>
+        KX_MAX_NAME is now obsolete, use KX_MAX_STRING [set to 128 by default]<br>
+        More parts of the driver released open-source under GPL<br>
+        OS X driver released opensource (without kX HAL though, just CoreAudio layer)<br>
+    </li>
+    <br>
+
+    <li><a name='3550'></a><i>09/18/2009 - Version 5.00.3550 (BETA) released</i><br><br>
+        Fixed issue with add-ons on multidevice configurations (E-DSP Control, 'mnu_idx')<br>
+        Fixed issue with PCs with more than 2Gb of memory, thanks to thrillhouse82<br>
+        Fixed issue with kX Console unable to launch from the tray menu after changing current folder<br>
+        Fixed 'slow tooltips' issue in kX DSP<br>                   
+        Fixed 'no labels' issue in kX DSP<br>
+    </li>           
+    <br>
+
+    <li><a name='3549'></a><i>08/19/2009 - Version 5.00.3549 (BETA) released</i><br><br>
+        Fixed memory issues with PCs with more than 2Gb of memory<br>
+        Added an internal option in order to fix A2ZSNB noisy playback issue<br>
+    </li>
+    <br>
+
+    <li><a name='3548'></a><i>07/28/2009 - Version 5.00.3548 (BETA) released</i><br><br>
+        Fixed a bug with Power Management (ASIO channels not restored properly after Sleep/Hibernation)<br>
+        Fixed a bug 'Master Mixer unusable' on 10k1 cards in Vista and Windows 7<br>
+        Fixed support for multiple E-DSP devices<br>
+        Fixed compatibility issue with Windows 7<br>
+        Certain parts of kX API and kX Mixer plugin management released opensource (GPL-covered)<br>
+        Included Mac OS X-compatible SDK with full source code for kxapi.a<br>
+    </li>
+    <br>
+
+    <li><a name='3547'></a><i>07/19/2009 - Version 5.00.3547 (BETA) released</i><br><br>
+        Fixed issues with x64 driver (during DSP reset and restoring plugin settings)<br>
+        Fixed kX DSP tooltip issue<br>
+    </li>
+    <br>
+
+    <li><a name='3546'></a><i>04/19/2009 - Version 5.00.3546 (ALPHA) released</i><br><br>
+
+        Added support for 64-bit Windows (Vista x64 and Windows XP x64)<br>
+        Added digital signature for the driver and the installer (signed by <a href='http://www.centrance.com'>CEntrance, Inc.</a>)<br>
+        <b>DSP plugins and Add-ons from previous versions are no longer compatible!</b><br>
+        Added experimental support for 44.1kHz mode for E-DSP devices (kxctrl-tweakable, use on your own risk!)<br>
+        Fixed E-DSP KX_IN/KX_OUT assignments for ASIO<br>
+        kX is no longer installed into windows/system32 folder, but stays in Program Files, do NOT copy any kX files to system32!<br>
+        Added to the driver installer KXM and micro effects by <a href='http://stylus.siteboard.de/'>stylus</a> [see the SDK for instructions]<br>
+        Added to the driver installer UFX plugins by Max M. [32-bit version only]<br>
+        Added to the driver installer ProFX and synth plugins by LeMury [32-bit version only]<br>
+        Added 'sa.minus' Spectrum Analyzer by Max M.<br>
+        Fixed multichannel fxbus assignment issue<br>
+        Fixed issues with loudness compensator (based on Russ changes)<br>
+        SFMan32.dll is not installed for x64 platforms, because it is not 100%-compatible with 64-bit OS<br>
+        Removed card/model information from the INF file (and in Device Manager you will only see 'Generic' cards now)<br>
+        
+        <b>Known issues</b>:<br>
+        Launching KXS, KXP, KXL files from Explorer might not work in Vista due to UAC<br>
+        Speaker Test does not work in Vista<br>
+        SPDIF AC3 output may not work correctly in Win64<br>        
+        CodeMax library is not supported under Win64<br>
+
+        <b>SDK / For developer</b>:<br>
+        iKX class updated to be cross-platform [supports OS X now]<br>
+        (note the changes in create(), open(), close(), destroy() - see kxctrl sample)<br>
+        edspctrl is cross-platform now<br>
+        kxctrl is cross-platform now<br>
+        Most of the SDK sources released under GPL (GNU Public License)<br>
+        SDK license agreement updated<br>
+        Since the mixer is no longer in system32 folder, kFile::get_full_skin_path function is used (see efx-tube example)<br>
+        Most DWORD pointers in SDK replaced by uintptr_t:<br>
+        e.g. publish_plugins, iKXPluginGUI::extended_gui, kMenu::track etc...<br>
+        Certain 'ints' replaced with 'size_t'<br>
+        MFC Timer uses UINT_PTR instead of UINT, if your code uses timer, update accordingly (see 'dynamica' example)<br>
+        kxparam_t is 'int' for x64 builds, thus, most DSP effects need to be updated<br>
+        iKXPlugin::get_plugin_presets() returns kxparam_t* instead of char * (all plugins need to be updated!)<br>
+        Most char pointers updated to 'const char *'<br>
+
+    </li>
+    <br>
+
+    <li><a name='3545'></a><i>08/11/2008 - Version 5.00.3545 (BETA) released</i><br><br>
+        Fixed a bug in INF file introduced in 3544 ("KX_WAVEOUT89_NAME" issue)<br>
+        ASIO send routing fixed for 10k2 cards (should not show FXBus16 as an option now)<br>
+        Renamed 'unknown' cards to kX Mixer-recognizable model names (without "?")<br>
+    </li>
+    <br>
+
+    <li><a name='3544'></a><i>07/28/2008 - Version 5.00.3544 (BETA) released</i><br><br>
+        improved 24-bit support<br>
+        changed default routings and WinMM device names<br>
+        updated kX Router<br>
+        added 'reload firmware' button for E-DSP control<br>
+        fixed power management issues with E-DSP<br>
+        Surrounder+ default preset set to 'direct path'<br>
+        optimized FXBusX microcode<br>
+    </li>
+    <br>
+
+    <li><a name='3543'></a><i>07/17/2008 - Version 5.00.3543 (BETA) released</i><br><br>
+        added support for 24/48 ASIO for all 10k2-based devices (audigy, audigy2, E-DSP)<br>
+        added E-DSP control panel<br>
+        E-DSP code is GPL-covered and included with the SDK<br>
+        most DSP effects (epilog, prolog, xrouting, fxbus, ...) were re-written to provide bit-accurate playback and recording on default volume settings<br>
+    </li>
+    <br>
+
+    <li><a name='3542'></a><i>05/28/2008 - Version 5.00.3542 (BETA) released</i><br><br>
+        Fixed input name on Audigy2 ZS Notebook (mic / line-in)<br>
+        Fixed 'Stereo Mix + Gain' microcode<br>
+        Added bit-accurate 16/48 playback (SPDIF-out bugfix) on Audigy2/Audigy devices [via EpilogX and FXBusX]<br>
+        Added bit-accurate 24/48 playback on Audgiy2/Audigy devices [via EpilogX and FXBusX, WinMM only]<br>
+        Added initial support for E-DSP audio cards (E-mu 0404, 1010, 1212, 1616, 1820) - 16/48 mode <b>ONLY</b><br>
+        Added CLEAX2Reverb effect with 64 presets [by Russ]<br>
+    </li>
+    <br>
+
+    <li><a name='3541'></a><i>04/05/2008 - Version 5.00.3541 (BETA) released</i><br><br>
+        Fixed issue with 'Wave' mixer slider (introduced in 3540)<br>
+        Fixed issue with AC-3 support under WinXP (introduced in 3540)<br>
+        Fixed AC97 3DSE selection on certain card models<br>
+        Increase number of plugin categories<br>
+        Fixed minor WinXP mixer issues<br>
+        Fixed 10k1 Surrounder+ issues<br>
+        Fixed skin issue of the FXRouter effect<br>
+    </li>
+    <br>
+
+    <li><a name='3540'></a><i>03/28/2008 - Version 5.00.3540 (BETA) released</i><br><br>
+        Fixed multichannel playback in Vista<br>
+        Minor Vista compatibility issues fixed<br>
+        Fixed AC-3 decoding/passthrough in Vista (via separate SPDIF device)<br>
+        Improved compatibility with certain TV-Tuners (WinXP)<br>
+        Removed joystick INF file, since it did not work anyway<br>
+        Fixed Master volume in sndvol32.exe and minor Mixer API-related fixes (WinXP, Vista)<br>
+    </li>
+    <br>
+
+
+    <li><a name='3539'></a><i>08/23/2007 - Version 5.00.3539 (BETA, internal) released</i><br><br>
+        This is long-expected Vista-compatible (x86 only) release<br>
+        Most changes found in 3538 changelog<br>
+        Significant changes since 3538m:<br>
+        - ASIO support under Vista<br>
+        - Fixed disabled device state in Vista control panel<br>
+        - kX Mixer master controls are not working (known issue)<br>
+        - The driver no longer links against debugging libraries, legacy DSP effects and plugins will not work without recompilation<br>
+    </li>
+    <br>
+
+    <li><a name='3538'></a><i>01/21/2007 - Version 5.00.3538 (BETA, internal) released</i><br><br>
+        Re-arranged kX Distributions<br>
+        Removed Win98 support<br>
+        kX Manager code completely re-written<br>
+        Added initial support for 6.1 and 7.1 speaker-sets<br>
+        Fixed bug with 'kxctrl -shw 19' option<br>
+        Added an option for AC97.2 input (<b>on the AC97 mixer page</b>)<br>
+        Added support for Audigy2 Zs Notebook<br>
+        Added '24/96 Router' for P16V hardware mixer (Audigy2 only)<br>
+        Added 'kX Console' menu item<br>
+        Added support for multiple ASIO drivers<br>
+        Improved SoundFont attack issue<br>
+        Improved kX DSP connect/disconnect features (hold 'Alt' button for legacy behaviour)<br>
+        Plugin window position is now saved and restored automatically with the settings<br>
+        Fixed bug with HpSp plugin (invalid channel assignment)<br>
+        Improved Speaker Test applet<br>
+        Changed the default routing for ASIO recording (kX In0/1 is now equal to WinMM Rec path)<br>
+        Improved support for hidden kX DSP effects<br>
+        Improved Power Management / Hibernation support<br>
+        Polish, German, Spanish, Chinese and Danish translations updated<br>
+        Turkish translation added<br>
+        Fixed bug with MX6 mixer automation support<br>
+        Changed default recording level for Wave/Synth sources (<b>'what you hear' is now OFF by default</b>)<br>
+        kX ASIO driver re-written to support 24/96 and other formats (Audigy2 only) (EXPERIMENTAL, not yet functional)<br>
+        Added buttons to copy Hardware Configuration / IO Status to clipboard<br>
+        Improved 24-bit and 32-bit format support (Audigy2)<br>
+        Added custom SoundFont manager (<b>sfman32.dll</b>)<br>
+        Added custom VSTi-based SoundFont manager<br>
+        Added hack to fix Cubase SX patch names issue<br>
+        Fixed minor bug in Dane disassembler<br>
+        Added support for WinRar3-archived skins<br>
+        Added option to minimize / restore kX DSP objects<br>
+        Added option to disable content redraw while dragging kX Manager windows<br>
+        Fixed some CLReverb4-related bugs<br>
+        Crossover, BoobleGum, Vibrato effects added<br>
+        Removed RemoteIR acceleration<br>
+        Fixed several SB22x-related issues<br>
+        Improved SRC DSP effect<br>
+        Initial support for Audigy2 Value added<br>
+        Fixed incorrect translation (8-point surround)<br>
+        kX Tray icon should be visible after Explorer crashes<br>
+        ASIO Control panel improved<br>
+        Added CD-SPDIF AC-3 decoding support<br>
+        Improved DSP-P16v resampling quality (i2s output, analog, audigy1/2)<br>
+        New DSP Effects added (newer Dynamica, ADC, Mixy etc.)<br>
+
+        Initial GSIF2 support (without recording and/or MIDI-In/Out)<br>
+        Fixed issue with invalid icons in Speaker Test applet<br>
+        Fixed issue with Audigy2 AC-3 passthru for certain decoder models<br>
+        Added additinal ASIO performance tweaks for SMP/HT machines (up to 1ms latency!)<br>
+        Fixed issues with ASIO control panel not saving changes<br>
+        ASIO sync code moved to kernel level<br>
+        Improved 'Driver Compatibility' window<br>
+        Changed default peak meter mode<br>
+        Fixed issue when renaming plugins (spaces)<br>
+        Fixed issue with kX Mixer handling multiple Surrounder instances incorrectly<br>
+        Improved SoundFont support for looped samples<br>
+
+        Fixed bug with invalid AllNoteOff/AllSoundsOff message handling<br>
+        Added sync method selection for kX ASIO control panel<br>
+        Added 'default' button for ASIO control panel<br>
+
+        Fixed brightness MIDI controller<br>
+        Added option to disable UART routing to kX Control device ('driver compatibility')<br>
+        Added support for dynamic drum channel assignment (<i>kxctrl -shw 21 value</i>)<br>
+        Several translations updated (Chinese, Polish etc.)<br>
+
+        Improved ASIO sync code (should improve performance compared to 3534f)<br>
+        Added option to assign double-click action on system tray<br>
+        Updated mixy42, mixy82 and loudness plugins<br>
+        Enhaced support for assignable mixer controls (-ma option for kxctrl)<br>
+        Improved minimized windows support<br>
+        Added Vista support [ASIO, Synth, DSP]<br>
+        Improved AC-3 stability<br>
+        Fixed BSOD issue with volume controls<br>
+
+        Added support for analog-ins on A2ZS Notebook<br>
+        Fixed issue with 24/96 router<br>
+        Fixed skin memory leak issue (Note: use Zip instead of Rar)<br>
+        Fixed EFX effects boot time issue<br>
+
+        <b>kX API/kX SDK:</b><br>
+        Added support for constant registers (Dane)<br>
+        Added support for kX Plugin Manager and kX Manager Add-ons<br>
+        Added support for p16v per-channel volumes<br>
+        Added access for kernel-level ASIO timers<br>
+        Added support for 'RAW' midi events in kX Automation<br>
+        kX SDK License Agreement has been updated to Revision 4<br>
+        kX API revised -- legacy plugins are no longer supported<br>
+        Added support for HWND extraction for iKXPluginGUI<br>
+        Added support for IKX_CLOSE_AND_REOPEN notification<br>
+        note to kX API Developers: include 'kxcompat.h' file for your legacy code<br>
+        Added passthru on/off functions<br>
+        Updated kX Add-on architecture<br>
+        Added option to launch any effect/kX Mixer applet from the skin by GUID<br>
+
+    </li>
+    <br>
+        
+<!--    
+<?
+/*
+[mail: ideas]
+
+make kX Automation MIDI device selectable via menu (for instance, non-kX)
+
+noise on line-in (order of p16v calls? -- changing buffers in asio4all solves the issue?)
+
+bug in preset management (plugin presets)
+
+add TheDelay effect
+
+remove Win98SE QuickFix from the installer
+
+voice.cpp: line 738: curvol+=0x1000; -> another constant?..
+enable/disable uart1/2 routing to kx control
+
+on double-click open 'mixer'/'dsp'/'effect'
+
+effect presets selectable via taskbar menu & via 'effects' submenu
+
+http://driverheaven.net/showthread.php?p=565881&posted=1#post565881
+ -- bypass not restored
+
+peak in epilog / select source
+
+launch [guid]
+guid-ify all mixer elements
+make page selection via guid/button
+
+configuration name on title bar is required [kX DSP]
+
+update about.image ['-' & 'expanding']
+
+http://www.driverheaven.net/showthread.php?t=62922&page=2
+kX Remote hangs
+buttons for kX Mixer/Skin implementing iKXManager
+
+* critical/serious bugs, new hardware issues, to-do:
+  setup: check for valid preset / kxu
+  dB sliders [kxmixer]
+* asio:
+  support for 24/96 playback [ASIO]
+  latency issue in 3538 compared to 3534
+  window on top of host
+  fake asio ins for 44.1
+  64 out channels [playback, asio]
+* kX scripts support [or at least an environment for 3rd-party implementations]
+  Or a command line integrated in KxDSP like that one from AutoCAD
+  Or more than this, updating Kx Automation with this feature for any plugin that supports automation..
+  Or a frequency analysis plug-in for Kx DSP...
+  It would be nice to also add hotkeys for they keyboard? Volume, mute
+* surrounder+: 
+   hpsh
+* Kevin Horden effects
+* p16v router
+  p16v & others: write(read) is unsafe [wdm/kernel]
+  'follow epilog' flag
+* ac-3 stuff [passthru for 10k1 etc...]
+  click on ac-3 pause/stop/resume (mute spdifs?..)
+  speed-up ac-3 decoding [winmm -> dsound]
+* sndvol32 / topology / -6dB bug under 9x
+* dsound / eax
+   3-d spatialization -- re-implement [speaker test, surrounder, 3-d gaming]
+    KX_HW_P16V_FOLLOW_EPILOG [not implemented]
+   p16v router / levels / routs [4 flags; 8 volumes; follow_epilog flag; follow swap_f_r flag; routings [+kX API change]]
+* soundfont bugs:
+  attack [semi-fixed?]
+  looping
+  panning for MIDI CC Pan (realtime)- fails [clicks]
+  sf 32Mb limitation [simultaneous playback]
+* kX GUI bug: skinned sliders [see eYagos effects]
+* kx add-on architecture
+  - further development
+* hardware:
+  constant beep: disable/enable device
+  i2s incorrect init (46/77/90 dB noise) [external units] http://driverheaven.net/showthread.php?t=53320
+* kX DSP:
+  info dsp plugin - unfinished
+  prologic ][ encoding/decoding
+  rotary/b3 scanner [lemury]
+  agc effect http://www.driverheaven.net/showthread.php?s=&threadid=13151 [eyagos]
+  dsp containers
+  Phase Shift [http://www.driverheaven.net/showthread.php?s=&threadid=35573]
+* gsif2
+  implement [midi]
+* kx dsp fx plugin
+  asio interface [in/out] ?
+* kx gui:
+  create_vslider/hslider: 'method' stuff
+  create_button: -""-
+* minor changes:
+  rename card feature
+  map keyboard keys to tweak plugins
+  display the current filename anywhere on the window [dsp]
+  preset selection (as card name) -- lru
+  change mouse cursors over ins/outs in the kX DSP
+  preserving filenames in the load/save dialog boxes would also be very handy 
+  keyboard navigation [tab] for all kXGUI-based software
+  the inability to move between controls with the keyboard makes using kxmixer difficult
+  bug? viblfofreq: http://www.driverheaven.net/showthread.php?s=&threadid=37453
+  bug: all the tweak windows show up in Always On Top mode, if the kX DSP is Always On Top 
+  Also it would be nice that when I put the mouse cursor over a pin, that pin would invert its colour, [hover]
+   For example in fxbus wave channels would be red, asio black
+  sliders on the ac97 page used the "deactivated" image when source is not Stereo Mix or Mono Mix
+  auto set hw accel in setup
+  bug: too short drums / metronome missing
+  ctrl+alt+<letter> -> effect tweak window
+  multiple accounts - separate settings
+  speaker test: card selection 
+  MIDI - LEARN - MODE [kx automation]
+  "automatic" labeling (peak on connect/disconnect)
+  bug? Reversed CC 74 (cut-off) response http://www.driverheaven.net/showthread.php?s=&threadid=34076
+  [dsp effect] Allow minimize to tray (per window)
+  re-write kx_wcwait [wdm/kernel]
+  dsp effects: tweak plugin titles not reflect 'rename' option
+  shared constant gprs: re-check [semi-implemented]
+  mixer: solo mute etc.. (extended) + balance / pan + level; + smooth sliders [shift+mouse]+ balanced difference
+  mixer: make dB sliders more smooth (?)
+  bug: In Cubase; when selecting the midi channel 10 to select drum sets in a Soundfont; 
+     where they are located on Bank #128 of a professional Soundfont (from EMU); the 
+     selection of drumsets are not displayed in the patch selection menu 
+  bug: winme detection [under certain cfgs]
+  bug:"Today I have found 15 files created by KX driver"
+  kX Edit settings (like the font size).
+  bug: kx dsp resources [leak; minor; font] [once per start-up]
+  mouse wheel -- additional support
+  check: changing mixer backgrounds for diff. pages [diff. sizes
+  automation: interpolated + coarse/fine:
+   http://www.driverheaven.net/showthread.php?s=&postid=186069#post186069
+   http://www.driverheaven.net/showthread.php?s=&threadid=26348
+  bug: stand-by by timer : http://www.driverheaven.net/showthread.php?s=&threadid=24543
+  make the checkbox labels in 'synth compatibility' somewhat larger
+  if you have a few peak meters going, it would be nice if you could stick them together
+  drum channel assignable
+  device-oriented systray menu
+  Add support for Digital Output on Gateway OEM SBLive
+  bug: it is also possible to start multiple instances of the driver compatibility and synth compatibility 
+  fix 'Update' function to restore 'output' connections, too
+  feature: free_unconnected_output_gpr()
+  bug: dane microcode is not 'unregistered' if file is deleted
+  p16v: mono playback (silence) [not confirmed]
+  force set midi velocity
+  bug: kxdsp gpr regs incorrect
+  enhanced bypass (10k2)
+  bug: dxdiag: right only (3-D); fmod 3-d audio?
+  'v' bit (valid) for 10k1 [spdif]:
+   'v' bit (valid) for HCFG [10k2]
+   add 'mute spdif on bad audio' option ('v' bit; 10k2-only)
+  bug: simultaneous UART In + RemoteIR/Drive tweak (buffer lost)
+  vsti: save/restore dialog; card selection dialog
+  vsti: works with card '0' only!
+  minimized windows bug
+  ac-3 channel assignment / management [non-5.1 streams] 
+   http://www.driverheaven.net/showthread.php?s=&threadid=28909&pagenumber=3
+
+[todo / ideas]
+http://www.driverheaven.net/showthread.php?s=&threadid=43743
+http://www.driverheaven.net/showthread.php?s=&threadid=25250
+http://www.driverheaven.net/showthread.php?s=&threadid=41276
+http://www.driverheaven.net/showthread.php?s=&threadid=39244
+http://www.driverheaven.net/showthread.php?s=&threadid=18969
+
+i=1 , j=1; - по порядку загрузки
+-- цикл --
+if PresentConnect ( plugin(i), / * from * / plugin(j) ) and
+NotFeedbacked ( plugin(i), plugin(j) ) then
+ChangePlugins ( plugin(i), plugin(j) ) else j++;
+if j>NumPlugins then i++, j=i;
+[ j=i+1 ]
+
+add_microcode(efx_register_info,efx_code,place?..)
+и parse_dane("text string");
+
+Invalid links @
+http://kxproject.spb.ru/docs.php?language=en :
+http://people.freenet.de/kxdev/docs/other/jost-jot2.pdf
+http://people.freenet.de/kxdev/docs/original/wo9901814.pdf 
+http://people.freenet.de/kxdev/docs/original/us5943427.pdf
+http://people.freenet.de/kxdev/docs/original/wo9707476.pdf 
+http://people.freenet.de/kxdev/docs/original/wo9830969.pdf
+http://people.freenet.de/kxdev/docs/original/wo9901953.pdf 
+http://people.freenet.de/kxdev/docs/original/us6138207.pdf
+*/
+?>
+-->
+
+    <li><a name='3537'></a><i>02/17/2004 - Version 5.00.3537 (BETA) released</i><br><br>
+        Fixed SMP/HyperThreading compatibility issues<br>
+        Fixed bug with invalid 24/96 loopback volume level<br>
+        Fixed bug with invalid 24/96 Master volume after reboot<br>
+        Improved SPDIF output quality for Audigy2 boards<br>
+        Swedish, Polish, Brazilian Portuguese, Spanish, Italian, French, Danish and German translations updated<br>
+        Fixed bug with AC-3 Passthru on Audigy2-based boards<br>
+        Fixed bug with incorrect handling of DOO mode for certain boards<br>
+        Added support for 48000 and 192000 sampling rates for the 'Wave HQ' device<br>
+        Support for 44100 is not available at the moment (additional research is necessary)<br>
+        Added support for 32-bit (32-32) format for Kernel Streaming clients (fake :))<br>
+        Default levels for CD-Digital and SPDIF-In set to '-inf'<br>
+        Fixed bug with FXMix2 plugin (10k1-compatibility issue)<br>
+        Improved RemoteIR support for trayed WinAmp and Foobar<br>
+        Improved RPN/NRPN support (fixed certain formulas)<br>
+        Fixed bug with kX Mixer handling default device change incorrectly<br>
+        Fixed bug with invalid 'kX1/MicIn' and 'kX0/LineIn' to 'AC97 In' mappings (0dB = 100%)<br>
+
+        Fixed invalid AC97 recording gain visualization<br>
+        Added 'Unload all SoundFonts' button<br>
+        Added an option to filter EAX calls ('Driver compatibility')<br>
+        Updated IO Status window<br>
+        kX API: 'hidden' kX DSP objects partially implemented<br>
+        Minor kX Setup improvements<br>
+        Fixed minor bug with default routings and kX Router applet<br>
+        Added support for SB22x model<br>
+        Fixed minor bug with 24/96 'Wave HQ' volume<br>
+        Added support for (32-0) formats<br>
+        S/PDIF sampling rate is now automatically set/reset when AC-3 Passthru is active<br>
+        Fixed bug with SPDIF 24/96 recording ('Wave HQ' device)<br>
+
+        Fixed minor SoundFont/SFMan-related issue<br>
+        Added support for certain OEM cards<br>
+        Fixed bug with 'p16v recording source' selection causing reboots<br>
+        Fixed bug with AC97-In +/- 12dB jump on mute/unmute<br>
+        Added two NoiseGate plugins<br>
+        Added compatibility option for Audigy2 passthru<br>
+
+        Improved RemoteIR compatibility with certain WinAmp versions<br>
+        Added option to disable S/PDIF notifications<br>
+        Improved RemoteIR support (<? klink("remote");?>details...</a>)<br>
+        Fixed bug with certain settings not saved on reboot<br>
+        Improved MIDI UART IRQ handling<br>
+        Major SoundFont memory management improvement (support for large SoundFonts added)<br>
+        Some SoundFont-related optimizations (voice management engine)<br>
+        Improved UART Input/Output<br>
+        Added CLEAX4Reverb effect with certain presets (ALPHA)<br>
+        Added option to turn on/off AC97 to Front Speakers routing (for 10k2 cards: 'kxctrl -shw 19 1')<br>
+        Certain AC-3 decoding engine improvements<br>
+        Fixed issue with kX Router restoring settings incorrectly after Hibernate<br>
+    </li>
+    <br>
+
+    <li><a name='3536'></a><i>12/04/2003 - Version 5.00.3536 (ALPHA) released</i><br><br>
+        <b>This version might be not 100% compatible with HT/SMP machines</b><br>
+        Improved 3-D audio attenuation and Doppler models<br>
+        Improved kernel-level 3-D audio synchronization (BETA)<br>
+        Improved SMP / HyperThreading compatibility (EXPERIMENTAL)<br>
+        Improved Interrupt handling code<br>
+        Added AC97 'Recording Gain' slider (for analog ac97 gain)<br>
+        Fixed bug with incorrect multibyte characters handling (Chinese etc..)<br>
+                Fixed bug with kX Mixer notifications / RemoteIR support<br>
+                Effect names and languages are now sorted alphabetically in the kX Tray menu<br>
+                Added support for CL-compatible sampling rate interpolation (compatibility option)<br>
+                Added option to reset hardware voices (kxctrl -rv)<br>
+                Option to turn off FXBus amounts smoothing added (compatibility option)<br>
+                Improved SoundFont support (looped and non-looped samples)<br>
+                Minor sfman32.dll compatibility issues solved<br>
+                Improved AC-3 decoding of non-standard AC-3 streams<br>
+                The position of plugin windows are now saved<br>
+                Fixed bug with center/lfe/digital channels not muted when headphones are plugged-in<br>
+                Fixed incorrect vertical peak meter visualisation<br>
+                Fixed minor bug in kX Automation<br>
+                Added 'Expander', 'Expander+', 'WaveGen3' DSP effects<br>
+                Added 'Delay A', 'Delay B' and 'Dynamics Processor' effects<br>
+                Optimized 'FXMix2' effect<br>
+                Fixed bug with kX DSP displaying resource allocation incorrectly<br>
+                Danish, Traditional Chinese, Polish and Spanish translations updated<br>
+                kX API: added card-specific input/output labeling<br>
+                kX API: added support for text-align properties<br>
+                Fixed bug with invalid FX routings ('no reverb' issue)<br>
+    </li>
+    <br>
+
+    <li><a name='3535'></a><i>10/14/2003 - Version 5.00.3535 (ALPHA) released</i><br><br>
+        Added support for 24/96 playback and recording for Audigy2-based boards (EXPERIMENTAL)<br>
+        
+        Improved power management support<br>
+        Improved hardware compatibility with certain audio cards<br>
+
+        Fixed bug with AC97 contoller power management<br>
+                Fix crackling sound on start-up for Audigy2 boards<br>
+                
+                Improved real-time panning quality<br>
+                Added option to choose Wave panning method (true pan or balance) - by command-line tool<br>
+                Added compatibility option to enable AC-3/Multichannel volume change<br>
+                Added option to unload kX Mixer automatically after start-up ('--once')<br>
+                
+                Added support for horizontal peak meter<br>
+                Added a shortcut for the peak meter to the kX Mixer page<br>
+                Improved IO Status window<br>
+                Improved 'mute speakers when headphones are plugged-in' option<br>
+
+                Added option to choose the desired speaker spatialization method (by using command-line tool)<br>
+
+                kX DSP window enlarged<br>
+                Added real-time update option for kX Editor and kX API (EXPERIMENTAL)<br>
+                Updated Filter effects (may be not 100%-compatible with previous)<br>
+                Added APS Compressor+ with Side Chain input<br>
+                Added MX6 (custom mixer, v 1.113a) DSP effect (described <a href='http://www.kxproject.com/mx6_help.php' class=fade>here</a>)<br>
+                Added high-quality headphones positioning effect (HpSp)<br>
+                Updated XRouting effect to support 8-point spatialization<br>
+                Prolog and Epilog effects re-written to support amplification (EXPERIMENTAL)<br>
+                Improved kX Mixer indication for inputs & outputs (levels measured in dB)<br>
+                (<b>NOTE</b>: if you have any pre-3535 setting files, the new prolog/epilog
+                features won't be available until you upload new prolog/epilog effects
+                into the DSP. Resetting settings will upload the new effects automatically)<br>
+                (<b>NOTE</b>: the AC97 slider volume is shown in percents (%); 100% corresponds
+                to 12dB amplification)<br>
+                The <b>SDK License Agreement</b> has been updated<br>
+
+                Danish translation added<br>
+                Polish translation updated<br>
+                Brazilian Portuguese translation updated<br>
+                Improved System Tray icon<br>
+        <br>
+    </li>
+    <br>
+
+    <li><a name='3534f'></a><i>08/18/2003 - Version 5.00.3534f released [Quick Fix]</i><br><br>
+           Fixed kX 3-D attenuation model<br>
+           Fixed kX 3-D Doppler calculation<br>
+           Fixed kX 3-D Distance Factor issue<br>
+           Added kX 3-D compatibility / debugging options<br>
+           Added support for SB0320 card<br>
+           Added Thai language support<br>
+    </li>
+    <br>
+
+    <li><a name='3534'></a><i>08/02/2003 - Version 5.00.3534 released</i><br><br>
+         On-the-fly support for <a href='http://melodymachine.com' class=fade target=new>sfArk v2</a> files added<br>
+         Fixed some issues related to WavePCM mixer slider<br>
+         Fixed minor bug with the setup program under Win98SE / WinME<br>
+         Fixed incorrect 'Swap Front and Rear' function while in 'Digital Output Only' mode<br>
+         Improved support for multiple devices<br>
+         German translation updated<br>
+         Italian translation updated<br>
+         Polish translation updated<br>
+         Fixed real-time pitch calculation for certain card models<br>
+         Added option to enable/disable real-time resonance and filter cutoff (Synth compatibility)<br>
+         Added support for 44100 sampling rate for ASIO (ALPHA, <b>without recording!</b>)<br>
+         Fixed bug with Cubase SX handling ASIO 44100 sampling rate incorrectly<br>
+         Added option to tweak GSIF buffer size<br>
+         Added option to mute speakers when headphones are inserted<br>
+         Fixed bug with B2B plugins<br>
+         Improved Modulation CC compatibility (VibLfoFreq Divisor in Synth Compatibility panel)<br>
+         Initial support for hardware-accelerated DirectSound 3-D (attenuation and spatialization)<br>
+         (In order to disable DirectSound acceleration, select 'Wave 4/5' device)<br>
+         Added option to choose bank selection method (Synth Compatibility)<br>
+         Fixed bug with multiple soundfonts playing simultaneously<br>
+         Added option to select target Synth device on SoundFont upload<br>
+         Added automation for most plugins<br>
+         Fixed bug with AC-3 passthru for certain Audigy2 cards<br>
+         Added 'Multimedia Properties' shortcut<br>
+         Peak plugin improved<br>
+         Fixed some minor issues with skin handling code<br>
+    </li>
+    <br>
+
+     <li><a name='3533b'></a><i>05/30/2003 - Version 5.00.3533b released [Quick Fix]</i><br><br>
+         Fixed bug with DirectX Panning function (for 10k1-based boards)<br>
+     </li>
+     <br>
+
+
+     <li><a name='3533'></a><i>05/28/2003 - Version 5.00.3533 released</i><br><br>
+         Some fundamental SoundFont changes:<br>
+         Fixed modulation, attack, decay, sustain, release formulas<br>
+         Improved panning quality<br>
+         Added support for 'Balance' MIDI controller (#8)<br>
+         Fixed stereo samples support (based on CL behaviour)<br>
+         Fixed attenuation formulas (based on CL behaviour)<br>
+         Added 'Synth Compatibility' option<br>
+         Default Synth volume increased by +6dB<br>
+         Fixed Velocity to FilterCutoff formula (can be turned off via 'Synth Compatibility' flags)<br>
+         <a href=/help/midi.htm class=fade target=new>MIDI Implementation chart</a> revised<br>
+         <br>
+         Fixed bug with incorrect patch names for drum channels<br>
+         Fixed bug with clicks when using Vienna<br>
+         Fixed some sfman32.dll-related issues<br>
+         Re-distributed sfman32.dll updated (should fix patch name issues with multiple devices)<br>
+         (<b><i>NOTE</i>: you may need to install sfman32.dll from a previous driver version if you
+         experience problems with SoundFonts and / or patch names. Please review
+         the following article (<a href='http://www.driverheaven.net/newreply.php?s=&action=newreply&threadid=15296'>SoundFont discussion</a> for details.</b>).<br>
+         Fixed bug with muted SoundFont devices when running Vienna<br>
+         <br>
+         Some of the inputs and outputs re-labelled based on IO Assignment guide<br>
+         Fixed Optical / Coaxial labelling <br>
+         (a new 10k2-specific slider 'AC97 In 2' corresponds to Philips UDA ADC codec connected to the AC97 codec)<br>
+         (in order to be actived, it is necessary to turn on AC97 master volume ("kxctrl -sac97 0 0")<br>
+         (don't forget to turn it back off by running "kxctrl -sac97 0 9f1f") [EXPERIMENTAL]<br>
+         Added 'I2S 2 Out' slider for 10k2-based boards<br>
+         <br>
+         Minor GUI improvements<br>
+         Added 'Enable Balloon Tooltip' option<br>
+         <br>
+         Fixed bug with 22050Hz recording frequency being rejected<br>
+         Added support for 96000Hz recording in 'Direct SPDIF Recording' mode (if supported by hardware)<br>
+         Added 24-bit audio playback support for 10k2-based boards [EXPERIMENTAL]<br>
+         <br>
+         Fixed bug with 'Bypass' option not being restored correctly<br>
+         Plugin presets handling code re-written (ALPHA)<br>
+         Added option to import / export plugin presets (ALPHA)<br>
+         Added context menu for selecting presets via kX DSP<br>
+         Fixed bug with saving settings in version-independent format<br>
+         <br>
+         Major kX Mixer optimizations solving long delays<br>
+         Improved kX Mixer memory management<br>
+         <br>
+         Added option to preserve settings on upgrade/reinstall [EXPERIMENTAL]<br>
+         Added ASIO Control Panel for kX Mixer (Settings - ASIO Control Panel)<br>
+         Fixed bug with AC97 controls been swapped (left and right)<br>
+         Added 'FXBusX', 'Prolog Lite', 'Epilog Lite k1', 'Epilog Lite k2' and 'AC3 Passthru' effects<br>
+         Added 'FXMix' effect<br>
+         Updated 'B2B' and '16to32' effects<br>
+         Fixed bug with help displayed incorrectly<br>
+         Fixed playback buffer sizes (Setup Buffers window)<br>
+         
+         I/O (SPDIF) Status window added<br>
+         Added support for AC-3 passthru for some 10k1-based cards (with chip revision>=7) (ALPHA)<br>
+         
+         Fixed bug with incorrect WinMM/DSP volumes when set to maximum<br>
+
+         Fixed bug with 'LineIn' WinMM slider being handled incorrectly<br>
+
+         GSIF support implemented<br>
+         Improved GSIF audio latency<br>
+      </li>
+      <br>
+
+   <li><a name='3532'></a><i>04/30/2003 - Version 5.00.3532 released</i><br><br>
+    Audigy2 Platinum Ex and External Drive support added<br>
+
+    Fixed bug with SPDIF Freq selection<br>
+    Fixed possible bug with SPDIF Bypass mode<br>
+
+    Stereo samples support (SF2) improved<br>
+    Improved SoundFont velocity/volume/expression handling<br>
+    Improved SoundFont formulas<br>
+    Added support for multiple SoundFont loading via 'Load SoundFont' dialog<br>
+
+    Improved support for multiple kX-compatible cards<br>
+    Selective kX driver installation for multi-card set-ups implemented<br>
+
+    Added 'Save'/'Restore' option for each kX Mixer applet<br>
+
+    kX Ctrl utility updated:<br>
+    - Interactive mode added<br>
+    - Options to reset settings / re-initialize DB card added<br>
+
+    Fixed bug with incorrect 10k2 microcode dump function<br>
+    Fixed B2B DSP Effect<br>
+    Fixed bug with AC-3 passthru for 10k2-based boards - should work correctly now<br>
+    Improved AC-3 synchronization<br>
+
+    Ukrainian translation added<br>
+    Japanese translation added<br>
+
+    Added support for saving / restoring kX Automation settings (ALPHA)<br>
+
+    Fixed bug with MRU list of settings<br>
+    
+    Fixed 'click' when testing speakers<br>
+    Improved test sample for subwoofer channel<br>
+    
+    Improved ASIO synchronization<br>
+    Improved ASIO sample position accuracy<br>
+    Improved UART Out SysEx handling<br>
+    Initial GSIF support<br>
+
+    Pseudo Mic-in slider for Windows Mixer added (for compatibility only)<br>
+    Fixed support for sndvol32 mixer notifications (ALPHA, causes slower slider updates)<br>
+    Fixed bug with Windows Mixer - kX Mixer notifications (redraw)<br>
+    
+    Fixed bug with 'Reset global settings'<br>
+    Fixed bug with B2B [v2] plugin<br>
+    SPDIF-In AC-3 decoding implemented for 10k2-based boards (alpha: high latency...)<br>
+    New CLEAX3Reverb effect added ('Concert hall' preset)<br>
+    New Stereo Mix + Gain effect added<br>
+
+    Added a 'Software/kX/Mixer/EnableBalloonTooltips' registry option<br>
+    Fixed bug with APS SPDIF Recording levels<br>
+    Fixed bug with kX Synth volume<br>
+    
+    Fixed bug with ASIO Control Panel window<br>
+
+    SPDIF Direct Recording option added for 10k2-based boards<br>
+
+    Added support for Separate OSD/RemoteIR settings for each device<br>
+    Improved OSD visual appearance<br>
+    Notification / RemoteIR code re-written<br>
+    Enhanced On-Screen Display function added<br>
+    Added support for Foobar2000 player (kX RemoteIR)<br>
+    Added support for Windows Media Player (kX RemoteIR)<br>
+    Added support for WinDVD Player (kX RemoteIR)<br>
+    Added support for WinAmp 2.xx (kX RemoteIR)<br>
+   </li>
+   <br>
+
+   <li><a name='3531'></a><i>03/27/2003 - Version 5.00.3531 released</i><br><br>
+    Fixed bug with clicks at the beginning of the ASIO / Multichannel playback<br>
+    Fixed bug with Surrounder effect (Bass redirection)<br>
+    Fixed bug with Audigy2 support<br>
+    Additional presets for Eq and Surrounder effects added<br>
+    SoundFont memory management improved<br>
+    Brazilian Portuguese translation updated<br>
+    Italian translation updated<br>
+    APS Pitch (ALPHA) and Crossfade effects added<br>
+    'Mute' / 'Bypass' options added for all DSP effects (ALPHA)<br>
+    An option to disable kX Remote added<br>
+    An option to disable tooltips added<br>
+    Support for Multimedia Keyboards added (ALPHA, disabled by default)<br>
+    Numeric mixer values added<br>
+    RemoteIR timings changed<br>
+    Minor GUI updates<br>
+   </li>
+   <br>
+
+
+   <li><a name='3530'></a><i>03/03/2003 - Version 5.00.3530 BETA released</i><br><br>
+    Fixed bug with kX DSP tooltips not being updated<br>
+    Fixed bug with kX Mixer window initial position<br>
+    Fixed bug with 'Re-align plugin' command<br>
+    Fixed bug with icon association<br>
+    Fixed 'Always On Top' option for plugins<br>
+    Fixed bug with ASIO driver device selection<br>
+    Fixed bug with AC97 codec programming for certain card models (problems with subwoofer and center)<br>
+    INF file and card names updated<br>
+    Kernel-level driver partially re-written<br>
+    (WDM) Multichannel playback support added (via 0/1 device) -  up to 6 channels<br>
+    DirectSound 3-D Software emulation improved (via 4 / 5.1 speakers)<br>
+    The default routings for 'Wave X/Y' devices changed - read <? klink("routings") ?>Routing Guide</a> for details<br>
+    Routing plugin completely re-written (ALPHA) - read <? klink("routings"); ?>Routing Guide</a> for details<br>
+    Fixed bug with 'Wave Balance' slider (Windows mixer)<br>
+    Default ASIO routings updated<br>
+    New 'Decimator', 'Gain', 'Surrounder', 'XRouting' effects added<br>
+    'WaveGen' effect updated<br>
+    New Recording sliders added (Rear & Center/Subwoofer levels)<br>
+    Improved Audigy2 support<br>
+    Aqua skin updated<br>
+    'Phantom' recording and playback devices removed<br>
+    Italian translation updated<br>
+    Advanced SoundFont control options added (including <b>initial</b> SoundFont Collection support) (ALPHA)<br>
+    Extended voice analyzer notifications added<br>
+    Option to disable OSD for kX Remote added<br>
+    kX Plugin architecture revised<br>
+    kX Plugin exception handling added<br>
+    kX Plugin API: support for 'built-in' presets added<br>
+    kX Plugin API: new 'Combo' control added<br>
+    kX Plugin API: event handling simplified<br>
+    Sample 'DSW' Project added to the SDK (\fx_demo folder)<br>
+    kX SDK package updated<br>
+    Skin API: Tiled backgrounds support added (ALPHA)<br>
+    Skin API: built-in plugin skins implemented (ALPHA)<br>
+   </li>
+   <br>
+
+  <li><a name='3529'></a><i>02/07/2003 - Version 5.00.3529 ALPHA released</i><br><br>
+    kX Mixer core partially re-written<br>
+    kX GUI core re-written<br>
+    kX Save/Restore settings feature revised and partially re-written<br>
+    kX Skin Architecture revised<br>
+    Vienna / SoundFont Editing feature implemented (except 'wave playback') (ALPHA)<br>
+    Fixed some skin selection related bugs<br>
+    Initial Audigy2 support added<br>
+    New NSIS-based Setup program<br>
+    New APS Everb effect added<br>
+    kX Setup: OS detection code updated<br>
+    Major voice management bug fixed (infinite sustained notes)<br>
+    Voice management improved<br>
+    Routing-related changes<br>
+    Korean translation added<br>
+    Greek translation added<br>
+    Chinese (Simplified and Traditional) translations added<br>
+    Added card name to each window's title<br>
+    'Unknown' i2s output added for 10k2-based boards<br>
+    'Swap front and rear' option now affects 'digital' outputs<br>
+    Fixed SoundFont Percussion Banks handling<br>
+    Fixed issue with analog center/subwoofer on some 10k2-based boards<br>
+    Fixed bug with Analyzer appearance<br>
+    Fixed bug with FilterQ parameter being programmed incorrectly (non-realtime)<br>
+    Fixed internal cache control register programming (less clicks / distortion)<br>
+    Fixed bug with kX DSP resources leakage<br>
+    Fixed minor bugs with different translations (such as Spanish)<br>
+    Fixed bug with skin / language selection<br>
+    Added support for mute/unmute for psudo-LineIn source (ALPHA)<br>
+    Default ASIO routings added<br>
+    Fixed bug with 8-bit data streams mapped into the memory incorrectly (ALPHA)<br>
+    Drammatically improved ASIO driver memory management (ALPHA)<br>
+    Implemented MIDI CC 71 (Sound Resonance / FilterQ); '64' = '0' (ALPHA)<br>
+    FX Amounts implemented (and moved from the 'Effects' page of the mixer to the
+     kX Router applet)<br>
+  </li>
+  <br>
+
+  <li><a name='3528'></a><i>12/02/2002 - Version 5.00.3528 ALPHA released</i><br><br>
+    Hungarian translation added<br>
+    'SPDIF Source Select' feature for E-mu APS implemented (BETA)<br>
+    'Analog Gain' feature added for E-mu APS cards (BETA)<br>
+    Fixed kXSetup to leave any joystick drivers already installed intact<br>
+    kX Skin: translate window gadgets position made configurable<br>
+    Fixed bug with WinMM volumes for 4/5, 6/7 and 8/9 devices (in multicard configurations)<br>
+    Fixed pan formula<br>
+    Fixed minor GUI bugs<br>
+    Implemented MIDI CCs 16,17,18,19 (control SendE, SendF, SendG, SendH for 10k2-based cards) (ALPHA)<br>
+    Implemented MIDI CC 68 (Legato) via Attack Time (ALPHA)<br>
+    Implemented MIDI CC 72 (Sound [Vol] Release Time); '64' = '0' (ALPHA)<br>
+    Implemented MIDI CC 73 (Sound [Vol] Attack Time) '64' = '0' (ALPHA)<br>
+    Implemented MIDI CC 74 (Sound Brightness) '64' = '0' (via Filter Cutoff) (ALPHA)<br>
+    <i>Note: new controllers implementation is a subject to change</i><br>
+    Added support for most real-time SF2.1 NRPNs (ALPHA)<br>
+    Added support for AWE NRPNs (ALPHA)<br>
+    Reverb/Chorus formulas changed according to SoundFont 2.01 specification (#8.4.8):<br>
+    <h5>
+     reverb[0..255]=(SF_Reverb(%)*2.5+(MIDI_CC91*50/127))*kXMixerFXAmount/255<br>
+     that is, SoundFont reverb affects hardware reverb directly and
+     MIDI CC91 affects only 20% of the hardware reverb<br>
+    </h5>
+    Fixed MIDI Note-On Velocity to Filter Cutoff formula (according to SoundFont 2.01 Specification, #8.4.2)<br>
+  </li>
+  <br>
+
+  <li><a name='3527'></a><i>11/09/2002 - Version 5.00.3527 BETA released</i><br><br>
+    Increased the number of hardware-accelerated DirectSound voices reported by the driver<br>
+    Fixed bug with kxsetup unable to find kxskin.kxs file where special 
+      characters are used in the account names<br>
+    'Disable startup splash' option added<br>
+    Fixed bug with plugin background painted incorrectly<br>
+    Added support for presets for kX DSP effects<br>
+    Recently used settings files listing added<br>
+    'Line-In' slider now assignable to any kX DSP slider (via kxctrl)<br>
+    Fixed bug with Norwegian and Sweden localizations displaying SoundFont parameters incorrectly<br>
+    Fixed bug with Plugin windows header displayed incorrectly<br>
+    Fixed bug with looped samples (SoundFonts) (ALPHA)<br>
+    Improved SoundFont voice management (mainly of looped voices) (BETA)<br>
+    Improved SoundFont 2.01 compatibility<br>
+    Fixed bug with Bypass mode not restored after reboot<br>
+    Fixed bug with SoundFont page causing crashes sometimes<br>
+    Added 'Manifest' file for kX Mixer<br>
+    WaveGen plugin added<br>
+    Tooltips font made tweakable<br>
+    Minor GUI changes<br>
+    Initial NRPN support (E-mu APS-compatible, not realtime) (ALPHA)<br>
+    Bulgarian translation added<br>
+    Croatian translation added<br>
+    French and Polish translations updated<br>
+  </li>
+  <br>
+
+  <li><a name='3526'></a><i>10/23/2002 - Version 5.00.3526 RC1 released</i><br><br>
+    Fixed bug with SPDIF Bypass mode<br>
+    Fixed Epilog microcode (RecL and RecR can now be connected directly to the FXBus)<br>
+    Fixed bug with microcode being positioned incorrectly sometimes (system hangs)<br>
+    Fixed GUI bug with incorrect windows switching after displaying dialog boxes<br>
+    Chorus/Reverb formula changed once again ;)<br>
+     <h6>
+         final = SoundFont Reverb Amount (0..1000) / 4 + MIDI CC91 Amount (0..127) * 2 + kX Mixer Synth Reverb Amount (0..255)
+         </h6>
+     <br>
+    Keyboard shortcuts added ('1'..'7', 'd', 'e', 'm', 'r', 'a' for opening corresponding windows)<br>
+    Fixed major bug with WDM/WinMM Recording synchronization<br>
+    Fixed bug with Alt-Tab Task Switcher icons displayed incorrectly<br>
+    B2B effect added - for bit-to-bit playback and AC3 passthru (ALPHA)<br>
+    AC3Passthru effect fixed (for 10k2-based cards only, ALPHA)<br>
+    Dummy 'LineIn' slider added to Windows Mixer (for compatibility with TV-Tuner software only, ALPHA)<br>
+    Improved inter-channel synchronization<br>
+    Target SPDIF selection for SPDIF Passthru added<br>
+    New 'Phat EQ Mono' and 'Phat EQ Stereo' effects added<br>
+    EQ effects updated in order to support non-linear parameter changes<br>
+    Dutch translation added<br>
+    Brasilian translation added<br>
+    Italian translation updated<br>
+    Swedish translation updated<br>
+    kX API: custom-drawn kX DSP windows interface revised (BETA, subject to change)<br>
+    kX API: migrated from CDialog to CWnd base class for all GUI objects (BETA)<br>
+  </li> 
+  <br>
+
+  <li><a name='3525'></a><i>10/10/2002 - Version 5.00.3525 released</i><br><br>
+    Norwegian translation added<br>
+    Fixed bug with multiple instances of 'Peak Meter'<br>
+    Fixed bug with switching languages<br>
+    kX API: custom-drawn kX DSP windows implemented (BETA, subject to change)<br>
+    Fixed bug with kX DSP showing connections incorrectly<br>
+    Detailed tooltips added for prolog/epilog in kX DSP<br>
+    Fixed bug with long path names being handled incorrectly<br>
+    Fixed bug with Global Zone generators (sf2) (ALPHA)<br>
+    Fixed bug with Effect controls displayed incorrectly<br>
+    Fixed kX DSP Status displaying hardware resources incorrectly<br>
+    New effect 'APS Compressor' added<br>
+    Voice management algorithm improved (BETA)<br>
+    Fixed bug with allocating stereo voices<br>
+    Fixed bug with releasing sustained voices<br>
+    INI-files processing speed improved (BETA)<br>
+    Fixed bug with Midi voices not being freed after StandBy/Hybernation (BETA)<br>
+    Improved help launching scheme<br>
+    Fixed bug with kX Remote handling 'Mute' command incorrectly<br>
+    Italian translation added<br>
+    Swedish translation added<br>
+    Second French translation added<br>
+    Cnv51To2 (kXSurround) effect added [Mixes 5.1 content into 2 stereo channels]<br>
+    Reverb/Chorus formulas changed: new formula is:<br>
+     <h6>
+         final = SoundFont Reverb Amount (0..1000) * MIDI CC91 Amount (0..127) / 500 + kX Mixer Synth Reverb Amount (0..255)
+     <br>
+     Note: this amount corresponds to FXBUS volume only, the actual effect amount can be
+     changed additionally by tweaking the effect itself.
+    </h6>
+  </li> 
+  <br>
+
+  <li><a name='3524'></a><i>09/24/2002 - Version 5.00.3524 released</i><br><br>
+    Fixed bug with kX Notification (BSODs when plugging in headphones)<br>
+    Fixed bug with StandBy/Hybernation and BSODs<br>
+    Fixed bug with Recording (BSODs)<br><br>
+    Fixed bug with StandBy/Hybernation mode (related to DigitalOutputOnly mode)<br>
+    'Downmix' effect added<br>
+    Initial support for non-administrator priviledged accounts for Win2k/WinXP<br>
+    Recent save/restore folder is now saved<br>
+    Epilog effect re-written using temp registers (allows direct FXBUS-Epilog connections)<br>
+    Fixed 'Reset All Controllers' MIDI handling<br>
+        Complete support for custom fonts<br>
+    Improved 'kxskin.kxs' searching algorithm for kxsetup<br>
+    Added 'tweak' option for 'Peak' microcode (ALPHA, buggy)<br>
+    Spanish translation added<br>
+    Romanian translation added<br>
+    French translation added<br>
+  </li>
+  <br>
+
+
+  <li><a name='3523'></a><i>09/12/2002 - Version 5.00.3523 released</i><br><br>
+    New self-extracting setup program<br>
+    Added support for hardware 'mute', 'vol+', 'vol-' buttons for 10k2-based cards<br>
+    Added Polish language support<br>
+    Added support for SysEx-controlled Synth volume<br>
+    Added labels for peak meters<br>
+    Fixed minor APS-related bugs<br>
+    Fixed issue with APS ECard when returning from Hybernate/Standby modes<br>
+    Fixed bug with multiple note_on events producing clicks (with 'sustain pedal' turned on)<br>
+    Fixed XTram quota for 10k2 cards (64 instead of 32 XTram registers are now available)<br>
+    Fixed UART/MPU-out buffering issues (alpha)<br>
+    Fixed bug with kX Automation handling some registers incorrectly<br>
+    Fixed some significant issues and bugs with multilayered soundfont handling<br>
+    Fixed 10k2 spdif output representation<br>
+    Fixed incorrect hold2 / softpedal handling<br>
+    Minor kX Setup changes and fixes<br>
+    Initial support for spdif ins / output jacks status notification<br>
+    Initial support for APS E-Card ADC gain control and selectable D1/D2 routings<br>
+    New StereoVolume effect added<br>
+    APS inputs amplification reverted to pre-3522 state<br>
+    Minor kX Mixer speed-ups and optimizations<br>
+    Skin architecture revised (Alpha): custom & embedded fonts, labels, languages etc...<br>
+    <b>Note:</b> some beta testers reported Bluescreens when trying CD SPDIF playback. 
+    If you experience this problem - post your card information on our forum 
+    (but, please, avoid duplicating existing postings with the same card model ;).<br>
+    Reverb/Chorus formulas changed: new formula is:<br>
+    <h5>
+         final = SoundFont Reverb Amount (0..100%) * MIDI CC91 Amount (0..127) * kX Mixer Synth Reverb Amount (0..255) / 100 / 127 + kX Mixer Synth Reverb Amount (0..255) / 10
+     <br><br>
+     Note: this amount corresponds to FXBUS volume only, the actual effect amount can be
+     changed additionally by tweaking the effect itself.
+    </h5>
+  </li>
+  <br>
+
+  <li><a name='3522'></a><i>08/05/2002 - Version 5.00.3522 released</i><br><br>
+    Added 'Peak' DSP plugin<br>
+    Added 'Peak Meter' view for the kX Mixer Analyzer: up to 3 different Peak Meters can be displayed simultaneously<br>
+    (see <!-- <? echo("--"); echo(">"); klink("help"); echo("<!--"); ?>-->Help</a> -- kX DSP Guide for details)<br>
+    Fixed LiveDrive detection code<br>
+    Fixed issues with LiveDrive when returning from Hybernate/Standby modes<br>
+    Added Automation support for Timbre, EQ10a effects<br>
+    Fixed some bugs with kX Automation applet<br>
+    Initial support for AC-3 passthru for 10k2-based cards implemented<br>
+    Fixed APS inputs amplification bug (alpha)<br>
+    Added support for the German language<br>
+  </li>
+  <br>
+
+  <li><a name='3521'></a><i>07/14/2002 - Version 5.00.3521 Beta released</i><br><br>
+    Cubase Automation VST created featuring realtime FX control via MIDI (Alpha)<br>
+    Integrated seven filters<br>
+    Added 'FreqSplitter' effect for controlling subwoofer<br>
+    Separated 'Synth' and 'Synth2' MIDI per-channel routings<br>
+    Routing Architecture revised: new 'Router' applet added<br>
+    Simple OSD for the kX Remote implemented<br>
+    Adjusted kX Remote sensivity<br>
+    Custom Save Settings feature implemented (version- and card-independent settings files are now supported)<br>
+    Realtime ASIO/Synth Routing change implemented (beta)<br>
+    Double-click on a plugin in the DSP window opens 'Tweak Plugin' dialog<br>
+    Mixer window is refreshed after 'load/reset dsp'<br>
+    Added 'kX SoundFont' shortcut to the system tray menu<br>
+    Added 'Tweak...' option for prolog, epilog, routing and FXBus<br>
+    Plugins now have numbers in the kX DSP window<br>
+    kX Skin Architecture now supports RAR archives (avoid using solids!)<br>
+    Command Line Reference updated<br>
+
+    Fixed Cubase SoundFont bug<br>
+    Fixed Dane assembler bug<br>
+    Fixed incorrect effect names in system tray after 'Rename microcode'<br>
+    Fixed renamed effects not restored after 'Reset settings'<br>
+    DSP Clear and Align flags programmed incorrectly bug fixed<br>
+    Fixed incorrect Start Menu items installation bug (under 98se)<br>
+    Fixed SPDIF Bypass for 10k2<br>
+    SDK: DirectSynth Architecture implemented<br>
+    <h5>note: this version is considered to be Beta - that is, new features were not fully tested and may be incomplete</h5>
+  </li>
+  <br>
+
+  <li><a name='3520'></a><i>05/14/2002 - Version 5.00.3520 released</i><br><br>
+    Patch name look-up implemented for SoundFont-aware applications (BETA)<br>
+    kX Mixer multidevice support subsystem completely re-written (BETA)<br>
+    'Disable RemoteIR' option removed<br>
+    RemoteIR/Uart SysEx message filter implemented<br>
+    On-board Mute/Vol+/Vol- support implemented<br>
+    Basic support for RemoteIR implemented (Vol+/Vol-/Mute)<br>
+    Minor GUI / Aqua Skin changes<br>
+        Added new effects 'Mono Mix', 'Stereo Mix', 'Pan x2', and 'Pan'<br>
+        Optical / Coaxial inputs re-mapped<br>
+        Fixed bug in the SDK package<br>
+  </li>
+  <br>
+
+  <li><a name='3519'></a><i>05/05/2002 - Version 5.00.3519 released</i><br><br>
+    Separate device for LiveDrive IR function implemented<br>
+    Added APS Fuzz effect<br>
+    Added Encode4 effect<br>
+    Fixed some Dane disassembler bugs<br>
+    Added 're-align plugins' command for the kX DSP window<br>
+    Effect lists are now categorized<br>
+    Fixed DC level for all the inputs<br>
+    Increased default kX Synth volume and recording level<br>
+    Added status line for the kX DSP window<br>
+    Fixed 'Recording Level' control bug<br>
+    Minor GUI / Aqua Skin changes<br>
+  </li>
+  <br>
+
+  <li><a name='3518'></a><i>04/24/2002 - Version 5.00.3518 released</i><br><br>
+    Spontaneous volume reset bug partially fixed, however, using the Windows Mixer to 
+    adjust volume (instead of the kX Mixer) may cause the bug to reappear 
+    (due to a Microsoft internal bug - might be fixed in the future).<br>
+    Fixed 'phantom' recording devices bug<br>
+    Optimized AC-3 decoding<br>
+    Fixed uninstaller bug (Run section)<br>
+    Fixed SPDIF Frequency switcher bug for Audigy<br>
+    Implemented SPDIF Bypass for Audigy<br>
+    Integrated '3D Sound Gen' effect<br>
+    Separated 'Volume' and 'Volume+DC' DSP effects<br>
+    Removed 'Default tweaker' for kX Mixer-controlled DSP effects (epilog, prolog, routing)<br>
+  </li>
+  <br>
+  <li><a name='3517'></a><i>04/10/2002 - Version 5.00.3517 BETA released</i><br><br>
+    Fixed LiveDrive detection algorithm<br>
+    WinMM mixer notification implemented<br>
+    Standard default tweaker is now provided for every tweakable effect<br>
+    Fixed kxctrl RIFX extraction TRAM bug<br>
+    Additional ASIO latency improvements made<br>
+    kXPlugin API updated: note IKXPLUGIN_ defines<br>
+    Alpha blending is disabled under 98SE due to system instability issues (microsoft bug)<br>
+        Target SoundFont bank is now selectable via 'Load SoundFont' dialog<br>
+        SoundFont Bank assignment is now saved in settings file<br>
+        RemoteIR support can be disabled by using Settings->Disable RemoteIR menu<br>
+        New effects Flanger, Stereo/Mono Vocoders, Phase and Overdrive2 built-in.<br>
+        Fixed bug affecting 'playback-only' ASIO clients (such as Fruity).<br>
+
+  </li>
+  <br>
+  <li><a name='3516'></a><i>03/31/2002 - Version 5.00.3516 released</i><br><br>
+    WDM PCM core re-written<br>
+    Dramatically improved ASIO playback-recording synchronization<br>
+    UART Out improved<br>
+    Initial IR support<br>
+    Fixed bug with enable/disable microcode<br>
+    Fixed FPU-related bug: AC-3 content playback should be more stable and without artifacts<br>
+    Fixed interpolation bug when dynamically changing sampling rate<br>
+    Swap Front/Rear and Route Phones to Center/Sub no longer require DSP reset<br>
+    One more attempt to support APS E-Drive... it should work now<br>
+    Changed E-mu APS default mappings<br>
+    Fixed AC97 front output phase problem<br>
+    Fixed External subwoofer -related bug<br>
+    Fixed AC97 codec PCM output volume: physical analog front should sound better now<br>
+    Fixed headphones routed via center/sub volume<br>
+    Fixed 10k2 SPDIF output volume being too low<br>
+    Fixed ASIO buffers allocation strategy (no more lock-ups)<br>
+  </li>
+  <br>
+  <li><a name='3515'></a><i>03/10/2002 - Version 5.00.3515 (BETA) released</i><br><br>
+    Separate devices for front/rear/center+subwoofer outputs added<br>
+    Shell integration - right click context menu added for kX files<br>
+        DLL--KXL and ZIP--KXS types changed<br>
+    Fixed bug in 'Register Dane Source' dialog<br>
+    Fixed bug in Interpolation ROM settings: WinMM should sound better<br>
+    Added '10 Band EQ' and 'Timbre' DSP effects<br>
+    Fixed skin registration bug<br>
+    Lots of kX Setup fixes<br>
+    New FXBus representation<br>
+    For Audigy the number of FXBusses increased up to 32<br>
+    'Always on top' setting is saved now<br>
+    SoundFont Manager is now included in the kX Software package<br>
+    StandBy and Hybernation features should work without any problems under 2k/XP/98SE/Me<br>
+    Fixed Start Menu items installation routine<br>
+    Windows XP icons revised<br>
+    kX Plugin API: core GUI-related changes<br>
+  </li>
+  <br>
+
+  <li><a name='3514'></a><i>02/22/2002 - Version 5.00.3514 (BETA) released</i><br><br>
+    ASIO Recording implemented<br>
+    Fixed memory leaks in kxctrl<br>
+    Fixed virtual memory leaks on faults in kX ASIO<br>
+    Fixed 'Speaker Test' dialog reporting 5.1 speakers incorrectly<br>
+    Fixed but with 'MicBoost' setting<r>
+    Default mapping changed for surround left and right channels, center and subwoofer (should be more logical now)<br>
+    Fixed bug in multiclient support for ASIO (multiclient playback)<br>
+    Implemented hardware mute/unmute via onboard connector<br>
+    Improved mute/unmute strategy when saving and restoring configuration<br>
+        Changed E-Drive/LiveDrive initialization code. E-Drive may work now (... and may not)<br>
+        'Rename microcode' implemented<br>
+        kX Editor improved<br>
+        MIDI Reverb/Chorus formula changed:<br>
+        - reverb = send_c*(SoundFont_reverb*255/1000+CC91*255/127)/255 <br>
+        - chorus = send_d*(SoundFont_chorus*255/1000+CC93*255/127)/255<br>
+        Fixed TRAM allocation (BSODs on setting TRAM size)<br>
+        Fixed Optical Output on Audigy Drive<br>
+        User-friendly error reporing in kX DSP<br>
+        Fixed RIFX binary GUID bug (re-run 'kxctrl -mx' on your DLLs)<br>
+        Fixed SoundFont sample size limitation (long-sampled instruments should be played back better)<br>
+        Skins no longer contain duplicated data. Skin Architecture revised<br>
+        kXAPI: new CKXFile class for skin support<br>
+        kXAPI: DSP plugins are now skinnable<br>
+  </li>
+  <br>
+
+  <li><a name='3513'></a><i>02/09/2002 - Version 5.00.3513 released</i><br><br>
+        GUID generator for effect plugins now built-in (Settings->Generate GUID)<br>
+    Support for RIFX binaries added<br>
+    Save/Restore microcode state function now supports Dane Sources and RIFX binaries<br>
+    RIFX extractor updated<br>
+  </li>
+  <br>
+
+  <li><a name='3512'></a><i>02/08/2002 - Version 5.00.3512 released (beta)</i><br><br>
+        Save/Restore microcode state fully implemented (including connections)<br>
+        Added 'Disconnect input' feature<br>
+        Fixed microcode translation algorithm<br>
+        Save/Restore settings: SoundFont loader doesn't mute Master output anymore<br>
+        Fixed ASIO channel assignment bug<br>
+        Minor ASIO timing fixes<br>
+        kX API: function get_connections() implemented<br>
+        AC3 buffers are now configurable via Settings->SetBuffers<br>
+  </li>
+  <br>
+
+  <li><a name='3511'></a><i>02/06/2002 - Version 5.00.3511 released</i><br><br>
+    Fixed stereo panning bug (panning vs balance).<br>
+    Brand new skin (Aqua skin).<br>
+    Fixed incorrect restore of FX parameters.<br>
+    Fixed Reverb/Chorus MIDI controller-related bug.<br>
+  </li>
+  <br>
+
+  <li><a name='3510'></a><i>01/29/2002 - Version 5.00.3510 released</i><br><br>
+    Reverb and Chorus effects are now properly connected<br>
+    Reverb and Chorus controls updated (kX mixer -> FX Amounts page)<br>
+    New Overdrive effect added (built-in, but without controls)<br>
+    New XSumm effect added (built-in)<br>
+    TS PentodeM4 effect is no longer loaded by default<br>
+    Fixed memory leaks in kX mixer<br>
+    Save/Restore of Reverb/Chorus parameters implemented<br>
+    Fixed 'Reset Settings' bug<br>
+    Improved DSP level control<br>
+  </li>
+  <br>
+
+  <li><a name='3509'></a><i>01/22/2002 - Version 5.00.3509 released - <b>BETA</b> release</i><br><br>
+    kX API: added dsp_stop(), dsp_go(), dsp_clear() functions<br>
+    Added kX DSP -> Clear Microcode menu item<br>
+    Fixed TRAM address management for 10k2-based cards<br>
+        Fixed ASIO routing bug (save/restore settings)<br>
+    Fixed 'Transparent background' bug<br>
+        DSP Plugin Management is being rewritten. Wait for 3510!<br>
+        Added Save/Restore input/output level feature<br>
+        Added 'Reverb Lite' DSP Effect<br>
+        Added 'Stereo Chorus A' DSP Effect<br>
+        <b>Partial</b> Save/Restore DSP state support<br>
+  </li>
+  <br>
+
+  <li><a name='3508'></a><i>01/16/2002 - Version 5.00.3508 released</i><br><br>
+        ASIO subsystem rewritten: increased stability<br>
+        Removed 'ASIO Panic!' menu item<br>
+        Effective latency reduced to 5.33ms (depends on CPU performance)<br>
+        Multiple ASIO client support added<br>
+  </li>
+  <br>
+
+  <li><a name='3507'></a><i>01/14/2002 - Version 5.00.3507 released (minor update)</i><br><br>
+    Added 'Language' menu item<br>
+    Language selection is automatically saved<br>
+  </li>
+  <br>
+
+  <li><a name='3506'></a><i>01/11/2002 - Version 5.00.3506 released</i><br><br>
+    Fixed 'Save/Restore Settings' bug<br>
+    Fixed 'Minimize' bug<br>
+    Added Russian language support<br>
+    Skin Architecture revised<br>
+    Changed HEX numbers to Decimal (kX ASIO and kX Router)<br>
+  </li>
+  <br>
+
+  <li><a name='3505'></a><i>01/08/2002 - Version 5.00.3505 released</i><br><br>
+    Added Skin selection<br>
+    Added 'Internet' menu item<br>
+    HTMLized and updated readme.html file<br>
+    Program group 'kX Audio Driver' is now created by kxsetup and 'Reset Settings'<br>
+    Uninstallation made much more easier<br>
+  </li>
+  <br>
+  <li><a name='3504'></a><i>01/05/2002 - Version 5.00.3504 released</i><br><br>
+    Added 'SPDIF Bypass' option (for 10k1-based cards only)<br>
+        Changed default MIDI Synth playback / recording level<br>
+        Fixed front/rear/headphones output level<br>
+        Fixed bug causing continious ringing sound on emu10k1-based cards<br>
+  </li>
+  <br>
+  <li><a name='3503'></a><i>01/04/2002 - Version 5.00.3503 released</i><br><br>
+    Implemented 'ASIO' applet<br>
+    Fixed ASIO panning bug<br>
+    Fixed ASIO memory allocation bug<br>
+    Revised ASIO Control Panel<br>
+    Changed window size of ASIO and Router applets (depends on card capabilities now)<br>
+  </li>
+  <br>
+  <li><a name='3502'></a><i>01/03/2002 - Version 5.00.3502 released</i><br><br>
+        Added 'Settings/SetUp Buffers' menu: <br>
+        - Permits changing the size of playback 
+        and recording buffers and the size of Tank Memory.<br>
+        Decreasing 'Playback Buffer Size' may reduce latency when using DirectX-based
+        software.<br>
+
+        Known issues: <br>
+        - your machine may hang or you may experience
+        clicks and sound distortion if you specify buffers which are too small.<br>
+
+        After changing Tank Memory size it is recommended that you reset DSP.<br>
+        All buffer changes should be done with no playback/recording activity.<br>
+        This feature is considered to be in an 'alpha' state. BSODs are possible.
+        <br>
+        <br>
+        Modified Card Selection method (minor GUI change)<br>
+        <br>
+        Right mouse click on kX Mixer window or other applets now displays a popup menu <br>similar to the one displayed in system tray.
+        <br>
+  </li>
+  <br>
+  <li><a name='3501'></a><i>01/02/2002 - Version 5.00.3501 released</i><br><br>
+    Fixed ASIO initial click and play/pause/stop clicks<br>
+    Fixed ASIO latencies greater than 21.33ms<br>
+    Fixed UAEs if latency is greater than 21.33ms<br>
+    Added 'ASIO Panic!' menu (Settings/ASIO Panic!) - mutes all ASIO output<br>
+        Latencies greater or equal to 86ms should no longer have sync problem<br>
+  </li>
+  <br>
+  <li><a name='3500'></a><i>01/01/2002 - Initial public release (version 5.00.3500)</i></li>
+ </ul>
+                                
+</h4>

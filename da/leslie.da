@@ -1,0 +1,123 @@
+name "Leslie Horn";
+comment "Simulate Leslie Horn";
+guid "02a2a5d2-8e28-4068-82b7-d0809d34ef73"
+
+;reserve ram space (maxdelay=0x51eb8)
+itramsize 240; (0.005=5ms)
+;registers 
+input in; (mono input)
+output outL, outR; (stereo output)
+control Speed=0.5; (mod speed)
+control DlyT_Horn=0.5; (delay time)
+control DoplerLvl=0x0; (DoplerLvl depth)
+control TremDepth=0x0; (tremelo depth)
+control Panning=0x0; (stereo panning depth)
+control DryLvl=0x0; (dry lvl mix)
+
+static dly_horn=0x0; (moded delay time)
+static mt_horn=0x0; (Readout point horn)
+const shift=0x800; (Tram crap..correction)
+static xsin=0x0, xcos=0.5;
+
+;to many regs but for now it's ok
+
+temp tmpIn, trh_lfo, dlyh_lfo;
+temp sinpos, sinneg, b, pl, pr, th;
+
+;even more regs for the Filters..doh
+
+;hipass settings fixed at 400hz:
+static b0=0x3ed8876a, b1=0x824ef12b, b2=0x3ed8876a;
+
+;lopass settings fixed at 400hz:
+static c0=0xb05d5, c1=0x160bab, c2=0xb05d5;
+
+static a1=0x7d805267, a2=0xc2539641, sca=0x2;
+static lx1=0x0, lx2=0x0, ly1=0x0, ly2=0x0;
+static kx1=0x0, kx2=0x0, ky1=0x0, ky2=0x0;
+temp t1, t2
+
+; Internal TRAM delay line; (mono delay line for now)
+idelay write wrth at 0x0 ; write point horn
+idelay read rdh0 at 0x78 ; read point0 horn
+idelay read rdh1 at 0x78 ; read point1 horn
+
+;---------------------------------------------
+;read input sample
+macs tmpIn, in, 0x0, 0x0;
+
+;Hipass filter at 400hz
+macs 0x0, 0x0, 0x0, 0x0;
+macmv lx2, lx1, lx2, b2;
+macmv lx1, in, lx1, b1;
+macmv t1, t1, tmpin, b0;
+macmv ly2, ly1, ly2, a2;
+macmv t1, t1, ly1, a1;
+macs t2, accum, 0x0, 0x0;
+macints ly1, 0x0, t2, sca;
+;write hi
+macs wrth, ly1, 0x0, 0x0;
+
+;Lopass will kick in later
+; macs 0x0, 0x0, 0x0, 0x0;
+; macmv kx2, kx1, kx2, c2;
+; macmv kx1, in, kx1, c1;
+; macmv t1, t1, in, c0;
+; macmv ky2, ky1, ky2, a2;
+; macmv t1, t1, ky1, a1;
+; macs t2, accum, 0x0, 0x0;
+; macints ky1, 0x0, t2, sca;
+; macs outlow, ky1, 0x0, 0x0;
+
+;--------------------------------------------
+;Lfo freq control workaround
+macs b, 0, Speed, 0.001;
+
+;symetric sine osc in xsin, range = -0.5..0.5
+macs xsin, xsin, b, xcos;
+macsn xcos, xcos, b, xsin;
+
+;save positive sine and shift range-> 0..1
+macs sinpos, 0.5, xsin, 1;
+
+;save inverted sine and shift range-> 0..1
+macsn sinneg, 0.5, xsin, 1; 
+
+; apply Tremelo depth to tremlfo
+macsn trh_lfo, 1, sinpos, TremDepth;
+
+; apply Dopler depth to delay lfo
+macsn dlyh_lfo, 1, sinneg, DoplerLvl;
+
+; apply panning depth to panning lfo
+macsn pl, 1, sinpos, Panning;
+macsn pr, 1, sinneg, Panning;
+
+;---------------------------------------------
+;read delay and interpolate to prevent noise
+macintw th, 0x0, mt_horn, 0x00100000;
+interp th, rdh0, th, rdh1;
+
+; apply tremelo modulation to delay output
+macs th, 0, th, trh_lfo;
+
+; mix with some dry input "cuz it sounds so nice"
+macs th, th, tmpin, DryLvl;
+
+; stereo lfo panning and output
+macs outl, 0, th, pl;
+macs outr, 0, th, pr;
+
+;----------------------------------------------
+; Modulate delay line
+; scale delaytime control
+interp dly_horn, 0x0, DlyT_Horn, 0x51eb8;
+
+; calc new delay time horn
+macs mt_horn, &wrth, dly_horn, dlyh_lfo;
+
+; calc new readout point adresses
+macs &rdh0, mt_horn ,0x0 ,0x0;
+macs &rdh1, mt_horn ,shift ,0x7fffffff;
+
+end;

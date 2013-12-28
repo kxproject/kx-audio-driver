@@ -1,0 +1,5 @@
+1>errors in directory f:\audio\10kx\kxmixer
+1>nmake : error: f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\_objects.mac was changed during the build process and the build results may not be valid. Please re-build this directory.
+1>NMAKE : fatal error U1073: don't know how to make 'f:\audio\10kx\kxmixer\..\kxapi\objchk_wxp_x86\i386\kxapi.lib'
+1>nmake.exe /nologo BUILDMSG=Stop. -i /nologo /f e:\ntddk7600\bin\makefile.def BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR= failed - rc = 2
+

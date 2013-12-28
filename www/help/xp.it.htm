@@ -1,0 +1,58 @@
+<h3>Installazione sotto WinXP/2k</h3>
+
+<h4>
+
+<p>
+Questo documento si basa sulle e-mail ed i messaggi di Trypt0. Si raccomanda di provare ad eseguire 
+<b>kxsetup</b> <i>prima</i> di qualsiasi installazione manuale: le versioni recenti di kxsetup dovrebbero 
+funzionare senza alcun problema.
+</p>
+
+<p>
+Per installare il driver manualmente sotto Windows XP o Windows 2000, occorre scaricare preliminarmente l'ultima
+versione del driver audio <i>kX</i> e delle librerie MFC (dal sito del <i>kX Project</i>).
+</p>
+
+<p>
+Non dimenticate di disinstallare LiveWare e/o eventuali driver APS. Volendo, si pu&ograve lasciare installato
+il 'PlayCenter' o altro eventuale software Creative.
+</p>
+
+<p>
+Fatto questo, scompattate il driver <i>kX</i> in una cartella temporanea e scompattate le librerie MFC 
+nella cartella \windows\system32 (\winnt\system32).
+</p>
+
+<p>Dopo ci&ograve, riavviate il computer in 'Modalità Provvisoria' ['Safe Mode'], premendo 
+velocemente F8 appena superati i test di avvio (POST) del sistema.</p>
+
+<p>Dovreste ora trovarvi nella 'Modalit&agrave Provvisoria' di Windows XP/2000.</p>
+
+<p>
+Premete adesso, contemporaneamente, i tasti 'Windows' e 'Pausa'; cliccate sulla scheda 'Hardware';
+cliccate su 'Gestione periferiche' ['Device Manager']; fate doppio click su "Controller audio, video e giochi";
+fate doppio click sulla voce corrispondente alla scheda audio (qualcosa tipo: "kX 10kX Audio - Model SBXXXX"); 
+cliccate sulla scheda 'Driver'; cliccate sul bottone "Aggiorna Driver..."; procedete scegliendo 'Cerca un 
+driver adatto alla perifierica' fino a selezionare l'opzione che permette di 'Selezionare un percorso'; 
+specificate ora il percorso corrispondente alla cartella dove avete scompattato il driver <i>kX</i> e installate
+il driver corrispondente alla vostra scheda audio.
+</p>
+
+<p>
+Una volta completata l'installazione, riavviate il computer. 
+Fate uso del <i>kX Mixer</i> per configurare la scheda audio (Impostazioni->Ripristina Impostazioni)
+[(Settings->Reset Settings)].
+</p>
+
+<p>
+Prima di eseguire kxsetup, potete anche provare a cancellare o rinominare i file: 
+<b>\winnt\Driver Cache\i386\driver.cab</b>, 
+<b>\winnt\inf\wdma10k1.inf</b> e <b>\winnt\inf\wdm_emu.inf</b>.
+</p>
+
+</h4>
+
+<h5>
+ -- testo originale:  kX Project (informazioni di: Trypt0)<br>
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>

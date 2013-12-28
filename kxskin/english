@@ -1,0 +1,767 @@
+# --------------------------------------------------------------
+# kX Audio Driver
+# kX Mixer language file
+# Copyright (c) Eugene Gavrilov [English, Russian],
+#               alino [Italian] _a_l_e_@mail.com
+#               Guayabo [Spanish], djtronic [Spanish] djtronic@espanet.com
+#       Nando Dominguez [Spanish] 
+#       Valentin RUSU [Romanian] kx@valentinrusu.net
+#       Treasure [Deutsch],
+#       Dark Shadow dark.shadow@gmx.at [Deutsch-Updates 3536-3538]
+#       stachooo@poczta.fm,
+#       Yves Prigent / Kapifree [French 2 version] yves.prigent@numericable.fr / kapi@free.fr
+#       Pascal "vikflash" Conchon [French update 16/dec/04] vikflash@free.fr
+#       Petri Jokinen petri.jokinen@telia.com,
+#       Bedeox [Second Polish version] bedeox@emil.teleton.pl
+#               poprawki polskiego tiumaczenia Siawomir Siodelski s.siodelski@kujawy.ruch.com.pl
+#       Wlodzimierz Grabowski [Polish] wlodekk@interia.pl, 
+#       Piotr Trochimczyk [Polish] pit_1981@interia.pl
+#       Marko P. / Michael Lilja [Swedish] axiomis@hotmail.com / michael.lilja@comhem.se
+#       Vedran "RIV@NVX" Miletic [Croatian] riva_station@yahoo.com
+#       Pal A. Lind [Norwegian] palind@online.no
+#       Tim Mertens [Dutch] tim@dimed.be
+#       Svetlin Staikov [Bulgarian] sjs@abv.bg
+#       Daniel Marinho Drummond [Brazilian Portuguese] daniel@ufla.br
+#       Sümegi Tamás [Hungarian] sumegit@enternet.hu
+#       Shyguy [Korean] freebits@hanafos.com
+#       Vasilis Platanias [Greek] azathoth@otenet.gr
+#       Benny Wen [Chinese] itwinner@cmmail.com
+#       Stark Wong [Traditional Chinese] starkwong@hotmail.com
+#       Welman Jordan (Zuo Weiming) [Chinese, 5.10.00.3538] wmjordan@163.com
+#       ivan [Ukrainian] freeline@ukr.net
+#       SHO TAKETANI [Japanese] dees@globetown.net
+#       Phanu "Ake" Wasusin [Thai] wasusin@hotmail.com
+#       Kian Andersen [Danish] kian@neksus.dk / evilneksus @gmail.com
+#       Turkay Guner [Turkish] trqy@hotmail.com.tr
+# All rights reserved
+
+# --------------------------------------------------------------
+# it is not required to alter this file in any way in order 
+# to create a custom skin
+# DO NOT include this file with your custom skin
+# --------------------------------------------------------------
+
+# TRANSLATORS: NOTE:
+# ------------------
+# please search for 'TRANSLATORS: NOTE:' found in this file for specific notes
+# search for '.<your locale id>=???' in order to find missing translations
+# do NOT edit the lines with different locale IDs
+# do NOT duplicate the line, if you wish to leave the English text
+# (that is, "text_line=APS" -- do NOT add "text_line.123=APS")
+# don't forget to add your NAME (Nickname) and E-MAIL
+# if you update the translation, contact the translation author before
+
+# Locale IDs
+# ------------
+# 402=Bulgarian
+# 404=Chinese Traditional
+# 406=Danish
+# 407=Deutsch
+# 408=Greek
+# 40c=French
+# 40e=Hungarian
+# 410=Italian
+# 412=Korean
+# 413=Dutch
+# 414=Norwegian
+# 415=Polish
+# 416=Brazilian Portuguese
+# 418=Romanian
+# 419=Russian
+# 41a=Croatian
+# 41d=Swedish
+# 41e=Thai
+# 41f=Turkish
+# 422=Ukrainian
+# 804=Chinese Simplified
+# 80a=Spanish
+# 40c0=French ][
+# 
+#
+# ---------------
+# TRANSLATORS: NOTE: DO NOT REMOVE the following parts of the text:
+# '\n' '\r' '%s' '%d' etc...
+# they are vital for correct kX Mixer operation
+# do NOT add any special characters ('%', '/', '\') unless they are present
+# in the English text
+# duplicate the symbols (e.g. '&&') when they are doubled in the English text
+#
+# ---------------
+
+[lang]
+mixer.name=Mixer
+automation.name=kX Automation
+
+
+# TRANSLATORS: NOTE:
+# please re-check the kX Automation window -- your large strings might have been truncated
+midi.plugin=Plugin
+midi.parameter=Parameter
+midi.event=Midi Event
+midi.channel=Channel
+midi.none=None
+midi.ctrl=Controller
+midi.pitchbend=Pitch Bend
+midi.note=Note
+midi.channel_=Channel:
+midi.function=Event:
+midi.index=Index:
+midi.controller_=Controller %d
+midi.notekey=Note Key
+midi.key=Key:
+midi.reset=Reset
+midi.ctrl2=Controller2
+midi.raw=Raw
+
+remote.name=kX Remote
+
+preset=Choose Preset
+preset.custom=<Custom>
+preset.save=Save...
+preset.savedlg=Save preset
+preset.delete=Delete
+preset.default=<Default>
+preset.confirm=Do you really wish to delete \npreset '%s'?
+preset.name=Save preset
+
+plugin.reset=Reset
+
+preset.import.error1=Error importing preset
+preset.import.error2=Error importing preset: corresponding plugin isn't loaded
+preset.import.error3=Error importing preset: invalid file format
+preset.import.error4=Preset successfully imported
+
+editor.st_loaded=File %s uploaded\n
+editor.st_parsed=File successfully parsed\n
+editor.st_new=New microcode source created\n
+editor.st_compile_error=Compilation failed\n
+editor.st_dump=Dump successfully loaded\n
+editor.name=kX Dane
+editor.compiling=Compiling...\n
+editor.info=Information
+editor.uploaded=Uploaded from external file
+editor.warning=Compilation warnings
+editor.redis=Error re-dissembling microcode
+editor.status='%s' [%d]  Instrs: %d  Regs: %d  iTram usage: %d xTram usage: %d
+editor.open_error=Error opening input file
+editor.new=New microcode:
+editor.loaded=Loaded microcode:
+editor.dump=Dump:
+editor.updated=Microcode updated
+editor.update_failed=Microcode update failed...
+editor.error_open=Error opening microcode file
+
+router.name=kX Router
+p16v_router.name=kX 24/96 Router
+
+dsp.name=kX DSP
+# TRANSLATORS: NOTE:
+# re-check the following line by clicking 'info...' in the kX DSP window
+dsp.info=Information\n-------------\nName: %s\nCopyright: %s\nComment: %s\nEngine: %s\nCreated: %s\nGuid: %s\n\nResource Usage:\nCode: %d\nRegisters: %d\nITramSize: %d XTramSize: %d\n
+dsp.infotitle=Information
+dsp.register=Successfully registered %d plugin(s)
+dsp.realign=Re-align plugins
+# TRANSLATORS: NOTE:
+# re-check the kX DSP window -- it should display the stats properly
+dsp.status_text=Instr:%d/%d GPRs: %d/%d iTram: %d/%d xTram: %d/%d iTramSize: %d/%d xTramSize: %d/%d
+
+addon.register=Successfully registered %d addon(s)
+
+categories.0=Default
+categories.1=Basic
+# TRANSLATORS: NOTE:
+# do NOT translate 'livedrive', 'aps', 'profx', 'liveware', 'ef-x'
+categories.2=APS
+categories.3=LiveWare
+categories.4=Surround
+categories.5=EQ && Filter
+categories.6=Passthru
+categories.7=ProFX
+categories.8=Legacy
+categories.9=EF-X
+categories.10=DSPi Synth
+categories.11=UFX
+categories.12=KXM Synth
+categories.13=microeffects
+
+# TRANSLATORS: NOTE:
+# 'translate' means 'allocate resources'
+# 'untranslate' means 'free resources'
+translate.name=Translate microcode
+
+translate.option=Advanced Options
+connect.option=Smart Connect
+
+translate.p1=Position: don't care
+translate.p2=After microcode
+translate.p3=Before microcode
+
+translate.enabled= (Enabled)
+translate.disabled= (Disabled)
+translate.not_translated= (Not Translated)
+translate.translated= (Translated)
+translate.bypass= (ByPass)
+
+# errors
+translate.no_itram=No more free iTRAM memory
+translate.no_xtram=No more free xTRAM memory
+translate.no_gpr=No more free GPR registers
+translate.bad_trama=Internal error #2001 -- REPORT TO KX TEAM
+translate.no_tram=No more free TRAM registers
+translate.bad_reg=Error translating registers
+translate.no_mc=There's no free memory for microcode
+
+rename.name=Rename
+
+settings.name=Save/Restore Settings
+
+# these are theoretically localizable
+# TRANSLATORS: NOTE:
+# re-check the 'settings' window -- your lines might have been truncated
+settings.param1=Routings
+settings.param2=FX Amounts
+settings.param3=ASIO
+settings.param4=Buffer sizes
+settings.param5=WinMM
+settings.param6=AC97
+settings.param7=SoundFonts
+settings.param8=Hardware
+settings.param9=DSP
+settings.param10=Version Ind.
+settings.param11=Card Ind.
+settings.param12=Automation
+settings.param13=Add-on
+
+settings.splash=Startup logo enabled
+settings.osd=On Screen Display enabled
+settings.remote_ir=RemoteIR enabled
+# TRANSLATORS: NOTE:
+# OSD = 'On Screen Notification'
+settings.osd_notifications=OSD Notifications...
+settings.mm_keyboard=Multimedia Keyboard enabled
+settings.tooltips=Tooltips enabled
+settings.balloon=Use Balloon tooltips
+settings.show_content=Show window content while dragging
+settings.headphones=Automute when headphones are plugged-in
+
+settings.synth=Synth Compatibility...
+# TRANSLATORS: NOTE:
+# in most cases, do NOT translate these lines...
+settings.synth1=Hold parameter
+settings.synth2=Attenuation
+settings.synth3=Velocity to FC
+settings.synth4=Legacy Modulation
+settings.synth5=VibLFOFreq divisor
+settings.synth6=ModLFO2Vol correction
+settings.synth7=Legacy Attack
+settings.synth8=Legacy Release/Decay
+settings.synth9=RealTime Resonance
+settings.synth10=RealTime FC
+settings.compat.bank=Bank Selection Method...
+
+settings.compat=Driver Compatibility...
+# TRANSLATORS: NOTE:
+# in most cases, do NOT translate these lines...
+settings.compat1=Pan/Balance
+settings.compat2=Interpolated SRC
+settings.compat3=Multichannel volume
+settings.compat4=Don't smooth amounts
+settings.compat5=Filter all EAX requests
+settings.compat6=Force XTRAM-based PT
+settings.compat7=(LEGACY)
+settings.compat8=Disable S/PDIF notification
+settings.compat9=(LEGACY)
+settings.compat10=(LEGACY)
+settings.compat11=SB22x hack enabled
+settings.compat12=Disable UART/Control routing
+settings.compat13=P16v I2S s/r follows SRC
+settings.compat14=Force SPDIF L/R Swap
+settings.compat15=Disable circular chn alloc
+settings.compat16=Do no notify on PCI Bus errors
+
+# TRANSLATORS: NOTE:
+# OSD = 'On Screen Display'
+notifications.name=OSD Notifications
+notifications.param1=Volume
+notifications.param2=AC-3 Status
+notifications.param3=Speakers/Plugs State
+notifications.param4=S/PDIF Activity
+notifications.param5=Multimedia Player
+
+setup_buffers.name=Setup Buffers
+setup_buffers.tanksize=Tank Memory Size
+setup_buffers.pb_size=Playback Buffer Size
+setup_buffers.rec_size=Recording Buffer Size
+setup_buffers.num_ac3=Number of AC3 Buffers
+setup_buffers.gsif=GSIF Buffer Size
+setup_buffers.none=none
+
+spectrum.help=Load 'Peak' plugin and connect it to desired source
+
+sptest.name=Speaker Test
+
+edspctrl.name=E-DSP Control
+
+about.name=About...
+
+# TRANSLATORS: NOTE:
+# update your translations since the name of the window was changed in 3536..3537
+iostatus.name=SPDIF/I2S Status...
+
+sfbank.name=Select SoundFont Bank
+sfbank.sfbank=Bank #
+sfbank.error=Valid values are from 0 to 127
+sfbank.subsynth=Target Synth
+sfbank.both=Both Synths
+
+# this is not used yet
+page_main.tooltip=kX mixer / 10kx outputs
+
+# ----------------------
+# slider locales
+# ----------------------
+sliders.mixer.master.tooltip=Master Volume
+sliders.mixer.wave.tooltip=Wave / PCM
+sliders.mixer.synth.tooltip=MIDI Synth
+sliders.out.a_front.tooltip=Analog Front
+# TRANSLATORS: NOTE:
+# do not translate A1, A2,...
+sliders.out.a1a2.tooltip=A1 / A2
+sliders.out.a3a4d2.tooltip=A3 + A4 / D2
+sliders.out.a5a6.tooltip=A5 / A6
+sliders.out.a7a8.tooltip=A7 / A8
+sliders.out.d1.tooltip=D1
+sliders.out.d_front.tooltip=Digital Front / S/PDIF0 Output
+sliders.out.a_rear.tooltip=Analog Rear
+sliders.out.d_rear.tooltip=Digital Rear
+sliders.out.a_center.tooltip=Analog Center
+sliders.out.a_sw.tooltip=Analog Subwoofer
+sliders.out.d_center.tooltip=Digital Center
+sliders.out.d_sw.tooltip=Digital Subwoofer
+sliders.out.spdif.tooltip=Generic S/PDIF Out
+sliders.out.phones.tooltip=Headphones
+sliders.out.ac97.tooltip=AC97 Out
+sliders.out.u2425.tooltip=S/PDIF1
+sliders.out.k2i2s2.tooltip=10k2 I2S 2
+sliders.mixer.ecard_gain.tooltip=Analog Gain
+
+sliders.mixer.rec.tooltip=Master Recording Level
+
+sliders.in.ac97.tooltip=AC97 In
+sliders.in.a1a2.tooltip=A1/A2 In
+sliders.in.cdspdif.tooltip=CD Digital In
+sliders.in.generic.tooltip=Generic Input
+sliders.in.d1.tooltip=D1 In
+sliders.in.i2s.tooltip=ZVideo I2S In
+sliders.in.d2.tooltip=D2 In
+sliders.in.aps_cd.tooltip=CD Digital In
+sliders.in.optical.tooltip=Unknown In 2
+sliders.in.ac97_2.tooltip=AC97 In 2
+sliders.in.a3a4.tooltip=A3/A4 In
+sliders.in.line2.tooltip=Line2/Mic2 In
+sliders.in.line2_ex.tooltip=Line2 In
+sliders.in.line1_ex.tooltip=Line1/Mic In
+sliders.in.coaxial.tooltip=Coaxial / Optical S/PDIF In
+sliders.in.aux2.tooltip=AUX2 In
+sliders.in.aux_ex.tooltip=Line3 In
+
+# rec levels
+
+sliders.rin.ac97.tooltip=AC97 Rec Level
+sliders.rin.a1a2.tooltip=A1/A2 Rec Level
+sliders.rin.cdspdif.tooltip=CD Digital Rec Level
+sliders.rin.generic.tooltip=Generic Input Rec Level
+sliders.rin.d1.tooltip=D1 Rec Level
+sliders.rin.i2s.tooltip=ZVideo I2S Rec Level
+sliders.rin.d2.tooltip=D2 Rec Level
+sliders.rin.aps_cd.tooltip=CD Digital Rec Level
+sliders.rin.optical.tooltip=Unknown In 2 Rec Level
+sliders.rin.ac97_2.tooltip=AC97 In 2 Rec Level
+sliders.rin.a3a4.tooltip=A3/A4 Rec Level
+sliders.rin.line2.tooltip=Line2/Mic2 Rec Level
+sliders.rin.line2_ex.tooltip=Line2 Rec Level
+sliders.rin.line1_ex.tooltip=Line1/Mic Rec Level
+sliders.rin.coaxial.tooltip=Coaxial/Optical S/PDIF Rec Level
+sliders.rin.aux2.tooltip=AUX2 Rec Level
+sliders.rin.aux_ex.tooltip=Line3 Rec Level
+
+sliders.ac97.linein.tooltip=Line In
+sliders.ac97.videoin.tooltip=Video In
+sliders.ac97.cdin.tooltip=CD Analog In
+sliders.ac97.auxin.tooltip=AUX In
+sliders.ac97.micin.tooltip=Mic In
+sliders.ac97.tadin.tooltip=TAD In
+sliders.ac97.pcspkr.tooltip=PC Speaker
+sliders.ac97.tadout.tooltip=TAD Out
+sliders.ac97.recgain.tooltip=Analog Recording Gain
+
+sliders.rec.wave.tooltip=Wave Recording Level
+sliders.rec.synth.tooltip=Synth Recording Level
+sliders.rec.reverb.tooltip=FX1 (Reverb) Recording Level
+sliders.rec.chorus.tooltip=FX2 (Chorus) Recording Level
+sliders.rec.rear.tooltip=Rear (6/7) Recording Level
+sliders.rec.csw.tooltip=Center/Subwoofer (8/9) Recording Level
+
+sliders.amount.w.e.tooltip=Wave SendE Level
+sliders.amount.w.f.tooltip=Wave SendF Level
+sliders.amount.w.g.tooltip=Wave SendG Level
+sliders.amount.w.h.tooltip=Wave SendH Level
+sliders.amount.s.e.tooltip=Synth SendE Level
+sliders.amount.s.f.tooltip=Synth SendF Level
+sliders.amount.s.g.tooltip=Synth SendG Level
+sliders.amount.s.h.tooltip=Synth SendH Level
+sliders.amount.wm.r.tooltip=Wave SendC (Reverb) Level
+sliders.amount.wm.c.tooltip=Wave SendD (Chorus) Level
+sliders.amount.w.r.tooltip=Wave Stereo Reverb
+sliders.amount.w.c.tooltip=Wave Stereo Chorus
+sliders.amount.s.r.tooltip=Synth SendC (Reverb) Level
+sliders.amount.s.c.tooltip=Synth SendD (Chorus) Level
+
+# -------------------------------------------------------------------------------------------
+# button descriptions
+# -------------------------------------------------------------------------------------------
+
+buttons.help.tooltip=Help
+buttons.quit.tooltip=Close
+buttons.spquit.tooltip=Close
+buttons.cancel.tooltip=Cancel
+buttons.mini.tooltip=Minimize
+buttons.about.tooltip=Info
+buttons.sptest.tooltip=Speakers test
+buttons.test.tooltip=Speakers test
+buttons.sfload.tooltip=Load SoundFont
+buttons.sfreload.tooltip=Reload SoundFont
+buttons.sfcload.tooltip=Load SoundFont Collection
+buttons.sfcsave.tooltip=Save SoundFont Collection
+buttons.sfunload.tooltip=Unload SoundFont
+buttons.sfunloadall.tooltip=Unload All SoundFonts
+buttons.kxdsp.tooltip=kX DSP
+buttons.ins_outs.tooltip=Ins 'n' Outs
+buttons.recording.tooltip=Recording
+buttons.mixer.tooltip=Master
+buttons.ac97.tooltip=AC97
+buttons.ecard.tooltip=E-Card
+buttons.effects.tooltip=FX
+buttons.soundfont.tooltip=SoundFont
+buttons.spectrum.tooltip=Analyzer
+buttons.spectrum_mode.tooltip=Mode
+buttons.doo.tooltip=Toggle 'Digital Output Only' mode
+buttons.swap_rear.tooltip=Toggle 'Swap Front and Rear' mode
+buttons.ac97.reset.tooltip=Reset AC97
+buttons.ac97.a2.tooltip=AC97 <-> I2S Routing mode
+buttons.bypass.tooltip=Toggle 'S/PDIF Bypass' mode
+buttons.passthru.tooltip=Toggle 'AC-3 Passthru' mode
+buttons.route_csw.tooltip=Toggle 'Route headphones to Center/Subwoofer' mode
+buttons.ac97.micboost.tooltip=Mic Boost (+20 dB)
+buttons.fxrouter.tooltip=kX Automation
+buttons.router.tooltip=kX Router
+buttons.update.tooltip=Update DSP Microcode
+buttons.check.tooltip=Check Microcode
+buttons.load.tooltip=Load Dane Source...
+buttons.new.tooltip=New microcode...
+buttons.save.tooltip=Save Dane Source...
+buttons.export.tooltip=Export to C++...
+buttons.ok.tooltip=Ok
+buttons.translate.tooltip=Translate
+
+# legacy stuff:
+# buttons.l.test.tooltip=Left Front
+# buttons.r.test.tooltip=Right Front
+# buttons.sl.test.tooltip=Left Rear
+# buttons.sr.test.tooltip=Right Rear
+# buttons.c.test.tooltip=Center
+# buttons.sw.test.tooltip=SubWoofer
+
+# new stuff: [8-point surround]
+buttons.n.test.tooltip=Center
+buttons.nw.test.tooltip=Front Left
+buttons.w.test.tooltip=Side Left
+buttons.sw.test.tooltip=Rear Left
+buttons.s.test.tooltip=Rear Center
+buttons.se.test.tooltip=Rear Right
+buttons.e.test.tooltip=Side Right
+buttons.ne.test.tooltip=Front Right
+buttons.sub.test.tooltip=SubWoofer
+
+buttons.selplugin.tooltip=Select
+buttons.mixer_close.tooltip=Close
+buttons.mixer_mini.tooltip=Minimize
+buttons.mixer_about.tooltip=Info
+buttons.speaker_setup=Speaker Setup...
+buttons.spdif_decode.tooltip=Toggle 'S/PDIF-In AC-3 Decode' mode
+buttons.peak.tooltip=Peak Meter...
+buttons.copy.tooltip=Copy to clipboard
+
+buttons.save_settings=Save Settings...
+buttons.load_settings=Load Settings...
+
+plugin.mute=Mute
+plugin.reset=Reset
+plugin.bypass=Bypass
+
+dsp_plugin.minimize=Minimize
+dsp_plugin.minimize_all=Minimize All
+dsp_plugin.restore=Restore
+dsp_plugin.restore_all=Restore All
+
+# kX DSP submenu
+dsp.window_size=Window Size
+dsp.conn_size=Connector Size
+
+dsp.large=Large
+dsp.huge=Huge
+dsp.small=Small
+dsp.default=Default
+
+# p16v routing window
+p16v_routing.onoff=On/Off
+
+# E-DSP control window
+edsp_reload=Reload firmware
+           
+[errors]
+# TRANSLATORS: NOTE:
+# re-check if your translation is up-to-date with the English text,
+# since some of the setup messages were updated
+error=Error
+image=Incorrect image specified for the button
+severe=Severe error
+image_load=Unable to load image '%s' - Application aborted
+incorrect_skin=Incorrect Skin File
+open_file=Error opening file
+translate=Error translating microcode
+get_microcode=Error getting microcode
+inv_microcode=Invalid microcode
+asm=Error assembling microcode
+skin_error=Error changing current skin - Reverting to default
+setup1=Error %d (%x): Error copying INF file to %s
+setup2=Setup requires correct setupapi.dll or cfgmgr32.dll
+setup3=Error %d (%x): Error locating device node
+setup4=Error %d (%x): Error re-enumerating devices
+setup5=Error initializing DirectSound\nkX Driver requires DirectX 8.0\nSoftware cannot be installed
+setup6=Error while getting registry info [remove]: %d (%xh)\n
+setup7=Error removing device
+setup8=Please close kX Mixer and re-run setup
+setup9=kX Audio Driver requires CodeMax2.0 DLL to be installed\nPlease download it from www.kxproject.com\n\nkX Setup cannot continue
+setup10=Please close any opened Creative applications and re-run setup
+setup11=kX Setup cannot update the drivers for your computer...
+setup12=kX Setup: Windows will now re-enumerate all the supported devices\nand will install drivers for them\nPlease confirm new device installation\nand answer 'No' to System Reboot requests if any\nPress OK now and follow on-screen instructions...
+skin2=User skin file not found or is invalid.\nDefault skin is used.
+no_devs=kX devices not found. Reinstall the drivers.
+cp=Error: Control Panel parameters not set.\nIt is recommended that you re-run 'Reset device settings'\nwhen you set Control Panel parameters\n(see readme.html for details)
+sfload=Error loading SoundFont
+patches=Too many effects
+load_m=Error loading microcode
+nomem=Not enough memory or file is empty
+instant=Error instantiating effect / plugin\nDo you wish to unregister it?
+instant2=Error instantiating effect / plugin
+populate=Plugin failed to populate microcode
+plinit=Plugin failed to initialize
+badlib=Error: invalid plugin libary
+
+# these are theoretically localizable
+dx0=Error initializing DirectSound
+dx1=Error initializing primary DirectSound
+dx2=Error setting primary buffer format for DirectSound
+dx3=Error initializing secondary DirectSound
+dx4=Failed to query for property
+dx5=Error setting speaker config
+dx6=Error setting cooperative level
+dx7=Failed to create sound
+dx8=Failed to query Buffer
+
+# these are theoretically localizable
+cp_req= Error setting routing\nPlease set audio 'Hardware acceleration' to 'Full',\nSample rate conversion quality' to 'Best'\nand 'Speaker setup' to '5.1 Surround sound'\n(control panel/multimedia/audio/advanced properties)\nrate conversion quality' to 'Best'\nand 'Speaker setup' to '5.1 Surround sound'\n(control panel/multimedia/audio/advanced properties)\n
+cp_req2=Error getting routing table\nPlease set audio 'Hardware acceleration' to 'Full',\n'Sample rate conversion quality' to 'Best'\n and 'Speaker setup' to '5.1 Surround sound'\n(control panel/multimedia/audio/advanced properties)\n
+sfman=sfman32.dll not found!\nPlease download and install SoundFont Master Manager\nand re-run 'Settings->Reset Global Settings'
+sfman2=Error registering SoundFont device
+sfman3=sfman32.dll is incorrect!\nPlease download and install SoundFont Master Manager\nand re-run 'kxmixer Settings->Reset Global Settings'
+
+fxregister=Error registering default Effects library
+
+ini_file=Incorrect settings file
+# TRANSLATORS: NOTE:
+# 'legacy' = outdated, old, not supported anymore
+ini_file2=Routing information incomplete\nMaybe legacy settings file
+ini_file3=Amount information incomplete\nMaybe legacy settings file
+ini_file4=Buffers information incomplete\nMaybe legacy settings file
+ini_file5=HW Parameters information incomplete\nMaybe legacy settings file
+ini_file6=AC97 information incomplete\nMaybe legacy settings file
+ini_file7=ASIO Routing information incomplete\nMaybe legacy settings file
+ini_file8=Mixer information incomplete\nMaybe legacy settings file
+ini_file_ver=Settings file has invalid version
+sptest=Unable to find Wave file in the skin!
+badskin=Error registering new skin\nIncorrect file format
+
+[setup]
+setup1=kX Setup will now install new drivers for your soundcard\nPlease confirm new device installation\nand answer 'No' to any reboot requests\nAnswer 'yes' to proceed with unsigned driver installation if prompted (the kX Audio Driver is not Microsoft certified)\nPress OK now and follow on-screen instructions...
+setup2=Installing drivers....\nIgnore reboot requests, press 'OK' to continue \nwhen the Install Wizard has finished installing \nnew drivers for all of your device(s)\n
+setup3=kX Setup:\nIt is now safe and necessary to reboot your computer before continuing\nPress OK to reboot NOW
+setup4=Windows NT/2000/XP Administrator Privilege required\nPlease reboot before continuing
+setup5=Do you really wish to uninstall kX Audio Driver?
+setup6=Installation aborted
+setup7=Do you wish to remove the following device?
+setup8=In order to install the drivers for the following device,\nit is necessary to remove it first.\nDo you wish to do this?\n\nDevice:
+setup9=Do you wish to install the kX Drivers for the following device?
+setup10=Do you wish to uninstall any kX Driver registry entries, file associations and files (recommended)?
+setup11=Do you wish to reset global settings? (Such as registry entries, file associations, soundfont / asio registration etc..)?
+setup12=Do you wish to reset current device settings to defaults?
+setup13=Setup has detected existing kX Driver installation [%s]\nIt is recommended to uninstall it completely before continuing\nDo you wish to do that (all your settings will be reset)? (Recommended)
+setup14=kX Mixer has detected existing kX Driver (%s) settings for your device '%s'\nDo you wish to reset them to defaults? (Recommended)
+setup15=kX Mixer has detected existing kX Driver DSP plugins and skins\nDo you wish to keep them registered? (Recommended)
+setup16=Do you wish to reset DSP plugin and skin registrations?
+setup17=Error installing device driver\nkX Setup will try to re-install the driver later...
+setup18=Installation completed. Thank you for choosing kX Audio Driver!\n\nAfter you reboot your computer, please check the following settings:\nOpen kX Mixer and click 'Speaker Setup...' to choose the appropriate speaker settings.\nCheck your speaker connection: Front and Rear outputs are swapped by default!\nIf you are using digital speakers, turn Digital Output Only mode ON.\nIf you are experiencing any difficulties, please review our FAQ and read our Help.\nPost any bug reports and questions to our support forum (www.kxproject.com).\n\n          - kX Team\n
+setup19=kX Setup hasn't detected any kX-compatible devices.\n\nPlease try to reboot and re-run the installation program. Make sure your card is supported by the driver (review the FAQ for details).
+setup20=kX Mixer will now need to launch kX Setup in order to reset some of your global settings.\nYou might be asked to provide your password and confirm this operation.\n\nIt is vital to do so for correct operation.
+setup21=kX Mixer will now need to launch kX Setup in order to update ASIO drivers.\nYou might be asked to provide your password or confirm this operation.\nIt is vital to do so for the ASIO drivers to function properly.
+
+agree=Agree
+cancel=Cancel
+quit=Quit
+about=About
+setup=Setup
+init_error=Error initializing your Audio Card\nPlease reinstall drivers\nIf you haven't rebooted after setup - please reboot now.\nIf kX Setup is currently in progress - ignore this message\n
+dynamic=Some of device names were dynamically changed. It is recommended that you reboot again for the changes to take effect\nkX Mixer may not function properly until next reboot\n
+uninstall=Uninstall completed
+uninstall2=Uninstall
+vsti=Please choose the path to your VST Plugins folder
+vsti2=Please choose the path to your VST Plugins folder or press 'Cancel' if you don't have VST Hosts (such as Cubase VST) installed
+
+[locals]
+select_card=Select Card
+compile=Compilation
+always_on_top=Always On Top
+restore=Restoring settings...
+spdif_freq=S/PDIF Frequency
+sflist=SoundFont list
+sfinfo=SoundFont Information
+mem=Memory Usage
+mute=Mute
+unmute=UnMute
+center=0 dB
+linked=Linked
+unlinked=UnLinked
+no_sfs=<No SoundFonts>
+sf=-- Total %d SoundFont%s loaded (Total Size: %dKb) --
+bank=bank
+ecard_spdif0=D2/SPDIF0 Source
+ecard_spdif1=D1/SPDIF1 Source
+spdif_recording=Direct S/PDIF Recording
+zsnb_source=Analog Source
+p16v_recording=P16V Recording Source (24/96)
+p16v_playback=P16V Default Playback Channel (24/96)
+edsp_clock=E-DSP Clock Source
+headphones_edsp_192=Headphones source for 192kHz mode
+
+[menu]
+systray=kX Manager
+mixer=kX Mixer
+dsp=kX DSP
+router=kX Router
+p16v_router=kX 24/96 Router
+editor=kX Editor
+sfman=kX SoundFont
+device=Device
+saveset=Save Settings...
+loadset=Load Settings...
+console=kX Console
+# TRANSLATORS: NOTE: update 'reset settings' -> 'reset device settings'!
+resetset=Reset Device Settings
+# TRANSLATORS: NOTE: 'global' settings are not related to 'device settings'
+# that is, if you reset global settings, your device settings will be preserved
+# global settings include, for instance, tooltips, language, ASIO driver registration etc...
+# that is, do NOT use the term 'all' instead of 'global'
+reset_globset=Reset Global Settings
+setupbuf=Setup Buffers...
+settings=Settings
+add_eff=Register Effects (Dane/kXL/RIFX)...
+add_addon=Register Add-On...
+addons=Add-Ons
+effects=Effects
+add_skin=Register new Skin...
+skin=Skin
+check=Check for driver updates
+online=Download presets and custom profiles
+# TRANSLATORS: NOTE:
+# please use the most polite form of the word 'donate' that exists in your language
+# something like: 'support the project', 'invest into kX' etc...
+# (that is, not just 'pay' etc...) :-)
+donate=Donate
+download_s=Download skins
+download_e=Download effects
+internet=Internet
+help_file=Help file is not installed. Do you wish to download it now?
+about=About...
+help=Help
+sptest=Speaker test
+cpanel=Multimedia Properties...
+quit=Quit
+refresh=Refresh
+reset_dsp=Reinitialize DSP
+register_plugin=Register Effects (Dane/kXL/RIFX)...
+add_sum=Sum
+add_vol=Vol
+disc_out=Disconnect Output
+disc_in=Disconnect Input
+disable=Disable
+enable=Enable
+translate=Translate...
+untranslate=Untranslate
+bypass=Bypass
+swap=Swap by
+edit=Edit
+edit_source=Edit Source
+edit_dump=Edit Dump
+# TRANSLATORS: NOTE:
+# 'C++' is language name. don't translate it :)
+export=Export to C++...
+info=Info...
+tweak=Tweak...
+set_defs=Reset settings
+unload=Unload
+language=Language
+clear_dsp=Clear DSP
+eff_list=Add Effect / Plugin
+rename=Rename
+guidgen=Generate GUID
+guidclip=GUID - copied to the clipboard
+remote=kX Remote
+remote_disable=Disable kX Remote
+midi=kX Automation
+fxctrl=Assign...
+presets=Presets
+presets.export=Export presets...
+presets.import=Import presets...
+asio=ASIO Control Panel
+
+[info]
+curskin=Current skin
+author=Skin Author
+driver=Driver Name
+dbname=DB Name
+drvdate=Driver Date
+allrights=All Rights Reserved
+version=Version
+compiled=Compiled
+drvversion=Driver Version
+is10k2=Card is '10k2'
+is51=Card model is '5.1'
+
+[ac97]
+mic=Mic
+cd=CD
+video=(Video)
+aux=Aux
+linein=LineIn
+stereomix=StereoMix
+monomix=MonoMix
+phone=TAD
+source=AC97 Source
+3dse=3D Stereo Enhancement
+3d_off=Off
+3d_low=Low
+3d_norm=Normal
+3d_high=High
+spdif=SPDIF
+wuh=WUH

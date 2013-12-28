@@ -1,0 +1,104 @@
+; ......................................
+; 	4th-order crossover
+; ......................................
+
+name "crossover-4"
+copyright "Copyright © Max Mikhailov, 2003-2004."   
+guid "8b5a4e20-7642-11d8-b0d0-993aaeed8613"      
+
+; входы/выходы 
+; i/o
+input 	in1, in2
+output	l1, h1, l2, h2  
+
+; коэффициенты фильтров  
+; filter coefficients
+static	b = 0.870362407832009        
+static	a2 = 0.930680573414541	
+static	a3 = -0.870367477456469 
+
+static  lz1, lz2, lz3, lz4, lz5, lz6   
+static  rz1, rz2, rz3, rz4, rz5, rz6 
+
+temp	i, x, y
+
+; .......................                
+; левый
+; left    
+
+macs	i, in1, 0, 0 
+              
+; hp1                      
+macs	x, 0, i, b 
+
+macints	y, x, lz1, -2
+macsn	lz1, x, y, a2
+macsn	lz1, lz1, lz2, .5
+macs	lz2, x, y, a3
+        
+; hp2            
+macints	h1, y, lz3, -2
+macsn	lz3, y, h1, a2
+macsn	lz3, lz3, lz4, .5
+macs	lz4, y, h1, a3 
+
+
+; ap     
+macsn	x, lz5, i, a3
+macs	lz5, x, i, -1
+macs	y, lz6, lz5, a2
+macs	lz5, y, lz5, a2
+macs	lz6, i, x, a3
+
+; lp     
+macs	l1, x, h1, -1
+
+; .......................               
+; правый  
+; right
+
+macs	i, in2, 0, 0 
+              
+; hp1                      
+macs	x, 0, i, b 
+
+macints	y, x, rz1, -2
+macsn	rz1, x, y, a2
+macsn	rz1, rz1, rz2, .5
+macs	rz2, x, y, a3
+        
+; hp2            
+macints	h2, y, rz3, -2
+macsn	rz3, y, h2, a2
+macsn	rz3, rz3, rz4, .5
+macs	rz4, y, h2, a3 
+
+
+; ap     
+macsn	x, rz5, i, a3
+macs	rz5, x, i, -1
+macs	y, rz6, rz5, a2
+macs	rz5, y, rz5, a2
+macs	rz6, i, x, a3
+
+; lp     
+macs	l2, x, h2, -1
+
+end
+
+
+ .......................                  
+               
+; расчет коэффициентов
+; coefficients calculation    
+
+;f 	- частота разделения, crossover frequency
+;fs  - частота дискретизации, sampling frequency  
+
+;t 	= tan(pi * f / fs);
+;s 	= sqrt(2);
+
+;a1 	= 1 / (1 + t*t + t*s);
+;a2 	= a1 * (1 - t*t);
+;a3 	= a1 * (t*s - t*t - 1);
+;b 	= a1 * a1;

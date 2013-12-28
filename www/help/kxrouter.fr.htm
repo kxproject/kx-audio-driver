@@ -1,0 +1,95 @@
+<title>Le Routeur kX</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><font size="3"><b>Routage kX </b></font></p>
+<hr>
+<p><font ><b><font size="2">G&eacute;n&eacute;ralit&eacute;s<br>
+<br>
+  </font></b><font size="2">L'&eacute;cran Routage kX est activ&eacute; &agrave; 
+  partir du <a href="mixer.htm">Mixeur kX</a> ou &agrave; partir du <a href="menu.htm">Menu 
+  kX</a>. Cet &eacute;cran affiche et vous permet de modifier le routage des flux 
+  audio : d'o&ugrave; partent et o&ugrave; vont les flux, et les modalit&eacute;s 
+  de liaison entre le syst&egrave;me et les 16 <a href="dspguide.htm#fxbus">Bus 
+  FX</a> dans l'&eacute;cran <a href="dspguide.htm">DSP kX</a>.</font></font></p>
+<p><font size="2" ><b>Les flux audio et le routeur kX&nbsp;</b></font></p>
+<p><font size="2">Les sorties logicielles comportent :</font></p>
+<ul>
+  <li><font size="2">Audio (Wave) gauche et droite (sous-syst&egrave;me Windows 
+    Multim&eacute;dia WinMM)</font></li>
+  <li><font size="2">Voies DirectSound2D (avec acc&eacute;l&eacute;ration mat&eacute;rielle)</font></li>
+  <li><font size="2">Voies DirectSound3D (avec acc&eacute;l&eacute;ration mat&eacute;rielle)</font></li>
+  <li><font size="2">Voies AC (5+1)</font></li>
+  <li><font size="2">16 canaux MIDI</font></li>
+  <li><font size="2">16 canaux de sortie ASIO</font></li>
+</ul>
+<p><font size="2">Les sorties logicielles sont regroup&eacute;es comme suit :</font></p>
+<ul>
+  <li><font size="2">Groupe 1. Audio (Wave) Gauche/Droite et voies DirectSound 
+    2D (st&eacute;r&eacute;o ou mono)</font></li>
+  <li><font size="2">Groupe 2. DirectSound3D et voies AC3 (elles utilisent seulement 
+    une sortie mono qui est d&eacute;coup&eacute;e par le pilote en 2, 4 ou 6 
+    canaux) ;</font></li>
+  <li><font size="2">Groupe 3. 16 canaux MIDI</font></li>
+  <li><font size="2">Groupe 4. 16 canaux ASIO&nbsp;</font></li>
+</ul>
+<p><font size="2"><img  src="images/techni2.gif" ></font></p>
+<p><font size="2">Ces groupes peuvent avoir des routages diff&eacute;rents, notamment 
+  16 routages diff&eacute;rents pour les canaux MIDI et 16 pour les canaux <a href="asio.htm">ASIO</a> 
+  (chacun d'entre eux &eacute;tant contr&ocirc;lable s&eacute;par&eacute;ment).<br>
+<br>
+  Chaque voie logicielle est rout&eacute;e de mani&egrave;re mat&eacute;rielle 
+  vers 4 BusFx diff&eacute;rents. Ces routages sont nomm&eacute;s 'A', 'B', 'C', 
+  'D', et chacun peuvent &ecirc;tre ajust&eacute;s s&eacute;par&eacute;ment. Les 
+  quantit&eacute;s de ces valeurs sont appel&eacute;s 'send_a', 'send_b', 'send_c' 
+  and 'send_d'. Quatre BusFx additionnels suppl&eacute;mentaires sont ajout&eacute;s 
+  dans le cas des cartes 10k2 ('E', 'F', 'G' and 'H'), soit un total de 8. Les 
+  puissances appliqu&eacute;es aux effets peuvent &ecirc;tre contr&ocirc;l&eacute;es 
+  par les curseurs de la page <a href="fxlevels.htm">Quantit&eacute; d'effet</a> 
+  du <a href="mixer.htm">Mixeur kX</a>.<br>
+<br>
+  Il convient de noter que les routages audio (Wave), DirectSound et MIDI n&eacute;cessitent 
+  que send_a et send_b soient r&eacute;serv&eacute;s au pilote kX pour permettre 
+  le panoramique st&eacute;r&eacute;o. L'utilisateur peut donc contr&ocirc;ler 
+  uniquement les quantit&eacute;s send_c and send_d (bien que tous les routages 
+  soient contr&ocirc;lables). Pour les voies ASIO, les 4 quantit&eacute;s sont 
+  contr&ocirc;lables (8 pour les cartes 10k2) &agrave; l'aide des curseurs de 
+  l'&eacute;cran <a href="asio.htm">Contr&ocirc;le ASIO kX</a>.<br>
+<br>
+  La configuration par d&eacute;faut permet de g&eacute;rer la balance de sources 
+  st&eacute;r&eacute;o en utilisant les m&eacute;thodes classiques de Windows 
+  / DirectX / Midi (g&eacute;r&eacute;es de mani&egrave;re interne par les send_a 
+  et send_b), et d'utiliser les send_c et send_d comme 'Quantit&eacute; d'effet 
+  FX'. Les send c et d sont associ&eacute;s par d&eacute;faut aux effets de r&eacute;verb&eacute;ration 
+  et de ch&#156;ur (chorus), et peuvent &ecirc;tre contr&ocirc;l&eacute;s via 
+  les contr&ocirc;leurs MIDI aussi bien que par les curseurs du mixeur kX.<br>
+<br>
+  Une fois que le signal est modifi&eacute; par la quantit&eacute; d'effet puis 
+  rout&eacute; vers le bus FX cible, il peut &ecirc;tre contr&ocirc;l&eacute; 
+  par l'&eacute;cran <a href="dspguide.htm">DSP kX</a>. </font></p>
+
+<p><b><font  size="2">Utilisation du routeur kX </font></b></p>
+<p><font size="2">Les fonctions offertes par le routeur kX sont tr&egrave;s proches 
+  de celles de la <a href="asio.htm">fen&ecirc;tre de routage ASIO</a>, cependant 
+  il n'y a pas de curseur de gestion de puissance pr&eacute;sent dans le routeur 
+  kX. </font></p>
+<table width="550" >
+  <tr>
+    <td width="46%" align="center" valign="middle"><img src="images/kxrouter.gif" ></td>
+    <td width="54%" valign="top"> 
+      <p><font  size="2">Les flux sont soit mono soit st&eacute;r&eacute;o. </font></p>
+      <p><font  size="2">Les voies audio (Wave) et les fontes sonores sont rout&eacute;es 
+        aux paires</font><font  size="2"> 0/1 et 2/3 du bus FX, pendant que le 
+        flux ac3 utilise un simple bus 4-8.</font></p>
+      <p><font  size="2">Tous les flux sont rout&eacute;s vers le bus 13/14 par 
+        d&eacute;faut, qui agit comme un aller/retour pour les effets de r&eacute;verb&eacute;ration 
+        et de chorus dans la configuration par d&eacute;faut.</font></p>
+      </td>
+  </tr>
+</table>
+<p><font   size="2"><b>Trucs et astuces.</b></font></p>
+<p><font ><font size="2">La configuration du routage est sp&eacute;cifique &agrave; 
+  chaque carte install&eacute;e. La carte en cours de s&eacute;lection est indiqu&eacute;e 
+  dans le coin en bas &agrave; droite de la fen&ecirc;tre. La carte s&eacute;lectionn&eacute;e 
+  peut &ecirc;tre modifi&eacute;e en cliquant sur le nom du p&eacute;riph&eacute;rique.</font></font></p>

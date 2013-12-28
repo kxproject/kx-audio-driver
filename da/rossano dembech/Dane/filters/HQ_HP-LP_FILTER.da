@@ -1,0 +1,43 @@
+; New microcode
+	name "HQ HP-LP filter";
+	copyright "Copyright (c) 2004.";
+	created "04/19/2005";
+	engine "kX";
+	; comment "";
+	guid "56671184-62e3-43ec-ae2f-4ccfebc2abf3";
+
+input in_l, in_r
+output HP_L, HP_R, LP_L, LP_R
+control Filter=0
+static K=1
+temp tl_1, tl_2, tl_3, tl_4, tl_5, tl_6, tl_7, tl_8, tl_9
+temp tr_1, tr_2, tr_3, tr_4, tr_5, tr_6, tr_7, tr_8, tr_9
+
+interp tl_1,   tl_1,   Filter, in_l
+interp tl_2,   tl_2,   Filter, tl_1
+interp tl_3,   tl_3,   Filter, tl_2
+interp tl_4,   tl_4,   Filter, tl_3
+interp tl_5,   tl_5,   Filter, tl_4
+interp tl_6,   tl_6,   Filter, tl_5
+interp tl_7,   tl_7,   Filter, tl_6
+interp tl_8,   tl_8,   Filter, tl_7
+interp tl_9,   tl_9,   Filter, tl_8
+interp LP_L, LP_L, Filter, tl_9
+macsn HP_L, in_l, LP_L, K
+
+interp tr_1,   tr_1,   Filter, in_r
+interp tr_2,   tr_2,   Filter, tr_1
+interp tr_3,   tr_3,   Filter, tr_2
+interp tr_4,   tr_4,   Filter, tr_3
+interp tr_5,   tr_5,   Filter, tr_4
+interp tr_6,   tr_6,   Filter, tr_5
+interp tr_7,   tr_7,   Filter, tr_6
+interp tr_8,   tr_8,   Filter, tr_7
+interp tr_9,   tr_9,   Filter, tr_8
+interp LP_R, LP_R, Filter, tr_9
+macsn HP_R, in_r, LP_R, K
+
+end
+
+
+

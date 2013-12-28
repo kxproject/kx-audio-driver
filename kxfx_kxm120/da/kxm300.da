@@ -1,0 +1,21 @@
+name "kxm 300";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created ""; 
+comment "4 channel mixer module (kxm 300 v1.1)"
+guid "4bfd4d33-ce27-43e1-ad76-57781caebf71";
+
+; Registers
+input in_1, in_2, in_3, in_4;
+output out
+control vol_1=1, vol_2=1, vol_3=1, vol_4=1, master=0.5
+static a
+
+; amplify, mix & output
+macs a, 0, in_1, vol_1  
+macs a, a, in_2, vol_2 
+macs a, a, in_3, vol_3 
+macs a, a, in_4, vol_4 
+macs out, 0, a, master
+
+end

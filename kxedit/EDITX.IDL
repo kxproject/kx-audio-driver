@@ -1,0 +1,2318 @@
+#include <olectl.h>
+#include "cmidlids.h"
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+interface ICodeMax;
+interface IRange;
+interface IPosition;
+interface IHotKey;
+interface ILanguage;
+interface IGlobals;
+interface IRect;
+
+[
+    uuid(ECEDB943-AC41-11D2-AB20-000000000000),
+    version(2.0),
+    helpstring("CodeMax 2.0 Edit Control"),
+	helpfile( "CodeMax.chm" )
+]
+library CodeMax
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+	typedef
+	[
+		uuid(ECEDB94B-AC41-11d2-AB20-000000000000)
+	]
+	enum cmLimit {
+		cmMaxFindReplText = 100,              // maximum size (TCHARs) of text to find or replace
+		cmFindReplaceMRUMax = 10,             // maximum MRU size in find and find/replace dialogs
+		cmFindReplaceMRUBuffSize = 1010,      // required buffer size for pszMRUList argument CMSetFindReplaceMRUList() and CMGetFindReplaceMRUList() 
+		cmMaxMacros = 10,                     // maximum number of keystroke macros supported by CodeMax
+		cmMaxCmdString = 50,                  // maximum size of command string returned in pszBuff param of CMGetCommandString() if bDescription is FALSE
+		cmMaxCmdDescription = 100,            // maximum size of command string returned in pszBuff param of CMGetCommandString() if bDescription is TRUE
+		cmMaxLanguageName = 30,               // maximum size of a language name set with CMRegisterLanguage
+		cmMaxTabSize = 100,                   // maximum tab size (characters)
+		cmMinTabSize = 2                      // minimum tab size (characters)
+	} cmLimit;
+
+	typedef
+	[
+		uuid(ECEDB94C-AC41-11d2-AB20-000000000000)
+	]
+	enum cmCommand {
+		cmCmdWordUppercase               = 100,   // Makes the current word uppercase
+		cmCmdWordTranspose               = 101,   // Swaps the current and previous words
+		cmCmdWordRightExtend             = 102,   // Extends the selection forward to the start of the next word
+		cmCmdWordRight                   = 103,   // Moves forward to the start of the next word
+		cmCmdWordEndRight                = 104,   // Moves forward to the end of the next word
+		cmCmdWordEndRightExtend          = 105,   // Extends the selection forward to the start of the next word
+		cmCmdWordLowerCase               = 106,   // Makes the current word lowercase
+		cmCmdWordLeftExtend              = 107,   // Extends the selection backward to the start of the previous word
+		cmCmdWordLeft                    = 108,   // Moves backward to the start of the previous word
+		cmCmdWordEndLeft                 = 109,   // Moves backward to the end of the previous word
+		cmCmdWordEndLeftExtend           = 110,   // Extends the selection backward to the end of the previous word
+		cmCmdWordDeleteToStart           = 111,   // Deletes a word to the left
+		cmCmdWordDeleteToEnd             = 112,   // Deletes a word to the right
+		cmCmdWordCapitalize              = 113,   // Makes the first character uppercase
+		cmCmdWindowStart                 = 114,   // Moves to the top of the text window
+		cmCmdWindowScrollUp              = 115,   // Scrolls the file contents up one line
+		cmCmdWindowScrollToTop           = 116,   // Scrolls the line to the top of the window
+		cmCmdWindowScrollToCenter        = 117,   // Scrolls the line to the center of the window
+		cmCmdWindowScrollToBottom        = 118,   // Scrolls the line to the bottom of the window
+		cmCmdWindowScrollRight           = 119,   // Scrolls the window to the right
+		cmCmdWindowScrollLeft            = 120,   // Scrolls the window to the left
+		cmCmdWindowScrollDown            = 121,   // Scrolls the file contents down one line
+		cmCmdWindowRightEdge             = 122,   // Moves to the right edge of the text window
+		cmCmdWindowLeftEdge              = 123,   // Moves to the left edge of the text window
+		cmCmdWindowEnd                   = 124,   // Moves to the bottom of the text window
+		cmCmdUppercaseSelection          = 125,   // Makes the selection all uppercase
+		cmCmdUntabifySelection           = 126,   // Replaces tabs with spaces in the selection
+		cmCmdUnindentSelection           = 127,   // Indents the selected text left one tab stop
+		cmCmdUndoChanges                 = 128,   // Undoes the last action, ignoring movement commands
+		cmCmdUndo                        = 129,   // Undoes the last action
+		cmCmdTabifySelection             = 130,   // Replaces spaces with tabs in the selection
+		cmCmdSentenceRight               = 131,   // Moves to the beginning of the next sentence
+		cmCmdSentenceLeft                = 132,   // Moves to the beginning of the previous sentence
+		cmCmdSentenceCut                 = 133,   // Deletes the remainder of the sentence
+		cmCmdSelectSwapAnchor            = 134,   // Swaps the anchor and the cursor in a selection
+		cmCmdSelectPara                  = 135,   // Selects the current paragraph
+		cmCmdSelectLine                  = 136,   // Selects lines of text
+		cmCmdSelectAll                   = 137,   // Selects the entire document
+		cmCmdRedoChanges                 = 138,   // Redoes the last action, ignoring movement commands
+		cmCmdRedo                        = 139,   // Redoes the previously undone action
+		cmCmdPaste                       = 140,   // Inserts the Clipboard contents at the insertion point
+		cmCmdParaUp                      = 141,   // Moves to the beginning of the previous paragraph
+		cmCmdParaDown                    = 142,   // Moves to the beginning of the next paragraph
+		cmCmdPageUpExtend                = 143,   // Extends the selection up one page
+		cmCmdPageUp                      = 144,   // Moves the cursor up one page
+		cmCmdPageDownExtend              = 145,   // Extends the selection down one page
+		cmCmdPageDown                    = 146,   // Moves the cursor down one page
+		cmCmdLowercaseSelection          = 147,   // Makes the selection all lowercase
+		cmCmdLineUpExtend                = 148,   // Extends the selection up one line
+		cmCmdLineUp                      = 149,   // Moves the cursor up one line
+		cmCmdLineTranspose               = 150,   // Swaps current and previous lines
+		cmCmdLineStart                   = 151,   // Moves to the start of the current line
+		cmCmdLineOpenBelow               = 152,   // Opens a new line below the cursor
+		cmCmdLineOpenAbove               = 153,   // Opens a new line above the cursor
+		cmCmdLineEndExtend               = 154,   // Extends the selection to the end of the current line
+		cmCmdLineEnd                     = 155,   // Moves the cursor to the end of the current line
+		cmCmdLineDownExtend              = 156,   // Extends the selection down one line
+		cmCmdLineDown                    = 157,   // Moves the cursor down one line
+		cmCmdLineDeleteToStart           = 158,   // Deletes to the beginning of the current line
+		cmCmdLineDeleteToEnd             = 159,   // Deletes to the end of the current line
+		cmCmdLineDelete                  = 160,   // Deletes the selected line
+		cmCmdLineCut                     = 161,   // Deletes the selected lines and places the text on the clipboard
+		cmCmdIndentToPrev                = 162,   // Indents to the position of the next text on the previous line
+		cmCmdIndentSelection             = 163,   // Indents the selected text right one tab stop
+		cmCmdHomeExtend                  = 164,   // Extends the selection to either the start of the current line or the start of the text on that line
+		cmCmdHome                        = 165,   // Moves to either the start of the current line or the start of the text on that line
+		cmCmdGotoMatchBrace              = 166,   // Finds the matching brace
+		cmCmdGotoIndentation             = 167,   // Moves to the end of the indentation
+		cmCmdGotoLine                    = 168,   // Moves to a user-specified line
+		cmCmdFindReplace                 = 169,   // Displays the find & replace dialog box
+		cmCmdReplace                     = 170,   // Replaces the first occurrence of the find text after the current position with the replace text and finds the next occurrence of the find text
+		cmCmdReplaceAllInBuffer          = 171,   // Replaces the find text with the replace text in the entire buffer
+		cmCmdReplaceAllInSelection       = 172,   // Replaces the find text with the replace text in the selection
+		cmCmdFindPrevWord                = 173,   // Finds the previous occurrence of the selected text
+		cmCmdFindPrev                    = 174,   // Finds the previous occurrence of the specified text
+		cmCmdFindNextWord                = 175,   // Finds the next occurrence of the selected text
+		cmCmdFindNext                    = 176,   // Finds the next occurrence of the specified text
+		cmCmdFindMarkAll                 = 177,   // Finds the specified text and sets a bookmark at the found locations
+		cmCmdFind                        = 178,   // Finds the specified text
+		cmCmdSetFindText                 = 179,   // Sets the text to search for in subsequent find commands
+		cmCmdSetReplaceText              = 180,   // Sets the text to substitute for the find text in subsequent find & replace commands
+		cmCmdTogglePreserveCase          = 181,   // Toggles intelligent case preservation when replacing text
+		cmCmdToggleWholeWord             = 182,   // Toggles whole word searching on and off
+		cmCmdToggleCaseSensitive         = 183,   // Toggles case sensitive searching on and off
+		cmCmdEnd                         = 184,   // Moves to the end of the current line, bottom of the text window, or end of the file
+		cmCmdToggleWhitespaceDisplay     = 185,   // Shows or hides whitespace indicators
+		cmCmdToggleOvertype              = 186,   // Toggles between inserting and replacing text
+		cmCmdSetRepeatCount              = 187,   // Sets the repeat count for the next command
+		cmCmdDocumentStartExtend         = 188,   // Extends the selection to the beginning of the file
+		cmCmdDocumentStart               = 189,   // Moves to the beginning of the file
+		cmCmdDocumentEndExtend           = 190,   // Extends the selection to the end of the file
+		cmCmdDocumentEnd                 = 191,   // Moves to the end of the file
+		cmCmdDeleteHorizontalSpace       = 192,   // Deletes the spaces and tabs around the cursor
+		cmCmdDeleteBlankLines            = 193,   // Deletes the blank lines adjacent to the cursor
+		cmCmdDeleteBack                  = 194,   // Deletes the selection or, if there is no selection, the character to the left of the cursor
+		cmCmdDelete                      = 195,   // Deletes the selection
+		cmCmdCutSelection                = 196,   // Cuts the selection and puts it on the Clipboard
+		cmCmdCut                         = 197,   // Cuts the selection and puts it on the Clipboard
+		cmCmdCopy                        = 198,   // Copies the selection to the Clipboard
+		cmCmdCharTranspose               = 199,   // Swap characters around the insertion point
+		cmCmdCharRightExtend             = 200,   // Extends the selection one character to the right
+		cmCmdCharRight                   = 201,   // Moves the cursor one character to the right
+		cmCmdCharLeftExtend              = 202,   // Extends the selection one character to the left
+		cmCmdCharLeft                    = 203,   // Moves the cursor one character to the left
+		cmCmdBookmarkToggle              = 204,   // Toggles a bookmark for the current line on and off
+		cmCmdBookmarkPrev                = 205,   // Moves to the line containing the previous bookmark
+		cmCmdBookmarkNext                = 206,   // Moves to the line containing the next bookmark
+		cmCmdBookmarkClearAll            = 207,   // Clears all bookmarks in the window
+		cmCmdBookmarkJumpToFirst         = 208,   // Moves to the first line containing a bookmark
+		cmCmdBookmarkJumpToLast          = 209,   // Moves to the last line containing a bookmark
+		cmCmdAppendNextCut               = 210,   // Adds the next cut text to end of the Clipboard
+		cmCmdInsertChar                  = 211,   // Inserts a character at the current location
+		cmCmdNewLine                     = 212,   // Inserts a new-line character at the current location
+		cmCmdRecordMacro                 = 213,   // Begins/ends keystroke macro-recording
+		cmCmdPlayMacro1                  = 214,   // Plays keystroke macro 1
+		cmCmdPlayMacro2                  = 215,   // Plays keystroke macro 2
+		cmCmdPlayMacro3                  = 216,   // Plays keystroke macro 3
+		cmCmdPlayMacro4                  = 217,   // Plays keystroke macro 4
+		cmCmdPlayMacro5                  = 218,   // Plays keystroke macro 5
+		cmCmdPlayMacro6                  = 219,   // Plays keystroke macro 6
+		cmCmdPlayMacro7                  = 220,   // Plays keystroke macro 7
+		cmCmdPlayMacro8                  = 221,   // Plays keystroke macro 8
+		cmCmdPlayMacro9                  = 222,   // Plays keystroke macro 9
+		cmCmdPlayMacro10                 = 223,   // Plays keystroke macro 10
+		cmCmdProperties                  = 224,   // Displays the properties dialog
+		cmCmdBeginUndo                   = 225,   // Starts an undo transaction
+		cmCmdEndUndo                     = 226,   // Ends an undo transaction
+		cmCmdToggleRegExp                = 228,   // Toggles regular expression searching on and off
+		cmCmdClearSelection              = 229,   // Empties the selection
+		cmCmdRegExpOn                    = 230,   // Turns on regular expression searching
+		cmCmdRegExpOff                   = 231,   // Turns off regular expression searching
+		cmCmdWholeWordOn                 = 232,   // Turns on whole word searching
+		cmCmdWholeWordOff                = 233,   // Turns off whole word searching
+		cmCmdPreserveCaseOn              = 234,   // Turns on case preservation when replacing text
+		cmCmdPreserveCaseOff             = 235,   // Turns off case preservation when replacing text
+		cmCmdCaseSensitiveOn             = 236,   // Turns on case sensitive searching
+		cmCmdCaseSensitiveOff            = 237,   // Turns off case sensitive searching
+		cmCmdWhitespaceDisplayOn         = 238,   // Turns on whitespace display
+		cmCmdWhitespaceDisplayOff        = 239,   // Turns off whitespace display
+		cmCmdOvertypeOn                  = 240,   // Turns on overtype mode
+		cmCmdOvertypeOff                 = 241    // Turns off overtype mode
+	} cmCommand;
+
+	typedef
+	[
+		uuid(3DECBE71-BF40-11d3-AD2E-000000000000)
+	]
+	enum cmCommandErr {
+		cmErrFailure                     = 1,     // general failure
+		cmErrInput                       = 2,     // bad input
+		cmErrSelection                   = 3,     // bad selection
+		cmErrNotFound                    = 4,     // data not found
+		cmErrEmptyBuf                    = 5,     // buffer is empty
+		cmErrReadOnly                    = 6      // buffer is read-only
+	} cmCommandErr;
+
+	typedef
+	[
+		uuid(ECEDB94D-AC41-11d2-AB20-000000000000)
+	]
+	enum cmColorItem {
+		cmClrWindow                         = 0,  // window background color          
+		cmClrLeftMargin                     = 1,  // left margin background color     
+		cmClrBookmark                       = 2,  // bookmark foreground color        
+		cmClrBookmarkBk                     = 3,  // bookmark background color        
+		cmClrText                           = 4,  // plain text foreground color      
+		cmClrTextBk                         = 5,  // plain text background color      
+		cmClrNumber                         = 6,  // numeric literal foreground color 
+		cmClrNumberBk                       = 7,  // numeric literal background color 
+		cmClrKeyword                        = 8,  // keyword foreground color         
+		cmClrKeywordBk                      = 9,  // keyword background color         
+		cmClrOperator                       = 10, // operator foreground color        
+		cmClrOperatorBk                     = 11, // operator background color        
+		cmClrScopeKeyword                   = 12, // scope keyword foreground color   
+		cmClrScopeKeywordBk                 = 13, // scope keyword background color   
+		cmClrComment                        = 14, // comment foreground color         
+		cmClrCommentBk                      = 15, // comment background color         
+		cmClrString                         = 16, // string foreground color          
+		cmClrStringBk                       = 17, // string background color          
+		cmClrTagText                        = 18, // plain tag text foreground color      
+		cmClrTagTextBk                      = 19, // plain tag text background color      
+		cmClrTagEntity                      = 20, // tag entity foreground color
+		cmClrTagEntityBk                    = 21, // tag entity background color
+		cmClrTagElementName                 = 22, // tag element name foreground color
+		cmClrTagElementNameBk               = 23, // tag element name background color
+		cmClrTagAttributeName               = 24, // tag attribute name foreground color
+		cmClrTagAttributeNameBk             = 25, // tag attribute name background color
+		cmClrLineNumber                     = 26, // line number foreground color
+		cmClrLineNumberBk                   = 27, // line number background color
+		cmClrHDividerLines                  = 28, // line number separate line color
+		cmClrVDividerLines                  = 29, // left margin separate line color
+		cmClrHighlightedLine                = 30  // highlighted line color
+	} cmColorItem;
+
+	typedef
+	[
+		uuid(FEE5A5D1-B321-11d2-AB37-000000000000)
+	]
+	enum cmFontStyleItem {
+	    cmStyText               = 0, // plain text font style
+	    cmStyNumber             = 1, // numeric literal font style
+	    cmStyKeyword            = 2, // keyword font style
+	    cmStyOperator           = 3, // operator font style
+	    cmStyScopeKeyword       = 4, // scope keyword font style
+	    cmStyComment            = 5, // comment font style
+	    cmStyString             = 6, // string font style
+	    cmStyTagText            = 7, // plain tag text font style
+		cmStyTagEntity          = 8, // tag entity font style
+		cmStyTagElementName     = 9, // tag element name font style
+		cmStyTagAttributeName   = 10,// tag attribute name font style
+		cmStyLineNumber         = 11 // line number font style
+	} cmFontStyleItem;
+
+	typedef
+	[
+		uuid(16C2E571-B322-11d2-AB37-000000000000)
+	]
+	enum cmFontStyle {
+		cmFontNormal        = 0,  // normal font
+		cmFontBold          = 1,  // bold font
+		cmFontItalic        = 2,  // italic font
+		cmFontBoldItalic    = 3,  // bold + italic font
+		cmFontUnderline     = 4   // normal weight, underline
+	} cmFontStyle;
+
+	typedef
+	[
+		uuid(ECEDB950-AC41-11d2-AB20-000000000000)
+	]
+	enum cmAutoIndentMode {
+		cmIndentOff          = 0,  // auto-indent off -- new line begins at column 0                 
+		cmIndentScope        = 1,  // new line begins at correct language scope indentation level    
+		cmIndentPrevLine     = 2   // new line has identical indentation of previous line            
+	} cmAutoIndentMode;
+
+	typedef
+	[
+		uuid(ECEDB951-AC41-11d2-AB20-000000000000)
+	]
+	enum cmHitTestCode {
+		cmNowhere         = 0,   // Not over the CodeMax control                                     
+		cmHSplitter       = 1,   // Over the horizontal splitter bar                                 
+		cmVSplitter       = 2,   // Over the vertical splitter bar                                   
+		cmHVSplitter      = 3,   // Over the intersection of the horizontal and vertical splitter bar
+		cmEditSpace       = 4,   // Over the buffer contents (code)                                  
+		cmHScrollBar      = 5,   // Over the horizontal scrollbar                                    
+		cmVScrollBar      = 6,   // Over the vertical scrollbar                                      
+		cmSizeBox         = 7,   // Over the sizebox visible when both scrollbars are visible        
+		cmLeftMargin      = 8    // Over the left margin area                                        
+	} cmHitTestCode;
+
+	typedef
+	[
+		uuid(699D9FB2-76F6-11d3-AC9B-000000000000)
+	]
+	enum cmLineNumStyle {
+		cmDecimal         = 10,  // base 10 numbering
+		cmHexadecimal     = 16,  // base 16 numbering
+		cmBinary          = 2,   // base 2 numbering
+		cmOctal           = 8    // base 8 numbering
+	} cmLineNumStyle;
+
+	typedef
+	[
+		uuid(43847920-EE89-11d3-ADAE-000000000000)
+	]
+	enum cmPrintFlags {
+		cmPrnPromptDlg    = 0x0,   // display the print common dialog
+		cmPrnDefaultPrn   = 0x1,   // use default printer (no print dialog displayed)
+		cmPrnHDC          = 0x2,   // use HDC provided
+		cmPrnRichFonts    = 0x4,   // use bold, italics, underline, etc. when appropriate
+		cmPrnColor        = 0x8,   // print in color
+		cmPrnPageNums     = 0x10,  // print 'page # of #' at the bottom of the page
+		cmPrnDateTime     = 0x20,  // print date and time at top of the page
+		cmPrnBorderThin   = 0x40,  // surround text with a thin border
+		cmPrnBorderThick  = 0x80,  // surround text with a thick border
+		cmPrnBorderDouble = 0x100, // surround text with two thin borders
+		cmPrnSelection    = 0x200  // print the selection rather than entire edit contents
+	} cmPrintFlags;
+
+	typedef
+	[
+		uuid(94DD0A01-1CD5-11d4-AE09-000000000000)
+	]
+	enum cmLangStyle {
+		cmLangStyleProcedural = 0,  // procedure-based language
+		cmLangStyleSGML       = 1   // tag-based language
+	} cmLangStyle;
+
+	typedef
+	[
+		uuid(F4573278-29F7-40e0-8CED-2004C3A5F618)
+	]
+	enum cmBorderStyle {
+        cmBorderNone      = 0x0,  // no border
+        cmBorderThin      = 0x1,  // 1-pixel border
+        cmBorderClient    = 0x2,  // client edge
+        cmBorderStatic    = 0x4,  // static edge
+        cmBorderModal     = 0x8,  // modal edge
+        cmBorderCorral    = 0xa   // client & modal edge
+	} cmBorderStyle;
+
+    [
+        uuid(ECEDB941-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_CONTROL),
+        helpstring("CodeMax Edit Control")
+    ]
+    coclass CodeMax
+    {
+        [default] interface ICodeMax;
+        [default, source] dispinterface ICodeMaxEvents;
+    };
+    [
+        uuid(ECEDB94A-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_RANGE),
+        helpstring("Range Class")
+    ]
+    coclass Range
+    {
+        [default] interface IRange;
+    };
+    [
+        uuid(ECEDB944-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_POS),
+        helpstring("Position Class")
+    ]
+    coclass Position
+    {
+        [default] interface IPosition;
+    };
+    [
+        uuid(ECEDB945-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_LANG),
+        helpstring("Language Class")
+    ]
+    coclass Language
+    {
+        [default] interface ILanguage;
+    };
+    [
+        uuid(ECEDB946-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_HOTKEY),
+        helpstring("HotKey Class")
+    ]
+    coclass HotKey
+    {
+        [default] interface IHotKey;
+    };
+    [
+        uuid(ECEDB948-AC41-11d2-AB20-000000000000),
+        helpcontext(HELPID_GLOBALS),
+        helpstring("Globals Class")
+    ]
+    coclass Globals
+    {
+        [default] interface IGlobals;
+    };
+    [
+        uuid(8FF88AC1-2AEE-11d4-AE1E-000000000000),
+        helpcontext(HELPID_RECT),
+        helpstring("Rect Class")
+    ]
+    coclass Rect
+    {
+        [default] interface IRect;
+    };
+};
+
+[
+    object,
+    uuid(ECEDB952-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_RANGE),
+    helpstring("IRange Interface"),
+    pointer_default(unique)
+]
+interface IRange : IDispatch
+{
+    [
+        propput,
+        id(DISPID_RANGE_START_LINE), helpcontext(HELPID_RANGE_START_LINE),
+        helpstring("The anchor line pos")
+    ]
+    HRESULT StartLineNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_RANGE_START_LINE),
+        helpcontext(HELPID_RANGE_START_LINE),
+        helpstring("The anchor line pos")
+    ]
+    HRESULT StartLineNo([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RANGE_START_COL),
+        helpcontext(HELPID_RANGE_START_COL),
+        helpstring("The anchor column pos")
+    ]
+    HRESULT StartColNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_RANGE_START_COL),
+        helpcontext(HELPID_RANGE_START_COL),
+        helpstring("The anchor column pos")
+    ]
+    HRESULT StartColNo([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RANGE_END_LINE),
+        helpcontext(HELPID_RANGE_END_LINE),
+        helpstring("The extension line pos")
+    ]
+    HRESULT EndLineNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_RANGE_END_LINE),
+        helpcontext(HELPID_RANGE_END_LINE),
+        helpstring("The extension line pos")
+    ]
+    HRESULT EndLineNo([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RANGE_END_COL),
+        helpcontext(HELPID_RANGE_END_COL),
+        helpstring("The extension col pos")
+    ]
+    HRESULT EndColNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_RANGE_END_COL),
+        helpcontext(HELPID_RANGE_END_COL),
+        helpstring("The extension col pos")
+    ]
+    HRESULT EndColNo([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RANGE_COLUMN_SEL),
+        helpcontext(HELPID_RANGE_COLUMN_SEL),
+        helpstring("Column selection mode - on/off")
+    ]
+    HRESULT ColumnSel([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_RANGE_COLUMN_SEL),
+        helpcontext(HELPID_RANGE_COLUMN_SEL),
+        helpstring("Column selection mode - on/off")
+    ]
+    HRESULT ColumnSel([out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_RANGE_IS_EMPTY),
+        helpcontext(HELPID_RANGE_IS_EMPTY),
+        helpstring("True if range is empty")
+    ]
+    HRESULT IsEmpty([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_RANGE_EMPTY),
+        helpcontext(HELPID_RANGE_EMPTY),
+        helpstring("Makes the range empty")
+    ]
+    HRESULT Empty();
+    [
+        id(DISPID_RANGE_NORMALIZE),
+        helpcontext(HELPID_RANGE_NORMALIZE),
+        helpstring("Makes sure the anchor is before the extension")
+    ]
+    HRESULT Normalize();
+};
+
+[
+    object,
+    uuid(ECEDB953-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_POS),
+    helpstring("IPosition Interface"),
+    pointer_default(unique)
+]
+interface IPosition : IDispatch
+{
+    [
+        propput,
+        id(DISPID_POS_LINE),
+        helpcontext(HELPID_POS_LINE),
+        helpstring("The line position")
+    ]
+    HRESULT LineNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_POS_LINE),
+        helpcontext(HELPID_POS_LINE),
+        helpstring("The line position")
+    ]
+    HRESULT LineNo([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_POS_COL),
+        helpcontext(HELPID_POS_COL),
+        helpstring("The line position")
+    ]
+    HRESULT ColNo([in]long lVal);
+    [
+        propget,
+        id(DISPID_POS_COL),
+        helpcontext(HELPID_POS_COL),
+        helpstring("The column position")
+    ]
+    HRESULT ColNo([out, retval]long *plVal);
+};
+
+[
+    object,
+    uuid(ECEDB954-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_LANG),
+    helpstring("ILanguage Interface"),
+    pointer_default(unique)
+]
+interface ILanguage : IDispatch
+{
+    [
+        propput,
+        id(DISPID_LANG_CASESENSITIVE),
+        helpcontext(HELPID_LANG_CASESENSITIVE),
+        helpstring("Language is case-sensitive")
+    ]
+    HRESULT CaseSensitive([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_LANG_CASESENSITIVE),
+        helpcontext(HELPID_LANG_CASESENSITIVE),
+        helpstring("Language is case-sensitive")
+    ]
+    HRESULT CaseSensitive([out,retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_LANG_KEYWORDS),
+        helpcontext(HELPID_LANG_KEYWORDS),
+        helpstring("Language keywords (delimited by CR)")
+    ]
+    HRESULT Keywords([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_KEYWORDS),
+        helpcontext(HELPID_LANG_KEYWORDS),
+        helpstring("Language keywords (delimited by CR)")
+    ]
+    HRESULT Keywords([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_OPERATORS),
+        helpcontext(HELPID_LANG_OPERATORS),
+        helpstring("Language operators (delimited by CR)")
+    ]
+    HRESULT Operators([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_OPERATORS),
+        helpcontext(HELPID_LANG_OPERATORS),
+        helpstring("Language operators (delimited by CR)")
+    ]
+    HRESULT Operators([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_SINGLELINECOMMENTS),
+        helpcontext(HELPID_LANG_SINGLELINECOMMENTS),
+        helpstring("Single line comment tokens (delimited by CR)")
+    ]
+    HRESULT SingleLineComments([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_SINGLELINECOMMENTS),
+        helpcontext(HELPID_LANG_SINGLELINECOMMENTS),
+        helpstring("Single line comment tokens (delimited by CR)")
+    ]
+    HRESULT SingleLineComments([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_MULTILINECOMMENTS1),
+        helpcontext(HELPID_LANG_MULTILINECOMMENTS1),
+        helpstring("Multi-line comment start tokens (delimited by CR)")
+    ]
+    HRESULT MultiLineComments1([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_MULTILINECOMMENTS1),
+        helpcontext(HELPID_LANG_MULTILINECOMMENTS1),
+        helpstring("Multi-line comment start tokens (delimited by CR)")
+    ]
+    HRESULT MultiLineComments1([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_MULTILINECOMMENTS2),
+        helpcontext(HELPID_LANG_MULTILINECOMMENTS2),
+        helpstring("Multi-line comment end tokens (delimited by CR)")
+    ]
+    HRESULT MultiLineComments2([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_MULTILINECOMMENTS2),
+        helpcontext(HELPID_LANG_MULTILINECOMMENTS2),
+        helpstring("Multi-line comment end tokens (delimited by CR)")
+    ]
+    HRESULT MultiLineComments2([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_SCOPEKEYWORDS1),
+        helpcontext(HELPID_LANG_SCOPEKEYWORDS1),
+		helpstring("Language scoping 'begin' keywords (delimited by CR)")
+   ]
+    HRESULT ScopeKeywords1([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_SCOPEKEYWORDS1),
+        helpcontext(HELPID_LANG_SCOPEKEYWORDS1),
+		helpstring("Language scoping 'begin' keywords (delimited by CR)")
+    ]
+    HRESULT ScopeKeywords1([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_SCOPEKEYWORDS2),
+        helpcontext(HELPID_LANG_SCOPEKEYWORDS2),
+		helpstring("Language scoping 'end' keywords (delimited by CR)")
+    ]
+    HRESULT ScopeKeywords2([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_SCOPEKEYWORDS2),
+        helpcontext(HELPID_LANG_SCOPEKEYWORDS2),
+		helpstring("Language scoping 'end' keywords (delimited by CR)")
+    ]
+    HRESULT ScopeKeywords2([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_STRINGDELIMS),
+        helpcontext(HELPID_LANG_STRINGDELIMS),
+		helpstring("String delimiters (delimited by CR)")
+    ]
+    HRESULT StringDelims([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_STRINGDELIMS),
+        helpcontext(HELPID_LANG_STRINGDELIMS),
+		helpstring("String delimiters (delimited by CR)")
+    ]
+    HRESULT StringDelims([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_ESCAPECHAR),
+        helpcontext(HELPID_LANG_ESCAPECHAR),
+		helpstring("The escape token char")
+    ]
+    HRESULT EscapeChar([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_ESCAPECHAR),
+        helpcontext(HELPID_LANG_ESCAPECHAR),
+		helpstring("The escape token char")
+    ]
+    HRESULT EscapeChar([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_TERMINATORCHAR),
+        helpcontext(HELPID_LANG_TERMINATORCHAR),
+        helpstring("The statement terminator character")
+    ]
+    HRESULT TerminatorChar([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_TERMINATORCHAR),
+        helpcontext(HELPID_LANG_TERMINATORCHAR),
+        helpstring("The statement terminator character")
+    ]
+    HRESULT TerminatorChar([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_TAGELEMENTNAMES),
+        helpcontext(HELPID_LANG_TAGELEMENTNAMES),
+		helpstring("Tag-based element names (delimited by CR)")
+    ]
+    HRESULT TagElementNames([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_TAGELEMENTNAMES),
+        helpcontext(HELPID_LANG_TAGELEMENTNAMES),
+		helpstring("Tag-based element names (delimited by CR)")
+    ]
+    HRESULT TagElementNames([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_TAGATTRIBUTENAMES),
+        helpcontext(HELPID_LANG_TAGATTRIBUTENAMES),
+		helpstring("Tag-based attribute names (delimited by CR)")
+    ]
+    HRESULT TagAttributeNames([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_TAGATTRIBUTENAMES),
+        helpcontext(HELPID_LANG_TAGATTRIBUTENAMES),
+		helpstring("Tag-based attribute names (delimited by CR)")
+    ]
+    HRESULT TagAttributeNames([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_TAGENTITIES),
+        helpcontext(HELPID_LANG_TAGENTITIES),
+		helpstring("Tag-based entities (delimited by CR)")
+    ]
+    HRESULT TagEntities([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_LANG_TAGENTITIES),
+        helpcontext(HELPID_LANG_TAGENTITIES),
+		helpstring("Tag-based entities (delimited by CR)")
+    ]
+    HRESULT TagEntities([out,retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_LANG_STYLE),
+        helpcontext(HELPID_LANG_STYLE),
+		helpstring("Language style")
+    ]
+    HRESULT Style([in]cmLangStyle Style);
+    [
+        propget,
+        id(DISPID_LANG_STYLE),
+        helpcontext(HELPID_LANG_STYLE),
+		helpstring("Language style")
+    ]
+    HRESULT Style([out,retval]cmLangStyle *pStyle);
+};
+
+[
+    object,
+    uuid(ECEDB956-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_HOTKEY),
+    helpstring("HotKey Interface"),
+    pointer_default(unique)
+]
+interface IHotKey : IDispatch
+{
+    [
+        propput,
+        id(DISPID_HOTKEY_MOD1), helpcontext(HELPID_HOTKEY_MOD1),
+        helpstring("The modifiers for keystroke #1")
+    ]
+    HRESULT Modifiers1([in]long lVal);
+    [
+        propget,
+        id(DISPID_HOTKEY_MOD1), helpcontext(HELPID_HOTKEY_MOD1),
+        helpstring("The modifiers for keystroke #1")
+    ]
+    HRESULT Modifiers1([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_HOTKEY_VK1), helpcontext(HELPID_HOTKEY_VK1),
+        helpstring("The virtual key for keystroke #1")
+    ]
+    HRESULT VirtKey1([in]BSTR strKey);
+    [
+        propget,
+        id(DISPID_HOTKEY_VK1), helpcontext(HELPID_HOTKEY_VK1),
+        helpstring("The virtual key for keystroke #1")
+    ]
+    HRESULT VirtKey1([out, retval]BSTR *pstrKey);
+    [
+        propput,
+        id(DISPID_HOTKEY_MOD2), helpcontext(HELPID_HOTKEY_MOD2),
+        helpstring("The modifiers for keystroke #2")
+    ]
+    HRESULT Modifiers2([in]long lVal);
+    [
+        propget,
+        id(DISPID_HOTKEY_MOD2), helpcontext(HELPID_HOTKEY_MOD2),
+        helpstring("The modifiers for keystroke #2")
+    ]
+    HRESULT Modifiers2([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_HOTKEY_VK2), helpcontext(HELPID_HOTKEY_VK2),
+        helpstring("The virtual key for keystroke #2")
+    ]
+    HRESULT VirtKey2([in]BSTR strKey);
+    [
+        propget,
+        id(DISPID_HOTKEY_VK2), helpcontext(HELPID_HOTKEY_VK2),
+        helpstring("The virtual key for keystroke #2")
+    ]
+    HRESULT VirtKey2([out, retval]BSTR *pstrKey);
+};
+
+[
+    object,
+    uuid(ECEDB958-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_GLOBALS),
+    helpstring("IGlobals Interface"),
+    pointer_default(unique)
+]
+interface IGlobals : IDispatch
+{
+    [
+        propput,
+        id(DISPID_GBLPROP_FINDMRULIST),
+        helpcontext(HELPID_GBLPROP_FINDMRULIST),
+        helpstring("Sets the MRU list displayed in the Find dialog box")
+    ]
+    HRESULT FindMRUList([in]BSTR strMRUList);
+    [
+        propget,
+        id(DISPID_GBLPROP_FINDMRULIST),
+        helpcontext(HELPID_GBLPROP_FINDMRULIST),
+        helpstring("Retrieves the MRU list displayed in the Find dialog box")
+    ]
+    HRESULT FindMRUList([out,retval]BSTR *pstrMRUList);
+    [
+        propput,
+        id(DISPID_GBLPROP_REPLACEMRULIST),
+        helpcontext(HELPID_GBLPROP_REPLACEMRULIST),
+        helpstring("Sets the MRU list displayed in the Replace dialog box")
+    ]
+    HRESULT ReplaceMRUList([in]BSTR strMRUList);
+    [
+        propget,
+        id(DISPID_GBLPROP_REPLACEMRULIST),
+        helpcontext(HELPID_GBLPROP_REPLACEMRULIST),
+        helpstring("Retrieves the MRU list displayed in the Replace dialog box")
+    ]
+    HRESULT ReplaceMRUList([out,retval]BSTR *pstrMRUList);
+    [
+        id(DISPID_GBLMETH_REGISTERLANGUAGE),
+        helpcontext(HELPID_GBLMETH_REGISTERLANGUAGE),
+        helpstring("Registers a language")
+    ]
+    HRESULT RegisterLanguage([in]BSTR strName, [in]ILanguage *LanguageDef);
+    [
+        id(DISPID_GBLMETH_UNREGISTERLANGUAGE),
+        helpcontext(HELPID_GBLMETH_UNREGISTERLANGUAGE),
+        helpstring("Unregisters a language")
+    ]
+    HRESULT UnregisterLanguage([in]BSTR strName);
+    [
+        id(DISPID_GBLMETH_GETHOTKEYS),
+        helpcontext(HELPID_GBLMETH_GETHOTKEYS),
+        helpstring("Retrieves the keyboard assignments into a buffer")
+    ]
+    HRESULT GetHotKeys([out]SAFEARRAY(BYTE) *HotKeysBuff);
+    [
+        id(DISPID_GBLMETH_SETHOTKEYS),
+        helpcontext(HELPID_GBLMETH_SETHOTKEYS),
+        helpstring("Loads the keyboard assignments into CodeMax from a buffer")
+    ]
+    HRESULT SetHotKeys([in]SAFEARRAY(BYTE) *HotKeysBuff);
+    [
+        id(DISPID_GBLMETH_RESETDEFAULTHOTKEYS),
+        helpcontext(HELPID_GBLMETH_RESETDEFAULTHOTKEYS),
+        helpstring("Resets all keyboards settings back to the factory settings")
+    ]
+    HRESULT ResetDefaultHotKeys();
+    [
+        id(DISPID_GBLMETH_GETHOTKEYSFORCMD),
+        helpcontext(HELPID_GBLMETH_GETHOTKEYSFORCMD),
+        helpstring("Returns a hotkey assigned to a CodeMax command")
+    ]
+    HRESULT GetHotKeyForCmd([in]cmCommand lCmd, [in]long lNum, [out,retval]IHotKey **ppHotKey);
+    [
+        id(DISPID_GBLMETH_GETHOTKEYSFORCMDLENGTH),
+        helpcontext(HELPID_GBLMETH_GETHOTKEYSFORCMDLENGTH),
+        helpstring("Returns the total number of hotkeys assigned to a CodeMax command")
+    ]
+    HRESULT GetNumHotKeysForCmd([in]cmCommand lCmd, [out,retval]long *plCount);
+    [
+        id(DISPID_GBLMETH_REGISTERHOTKEY),
+        helpcontext(HELPID_GBLMETH_REGISTERHOTKEY),
+        helpstring("Assigns a hotkey to a CodeMax command")
+    ]
+    HRESULT RegisterHotKey([in]IHotKey *pHotKey, [in]cmCommand lCmd);
+    [
+        id(DISPID_GBLMETH_UNREGISTERHOTKEY),
+        helpcontext(HELPID_GBLMETH_UNREGISTERHOTKEY),
+        helpstring("Unassigns a hotkey from its associated CodeMax command")
+    ]
+    HRESULT UnregisterHotKey([in]IHotKey *pHotKey);
+    [
+        id(DISPID_GBLMETH_GETCOMMANDSTRING),
+        helpcontext(HELPID_GBLMETH_GETCOMMANDSTRING),
+        helpstring("Retrieves a plain English title or description of a CodeMax command")
+    ]
+    HRESULT GetCommandString([in]cmCommand lCmd, [in]VARIANT_BOOL bDescription, [out,retval]BSTR *pstrVal);
+    [
+        id(DISPID_GBLMETH_GETMACRO),
+        helpcontext(HELPID_GBLMETH_GETMACRO),
+        helpstring("Retrieves a macro definition into a byte buffer")
+    ]
+    HRESULT GetMacro([in]long lMacro, [out]SAFEARRAY(BYTE) *MacroBuff);
+    [
+        id(DISPID_GBLMETH_SETMACRO),
+        helpcontext(HELPID_GBLMETH_SETMACRO),
+        helpstring("Loads a macro into CodeMax from a buffer")
+    ]
+    HRESULT SetMacro([in]long lMacro, [in]SAFEARRAY(BYTE) *MacroBuff);
+    [
+        id(DISPID_GBLMETH_REGISTERCOMMAND),
+        helpcontext(HELPID_GBLMETH_REGISTERCOMMAND),
+        helpstring("Registers a custom command")
+    ]
+    HRESULT RegisterCommand([in]long lCmdId, [in]BSTR strName, [in]BSTR strDescription);
+    [
+        id(DISPID_GBLMETH_UNREGISTERCOMMAND),
+        helpcontext(HELPID_GBLMETH_UNREGISTERCOMMAND),
+        helpstring("Unregisters a custom command registered with RegisterCommand()")
+    ]
+    HRESULT UnregisterCommand([in]long lCmdId);
+    [
+        id(DISPID_GBLMETH_GETLANGUAGEDEF),
+        helpcontext(HELPID_GBLMETH_GETLANGUAGEDEF),
+        helpstring("Gets the language definition of a registered language")
+    ]
+    HRESULT GetLanguageDef([in]BSTR strName, [out, retval]ILanguage **Language );
+    [
+        id(DISPID_GBLMETH_UNREGISTERALLLANGUAGES),
+        helpcontext(HELPID_GBLMETH_UNREGISTERALLLANGUAGES),
+        helpstring("Unregisters all previously registered languages")
+    ]
+    HRESULT UnregisterAllLanguages();
+};
+
+[
+    object,
+    uuid(EF28E751-2AEF-11d4-AE1E-000000000000),
+    dual,
+    helpcontext(HELPID_RECT),
+    helpstring("IRect Interface"),
+    pointer_default(unique)
+]
+interface IRect : IDispatch
+{
+    [
+        propput,
+        id(DISPID_RECT_LEFT),
+		helpcontext(HELPID_RECT_LEFT),
+        helpstring("left")
+    ]
+    HRESULT left([in]long lVal);
+    [
+        propget,
+        id(DISPID_RECT_LEFT),
+		helpcontext(HELPID_RECT_LEFT),
+        helpstring("left")
+    ]
+    HRESULT left([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RECT_TOP),
+		helpcontext(HELPID_RECT_TOP),
+        helpstring("top")
+    ]
+    HRESULT top([in]long lVal);
+    [
+        propget,
+        id(DISPID_RECT_TOP),
+		helpcontext(HELPID_RECT_TOP),
+        helpstring("top")
+    ]
+    HRESULT top([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RECT_RIGHT),
+		helpcontext(HELPID_RECT_RIGHT),
+        helpstring("right")
+    ]
+    HRESULT right([in]long lVal);
+    [
+        propget,
+        id(DISPID_RECT_RIGHT),
+		helpcontext(HELPID_RECT_RIGHT),
+        helpstring("right")
+    ]
+    HRESULT right([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_RECT_BOTTOM),
+		helpcontext(HELPID_RECT_BOTTOM),
+        helpstring("bottom")
+    ]
+    HRESULT bottom([in]long lVal);
+    [
+        propget,
+        id(DISPID_RECT_BOTTOM),
+		helpcontext(HELPID_RECT_BOTTOM),
+        helpstring("bottom")
+    ]
+    HRESULT bottom([out, retval]long *plVal);
+};
+
+[
+    uuid(ECEDB959-AC41-11d2-AB20-000000000000),
+    helpstring("ICodeMaxEvents Interface"),
+]
+dispinterface ICodeMaxEvents
+{
+    properties:
+    methods:
+
+    [
+        id(DISPID_NTFY_CHANGE),
+        helpstring("The buffer changed")
+    ]
+    void Change([in] ICodeMax *Control);
+    [
+        id(DISPID_NTFY_HSCROLL),
+        helpstring("A view was scrolled horizontally")
+    ]
+    void HScroll([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_VSCROLL),
+        helpstring("A view was scrolled vertically")
+    ]
+    void VScroll([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_SELCHANGE),
+        helpstring("The caret position changed")
+    ]
+    void SelChange([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_VIEWCHANGE),
+        helpstring("The active view changed")
+    ]
+    void ViewChange([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_MODIFIEDCHANGE),
+        helpstring("The modified flag changed state")
+    ]
+    void ModifiedChange([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_SHOWPROPS),
+        helpstring("The user requested to show the properties dialog box")
+    ]
+    void ShowProps([in] ICodeMax *Control, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_PROPSCHANGE),
+        helpstring("The user pressed the Apply or OK button in the Window Properties dialog box")
+    ]
+    void PropsChange([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_CREATE),
+        helpstring("A CodeMax window was created")
+    ]
+    void Create([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_DESTROY),
+        helpstring("A CodeMax window was destroyed")
+    ]
+    void Destroy([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_SETFOCUS),
+        helpstring("A CodeMax window received the input focus")
+    ]
+    void SetFocus([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_KILLFOCUS),
+        helpstring("A CodeMax window lost the input focus")
+    ]
+    void KillFocus([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_CLICK),
+        helpstring("The left mouse button was pressed down")
+    ]
+    void Click([in] ICodeMax *Control, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_DBLCLK),
+        helpstring("The left mouse button was double clicked")
+    ]
+    void DblClick([in] ICodeMax *Control, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_RDBLCLK),
+        helpstring("The right mouse button was double clicked")
+    ]
+    void RDblClick([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_RETURN),
+        helpstring("The ENTER key was pressed")
+    ]
+    void Return([in] ICodeMax *Control, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_RCLICK),
+        helpstring("The user clicked the right mouse button to show the context menu")
+    ]
+    void RClick([in] ICodeMax *Control, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_DELETELINE),
+        helpstring("The user deleted a line")
+    ]
+    void DeleteLine([in] ICodeMax *Control, [in] long lLine, [in] long lItemData);
+
+    [
+        id(DISPID_NTFY_CMDFAILURE),
+        helpstring("A keystroke command failed")
+    ]
+    void CmdFailure([in] ICodeMax *Control, [in] cmCommand lCmd, [in] cmCommandErr lErrCode, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_REGISTEREDCMD),
+        helpstring("A registered command has been invoked")
+    ]
+    void RegisteredCmd([in] ICodeMax *Control, [in] cmCommand lCmd);
+
+    [
+        id(DISPID_NTFY_KEYDOWN),
+        helpstring("A key was pressed")
+    ]
+    void KeyDown([in] ICodeMax *Control, [in] long KeyCode, [in] long Shift, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_KEYUP),
+        helpstring("A key was released")
+    ]
+    void KeyUp([in] ICodeMax *Control, [in] long KeyCode, [in] long Shift, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_KEYPRESS),
+        helpstring("A key was pressed and released")
+    ]
+    void KeyPress([in] ICodeMax *Control, [in] long KeyAscii, [in] long Shift, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_MOUSEDOWN),
+        helpstring("A mouse button was pressed")
+    ]
+	void MouseDown([in] ICodeMax *Control, [in] long Button, [in] long Shift, [in] long X, [in] long Y, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_MOUSEMOVE),
+        helpstring("The mouse pointer moved")
+    ]
+	void MouseMove([in] ICodeMax *Control, [in] long Button, [in] long Shift, [in] long X, [in] long Y, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_MOUSEUP),
+        helpstring("A mouse button was released")
+    ]
+	void MouseUp([in] ICodeMax *Control, [in] long Button, [in] long Shift, [in] long X, [in] long Y, [out,retval] VARIANT_BOOL *pbStop);
+
+    [
+        id(DISPID_NTFY_OVERTYPECHANGE),
+        helpstring("The overtype mode has changed")
+    ]
+	void OvertypeChange([in] ICodeMax *Control);
+
+    [
+        id(DISPID_NTFY_FINDWRAPPED),
+        helpstring("A search operation wrapped to the start or end of the buffer")
+    ]
+	void FindWrapped([in] ICodeMax *Control, [in] cmCommand lCmd, [in] VARIANT_BOOL bForward, [out,retval] VARIANT_BOOL *pbStop);
+};
+
+[
+    object,
+    uuid(ECEDB95A-AC41-11d2-AB20-000000000000),
+    dual,
+    helpcontext(HELPID_CONTROL),
+    helpstring("ICodeMax Interface"),
+    pointer_default(unique)
+]
+interface ICodeMax : IDispatch
+{
+    [
+        propputref,
+        id(DISPID_FONT),
+        helpcontext(HELPID_FONT),
+        helpstring("The font used to display code")
+    ]
+    HRESULT Font([in]IFontDisp *pFont);
+    [
+        propput,
+        id(DISPID_FONT),
+        helpcontext(HELPID_FONT),
+        helpstring("The font used to display code")
+    ]
+    HRESULT Font([in]IFontDisp *pFont);
+    [
+        propget,
+        id(DISPID_FONT),
+        helpcontext(HELPID_FONT),
+        helpstring("The font used to display code")
+    ]
+    HRESULT Font([out, retval]IFontDisp **ppFont);
+    [
+        propput,
+        id(DISPID_ENABLED),
+        helpcontext(HELPID_ENABLED),
+        helpstring("The enabled/disabled state of the window")
+    ]
+    HRESULT Enabled([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_ENABLED),
+        helpcontext(HELPID_ENABLED),
+        helpstring("The enabled/disabled state of the window")
+    ]
+    HRESULT Enabled([out,retval]VARIANT_BOOL *pbVal);
+    [
+        propget,
+        id(DISPID_HWND),
+        helpcontext(HELPID_HWND),
+        helpstring("The HWND window handle")
+    ]
+    HRESULT Window([out, retval]long *phwnd);
+   
+    [
+        propput,
+        id(DISPID_TEXT),
+        helpcontext(HELPID_TEXT),
+        helpstring("The complete contents of the code buffer")
+    ]
+    HRESULT Text([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_TEXT),
+        helpcontext(HELPID_TEXT),
+        helpstring("The complete contents of the code buffer")
+    ]
+    HRESULT Text([out, retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_CMPROP_COLORSYNTAX),
+        helpcontext(HELPID_CMPROP_COLORSYNTAX),
+        helpstring("The color syntax highlighting state (on/off)")
+    ]
+    HRESULT ColorSyntax([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_COLORSYNTAX),
+        helpcontext(HELPID_CMPROP_COLORSYNTAX),
+        helpstring("The color syntax highlighting state (on/off)")
+    ]
+    HRESULT ColorSyntax([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_DISPLAYWHITESPACE),
+        helpcontext(HELPID_CMPROP_DISPLAYWHITESPACE),
+        helpstring("The 'display whitespace' state (on/off)")
+    ]
+    HRESULT DisplayWhitespace([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_DISPLAYWHITESPACE),
+        helpcontext(HELPID_CMPROP_DISPLAYWHITESPACE),
+        helpstring("The 'display whitespace' state (on/off)")
+    ]
+    HRESULT DisplayWhitespace([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_EXPANDTABS),
+        helpcontext(HELPID_CMPROP_EXPANDTABS),
+        helpstring("The 'convert tabs to spaces' state (on/off)")
+    ]
+    HRESULT ExpandTabs([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_EXPANDTABS),
+        helpcontext(HELPID_CMPROP_EXPANDTABS),
+        helpstring("The 'convert tabs to spaces' state (on/off)")
+    ]
+    HRESULT ExpandTabs([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_SMOOTHSCROLLING),
+        helpcontext(HELPID_CMPROP_SMOOTHSCROLLING),
+        helpstring("The 'smooth scrolling' state (on/off)")
+    ]
+    HRESULT SmoothScrolling([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SMOOTHSCROLLING),
+        helpcontext(HELPID_CMPROP_SMOOTHSCROLLING),
+        helpstring("The 'smooth scrolling' state (on/off)")
+    ]
+    HRESULT SmoothScrolling([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_READONLY),
+        helpcontext(HELPID_CMPROP_READONLY),
+        helpstring("The read-only state (on/off)")
+    ]
+    HRESULT ReadOnly([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_READONLY),
+        helpcontext(HELPID_CMPROP_READONLY),
+        helpstring("The read-only state (on/off)")
+    ]
+    HRESULT ReadOnly([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_LINETOOLTIPS),
+        helpcontext(HELPID_CMPROP_LINETOOLTIPS),
+        helpstring("The 'display line tooltips' state (on/off)")
+    ]
+    HRESULT LineToolTips([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_LINETOOLTIPS),
+        helpcontext(HELPID_CMPROP_LINETOOLTIPS),
+        helpstring("The 'display line tooltips' state (on/off)")
+    ]
+    HRESULT LineToolTips([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_DISPLAYLEFTMARGIN),
+        helpcontext(HELPID_CMPROP_DISPLAYLEFTMARGIN),
+        helpstring("The left margin visibility state (on/off)")
+    ]
+    HRESULT DisplayLeftMargin([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_DISPLAYLEFTMARGIN),
+        helpcontext(HELPID_CMPROP_DISPLAYLEFTMARGIN),
+        helpstring("The left margin visibility state (on/off)")
+    ]
+    HRESULT DisplayLeftMargin([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_ENABLECOLUMNSEL),
+        helpcontext(HELPID_CMPROP_ENABLECOLUMNSEL),
+        helpstring("The column selection enabled state (on/off)")
+    ]
+    HRESULT EnableColumnSel([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_ENABLECOLUMNSEL),
+        helpcontext(HELPID_CMPROP_ENABLECOLUMNSEL),
+        helpstring("The column selection enabled state (on/off)")
+    ]
+    HRESULT EnableColumnSel([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_ENABLEDRAGDROP),
+        helpcontext(HELPID_CMPROP_ENABLEDRAGDROP),
+        helpstring("The drag and drop enabled state (on/off)")
+    ]
+    HRESULT EnableDragDrop([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_ENABLEDRAGDROP),
+        helpcontext(HELPID_CMPROP_ENABLEDRAGDROP),
+        helpstring("The drag and drop enabled state (on/off)")
+    ]
+    HRESULT EnableDragDrop([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_OVERTYPE),
+        helpcontext(HELPID_CMPROP_OVERTYPE),
+        helpstring("The character overtype state (on/off)")
+    ]
+    HRESULT Overtype([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_OVERTYPE),
+        helpcontext(HELPID_CMPROP_OVERTYPE),
+        helpstring("The character overtype state (on/off)")
+    ]
+    HRESULT Overtype([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_SEARCHCASESENSITIVE),
+        helpcontext(HELPID_CMPROP_SEARCHCASESENSITIVE),
+        helpstring("The case sensitive searching state (on/off)")
+    ]
+    HRESULT SearchCaseSensitive([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SEARCHCASESENSITIVE),
+        helpcontext(HELPID_CMPROP_SEARCHCASESENSITIVE),
+        helpstring("The case sensitive searching state (on/off)")
+    ]
+    HRESULT SearchCaseSensitive([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_REPLACEPRESERVECASE),
+        helpcontext(HELPID_CMPROP_REPLACEPRESERVECASE),
+        helpstring("The intelligent case preservation replacing state (on/off)")
+    ]
+    HRESULT ReplacePreserveCase([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_REPLACEPRESERVECASE),
+        helpcontext(HELPID_CMPROP_REPLACEPRESERVECASE),
+        helpstring("The intelligent case preservation replacing state (on/off)")
+    ]
+    HRESULT ReplacePreserveCase([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_SEARCHWHOLEWORD),
+        helpcontext(HELPID_CMPROP_SEARCHWHOLEWORD),
+        helpstring("The whole word searching state (on/off)")
+    ]
+    HRESULT SearchWholeWord([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SEARCHWHOLEWORD),
+        helpcontext(HELPID_CMPROP_SEARCHWHOLEWORD),
+        helpstring("The whole word searching state (on/off)")
+    ]
+    HRESULT SearchWholeWord([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_MODIFIED),
+        helpcontext(HELPID_CMPROP_MODIFIED),
+        helpstring("The buffer modified state (on/off)")
+    ]
+    HRESULT Modified([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_MODIFIED),
+        helpcontext(HELPID_CMPROP_MODIFIED),
+        helpstring("The buffer modified state (on/off)")
+    ]
+    HRESULT Modified([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_ENABLECRLF),
+        helpcontext(HELPID_CMPROP_ENABLECRLF),
+        helpstring("The CRLF line delimiter buffer modified state (on/off)")
+    ]
+    HRESULT EnableCRLF([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_ENABLECRLF),
+        helpcontext(HELPID_CMPROP_ENABLECRLF),
+        helpstring("The CRLF line delimiter buffer modified state (on/off)")
+    ]
+    HRESULT EnableCRLF([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_GLOBALPROPS),
+        helpcontext(HELPID_CMPROP_GLOBALPROPS),
+        helpstring("The global properties state (on/off)")
+    ]
+    HRESULT GlobalProps([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_GLOBALPROPS),
+        helpcontext(HELPID_CMPROP_GLOBALPROPS),
+        helpstring("The global properties state (on/off)")
+    ]
+    HRESULT GlobalProps([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_VSCROLLVISIBLE),
+        helpcontext(HELPID_CMPROP_VSCROLLVISIBLE),
+        helpstring("The vscroll visibility state (on/off)")
+    ]
+    HRESULT VScrollVisible([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_VSCROLLVISIBLE),
+        helpcontext(HELPID_CMPROP_VSCROLLVISIBLE),
+        helpstring("The vscroll visibility state (on/off)")
+    ]
+    HRESULT VScrollVisible([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_HSCROLLVISIBLE),
+        helpcontext(HELPID_CMPROP_HSCROLLVISIBLE),
+        helpstring("The hscroll visibility state (on/off)")
+    ]
+    HRESULT HScrollVisible([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_HSCROLLVISIBLE),
+        helpcontext(HELPID_CMPROP_HSCROLLVISIBLE),
+        helpstring("The hscroll visibility state (on/off)")
+    ]
+    HRESULT HScrollVisible([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_ENABLEVSPLITTER),
+        helpcontext(HELPID_CMPROP_ENABLEVSPLITTER),
+        helpstring("The vsplitter visibility state (on/off)")
+    ]
+    HRESULT EnableVSplitter([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_ENABLEVSPLITTER),
+        helpcontext(HELPID_CMPROP_ENABLEVSPLITTER),
+        helpstring("The vsplitter visibility state (on/off)")
+    ]
+    HRESULT EnableVSplitter([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_ENABLEHSPLITTER),
+        helpcontext(HELPID_CMPROP_ENABLEHSPLITTER),
+        helpstring("The hsplitter visibility state (on/off)")
+    ]
+    HRESULT EnableHSplitter([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_ENABLEHSPLITTER),
+        helpcontext(HELPID_CMPROP_ENABLEHSPLITTER),
+        helpstring("The hsplitter visibility state (on/off)")
+    ]
+    HRESULT EnableHSplitter([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_LANGUAGE),
+        helpcontext(HELPID_CMPROP_LANGUAGE),
+        helpstring("The name of the currently selected language")
+    ]
+    HRESULT Language([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_CMPROP_LANGUAGE),
+        helpcontext(HELPID_CMPROP_LANGUAGE),
+        helpstring("The name of the currently selected language")
+    ]
+    HRESULT Language([out, retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_CMPROP_TABSIZE),
+        helpcontext(HELPID_CMPROP_TABSIZE),
+        helpstring("The current tab size (characters)")
+    ]
+    HRESULT TabSize([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_TABSIZE),
+        helpcontext(HELPID_CMPROP_TABSIZE),
+        helpstring("The current tab size (characters)")
+    ]
+    HRESULT TabSize([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_TOPINDEX),
+        helpcontext(HELPID_CMPROP_TOPINDEX),
+        helpstring("The topmost visible line number in view 0")
+    ]
+    HRESULT TopIndex([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_TOPINDEX),
+        helpcontext(HELPID_CMPROP_TOPINDEX),
+        helpstring("The topmost visible line number in view 0")
+    ]
+    HRESULT TopIndex([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_UNDOLIMIT),
+        helpcontext(HELPID_CMPROP_UNDOLIMIT),
+        helpstring("The max number of undoable edit actions (0 = none, n = limit, -1 = unlimited)")
+    ]
+    HRESULT UndoLimit([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_UNDOLIMIT),
+        helpcontext(HELPID_CMPROP_UNDOLIMIT),
+        helpstring("The max number of undoable edit actions (0 = none, n = limit, -1 = unlimited)")
+    ]
+    HRESULT UndoLimit([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_CURRENTVIEW),
+        helpcontext(HELPID_CMPROP_CURRENTVIEW),
+        helpstring("The currently active view number")
+    ]
+    HRESULT CurrentView([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_TEXTLENGTH),
+        helpcontext(HELPID_CMPROP_TEXTLENGTH),
+        helpstring("The length of the entire buffer contents in bytes.")
+    ]
+    HRESULT TextLength([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_TEXTLENGTHLOGICAL),
+        helpcontext(HELPID_CMPROP_TEXTLENGTHLOGICAL),
+        helpstring("The length of the entire buffer contents in characters.")
+    ]
+    HRESULT TextLengthLogical([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_LINECOUNT),
+        helpcontext(HELPID_CMPROP_LINECOUNT),
+        helpstring("The buffer line count")
+    ]
+    HRESULT LineCount([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_CURRENTWORD),
+        helpcontext(HELPID_CMPROP_CURRENTWORD),
+        helpstring("The word under the caret")
+    ]
+    HRESULT CurrentWord([out, retval]BSTR *pstrVal);
+    [
+        propget,
+        id(DISPID_CMPROP_CURRENTWORDLENGTH),
+        helpcontext(HELPID_CMPROP_CURRENTWORDLENGTH),
+        helpstring("The length of the word under the caret (in bytes)")
+    ]
+    HRESULT CurrentWordLength([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_CURRENTWORDLENGTHLOGICAL),
+        helpcontext(HELPID_CMPROP_CURRENTWORDLENGTHLOGICAL),
+        helpstring("The length of the word under the caret (in characters)")
+    ]
+    HRESULT CurrentWordLengthLogical([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_AUTOINDENTMODE),
+        helpcontext(HELPID_CMPROP_AUTOINDENTMODE),
+        helpstring("The current auto indent mode as defined in cmAutoIndentMode")
+    ]
+    HRESULT AutoIndentMode([in]cmAutoIndentMode lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_AUTOINDENTMODE),
+        helpcontext(HELPID_CMPROP_AUTOINDENTMODE),
+        helpstring("The current auto indent mode as defined in cmAutoIndentMode")
+    ]
+    HRESULT AutoIndentMode([out, retval]cmAutoIndentMode *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_VIEWCOUNT),
+        helpcontext(HELPID_CMPROP_VIEWCOUNT),
+        helpstring("The total number of open views")
+    ]
+    HRESULT ViewCount([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_VSPLITTERPOS),
+        helpcontext(HELPID_CMPROP_VSPLITTERPOS),
+        helpstring("The vertical position of the vsplitter")
+    ]
+    HRESULT VSplitterPos([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_VSPLITTERPOS),
+        helpcontext(HELPID_CMPROP_VSPLITTERPOS),
+        helpstring("The vertical position of the vsplitter")
+    ]
+    HRESULT VSplitterPos([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_HSPLITTERPOS),
+        helpcontext(HELPID_CMPROP_HSPLITTERPOS),
+        helpstring("The horizontal position of the hsplitter")
+    ]
+    HRESULT HSplitterPos([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_HSPLITTERPOS),
+        helpcontext(HELPID_CMPROP_HSPLITTERPOS),
+        helpstring("The horizontal position of the hsplitter")
+    ]
+    HRESULT HSplitterPos([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_FINDTEXT),
+        helpcontext(HELPID_CMPROP_FINDTEXT),
+        helpstring("The current find text")
+    ]
+    HRESULT FindText([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_CMPROP_FINDTEXT),
+        helpcontext(HELPID_CMPROP_FINDTEXT),
+        helpstring("The current find text")
+    ]
+    HRESULT FindText([out, retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_CMPROP_REPLACETEXT),
+        helpcontext(HELPID_CMPROP_REPLACETEXT),
+        helpstring("The current replace text")
+    ]
+    HRESULT ReplText([in]BSTR strVal);
+    [
+        propget,
+        id(DISPID_CMPROP_REPLACETEXT),
+        helpcontext(HELPID_CMPROP_REPLACETEXT),
+        helpstring("The current replace text")
+    ]
+    HRESULT ReplText([out, retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_CMPROP_LINENUMBERS),
+        helpcontext(HELPID_CMPROP_LINENUMBERS),
+        helpstring("Line numbering (on/off)")
+    ]
+    HRESULT LineNumbering([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_LINENUMBERS),
+        helpcontext(HELPID_CMPROP_LINENUMBERS),
+        helpstring("Line numbering (on/off)")
+    ]
+    HRESULT LineNumbering([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_LINENUMBERSTART),
+        helpcontext(HELPID_CMPROP_LINENUMBERSTART),
+        helpstring("Line number starting value")
+    ]
+    HRESULT LineNumberStart([in]long lVal);
+    [
+        propget,
+        id(DISPID_CMPROP_LINENUMBERSTART),
+        helpcontext(HELPID_CMPROP_LINENUMBERSTART),
+        helpstring("Line number starting value")
+    ]
+    HRESULT LineNumberStart([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_LINENUMBERSTYLE),
+        helpcontext(HELPID_CMPROP_LINENUMBERSTYLE),
+        helpstring("Line number style (cmDecimal, cmHex, etc.)")
+    ]
+    HRESULT LineNumberStyle([in]cmLineNumStyle lStyle);
+    [
+        propget,
+        id(DISPID_CMPROP_LINENUMBERSTYLE),
+        helpcontext(HELPID_CMPROP_LINENUMBERSTYLE),
+        helpstring("Line number style (cmDecimal, cmHex, etc.)")
+    ]
+    HRESULT LineNumberStyle([out, retval]cmLineNumStyle *plStyle);
+    [
+        id(DISPID_CMMETH_GETWORD),
+        helpcontext(HELPID_CMMETH_GETWORD),
+        helpstring("Retrieves the word at a specific buffer location")
+    ]
+    HRESULT GetWord([in]IPosition* Pos, [out, retval]BSTR *pstrWord);
+    [
+        id(DISPID_CMMETH_GETWORDLENGTH),
+        helpcontext(HELPID_CMMETH_GETWORDLENGTH),
+        helpstring("Retrieves the length of the word at a specific buffer location")
+    ]
+    HRESULT GetWordLength([in]IPosition *Pos, [in] VARIANT_BOOL bLogical, [out, retval]long *plLen);
+    [
+        id(DISPID_CMMETH_GETTOPINDEX),
+        helpcontext(HELPID_CMMETH_GETTOPINDEX),
+        helpstring("Retrieves the topmost visible line in a specific view")
+    ]
+    HRESULT GetTopIndex([in]long lView, [out, retval]long *plLine);
+    [
+        id(DISPID_CMMETH_SETTOPINDEX),
+        helpcontext(HELPID_CMMETH_SETTOPINDEX),
+        helpstring("Sets the topmost visible line in a specific view")
+    ]
+    HRESULT SetTopIndex([in]long lView, [in]long lLine);
+    [
+        id(DISPID_CMMETH_GETSEL),
+        helpcontext(HELPID_CMMETH_GETSEL),
+        helpstring("Retrieves the current selection")
+    ]
+    HRESULT GetSel([in]VARIANT_BOOL bNormalized, [out, retval]IRange **Sel);
+    [
+        id(DISPID_CMMETH_SETSEL),
+        helpcontext(HELPID_CMMETH_SETSEL),
+        helpstring("Changes the current selection")
+    ]
+    HRESULT SetSel([in]IRange *Sel, [in]VARIANT_BOOL bMakeVisible);
+    [
+        id(DISPID_CMMETH_GETSELFROMPOINT),
+        helpcontext(HELPID_CMMETH_GETSELFROMPOINT),
+        helpstring("Retrieves the buffer coordinates under a specific window (x,y) client position")
+    ]
+    HRESULT GetSelFromPoint([in]long lxClientPos, [in]long lyClientPos, [out, retval]IPosition **Pos);
+    [
+        id(DISPID_CMMETH_GETVISIBLELINECOUNT),
+        helpcontext(HELPID_CMMETH_GETVISIBLELINECOUNT),
+        helpstring("Returns the total number of fully or partially visible lines in a specific view")
+    ]
+    HRESULT GetVisibleLineCount([in]long lView, [in] VARIANT_BOOL bFullyVisible, [out, retval]long *plCount);
+    [
+        id(DISPID_CMMETH_GETLINE),
+        helpcontext(HELPID_CMMETH_GETLINE),
+        helpstring("Retrieves the text of a specific line")
+    ]
+    HRESULT GetLine([in]long lLine, [out, retval]BSTR *pstrLine);
+    [
+        id(DISPID_CMMETH_GETLINELENGTH),
+        helpcontext(HELPID_CMMETH_GETLINELENGTH),
+        helpstring("Returns the length of a specific line's text")
+    ]
+    HRESULT GetLineLength([in]long lLine, [out, retval]long *plLen);
+    [
+        id(DISPID_CMMETH_SETCOLOR),
+        helpcontext(HELPID_CMMETH_SETCOLOR),
+        helpstring("Sets the color of a specific window aspect defined in cmColorItem")
+    ]
+    HRESULT SetColor([in]cmColorItem lColorItem, [in]OLE_COLOR crColor);
+    [
+        id(DISPID_CMMETH_GETCOLOR),
+        helpcontext(HELPID_CMMETH_GETCOLOR),
+        helpstring("Retrieves the color of a specific window aspect defined in cmColorItem")
+    ]
+    HRESULT GetColor([in]cmColorItem lColorItem, [out, retval]OLE_COLOR *pcrColor);
+    [
+        id(DISPID_CMMETH_OPENFILE),
+        helpcontext(HELPID_CMMETH_OPENFILE),
+        helpstring("Places a file's contents into the edit buffer")
+    ]
+    HRESULT OpenFile([in]BSTR strFileName);
+    [
+        id(DISPID_CMMETH_SAVEFILE),
+        helpcontext(HELPID_CMMETH_SAVEFILE),
+        helpstring("Saves the buffer contents into a file")
+    ]
+    HRESULT SaveFile([in]BSTR strFileName, [in]VARIANT_BOOL bClearUndo);
+    [
+        id(DISPID_CMMETH_INSERTFILE),
+        helpcontext(HELPID_CMMETH_INSERTFILE),
+        helpstring("Inserts a file's contents into the edit buffer at a specific location")
+    ]
+    HRESULT InsertFile([in]BSTR strFileName, [in]IPosition *InsertPos);
+    [
+        id(DISPID_CMMETH_INSERTTEXT),
+        helpcontext(HELPID_CMMETH_INSERTTEXT),
+        helpstring("Inserts a block of text into the edit buffer at a specific location")
+    ]
+    HRESULT InsertText([in]BSTR strText, [in]IPosition *InsertPos);
+    [
+        id(DISPID_CMMETH_REPLACETEXT),
+        helpcontext(HELPID_CMMETH_REPLACETEXT),
+        helpstring("Replaces buffer text with a separate block of text")
+    ]
+    HRESULT ReplaceText([in]BSTR strText, [in]IRange *Range);
+    [
+        id(DISPID_CMMETH_HITTEST),
+        helpcontext(HELPID_CMMETH_HITTEST),
+        helpstring("Determines the CodeMax window component (defined in cmHitTestCode) under a specific (x,y) window client coordinate")
+    ]
+    HRESULT HitTest([in]long lxClientPos, [in]long lyClientPos, [out]long *plView, [out, retval]cmHitTestCode *plHitTestCode);
+    [
+        id(DISPID_CMMETH_ADDTEXT),
+        helpcontext(HELPID_CMMETH_ADDTEXT),
+        helpstring("Appends text to the end of the buffer")
+    ]
+    HRESULT AddText([in]BSTR strText);
+    [
+        id(DISPID_CMMETH_DELETELINE),
+        helpcontext(HELPID_CMMETH_DELETELINE),
+        helpstring("Deletes a specific line")
+    ]
+    HRESULT DeleteLine([in]long lLine);
+    [
+        id(DISPID_CMMETH_INSERTLINE),
+        helpcontext(HELPID_CMMETH_INSERTLINE),
+        helpstring("Inserts a single line of text at a specific line position")
+    ]
+    HRESULT InsertLine([in]long lLine, [in]BSTR strLine);
+    [
+        id(DISPID_CMMETH_SELECTLINE),
+        helpcontext(HELPID_CMMETH_SELECTLINE),
+        helpstring("Selects a specific line")
+    ]
+    HRESULT SelectLine([in]long lLine, [in]VARIANT_BOOL bMakeVisible);
+    [
+        id(DISPID_CMMETH_DELETESEL),
+        helpcontext(HELPID_CMMETH_DELETESEL),
+        helpstring("Deletes the buffer contents marked by the current selection")
+    ]
+    HRESULT DeleteSel();
+    [
+        id(DISPID_CMMETH_REPLACESEL),
+        helpcontext(HELPID_CMMETH_REPLACESEL),
+        helpstring("Replaces the buffer contents marked by the current selection with a body of text")
+    ]
+    HRESULT ReplaceSel([in]BSTR strText);
+    [
+        id(DISPID_CMMETH_EXECUTECMD),
+        helpcontext(HELPID_CMMETH_EXECUTECMD),
+        helpstring("Executes a CodeMax command defined in cmCommands")
+    ]
+    HRESULT ExecuteCmd([in]cmCommand lCommand, [in, optional] VARIANT CmdData );
+    [
+        id(DISPID_CMMETH_CANUNDO),
+        helpcontext(HELPID_CMMETH_CANUNDO),
+        helpstring("Determines if it is possible to undo an edit action")
+    ]
+    HRESULT CanUndo([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_CANREDO),
+        helpcontext(HELPID_CMMETH_CANREDO),
+        helpstring("Determines if it is possible to redo an edit action")
+    ]
+    HRESULT CanRedo([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_CANCUT),
+        helpcontext(HELPID_CMMETH_CANCUT),
+        helpstring("Determines if it is possible to cut the current selection and place it on the clipboard")
+    ]
+    HRESULT CanCut([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_CANCOPY),
+        helpcontext(HELPID_CMMETH_CANCOPY),
+        helpstring("Determines if it is possible to copy the current selection onto the clipboard")
+    ]
+    HRESULT CanCopy([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_CANPASTE),
+        helpcontext(HELPID_CMMETH_CANPASTE),
+        helpstring("Determines if it is possible to place the clipboard contents at the current edit selection position")
+    ]
+    HRESULT CanPaste([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_UNDO),
+        helpcontext(HELPID_CMMETH_UNDO),
+        helpstring("Undos the last edit action")
+    ]
+    HRESULT Undo();
+    [
+        id(DISPID_CMMETH_REDO),
+        helpcontext(HELPID_CMMETH_REDO),
+        helpstring("Redos the last edit action")
+    ]
+    HRESULT Redo();
+    [
+        id(DISPID_CMMETH_CUT),
+        helpcontext(HELPID_CMMETH_CUT),
+        helpstring("Cuts the current selection and places it on the clipboard")
+    ]
+    HRESULT Cut();
+    [
+        id(DISPID_CMMETH_COPY),
+        helpcontext(HELPID_CMMETH_COPY),
+        helpstring("Copies the current selection onto the clipboard")
+    ]
+    HRESULT Copy();
+    [
+        id(DISPID_CMMETH_PASTE),
+        helpcontext(HELPID_CMMETH_PASTE),
+        helpstring("Pastes the clipboard contents at the current edit selection position")
+    ]
+    HRESULT Paste();
+    [
+        id(DISPID_CMMETH_CLEARUNDOBUFFER),
+        helpcontext(HELPID_CMMETH_CLEARUNDOBUFFER),
+        helpstring("Clears the undo buffer so that undo/redo is not possible")
+    ]
+    HRESULT ClearUndoBuffer();
+    [
+        id(DISPID_CMMETH_ISRECORDINGMACRO),
+        helpcontext(HELPID_CMMETH_ISRECORDINGMACRO),
+        helpstring("Determines if the user is currently recording a macro")
+    ]
+    HRESULT IsRecordingMacro([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_ISPLAYINGMACRO),
+        helpcontext(HELPID_CMMETH_ISPLAYINGMACRO),
+        helpstring("Determines if the user is currently playing a macro")
+    ]
+    HRESULT IsPlayingMacro([out, retval]VARIANT_BOOL *pbAnswer);
+    [
+        id(DISPID_CMMETH_SETDLGPARENT),
+        helpcontext(HELPID_CMMETH_SETDLGPARENT),
+        helpstring("Sets the HWND window that will be used as the parent of all dialog boxes displayed by CodeMax")
+    ]
+    HRESULT SetDlgParent([in]long lhWnd);
+    [
+        propget,
+        id(DISPID_CMPROP_SELTEXT),
+        helpcontext(HELPID_CMPROP_SELTEXT),
+        helpstring("Retrieves the selected text")
+    ]
+    HRESULT SelText([out, retval]BSTR *pstrVal);
+    [
+        propput,
+        id(DISPID_CMPROP_SELTEXT),
+        helpcontext(HELPID_CMPROP_SELTEXT),
+        helpstring("Sets the selected text")
+    ]
+    HRESULT SelText([in]BSTR strVal);
+    [
+        propput,
+        id(DISPID_CMPROP_SELBOUNDS),
+        helpcontext(HELPID_CMPROP_SELBOUNDS),
+        helpstring("The global properties state (on/off)")
+    ]
+    HRESULT SelBounds([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SELBOUNDS),
+        helpcontext(HELPID_CMPROP_SELBOUNDS),
+        helpstring("The global properties state (on/off)")
+    ]
+    HRESULT SelBounds([out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_CMMETH_SETFONTSTYLE),
+        helpcontext(HELPID_CMMETH_SETFONTSTYLE),
+        helpstring("Sets the font style of a specific text token category defined in cmFontStyleItem")
+    ]
+    HRESULT SetFontStyle([in]cmFontStyleItem lFontStyleItem, [in]cmFontStyle byFontStyle);
+    [
+        id(DISPID_CMMETH_GETFONTSTYLE),
+        helpcontext(HELPID_CMMETH_GETFONTSTYLE),
+        helpstring("Retrieves the font style of a specific text token category defined in cmFontStyleItem")
+    ]
+    HRESULT GetFontStyle([in]cmFontStyleItem lFontStyleItem, [out, retval]cmFontStyle *pbyFontStyle);
+    [
+        propput,
+        id(DISPID_CMPROP_SEARCHREGEXP),
+        helpcontext(HELPID_CMPROP_SEARCHREGEXP),
+        helpstring("The regular expression searching state (on/off)")
+    ]
+    HRESULT SearchRegExp([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SEARCHREGEXP),
+        helpcontext(HELPID_CMPROP_SEARCHREGEXP),
+        helpstring("The regular expression searching state (on/off)")
+    ]
+    HRESULT SearchRegExp([out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_CMMETH_SETITEMDATA),
+        helpcontext(HELPID_CMMETH_SETITEMDATA),
+        helpstring("Sets per-line item data meaningful to the application")
+    ]
+    HRESULT SetItemData([in]long lLine, [in]long lData);
+    [
+        id(DISPID_CMMETH_GETITEMDATA),
+        helpcontext(HELPID_CMMETH_GETITEMDATA),
+        helpstring("Retrieves the per-line item data set with SetItemData()")
+    ]
+    HRESULT GetItemData([in]long lLine, [out, retval]long *plData);
+    [
+        id(DISPID_CMMETH_SETLINESTYLE),
+        helpcontext(HELPID_CMMETH_SETLINESTYLE),
+        helpstring("Sets a line's style bits")
+    ]
+    HRESULT SetLineStyle([in]long lLine, [in]long lStyle);
+    [
+        id(DISPID_CMMETH_GETLINESTYLE),
+        helpcontext(HELPID_CMMETH_GETLINESTYLE),
+        helpstring("Retrieves a line's style bits")
+    ]
+    HRESULT GetLineStyle([in]long lLine, [out, retval]long *plStyle);
+    [
+        id(DISPID_CMMETH_SETBOOKMARK),
+        helpcontext(HELPID_CMMETH_SETBOOKMARK),
+        helpstring("Turns on or off a bookmark for a single line")
+    ]
+    HRESULT SetBookmark([in]long lLine, [in]VARIANT_BOOL bVal);
+    [
+        id(DISPID_CMMETH_GETBOOKMARK),
+        helpcontext(HELPID_CMMETH_GETBOOKMARK),
+        helpstring("Gets the bookmark state (on/off) for a single line")
+    ]
+    HRESULT GetBookmark([in]long lLine, [out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_CMMETH_SETALLBOOKMARKS),
+        helpcontext(HELPID_CMMETH_SETALLBOOKMARKS),
+        helpstring("clears all bookmarks and then sets multiple bookmarks at once")
+    ]
+    HRESULT SetAllBookmarks([in]SAFEARRAY(long) *Lines);
+    [
+        id(DISPID_CMMETH_GETALLBOOKMARKS),
+        helpcontext(HELPID_CMMETH_GETALLBOOKMARKS),
+        helpstring("Collects a list of all bookmarks")
+    ]
+    HRESULT GetAllBookmarks([out]SAFEARRAY(long) *Lines);
+    [
+        id(DISPID_CMMETH_POSFROMCHAR),
+        helpcontext(HELPID_CMMETH_POSFROMCHAR),
+        helpstring("returns a client rect surrounding a character at a specified buffer position")
+    ]
+    HRESULT PosFromChar([in]IPosition *pPos, [out, retval]IRect **Rect);
+    [
+        propput,
+        id(DISPID_CMPROP_HIDESEL),
+        helpcontext(HELPID_CMPROP_HIDESEL),
+        helpstring("Hide selection when control loses focus (on/off)")
+    ]
+    HRESULT HideSel([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_HIDESEL),
+        helpcontext(HELPID_CMPROP_HIDESEL),
+        helpstring("Hide selection when control loses focus (on/off)")
+    ]
+    HRESULT HideSel([out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_HIGHLIGHTEDLINE),
+        helpcontext(HELPID_CMPROP_HIGHLIGHTEDLINE),
+        helpstring("the current highlighted line (-1 to clear.)")
+    ]
+    HRESULT HighlightedLine([in]long lLine);
+    [
+        propget,
+        id(DISPID_CMPROP_HIGHLIGHTEDLINE),
+        helpcontext(HELPID_CMPROP_HIGHLIGHTEDLINE),
+        helpstring("the current highlighted line (-1 to clear.)")
+    ]
+    HRESULT HighlightedLine([out, retval]long *plLine);
+    [
+        propput,
+        id(DISPID_CMPROP_NORMALIZECASE),
+        helpcontext(HELPID_CMPROP_NORMALIZECASE),
+        helpstring("Language keyword case fixup on-the-fly (on/off)")
+    ]
+    HRESULT NormalizeCase([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_NORMALIZECASE),
+        helpcontext(HELPID_CMPROP_NORMALIZECASE),
+        helpstring("Language keyword case fixup on-the-fly (on/off)")
+    ]
+    HRESULT NormalizeCase([out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_CMMETH_SETDIVIDER),
+        helpcontext(HELPID_CMMETH_SETDIVIDER),
+        helpstring("Sets a line's divider line state (on/off)")
+    ]
+    HRESULT SetDivider([in]long lLine, [in]VARIANT_BOOL bVal);
+    [
+        id(DISPID_CMMETH_GETDIVIDER),
+        helpcontext(HELPID_CMMETH_GETDIVIDER),
+        helpstring("Retrieves a line's divider line state (on/off)")
+    ]
+    HRESULT GetDivider([in]long lLine, [out, retval]VARIANT_BOOL *pbVal);
+    [
+        propput,
+        id(DISPID_CMPROP_OVERTYPECARET),
+        helpcontext(HELPID_CMPROP_OVERTYPECARET),
+        helpstring("Fat overtype caret (on/off)")
+    ]
+    HRESULT OvertypeCaret([in]VARIANT_BOOL bVal);
+    [
+        propget,
+        id(DISPID_CMPROP_OVERTYPECARET),
+        helpcontext(HELPID_CMPROP_OVERTYPECARET),
+        helpstring("Fat overtype caret (on/off)")
+    ]
+    HRESULT OvertypeCaret([out, retval]VARIANT_BOOL *pbVal);
+    [
+        id(DISPID_CMMETH_SETMARGINIMAGES),
+        helpcontext(HELPID_CMMETH_SETMARGINIMAGES),
+        helpstring("turns on/off margin images for a specific line")
+    ]
+    HRESULT SetMarginImages([in]long lLine, [in]BYTE byImages);
+    [
+        id(DISPID_CMMETH_GETMARGINIMAGES),
+        helpcontext(HELPID_CMMETH_GETMARGINIMAGES),
+        helpstring("retrieves the current margin images state for a specific line")
+    ]
+    HRESULT GetMarginImages([in]long lLine, [out, retval]BYTE *pbyImages);
+    [
+        propput,
+        id(DISPID_CMPROP_HIMAGELIST),
+        helpcontext(HELPID_CMPROP_HIMAGELIST),
+        helpstring("sets the line margin images")
+    ]
+    HRESULT hImageList([in]OLE_HANDLE hImageList);
+    [
+        propget,
+        id(DISPID_CMPROP_HIMAGELIST),
+        helpcontext(HELPID_CMPROP_HIMAGELIST),
+        helpstring("retrieves the line margin images")
+    ]
+	HRESULT hImageList([out, retval] OLE_HANDLE* phImageList);
+    [
+        propget,
+        id(DISPID_CMPROP_IMAGELIST),
+        helpcontext(HELPID_CMPROP_IMAGELIST),
+        helpstring("retrieves the ImageList control to be used")
+    ]
+	HRESULT ImageList([out, retval] IDispatch** ppImageList);
+    [
+        propput,
+        id(DISPID_CMPROP_IMAGELIST),
+        helpcontext(HELPID_CMPROP_IMAGELIST),
+        helpstring("sets the ImageList control to be used")
+    ]
+	HRESULT ImageList([in] IDispatch* pImageList);
+    [
+        propputref,
+        id(DISPID_CMPROP_IMAGELIST),
+        helpcontext(HELPID_CMPROP_IMAGELIST),
+        helpstring("sets the ImageList control to be used")
+    ]
+	HRESULT ImageList([in] IDispatch* pImageList);
+	[
+		hidden,
+		id(DISPID_ABOUTBOX),
+		helpstring("Displays an About box with version and copyright information"),
+		helpcontext(HELPID_CMMETH_ABOUTBOX)
+	]
+	HRESULT AboutBox();
+	[
+		id(DISPID_CMMETH_PRINT),
+		helpstring("prints the contents of the edit buffer"),
+		helpcontext(HELPID_CMMETH_PRINT)
+	]
+	HRESULT PrintContents( long hDC, long lFlags );
+    [
+        id(DISPID_CMMETH_SETCARETPOS),
+        helpcontext(HELPID_CMMETH_SETCARETPOS),
+        helpstring("Sets the caret position to a specific line and column.")
+    ]
+    HRESULT SetCaretPos([in]long lLine, [in]long lCol);
+    [
+        id(DISPID_CMMETH_VIEWCOLTOBUFFERCOL),
+        helpcontext(HELPID_CMMETH_VIEWCOLTOBUFFERCOL),
+        helpstring("Sets the caret position to a specific line and column.")
+    ]
+    HRESULT ViewColToBufferCol([in]long lLine, [in]long lViewCol, [out,retval] long *plBuffCol);
+    [
+        id(DISPID_CMMETH_BUFFERCOLTOVIEWCOL),
+        helpcontext(HELPID_CMMETH_BUFFERCOLTOVIEWCOL),
+        helpstring("Converts a view column position (physical coordinates) to buffer coords which correspond to actual character offsets in the buffer text.")
+    ]
+    HRESULT BufferColToViewCol([in]long lLine, [in]long lBuffCol, [out,retval] long *plViewCol);
+    [
+        propget,
+        id(DISPID_CMPROP_SELLENGTH),
+        helpcontext(HELPID_CMPROP_SELLENGTH),
+        helpstring("The length of the selection in bytes.")
+    ]
+    HRESULT SelLength([out, retval]long *plVal);
+    [
+        propget,
+        id(DISPID_CMPROP_SELLENGTHLOGICAL),
+        helpcontext(HELPID_CMPROP_SELLENGTHLOGICAL),
+        helpstring("The length of the selection in characters.")
+    ]
+    HRESULT SelLengthLogical([out, retval]long *plVal);
+    [
+        propput,
+        id(DISPID_CMPROP_BORDERSTYLE),
+        helpcontext(HELPID_CMPROP_BORDERSTYLE),
+        helpstring("the current border style")
+    ]
+    HRESULT BorderStyle([in]cmBorderStyle lBorderStyle);
+    [
+        propget,
+        id(DISPID_CMPROP_BORDERSTYLE),
+        helpcontext(HELPID_CMPROP_BORDERSTYLE),
+        helpstring("the current border style")
+    ]
+	HRESULT BorderStyle([out, retval] cmBorderStyle* plBorderStyle);
+    [
+        propget,
+        id(DISPID_CMPROP_HWND),
+        helpcontext(HELPID_CMPROP_HWND),
+        helpstring("The HWND window handle")
+    ]
+    HRESULT hWnd([out, retval]long *phwnd);
+    [
+        propput,
+        id(DISPID_CMPROP_CURRENTVIEW),
+        helpcontext(HELPID_CMPROP_CURRENTVIEW),
+        helpstring("The currently active view number")
+    ]
+    HRESULT CurrentView([in]long lVal);
+};

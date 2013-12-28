@@ -1,0 +1,4 @@
+LIBRARY			kXSFi
+EXPORTS			VSTPluginMain
+                        MAIN
+

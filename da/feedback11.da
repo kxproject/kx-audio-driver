@@ -1,0 +1,54 @@
+; New microcode
+	name "Feedback Destroyer";
+	copyright "Copyright (c) 2004.";
+	created "03/05/2005";
+	engine "kX";
+	comment "v 1.1";
+	guid "0f62ce63-02fe-4545-bdf2-debe5ed0ca53";
+	; -- generated GUID
+
+    input   in
+    output  out
+    
+    control NotchBW=0.95  ; Notch-Bandwidth
+    control Depth=1       ; Notch-Depht
+    control Velocity=0.1  ; Velocity of notch-frecuency change
+    static  wo=0         ; Notch-frecuency (dymanically changed)
+    static  z1,z2
+    static  prev_x,acc,prev_y
+	static  pole=0.0001   
+    temp    tin,t1,t2,t3,bw,dp
+    
+    ;Bandwidht normalization (0.5..0.99)
+    interp  bw,0.5,NotchBW,0.99  
+    ;Depth normalization (0..0.5)
+    interp  dp,0,Depth,0.5 
+    ;input scale
+    macs    tin,0,in,0.01
+    ;lattice notch filter
+    macsn   t1,tin,z2,1
+    macs    out,z2,t1,bw
+    macs    t2,tin,t1,bw
+    macsn   t3,t2,z1,1
+    macs    z2,z1,t3,wo
+    macs    z1,t2,t3,wo     
+    interp  out,tin,dp,out
+    macints out,0,out,0x64
+    ;frecuency search
+    macs    t1,0,out,z1 
+    macsn   wo,wo,t1,Velocity  
+    ;to avoid a 0Hz notch  
+    macs    t1,wo,0.99997,1
+    skip    ccr,ccr,0x80,0x1
+    macsn   wo,-0.99997,0,0 
+    ;DC-Filter
+    macsn   acc,acc,prev_x,1    
+    macs    prev_x,out,0,0
+    macs    acc,acc,prev_x,1  
+    macsn   acc,acc,prev_y,pole
+    macs    prev_y,acc,0,0 
+    ;output  
+    macs    out,prev_y,0,0
+ 
+    
+end

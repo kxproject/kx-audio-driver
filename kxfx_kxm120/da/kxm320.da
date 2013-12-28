@@ -1,0 +1,24 @@
+name "kxm 320";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created ""; 
+comment "6 channel mixer module (kxm 320 v1.1)"
+guid "a97f7ed1-c947-449e-8b15-37d6c1524110";
+
+; Registers
+input in_1, in_2, in_3, in_4, in_5, in_6;
+output out
+control vol_1=1, vol_2=1, vol_3=1, vol_4=1
+control vol_5=1, vol_6=1, master=0.5
+static a
+
+; amlify, mix & output
+macs a, 0, in_1, vol_1  
+macs a, a, in_2, vol_2 
+macs a, a, in_3, vol_3 
+macs a, a, in_4, vol_4
+macs a, a, in_5, vol_5  
+macs a, a, in_6, vol_6 
+macs out, 0, a, master
+
+end

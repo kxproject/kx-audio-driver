@@ -1,0 +1,26 @@
+name "kxm 310";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created ""; 
+comment "8 channel mixer module (kxm 310 v1.1)"
+guid "685f1ef3-1e16-4621-abad-49ef1b5fbde0";
+
+; Registers
+input in_1, in_2, in_3, in_4, in_5, in_6, in_7, in_8;
+output out
+control vol_1=1, vol_2=1, vol_3=1, vol_4=1
+control vol_5=1, vol_6=1, vol_7=1, vol_8=1, master=0.5
+static a
+
+; amlify, mix & output
+macs a, 0, in_1, vol_1  
+macs a, a, in_2, vol_2 
+macs a, a, in_3, vol_3 
+macs a, a, in_4, vol_4
+macs a, a, in_5, vol_5  
+macs a, a, in_6, vol_6 
+macs a, a, in_7, vol_7 
+macs a, a, in_8, vol_8  
+macs out, 0, a, master
+
+end

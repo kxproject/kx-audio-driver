@@ -1,0 +1,18 @@
+name "kxm 560";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "16/01/2008";
+engine "kX";    
+comment "-6db/oct highpass filter (kxm 560 v1.1)"
+guid "2c150c53-53f5-4115-ad20-6e524bb90c0a";
+
+; registers
+input in
+output out 
+static a 
+control cutoff=0.5    
+
+; filter
+interp a, a, cutoff, in ; -6db lowpass  
+macsn out, in, a, 1 ; -6db highpass
+
+end

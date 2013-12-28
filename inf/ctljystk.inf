@@ -1,0 +1,61 @@
+; This file is not part of kX Driver Distributive
+; it is provided for your convenience only
+; this file is probably Copyright (c) Creative Technology Ltd, 1994-2001.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%CREAF%
+DriverVer=07/09/2002
+;CatalogFile=ctljystk.cat
+
+[Manufacturer]
+%CREAF%=Creative
+
+[Creative]
+%*CtlGamePort1.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7002&SUBSYS_00201102
+%*CtlGamePort1.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7002&SUBSYS_00211102
+%*CtlGamePort1.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7002&SUBSYS_002F1102
+%*CtlGamePort1.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7002&SUBSYS_40011102
+%*CtlGamePort2.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7003&SUBSYS_00201102
+%*CtlGamePort2.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7003&SUBSYS_00401102
+%*CtlGamePort2.DeviceDesc%=CtlGamePort_Device,PCI\VEN_1102&DEV_7003&SUBSYS_00601102
+
+[SourceDisksNames]
+[SourceDisksFiles]
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+
+;---------------------------------------------------------------;
+
+[CtlGamePort_Device]
+Include=joystick.inf
+Needs=MSJSTICK
+AddReg=AddRegEmpty
+CopyFiles=CopyFilesEmpty
+
+;---------------------------------------------------------------;
+
+[CtlGamePort_Device.NT]
+Include=gameport.inf
+Needs=CreativeLabs_Port.NT
+AddReg=AddRegEmpty
+CopyFiles=CopyFilesEmpty
+
+[CtlGamePort_Device.NT.Services]
+Include=gameport.inf
+Needs=CreativeLabs_Port.NT.Services
+
+;---------------------------------------------------------------;
+
+[AddRegEmpty]
+[CopyFilesEmpty]
+
+;---------------------------------------------------------------;
+
+[Strings]
+CREAF="Creative"
+SPSVCINST_ASSOCSERVICE=0x00000002
+*CtlGamePort1.DeviceDesc="kX 10k1 Audio - Game Port"
+*CtlGamePort2.DeviceDesc="kX 10k2 Audio - Game Port"

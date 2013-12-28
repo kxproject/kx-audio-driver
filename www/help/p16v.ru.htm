@@ -1,0 +1,49 @@
+<title>Audigy2 routings</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Роутинг P16V</h3>
+
+<h4>
+
+<p class=Darken>Audigy2 routings</p>
+
+<p>Audigy2-based cards have slightly more complicated signal flow
+compared to 10k1 and Audigy 1 boards (shown on the following diagram).</p>
+
+<img width=747 height=303 src="images/p16v.gif">
+
+<p>That is, there's a special unit dealing with 24/96 audio streams called 'p16v'.
+This unit is capable of recording incoming SPDIF and I2S streams in 24/96 mode.
+The kX Audio driver enables both p16v and 10k2 to access inputs and outputs by
+default (as shown above). However, the actual hardware routing is even more complex.
+In the default mode the Audigy2 chip acts as Audigy1 with p16v unit operating
+in parallel mode.
+</p>
+
+<p>By default, p16v-&gt;10k2 path is
+disabled. It is necessary to load the ‘p16v’ effect into the kX DSP window in order
+to enable it. For example, if you wish to process p16v output and add some
+10k2-based reverb, use the following routing:</p>
+
+<img src="images/p16v_route.gif">
+
+<p>(Note: ‘swap front &amp; rear’ option
+might affect the actual p16v outputs you will be using. For instance, in this
+case ‘swap’ is active, that’s why p16v.‘in7/in8’ are used instead of p16v. ‘in0/in1’.
+The input numbers correspond to particular i2s/spdif outputs listed in our ‘I/O
+Assignment guide’).</p>
+
+<p class=Darken>Recording</p>
+
+<p>P16v 24/96 audio recording uses the same
+considerations mentioned in our ‘Direct SPDIF Recording guide’. That is, the
+sampling rate is not auto-detected and it is up to the user to choose the
+appropriate sampling rate in the audio recording application. Note: you may need
+to re-assign the sampling rate after recording (not 'resample' the audio, but just
+re-assign the sampling rate :)).</p>
+
+<h5><b>NOTE</b>: the 'p16v' codename was taken from the opensource.creative.com driver (as well as
+codenames 'Alice3' and 'Apollo').</h5>
+
+</h4>

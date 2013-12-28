@@ -1,0 +1,24 @@
+name "kxm 800";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "11/08/2007";
+engine "kX"; 
+comment "resampler 1-24 khz (kxm 800 v1.1)"
+guid "dad1d81b-910e-4bb0-b425-9572d5b0662e";
+
+; sample & hold with adjustable samplerate
+
+input in
+output out
+static a, m=0x2
+control rate=1
+
+; speed
+interp a, 0x30, rate, 0x2 ; 1-24 khz  
+
+; s&h
+macsn m, m, 0x1, 1 ; downward counter
+skip    ccr, ccr, 0x100, 2 ; jump if m!=0 (different)
+macs m, a, 0, 0 ; reset counter
+macs out, in, 0, 0 ; sample input & output
+
+end

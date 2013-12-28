@@ -1,0 +1,82 @@
+name "kxm 400";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "11/23/2007";
+engine "kx"; 
+comment " adsr envelope (kxm 400 v1.1)"
+guid "fcda57ed-63e1-42ac-a4e7-37f2a6571f6d";  
+
+input gate
+output adsr
+control a=0.1, d=0.9, s=0.2, r=0.9
+static r2, d2, a2, env1, env2, gate1, r1, a1, d1, xa, xa0, xd, xd0, xr, xr0
+static b ; test register for skips
+
+; start  
+
+; some lin > log calculations (can be placed to a, d, r routines)  
+log xa0, xa, 6, 0   
+log xd0, xd, 6, 0
+log xr0, xr, 6, 0 
+
+; trim sliders         
+interp a1, 0.5, a, 0.0000001 ; 60%~850ms, 99%~8,5s
+exp a2, a1, 20, 0  
+interp d1, 0.5, d, 0.0000001 
+exp d2, d1, 20, 0  
+interp r1, 0.5, r, 0.0000001 
+exp r2, r1, 20, 0    
+
+; gate?
+macs gate1, gate, 0,0
+skip ccr, ccr, 0x180, 4 ; goto env2? if gate1 =1
+; env1?
+macs env1, env1, 0, 0
+skip ccr, ccr, 0x180, 20 ; goto envelope2 if release =1 
+; goto start
+macs b,0,0,0      
+skip ccr, ccr, 0x8, 30 ; goto start 
+; env2?
+macs env2, env2, 0, 0
+skip ccr, ccr, 0x180, 23 ; goto reset if release =1 
+  
+;envelope1 
+macs env1, 1, 0, 0; set entry flag env1=1
+; attack
+macs xa, xa, 1, a2 ; increase counter 
+skip ccr, ccr, 0x10, 4 ; goto decay if counter =1
+macs xa0, xa0, 0.15, 1 ; log offset ~(1-log) to interpolate 0..1! 
+interp adsr, 0, xa0, 1 ; trace a line
+macs b,0,0,0
+skip ccr, ccr, 0x8, 21 ; goto start 
+
+; decay
+macs xd, xd, 1, d2 ; increase counter 
+skip ccr, ccr, 0x10, 4 ; goto sustain if counter =1
+macs xd0, xd0, 0.15, 1 ; log offset ~(1-log) to interpolate 0..1! 
+interp adsr, 1, xd0, s ; trace a line
+macs b,0,0,0
+skip ccr, ccr, 0x8, 15 ; goto start  
+
+; sustain
+macs adsr, s, 0, 0 ; trace a line
+macs b,0,0,0
+skip ccr, ccr, 0x8, 12 ; goto start
+
+; envelope2 
+macs env2, 1, 0, 0; set entry flag env2=1
+; release
+macs xr, xr, 1, r2 
+skip ccr, ccr, 0x10, 4 ; goto reset if counter = 1 
+macs xr0, xr0, 0.15, 1 ; log offset ~(1-log) to interpolate 0..1!
+interp adsr, s, xr0, 0 ; trace a line
+macs b,0,0,0
+skip ccr, ccr, 0x8, 5 ; goto start
+
+; reset all to init
+macs env1, 0,0,0   
+macs env2, 0,0,0 
+macs xa, 0,0,0
+macs xd,0,0,0 
+macs xr,0,0,0 
+
+end

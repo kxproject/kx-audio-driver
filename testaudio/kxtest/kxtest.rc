@@ -1,0 +1,375 @@
+/*
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+
+
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\kxtest.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\kxtest.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_INPUT DIALOGEX 0, 0, 234, 47
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter value"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_SAMPLE,75,16,77,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,177,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,177,24,50,14
+    LTEXT           "Sample value (hex):",IDC_STATIC,7,18,65,8
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 194, 106
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Disable TSC timing",IDC_DISABLETSC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,14,74,10
+    CONTROL         "Calculate from start time",IDC_CALCSTART,"Button",BS_AUTORADIOBUTTON | WS_GROUP,17,46,95,10
+    CONTROL         "Use position notify",IDC_NOTIFY,"Button",BS_AUTORADIOBUTTON,17,61,75,10
+    CONTROL         "Continuous polling",IDC_POLLING,"Button",BS_AUTORADIOBUTTON,17,75,75,10
+    GROUPBOX        "Playback timing method",IDC_STATIC,7,29,117,71
+    DEFPUSHBUTTON   "OK",IDOK,137,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,137,24,50,14
+END
+
+CG_IDD_PROGRESS DIALOGEX 0, 0, 186, 61
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,67,40,50,14
+    CONTROL         "Progress1",CG_IDC_PROGDLG_PROGRESS,"msctls_progress32",WS_BORDER | 0x1,15,26,154,8
+    CTEXT           " 0 %",CG_IDC_PROGDLG_PERCENT,16,10,153,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_INPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 227
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 40
+    END
+
+    IDD_SETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 187
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    CG_IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 54
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About kxtest"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "kxtest Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2004 by Dmitry Gorelov",IDC_STATIC,40,25,122,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_KXTEST_DIALOG DIALOGEX 0, 0, 463, 325
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "kxtest"
+FONT 8, "MS Shell Dlg", 400, 0, 0xCC
+BEGIN
+    COMBOBOX        IDC_PB_DEVICE,67,7,156,86,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Play/Rec",IDC_PLAY,235,114,122,21
+    CONTROL         "MME",IDC_PB_MM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,19,42,31,10
+    CONTROL         "DirectSound",IDC_PB_DS,"Button",BS_AUTORADIOBUTTON,19,54,55,10
+    CONTROL         "Kernel Streaming",IDC_PB_KS,"Button",BS_AUTORADIOBUTTON,19,67,70,10
+    CONTROL         "ASIO",IDC_PB_ASIO,"Button",BS_AUTORADIOBUTTON,19,80,33,10
+    CONTROL         "DSP",IDC_PB_KX,"Button",BS_AUTORADIOBUTTON,19,93,29,10
+    GROUPBOX        "Playback driver",IDC_STATIC,7,28,88,84
+    CONTROL         "44100",IDC_REC_44100,"Button",BS_AUTORADIOBUTTON | WS_GROUP,115,168,36,10
+    CONTROL         "48000",IDC_REC_48000,"Button",BS_AUTORADIOBUTTON,115,181,36,10
+    CONTROL         "96000",IDC_REC_96000,"Button",BS_AUTORADIOBUTTON,115,194,36,10
+    CONTROL         "192000",IDC_REC_192000,"Button",BS_AUTORADIOBUTTON,115,207,35,10
+    GROUPBOX        "Sample rate",IDC_STATIC,104,154,59,71
+    CONTROL         "MME",IDC_REC_MM,"Button",BS_AUTORADIOBUTTON | WS_GROUP,19,155,31,10
+    CONTROL         "DirectSound",IDC_REC_DS,"Button",BS_AUTORADIOBUTTON,19,168,55,10
+    CONTROL         "Kernel Streaming",IDC_REC_KS,"Button",BS_AUTORADIOBUTTON,19,181,70,10
+    CONTROL         "ASIO",IDC_REC_ASIO,"Button",BS_AUTORADIOBUTTON,19,194,33,10
+    CONTROL         "DSP",IDC_REC_KX,"Button",BS_AUTORADIOBUTTON,19,207,29,10
+    GROUPBOX        "Recording driver",IDC_STATIC,7,141,88,84
+    DEFPUSHBUTTON   "Close",IDOK,406,7,50,16
+    CTEXT           "",IDC_LSRC,45,235,200,10,SS_SUNKEN
+    CTEXT           "",IDC_LKX,45,251,200,10,SS_SUNKEN
+    CTEXT           "",IDC_LXOR,45,267,200,10,SS_SUNKEN
+    PUSHBUTTON      "++",IDC_LINC,242,23,19,13
+    PUSHBUTTON      "--",IDC_LDEC,264,23,19,13
+    PUSHBUTTON      "<<",IDC_LROL,242,38,19,13
+    PUSHBUTTON      ">>",IDC_LROR,264,38,19,13
+    PUSHBUTTON      "=0",IDC_LZERO,242,53,19,13
+    PUSHBUTTON      "=?",IDC_LASK,264,53,19,13
+    LTEXT           "Sample:",IDC_STATIC,15,235,26,8
+    LTEXT           "Recorded:",IDC_STATIC,7,251,34,8
+    LTEXT           "Diff:",IDC_STATIC,26,267,15,8
+    LTEXT           "",IDC_LSRCVAL,55,282,112,8
+    LTEXT           "",IDC_LKXVAL,55,294,112,8
+    GROUPBOX        "Format",IDC_STATIC,172,41,54,71
+    CONTROL         "16",IDC_PB_16,"Button",BS_AUTORADIOBUTTON | WS_GROUP,184,55,24,10
+    CONTROL         "24",IDC_PB_24,"Button",BS_AUTORADIOBUTTON,184,67,24,10
+    CONTROL         "24/32",IDC_PB_24_32,"Button",BS_AUTORADIOBUTTON,184,80,35,10
+    CONTROL         "32",IDC_PB_32,"Button",BS_AUTORADIOBUTTON,184,93,35,10
+    LTEXT           "Playback device:",IDC_STATIC,10,9,54,8
+    GROUPBOX        "Sample rate",IDC_STATIC,104,41,59,71
+    CONTROL         "44100",IDC_PB_44100,"Button",BS_AUTORADIOBUTTON | WS_GROUP,115,55,36,10
+    CONTROL         "48000",IDC_PB_48000,"Button",BS_AUTORADIOBUTTON,115,67,36,10
+    CONTROL         "96000",IDC_PB_96000,"Button",BS_AUTORADIOBUTTON,115,80,36,10
+    CONTROL         "192000",IDC_PB_192000,"Button",BS_AUTORADIOBUTTON,115,93,35,10
+    COMBOBOX        IDC_REC_DEVICE,67,122,156,86,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Format",IDC_STATIC,172,154,54,71
+    CONTROL         "16",IDC_REC_16,"Button",BS_AUTORADIOBUTTON | WS_GROUP,184,168,24,10
+    CONTROL         "24",IDC_REC_24,"Button",BS_AUTORADIOBUTTON,184,181,24,10
+    CONTROL         "24/32",IDC_REC_24_32,"Button",BS_AUTORADIOBUTTON,184,194,35,10
+    CONTROL         "32",IDC_REC_32,"Button",BS_AUTORADIOBUTTON,184,207,35,10
+    LTEXT           "Recording device:",IDC_STATIC,7,124,58,8
+    GROUPBOX        "Left sample",IDC_STATIC,234,7,57,100
+    COMBOBOX        IDC_PB_ASIOCS,146,23,77,86,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ASIO Clock:",IDC_STATIC,105,25,39,8
+    COMBOBOX        IDC_REC_ASIOCS,146,138,77,86,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "ASIO Clock:",IDC_STATIC,105,140,39,8
+    PUSHBUTTON      "Setup",IDC_PB_ASIOCP,54,78,32,13
+    PUSHBUTTON      "Setup",IDC_REC_ASIOCP,54,192,32,13
+    PUSHBUTTON      "Settings",IDC_SETTINGS,407,28,49,16
+    CONTROL         "Pulse",IDC_LPULSE,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,242,86,41,13
+    LTEXT           "",IDC_LDIFFVAL,55,306,112,8
+    CHECKBOX        "Random",IDC_LRND,242,69,41,13,BS_PUSHLIKE
+    CTEXT           "",IDC_RSRC,250,235,200,10,SS_SUNKEN
+    CTEXT           "",IDC_RKX,250,251,200,10,SS_SUNKEN
+    CTEXT           "",IDC_RXOR,250,267,200,10,SS_SUNKEN
+    LTEXT           "",IDC_RSRCVAL,260,282,112,8
+    LTEXT           "",IDC_RKXVAL,260,294,112,8
+    LTEXT           "",IDC_RDIFFVAL,260,306,112,8
+    PUSHBUTTON      "++",IDC_RINC,308,23,19,13
+    PUSHBUTTON      "--",IDC_RDEC,330,23,19,13
+    PUSHBUTTON      "<<",IDC_RROL,308,39,19,13
+    PUSHBUTTON      ">>",IDC_RROR,330,39,19,13
+    PUSHBUTTON      "=0",IDC_RZERO,308,54,19,13
+    PUSHBUTTON      "=?",IDC_RASK,330,54,19,13
+    GROUPBOX        "Right sample",IDC_STATIC,300,7,57,100
+    CONTROL         "Pulse",IDC_RPULSE,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,308,87,41,13
+    CHECKBOX        "Random",IDC_RRND,308,70,41,13,BS_PUSHLIKE
+    LTEXT           "",IDC_KXINFO,238,142,211,83,SS_NOTIFY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_KXTEST_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 456
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 318
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "kxtest.exe"
+            VALUE "LegalCopyright", "(c) Dmitry Gorelov.  All rights reserved."
+            VALUE "OriginalFilename", "kxtest.exe"
+            VALUE "ProductName", "kxtest"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About kxtest..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\kxtest.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

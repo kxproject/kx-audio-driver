@@ -1,0 +1,66 @@
+<title>Instradamenti [Routings]</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Guida agli instradamenti [routings]</h3>
+
+<h4>
+
+<p class=Darken><b>Introduzione</b></p>
+
+Il driver audio <i>kX</i> presenta 4 differenti dispositivi Wave: 'Wave 0/1', 'Wave 4/5', 'Wave 6/7' e 'Wave 8/9';
+ciascuno ha proprie funzionalit&agrave e instradamenti di default.<br>
+
+<p class=Darken><b>Wave 0/1</b></p>
+Questo dispositivo pu&ograve essere usato per la riproduzione multicanale (applicazioni Sonar, Direct 3-D e DVD).
+Ci&ograve per&ograve, a causa del supporto multicanale, richiede la disponibilt&agrave di grande potenza di 
+elaborazione e, pertanto, non &egrave raccomandato per applicazioni per le quali la latenza &egrave un fattore 
+critico, quali Sonar (ma una latenza di 10ms pu&ograve essere facilmente raggiunta). Si osservi che molte applicazioni 
+che utilizzano 'Wave 0/1' in modalit&agrave 'stereo' o 'mono' non sono influenzate da eleborazioni software 
+poich&eacute automaticamente disablitata.
+<br>
+L'uscita di questo dospositivo &egrave instradata verso il percorso del segnale 'Stereo Generico' ['Generic Stereo']
+ed &egrave mixata con l'uscita Synth [Synthesizer] quale uscita anteriore ('front') degli effetti di surround 
+(Reverb e Chorus). Spetta all'effetto 'Surrounder' scegliere verso cosa instradare il segnale 'Stereo Generico'.
+In questo modo pu&ograve essere fatto scorrere* dagli altoparlanti anteriori ('front') a quelli posteriori ('rear') 
+(* questa funzionalit&agrave non &egrave ancora supportata).
+<br>
+
+<p class=Darken><b>Wave 4/5, Wave 6/7, Wave 8/9</b></p>
+Questi dispositivi instradano direttamente verso le vostre uscite hardware. 'Wave 4/5' agli altoparlanti anteriori 
+('front'), 'Wave 6/7' a quelli posteriori ('rear'), 'Wave 8/9' a centrale e subwoofer.
+<br>
+L'uscita 'Wave 6/7' inoltre &egrave mixata con l'uscita posteriore ('rear') degli effetti di surround (Reverb e Chorus).
+Se intendete usare il driver audio <i>kX</i> per la riproduzione '5.1' (DVD, giochi), allora usate i collegamenti
+di default (senza dimenticare di scambiare fra loro gli altoparlanti anteriori e posteriori ['swap front and rear']).
+Altrimenti, avrete a disposizione 3 uscite stereo indipendenti che possono essere usate separatamente.
+Si osservi anche che 'Wave 4/5', 'Wave 6/7' and 'Wave 8/9' non richiedono ulteriori elaborazioni software (a 
+differenza di 'Wave 0/1') e ci&ograve pu&ograve determinare una minore latenza con Sonar e applicazioni simili 
+che utilizzano flussi audio a basso livello ['Kernel Streaming'].
+
+<p class=Darken><b>Utenti E-mu APS</b></p>
+E-mu APS presenta uno schema di instradamento simile. 'Wave 0/1' ha le stesse funzionalit&agrave delle
+altre schede audio <i>kX</i>; viene instradata verso 'A1/A2' per default (ci&ograve pu&ograve essere modificato 
+tramite l'effetto 'Surrounder' e l'applet <i>kX DSP</i> dell'interfaccia del driver <i>kX</i>).
+Anche 'Wave 4/5' &egrave instradato verso 'A1/A2'.
+'Wave 6/7' e 'Wave 8/9' vengono rispettivamente instradati verso le uscite fisiche 'D1' e 'D2' ('A3/A4').
+Dunque, per ottenere l'audio '5.1', baster&agrave semplicemente collegare 'D2' agli altoparlanti centrale/subwoofer e
+'D1' agli altoparlanti posterioni ('rear'). Negli altri casi, si hanno 3 uscite stereo indipendenti.
+
+<p class=Darken><b>ASIO</b></p>
+I canali ASIO corrispondono direttamente ai rispettivi dispositivi 'Wave X/Y'. Pertanto, i canali 'ASIO 4/5' 
+sono instradati verso 'FXbus 4/5' e gli altoparlanti anteriori ('front') , 'ASIO 6/7' verso altoparlanti 
+posteriori ('rear'), e cos&igrave via.
+I canali 'ASIO 2/3' sono instradati verso il percorso audio 'Synth'.
+
+<p class=Darken><b>Cuffie</b></p>
+Le cuffie ricevono per default l'uscita audio anteriore ('front'). E' possibile modificare queat impostazione
+agendo sull'effetto 'Surrounder' o riconnettendo gli ingressi cuffie ('headphones') del dispositivo 'Epilog' 
+nel DSP verso le uscite 'Surrounder' desderate. Le cuffie E-mu APS non possono essere contrllate con <i>kX DSP</i>.
+
+</h4>
+
+<h5>
+ -- testo originale:  kX Project<br> 
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>

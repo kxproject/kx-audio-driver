@@ -1,0 +1,64 @@
+// kX Driver / kX Driver Interface / kX Driver Effects Library
+// Copyright (c) Eugene Gavrilov, LeMury 2003-2004.
+// All rights reserved
+
+/*
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+
+// Written by: LeMury; revision: 2
+
+;---------------------------------------------
+MX6 General Purpose DSP Mixer for kX-Project:
+;---------------------------------------------
+
+6 stereo input Channels:
+-IN1 to IN6
+
+4 stereo Output Busses:
+-MAIN BUS
+-RECORD BUS
+-SEND1 BUS
+-SEND2 BUS
+
+Functions per Input channel:
+-IN slider is Input Level
+-S1 slider Routes to SEND1 BUS
+-S2 slider Routes to SEND2 BUS
+-M  checkbox Routes to MAIN BUS
+-R  checkbox Routes to REC BUS
+-E  checkbox Enables Channel's Input (uncheck it to Mute channel)
+
+Functions other controls:
+-RECMON checkbox SWAPS the MAIN output with the REC output.
+(for monitoring purposes)
+-VU checkbox selects between the REC and MAIN Bus readout.
+-Mouse click on Clip/Peak textbox indicator Resets 'Peak hold'.
+
+Usage:
+The mixer works like a normal 6 x 4 Mixer console.
+You can route an Input channel to Any, All, Selected or None of the 4 Busses
+by the use of the S1, S2, M and R controls.
+All of these Routing controls are POST Input slider!
+
+Remarks:
+To keep the mixer 'General Purpose' there are
+no task specific 'Return Inputs' for Fx-return etc.
+Simply use one of the 6 Inputs if you need a 'Return' and route it accordingly.
+Afterall, a 'normal' Return' is nothing more than a regular Input without 'Sends'
+
+
+/Lemury 10/11/2003
+;-----------------------------------------------------------------------------

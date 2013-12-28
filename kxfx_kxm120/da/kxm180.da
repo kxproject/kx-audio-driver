@@ -1,0 +1,17 @@
+name "kxm 180";
+copyright "2007. stylus";
+created "01/09/2008";
+engine "kx"; 
+comment "dc value (kxm 180 v1.0)"
+guid "55570f40-fa8f-47e4-b80c-14808fa071f2";  
+
+;
+
+output out
+control value=0.1 
+  
+; output
+macs out, value, 0, 0
+
+end
+

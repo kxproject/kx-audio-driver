@@ -1,0 +1,107 @@
+name "microchorus v2.0";
+engine "kX";
+comment "";
+copyright "2007. stylus, http://stylus.siteboard.de"
+guid "5522d777-5bd7-4c68-9ec5-09381161a092";
+
+; registers
+  input in
+  output out1, out2
+  const rd_shifted=0x1e0000 ; 960*0x800 
+  static in_half, fx, s, t, sin1, cos1, dry, wet, y, a, b, c, tin
+  static sin=0, cos=0.25
+  control speed=0.3
+  control depth=0.3
+  control dry_wet=1
+
+; itram
+  itramsize 1920 ; 2*20 ms
+  idelay write wrt1 at 0
+  idelay read rd11 at 960 
+  idelay read rd12 at 960 
+  idelay write wrt2 at 961
+  idelay read rd21 at 1920 
+  idelay read rd22 at 1920
+
+; temp input register
+  macs tin, in, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  
+; sinoid lfo
+  macs y, 0, speed, 0.0005 ; max. ~4 Hz 
+  macs sin,  sin,  y,  cos
+  macsn cos,  cos,  y,  sin
+  macs sin1, 0.5, sin, 1 ; dc offset +0.5    
+  macs cos1, 0.5, cos, 1 ; get 0..+1
+
+; half input 
+  macs in_half, 0, tin, 0.5 
+
+; *********** left channel *********
+	
+; modulated delayline left
+
+; interpolation coeff.
+  macintw t, 0, t, 0x100000 ; 20 bit shift to get the "address part" of the 32 bit (delay) gpr 
+
+; linear interpolated delay line 
+  interp a, rd11, t, rd12 ; relax the 2 "in order" readouts 
+
+; depth 
+  macsn c, 1, 1, depth
+  macs sin1, c, sin1, depth
+
+; calculate address offset "t" 
+  macs t, &wrt1, rd_shifted, sin1 
+
+; 2 "in order" delay readout´s
+  macints &rd11, t, 0x800, 0x1
+  macints &rd12, t, 0x800, 0x2 
+
+; fill delay line
+  macs wrt1, tin, 0, 0 ; fill should be after the tricky adress calculation
+
+; mix with in_half
+  macs fx, in_half, a, 0.5 
+
+; dry/wet
+  macs wet, 0, fx, dry_wet ; make a wet- register
+  macsn dry, in, in, dry_wet ; make a dry- register
+
+; out left
+  macs out1, dry, wet, 1 
+
+; *********** right channel ********* 
+
+; modulated delayline right  
+
+; interpolation coeff. 
+  macintw s, 0, s, 0x100000 
+
+; linear interpolated delay line 
+  interp b, rd21, s, rd22  
+
+; depth
+  macsn c, 1, 1, depth
+  macs cos1, c, cos1, depth
+
+; calculate address offset "s"
+  macs s, &wrt2, rd_shifted, cos1 
+
+; 2 "in order" delay readout´s
+  macints &rd21, s, 0x800, 0x1 
+  macints &rd22, s, 0x800, 0x2   
+
+; fill delay line
+  macs wrt2, tin, 0, 0 
+
+; mix with in_half
+  macs fx, in_half, b, 0.5 
+
+; dry/wet
+  macs wet, 0, fx, dry_wet 
+  macsn dry, in, in, dry_wet 
+
+; out right
+  macs out2, dry, wet, 1 
+    
+end

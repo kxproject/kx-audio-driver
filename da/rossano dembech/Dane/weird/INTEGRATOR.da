@@ -1,0 +1,27 @@
+name "HQ Integrator";
+copyright "Copyright (c) 2004";
+
+engine "kX";
+created "05/11/2005";
+comment "by ColHQ";
+guid "16f28b7b-6748-4029-a640-fc3f8cfeaa72";
+
+	input inL, inR;
+	output outL, outR;
+	control  integration=0.5
+	static PL=0x0, PR=0x0;
+    static tl, tr, tmpl, tmpr
+
+; Code
+     macints tl, 0, inl, 0x4
+     macints tr, 0, inr, 0x4
+	 macs	 tmpl,  tl,  PL,  integration;
+	 macs 	 tmpr,  tr,  PR,  integration;
+	 macs    outl, 0, tmpl, 0.25
+	 macs    outr, 0, tmpr, 0.25
+	 macs 	 PL,  tl,  0x0,  0x0;
+	 macs	 PR,  tr,  0x0,  0x0;
+
+end
+
+

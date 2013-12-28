@@ -1,0 +1,127 @@
+<title>kX MIDI Implementation</title>
+
+<h3>Present kX Audio Driver MIDI implementation:</h3>
+
+<pre>
+ 0x80 note off
+ 0x90 note on / off
+       Velocity affects Filter Cutoff according to SoundFont 2.01 specification:
+       (8.4.2 MIDI Note-On Velocity to Filter Cutoff (-2400 cents))
+       for velocities less than 64: Filter Cutoff -= (64-velocity)*2400/64 (0..2400 cents)
+ 0xa0 key pressure (realtime velocity change)
+ 0xb0 controller
+ 0xc0 program change
+ 0xd0 channel pressure (realtime modulation change)
+       MIDI Channel Pressure affects Vibrato LFO Pitch Depth [50 cents / max excursion]
+       (according to SoundFont 2.01 specification, 8.4.3)
+ 0xe0 pitchbend
+ 0xf0, 0xf7 sysex
+
+ MIDI Controllers:
+
+  0 - bank LSB
+       see #32
+  1 - modulation
+       MIDI Continuous Controller 1 affects Vibrato LFO Pitch Depth [50 cents / max excursion]
+       (according to SoundFont 2.01 specification, 8.4.4)
+       in 'Legacy mode' affects Modulation LFO Pitch Depth (18 * Modulation CC) / 1200
+  2 - breath [under development]
+  4 - foot [under development]
+  5 - portamento time [under development]
+  6 - data entry
+  7 - volume
+  8 - balance
+       stereo balance
+       doesn't change instrument positions
+  10 - pan
+        affects stereo samples in generic way
+  11 - expression
+  16 - General Purpose 1 [10k2 SendE Amount]
+  17 - General Purpose 2 [10k2 SendF Amount]
+  18 - General Purpose 3 [10k2 SendG Amount]
+  19 - General Purpose 4 [10k2 SendH Amount]
+  32 - bank MSB
+        supports 'mixed' programming model
+        resulting bank number is: LSB+MSB,
+        thus, 254 banks are accessible and both 'LSB only' & 'MSB only' modes are supported
+        kX Mixer supports 251 (0..250) banks
+        this behaviour might change in the future...
+  38 - data entry
+  64 - sustain
+  65 - portamento on/off [under development]
+  66 - sostenuto
+  67 - soft pedal 
+       implemented via Filter Cutoff:
+       if active, Filter Cutoff is increased by 0x9e (158) - that is, gives 9000 cents
+       (that is, Filter Cutoff frequency is decreased)
+  68 - legato 
+       if active, sets Attack time to 0
+  69 - hold2 
+        implemented via Modulation / Volume Envelope Release Time
+        if active, Modulation / Volume Envelope Release Time is increased by 1900 timecents
+  71 - sound resonance
+        implemented via Filter Q (0..15 units)
+        0 - resonance is decreased by 15 units
+        64 - default
+        127 - resonance is increased by 15 units
+  72 - sound release
+        implemented via Volume Envelope Release Time
+        0 - release time is decreased by 2400 timecents
+        64 - default
+        127 - release time is increased by 2400 timecents
+  73 - sound attack
+        implemented via Volume Envelope Attack time (0..127 units)
+        0 - attack time is decreased by 64 units
+        64 - default
+        127 - attack time is increased by 64 units
+        (log-encoded)
+  74 - sound brightness 
+        implemented via Filter Cutoff
+        0 - Filter Cutoff frequency increases (minimum effect depth)
+        64 - default; 
+        127 - Filter Cutoff frequency decreases (maximum effect depth)
+  84 - portamento control [under development]
+  91 - reverb level
+        implemented according to SoundFont 2.01 specification:
+        8.4.8 MIDI Continuous Controller 91 to Reverb Effects Send
+        Amount equals to 200 tenths of a percent
+        that is, 127 gives 20% reverb increase
+  92 - tremulo level [under development]
+  93 - chorus level
+        implemented according to SoundFont 2.01 specification:
+        8.4.9 MIDI Continuous Controller 93 to Chorus Effects Send
+        Amount equals to 200 tenths of a percent
+        that is, 127 gives 20% chorus increase
+  94 - celeste level [under development]
+  95 - phaser level [under development]
+  96 - data increment
+  97 - data decrement
+  98 - NRPN lsb fine
+  99 - NRPN msb coarse
+  100 - RPN lsb fine
+  101 - RPN msb coarse
+  120 - all sounds off [terminate all notes]
+  121 - reset all controllers
+         the following controlles aren't reset (according to MIDI specification):
+         7 (Volume),
+         10 (Pan),
+         8 (Balance),
+         91 (Reverb),
+         93 (Chorus),
+         92, 94, 95 (Tremulo, Celeste, Phaser)
+         0, 32 (Bank selection)
+  123 - all notes off [release all notes]
+
+ supported RPNs:
+  00 - pitchbend sensivity
+  01 - master fine tuning
+  02 - master coarse tuning
+  7f - RPN reset
+
+ supported NRPNs:
+  SoundFont 2.01 NRPNs
+  AWE NRPNs
+
+ SysEx:
+  f0 7f 7f 04 01 LL MM f7 - synth volume
+</pre>

@@ -1,0 +1,30 @@
+; Demo microcode
+	name "demo";
+	copyright "Copyright (c) kX Project, 2002-2004. All rights reserved";
+	created "05/03/2002";
+	engine "kX";
+	; comment "";
+	guid "ac9e749d-1c7d-4fd6-9896-9794c12b6d31";
+	; -- generated GUID
+	; -- note: you should always use a new guid for your effects
+	; -- you can generate it using kX Editor or kX Mixer
+
+; itramsize 0
+; xtramsize 0
+; -- we don't use TRAM lines in this example
+                                            
+    ; declare inputs & output registers                                            
+    input in1, in2
+    output out1,out2
+                                       
+    ; declare control registers                                        
+    control vol1, vol2
+    
+; code                           
+    
+    ; adjust volume level
+    macs out1, 0, in1, vol1
+    macs out2, 0, in2, vol2
+
+
+end

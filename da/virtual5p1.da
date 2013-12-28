@@ -1,0 +1,371 @@
+name "virtual5.1";
+copyright "Copyright (c) 2004. Foolou";
+created "10/22/2004";
+engine "kX";
+guid "b2d90700-13e6-4aba-ae11-fb3a34eb986a";
+
+comment "This plugin does a reduced HRTF-convolution to achieve virtual 5point-surround-sound"
+	
+itramsize 172;
+
+; This plugin does a reduced HRTF-convolution to achieve virtual 5point-surround-sound
+; The hrtf is derived from the kemar data : http://sound.media.mit.edu/KEMAR.html
+
+ 
+ ; input for the convolution is 4 mono-streams for the 4 positioned speakers:
+ ; infl = frontleft, infr = frontright, inbl = backleft, inbr = backright
+ ; inm = center
+  
+	input infl, infr, inbl;
+	input inbr;
+	input inm;
+	input lfe;
+
+ ; prestored values for the mixers
+	
+	control front-left=0.83;
+	control front-right=0.83;
+	control back-left=0.9;
+	control back-right=0.9;
+	control center=0.7;
+
+	control lfe-volume=0.7;
+	
+; output is a spatialized stereo-mix of the 5 audiosources for
+; headphone
+
+	output outhl, outhr;
+
+; this is the FIR-filters used to achieve the effect
+; backward-filter:
+
+	static l10= 0.03326667,  l11= 0.28890000,  l12=-0.06650000;
+	static l13=-0.30056667,  l14= 0.22286667,  l15= 0.07123333;
+	static l16=-0.17296667,  l17= 0.18620000,  l18= 0.41426667;
+	static l19= 0.08590000,  l20= 0.07236667,  l21= 0.33280000;
+	static l22= 0.03366667,  l23=-0.10180000,  l24= 0.00623333;
+	static l25=-0.04856667,  l26=-0.12326667,  l27=-0.05936667;
+	static r22= 0.08553333,  r23= 0.09703333,  r24=-0.09350000;
+	static r25=-0.04806667,  r26= 0.05866667,  r27=-0.00556667;
+	static r28=-0.00956667,  r29= 0.15076667,  r30= 0.23810000;
+	static r31= 0.07446667,  r32= 0.07696667;
+
+; frontleft-filter:
+
+	static fl09= 0.18696667, fl10= 0.41006667, fl11= -0.38650000;
+	static fl12=-0.14216667, fl13= 0.04960000, fl14= -0.14953333;
+	static fl15= 0.48100000, fl16= 0.03460000, fl17=  0.22436667;
+	static fl18= 0.76460000, fl19= 0.06076667, fl20= -0.40433333;
+	static fl21= 0.09683333, fl22= 0.07473333, fl23= -0.40000000;
+	static fl24=-0.12726667, fl25=-0.07180000;
+	
+	static fr20= 0.11010000, fr21= 0.04873333, fr22=-0.10876667;
+	static fr23= 0.07416667, fr24=-0.03633333, fr25=-0.04693333;
+	static fr26= 0.16090000, fr27= 0.04556667, fr28= 0.08066667;
+	static fr29= 0.23163333, fr30= 0.13646667, fr31=-0.07303333;
+	static fr32= 0.08133333, fr33=-0.10006667;
+	
+
+	
+; temporal variables needed to do the math	
+
+	temp outl, outr , x;  
+	
+	
+; using 5 sections of the itram for 5 audio-delays
+
+	idelay write putincuebl at 0x0;
+	idelay write putincuebr at 0x22;
+	idelay write putincuefl at 0x44;
+	idelay write putincuefr at 0x66;
+	idelay write putincuefm at 0x88;
+	
+; needs a lot of registers to access the needed parts of the 
+; itram for the hrtf-convolution
+
+	idelay read w32 at 0x20;
+	idelay read w31 at 0x1F;
+	idelay read w30 at 0x1E;
+	idelay read w29 at 0x1D;
+	idelay read w28 at 0x1C;
+	idelay read w27 at 0x1B;
+	idelay read w26 at 0x1A;
+	idelay read w25 at 0x19;
+	idelay read w24 at 0x18;
+	idelay read w23 at 0x17;
+	idelay read w22 at 0x16;
+	idelay read w21 at 0x15;
+	idelay read w20 at 0x14;
+	idelay read w19 at 0x13;
+	idelay read w18 at 0x12;
+	idelay read w17 at 0x11;
+	idelay read w16 at 0x10;
+	idelay read w15 at 0x0F;
+	idelay read w14 at 0x0E;
+	idelay read w13 at 0x0D;
+	idelay read w12 at 0x0C;
+	idelay read w11 at 0x0B;
+	idelay read w10 at 0x0A;
+	
+	idelay read b32 at 0x42;
+	idelay read b31 at 0x41;
+	idelay read b30 at 0x40;
+	idelay read b29 at 0x3F;
+	idelay read b28 at 0x3E;
+	idelay read b27 at 0x3D;
+	idelay read b26 at 0x3C;
+	idelay read b25 at 0x3B;
+	idelay read b24 at 0x3A;
+	idelay read b23 at 0x39;
+	idelay read b22 at 0x38;
+	idelay read b21 at 0x37;
+	idelay read b20 at 0x36;
+	idelay read b19 at 0x35;
+	idelay read b18 at 0x34;
+	idelay read b17 at 0x33;
+	idelay read b16 at 0x32;
+	idelay read b15 at 0x31;
+	idelay read b14 at 0x30;
+	idelay read b13 at 0x2F;
+	idelay read b12 at 0x2E;
+	idelay read b11 at 0x2D;
+	idelay read b10 at 0x2C; 
+	
+	idelay read p33 at 0x65;
+	idelay read p32 at 0x64;
+	idelay read p31 at 0x63;
+	idelay read p30 at 0x62;
+	idelay read p29 at 0x61;
+	idelay read p28 at 0x60;
+	idelay read p27 at 0x5F;
+	idelay read p26 at 0x5E;
+	idelay read p25 at 0x5D;
+	idelay read p24 at 0x5C;
+	idelay read p23 at 0x5B;
+	idelay read p22 at 0x5A;
+	idelay read p21 at 0x59;
+	idelay read p20 at 0x58;
+	idelay read p19 at 0x57;
+	idelay read p18 at 0x56;
+	idelay read p17 at 0x55;
+	idelay read p16 at 0x54;
+	idelay read p15 at 0x53;
+	idelay read p14 at 0x52;
+	idelay read p13 at 0x51;
+	idelay read p12 at 0x50;
+	idelay read p11 at 0x4F;
+	idelay read p10 at 0x4E;
+	idelay read p09 at 0x4D;
+	
+	idelay read q33 at 0x87;
+	idelay read q32 at 0x86;
+	idelay read q31 at 0x85;
+	idelay read q30 at 0x84;
+	idelay read q29 at 0x83;
+	idelay read q28 at 0x82;
+	idelay read q27 at 0x81;
+	idelay read q26 at 0x80;
+	idelay read q25 at 0x7F;
+	idelay read q24 at 0x7E;
+	idelay read q23 at 0x7D;
+	idelay read q22 at 0x7C;
+	idelay read q21 at 0x7B;
+	idelay read q20 at 0x7A;
+	idelay read q19 at 0x79;
+	idelay read q18 at 0x78;
+	idelay read q17 at 0x77;
+	idelay read q16 at 0x76;
+	idelay read q15 at 0x75;
+	idelay read q14 at 0x74;
+	idelay read q13 at 0x73;
+	idelay read q12 at 0x72;
+	idelay read q11 at 0x71;
+	idelay read q10 at 0x70;
+	idelay read q09 at 0x6F;
+	
+	idelay read outm at 0x98; center is just a little delayed
+
+; Code      
+
+; putting the 5 inputstreams on the itram
+	 macs 	 putincuebl,  inbl,  0x0,  0x0;
+	 macs 	 putincuebr,  inbr,  0x0,  0x0;
+	 macs 	 putincuefl,  infl,  0x0,  0x0;
+	 macs 	 putincuefr,  infr,  0x0,  0x0;
+	 macs    putincuefm,  inm,  0x0,  0x0;
+
+; and now doing the FIR math with the accum	 
+; backleft-stereo-l-spatialized
+
+	 macs 	 infl,  0x0,  0x0,  0x0;
+	 macmv 	 x,  x,  w27,  l27;
+	 macmv 	 x,  x,  w26,  l26;
+	 macmv 	 x,  x,  w25,  l25;
+	 macmv 	 x,  x,  w24,  l24;
+	 macmv 	 x,  x,  w23,  l23;
+	 macmv 	 x,  x,  w22,  l22;
+	 macmv 	 x,  x,  w21,  l21;
+	 macmv 	 x,  x,  w20,  l20;
+	 macmv 	 x,  x,  w19,  l19;
+	 macmv 	 x,  x,  w18,  l18;
+	 macmv 	 x,  x,  w17,  l17;
+	 macmv 	 x,  x,  w16,  l16;
+	 macmv 	 x,  x,  w15,  l15;
+	 macmv 	 x,  x,  w14,  l14;
+	 macmv 	 x,  x,  w13,  l13;
+	 macmv 	 x,  x,  w12,  l12;
+	 macmv 	 x,  x,  w11,  l11;
+	 macmv 	 x,  x,  w10,  l10;
+	 macs 	 x,  accum,  0x0,  0x0;
+	 macs 	 outl,  0x0,  x,   back-left; mixed into the outputleftchannel
+	 
+	 ;back-right stereo-r-spatialized
+
+	 macs 	 infl,  0x0,  0x0,  0x0;
+	 macmv 	 x,  x,  b27,  l27;
+	 macmv 	 x,  x,  b26,  l26;
+	 macmv 	 x,  x,  b25,  l25;
+	 macmv 	 x,  x,  b24,  l24;
+	 macmv 	 x,  x,  b23,  l23;
+	 macmv 	 x,  x,  b22,  l22;
+	 macmv 	 x,  x,  b21,  l21;
+	 macmv 	 x,  x,  b20,  l20;
+	 macmv 	 x,  x,  b19,  l19;
+	 macmv 	 x,  x,  b18,  l18;
+	 macmv 	 x,  x,  b17,  l17;
+	 macmv 	 x,  x,  b16,  l16;
+	 macmv 	 x,  x,  b15,  l15;
+	 macmv 	 x,  x,  b14,  l14;
+	 macmv 	 x,  x,  b13,  l13;
+	 macmv 	 x,  x,  b12,  l12;
+	 macmv 	 x,  x,  b11,  l11;
+	 macmv 	 x,  x,  b10,  l10;
+	 macs 	 x,  accum,  0x0,  0x0;
+	 macs 	 outr,  0x0,  x,   back-right; mixed into the outputrightchannel
+	 
+	 ;backleft stereo-r-spatialized
+	 macs 	 infl,  0x0,  0x0,  0x0;
+	 macmv 	 x,  x,  w32,  r32;
+	 macmv 	 x,  x,  w31,  r31;
+	 macmv 	 x,  x,  w30,  r30;
+	 macmv 	 x,  x,  w29,  r29;
+	 macmv 	 x,  x,  w28,  r28;
+	 macmv 	 x,  x,  w27,  r27;
+	 macmv 	 x,  x,  w26,  r26;
+	 macmv 	 x,  x,  w25,  r25;
+	 macmv 	 x,  x,  w24,  r24;
+	 macmv 	 x,  x,  w23,  r23;
+	 macmv 	 x,  x,  w22,  r22;
+	 macs 	 x,  accum,  0x0,  0x0;
+	 macs    outr, outr, x, back-left; mixed to outputright
+	 
+	 ;backright stereo-l-spatialized
+	 macs 	 infl,  0x0,  0x0,  0x0;
+	 macmv 	 x,  x,  b32,  r32;
+	 macmv 	 x,  x,  b31,  r31;
+	 macmv 	 x,  x,  b30,  r30;
+	 macmv 	 x,  x,  b29,  r29;
+	 macmv 	 x,  x,  b28,  r28;
+	 macmv 	 x,  x,  b27,  r27;
+	 macmv 	 x,  x,  b26,  r26;
+	 macmv 	 x,  x,  b25,  r25;
+	 macmv 	 x,  x,  b24,  r24;
+	 macmv 	 x,  x,  b23,  r23;
+	 macmv 	 x,  x,  b22,  r22;
+	 macs 	 x,  accum,  0x0,  0x0;
+	 macs    outl, outl, x, back-right;
+	   
+	; now the frontspeakers: 
+	; frontleft, stereo-l-spatialized
+	 macs 	 infl,  0x0,  0x0,  0x0;
+	 macmv   x,  x,  p25, fl25;
+	 macmv   x,  x,  p24, fl24;
+	 macmv   x,  x,  p23, fl23;
+	 macmv   x,  x,  p22, fl22;
+	 macmv   x,  x,  p21, fl21;
+	 macmv   x,  x,  p20, fl20;
+	 macmv   x,  x,  p19, fl19;
+	 macmv   x,  x,  p18, fl18;
+	 macmv   x,  x,  p17, fl17;
+	 macmv   x,  x,  p16, fl16;
+	 macmv   x,  x,  p15, fl15;
+	 macmv   x,  x,  p14, fl14;
+	 macmv   x,  x,  p13, fl13;
+	 macmv   x,  x,  p12, fl12;
+	 macmv   x,  x,  p11, fl11;
+	 macmv   x,  x,  p10, fl10;
+	 macmv   x,  x,  p09, fl09;
+	 macs  x, accum, 0,0;
+	 macs  outl, outl, x, front-left;
+	 
+	; frontleft, stereo-r-spatialized:
+	macs 	 infl,  0x0,  0x0,  0x0;
+	macmv    x, x , p33, fr33;
+        macmv    x, x , p32, fr32;
+	macmv    x, x , p31, fr31;
+        macmv    x, x , p30, fr30;
+        macmv    x, x , p29, fr29;
+        macmv    x, x , p28, fr28;
+        macmv    x, x , p27, fr27;
+        macmv    x, x , p26, fr26;
+        macmv    x, x , p25, fr25;
+        macmv    x, x , p24, fr24;
+        macmv    x, x , p23, fr23;
+        macmv    x, x , p22, fr22;
+        macmv    x, x , p21, fr21;
+        macmv    x, x , p20, fr20;
+        macs x, accum, 0,0; 
+        macs outr, outr, x, front-left;
+     
+        ; frontright, stereo-l-spatialized:
+ 	macs 	 infl,  0x0,  0x0,  0x0;
+        macmv    x, x , q33, fr33;
+        macmv    x, x , q32, fr32;
+        macmv    x, x , q31, fr31;
+        macmv    x, x , q30, fr30;
+        macmv    x, x , q29, fr29;
+        macmv    x, x , q28, fr28;
+        macmv    x, x , q27, fr27;
+        macmv    x, x , q26, fr26;
+        macmv    x, x , q25, fr25;
+        macmv    x, x , q24, fr24;
+        macmv    x, x , q23, fr23;
+        macmv    x, x , q22, fr22;
+        macmv    x, x , q21, fr21;
+        macmv    x, x , q20, fr20;
+        macs x, accum, 0,0;
+        macs outl, outl, x,  front-right;
+     
+        ; frontright, stereo-r-spatialized:
+	macs 	 infl,  0x0,  0x0,  0x0;
+	macmv   x,  x,  q25, fl25;
+	macmv   x,  x,  q24, fl24;
+	macmv   x,  x,  q23, fl23;
+	macmv   x,  x,  q22, fl22;
+	macmv   x,  x,  q21, fl21;
+	macmv   x,  x,  q20, fl20;
+	macmv   x,  x,  q19, fl19;
+	macmv   x,  x,  q18, fl18;
+	macmv   x,  x,  q17, fl17;
+	macmv   x,  x,  q16, fl16;
+	macmv   x,  x,  q15, fl15;
+	macmv   x,  x,  q14, fl14;
+	macmv   x,  x,  q13, fl13;
+	macmv   x,  x,  q12, fl12;
+	macmv   x,  x,  q11, fl11;
+	macmv   x,  x,  q10, fl10;
+	macmv   x,  x,  q09, fl09;
+	macs  x, accum, 0,0;
+	macs  outr, outr, x, front-right;
+	
+
+;after calculating the 8 different audio-streams they are mixed
+;together for the stereo-output
+
+  
+     macs    outl, outl, lfe, lfe-volume;
+     macs    outr, outr, lfe, lfe-volume;
+
+	 macs    outhl, outl,   outm,  center;
+	 macs    outhr, outr,   outm,  center;
+end;

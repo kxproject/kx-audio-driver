@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+
+sudo rm -R ./distr
+sudo rm -R ./final
+sudo rm -R ./build
+
+sudo rm ./kXAudioDriver*.dmg

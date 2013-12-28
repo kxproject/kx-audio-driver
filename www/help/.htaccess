@@ -1,0 +1,6 @@
+AddHandler parse_htm .htm
+Action parse_htm /helper.php?type=1234&file=
+AddHandler parse_bin .gif
+AddHandler parse_bin .jpg
+Action parse_bin /helper.php?type=4321&file=
+

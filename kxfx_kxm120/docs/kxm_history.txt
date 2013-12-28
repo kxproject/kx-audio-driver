@@ -1,0 +1,42 @@
+kxm history
+
+v1.3, April'2009
+
+- integrated with kX driver [by E.]
+- 64-bit compatibility changes [by E.]
+
+
+v1.2, 24.05.2008
+
+- "kxm 120" fast midi keyboard unit
+- no more need to bundle "trafo"
+
+v1.1, 23.04.2008
+
+- final release version
+- now 28 modules
+- new aliasingfree vco "kxm 210" replaces the old one (based on "kxm 200" with saw, triangle, square, pulswidthed square)
+- new full range keyboard unit "kxm 110", thanks russ
+- new "kxm 170" 16x multiplier (use as octave multiplier to generate higher frequencies for ringmodulation (fm - modulation))
+- new "kxm 180" single dc value
+- new "kxm 190" inverter
+- new "trafo" preset "kxm_v11" to use with "kxm 110"
+- some presets of classic synths with basic automation for nordlead 1 midi controllers
+- no more velocity control inputs in vcf's, vca's
+- no more spaced saw in vco's
+- no more supersquare (maybe later again)
+- 2 lfo inputs in vco, vcf's, vca for liquid modulation
+- added 16x gain slider in ringmodulator "kxm 820"
+- envelope adjustments in "kx 400"
+- base frequency adjustments in vco's (2 octaves lower), smaller finetune range
+- lfo control adjustments in vcf, vca
+- lfo offset slider +/- 0.5
+- spike filter on all vca control inputs
+- new guid in "kxm 520" (was the same as "kxm 500")
+- freeware "trafo 0.8" is bundled, please visit "http://members.nextra.at/hubwin//midi.html"
+- code optimizations
+
+
+v1.0, 2007
+
+- prerelease version

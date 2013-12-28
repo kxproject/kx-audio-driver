@@ -1,0 +1,79 @@
+kX Driver / kX Driver Interface
+Copyright (c) Eugene Gavrilov, 2001-2014.
+All rights reserved
+
+-----------------------------------
+ kX Software Development Kit (SDK)
+-----------------------------------
+
+/*
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+
+
+kX API:
+-------
+
+\h      - header files; for your programs include kxapi.h only
+\lib    - kX API import library;
+          dynamically linked to kxapi.dll and kxgui.dll (bundled with the kX Driver)
+
+Sample programs:
+----------------
+
+\kxctrl		- full source code of kxctrl.exe (bundled with the kX Driver)
+\edspctrl   - full source code of edspctrl.exe (bundled with the kX Driver)
+\kxfxlib    - full source code of kxfxlib.kxl (bundled with the kX Driver)
+\kxsfman    - full source code of sfman32.dll (bundled with the kX Driver)
+
+\kxapi      - full source code for the kxapi.dll
+\kxmixer    - partial source code for the kxmixer.exe
+
+build instructions:
+
+kxctrl:
+ cl -MT -I..\h kxctrl.cpp parse.cpp ..\lib\kxapi.lib
+kxfxlib:
+ use NTDDK build environment
+
+sample plugins:
+ \kxfx_pack: kX FX Pack source code
+ \fx_demo: demo effect
+
+ \kxfx_dynamica: Dynamica effect source code [supports skinning]
+ \kxfx_efx_tube: E-FX Tube effect source code [supports skinning]
+ \kxfx_efx_reverb: E-FX Reverb effect source code [supports skinning]
+ \kxfx_efx: E-FX library [custom controls, skinned]
+ \kxfx_kxm120: KXM effects library
+
+ \da: various Dane effects (.DA files)
+
+addons:
+ \kxaddons: full source code of kxaddons.kxa (bundled with the kX Driver)
+ \sample_addon: a demo add-on
+
+----------------
+OS X driver code
+----------------
+
+Folder \macosx contains full source code for the Mac OS X driver, except for HAL shared with Windows and covered by NDA.
+Subfolders:
+
+ \"10kx driver.xcodeproj" -- XCode project file
+ \kext -- main kext file source code, OS X specific components
+ \kxac97 -- AC 97 manager
+ \kxmanager -- kX Manager (kX Mixer) -- nothing useful there at the moment
+ \package -- install files and scripts for generating driver installer
+ \pcmblitter -- Apple library for dealing with audio format conversions (part of the KEXT)

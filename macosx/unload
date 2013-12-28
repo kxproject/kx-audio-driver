@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+
+echo === Unloading kX Audio driver....
+
+sync
+sync
+sudo kextunload -v /System/Library/Extensions/kXAudioDriver.kext
+sync
+sync

@@ -1,0 +1,60 @@
+<title>Индекс</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><img  src="images/kxlogo.jpg" width="300" height="150"></p>
+<p><b>Введение</b><br>
+&nbsp;&nbsp;&nbsp; <a href="mission.htm">Миссия kX Project</a><br>
+&nbsp;&nbsp;&nbsp; <a href="overview.htm">Краткий обзор kX драйвера</a><br>
+&nbsp;&nbsp;&nbsp; <a href="menu.htm">kX меню</a></p>
+<p><b>kX Микшер</b><br>
+&nbsp;&nbsp;&nbsp; <a href="mixer.htm">Краткий обзор kX Микшера</a><br>
+&nbsp;&nbsp;&nbsp; <a href="basic.htm">Основные функции</a><br>
+&nbsp;&nbsp;&nbsp; <a href="master.htm">Основные регулировки</a><br>
+  &nbsp;&nbsp;&nbsp; <a href="insnouts.htm">Входы и выходы</a><br>
+&nbsp;&nbsp;&nbsp; <a href="recording.htm">Запись</a><br>
+&nbsp;&nbsp;&nbsp; <a href="ac97.htm">Кодек AC97</a><br>
+&nbsp;&nbsp;&nbsp; <a href="fxlevels.htm">Уровни эффектов</a><br>
+&nbsp;&nbsp;&nbsp; <a href="soundfonts.htm">SoundFont</a><br>
+&nbsp;&nbsp;&nbsp; <a href="analyser.htm">Анализатор</a></p>
+<p><b>kX DSP</b><br>
+&nbsp;&nbsp;&nbsp; <a href="dspguide.htm">Руководство по kX DSP</a><br>
+  &nbsp;&nbsp;&nbsp; <a href="qguide.htm">Руководство для начинающих</a></p>
+<p><b>kX Router</b><br>
+  &nbsp;&nbsp;&nbsp; <a href="kxrouter.htm">Руководство по kX Router</a><br>
+&nbsp;&nbsp;&nbsp; <a href="routings.htm">Руководство по маршрутизации</a></p>
+<p><b>kX Редактор</b><br>
+  &nbsp;&nbsp;&nbsp; <a href="editor.htm">Руководство по kX Dane ассемблеру</a></p>
+<p><b>kX Automation</b><br>
+&nbsp;&nbsp;&nbsp; <a href="automation.htm">Руководство по kX автоматизации</a></p>
+<p><b>kX Пульт</b><br>
+&nbsp;&nbsp;&nbsp; <a href="remote.htm">kX пульт </a></p>
+<p><b>kX Установка</b><br>
+&nbsp;&nbsp;&nbsp; <a href="setup.htm">Инструкции по установке kX драйвера</a></p>
+<p><b>kX ASIO</b><br>
+&nbsp;&nbsp;&nbsp; <a href="asio.htm">Управление ASIO</a><br>
+&nbsp;&nbsp;&nbsp; <a href="asiorec.htm">Запись ASIO</a><br>
+&nbsp;&nbsp;&nbsp; <a href="qguide.htm">Руководство для начинающих</a></p>
+<p><b>kX Проверка Колонок и настройка эффекта Surrounder</b><br>
+  &nbsp;&nbsp;&nbsp; <a href="spktest.htm"> Проверка колонок</a><br>
+  &nbsp;&nbsp;&nbsp; <a href="surrounder.htm"> Surrounder</a></p>
+<p><b>Решение проблем</b><br>
+&nbsp;&nbsp;&nbsp; <a href="issues.htm">Известные проблемы и их решение</a></p>
+<p><b>FAQ</b><br>
+&nbsp;&nbsp;&nbsp; <a href="faq.htm">Список популярных вопросов</a></p>
+<p><b>Приложение A: Технический справочник</b><br>
+&nbsp;&nbsp;&nbsp; <a href="signaflow.htm">Сигнальная блок-схема</a><br>
+&nbsp;&nbsp;&nbsp; <a href="hardware.htm">Обзор аппаратных средств</a><br>
+&nbsp;&nbsp;&nbsp; <a href="io.htm">Назначения входов и выходов</a><br>
+&nbsp;&nbsp;&nbsp; <a href="rear.htm">Перемена местами Фронта и Тыла</a><br>
+&nbsp;&nbsp;&nbsp; <a href="midi.htm">MIDI Implementation</a></p>
+<p><b>Приложение B: Глоссарий</b><br>
+&nbsp;&nbsp;&nbsp; <a href="glossary.htm">Глоссарий</a></p>
+<p><b>Приложение C: Справочник параметров командной строки</b><br>
+&nbsp;&nbsp;&nbsp; <a href="commandline.htm">Справочник параметров командной строки</a></p>
+<p><b>Авторские права и благодарности</b><br>
+&nbsp;&nbsp;&nbsp; <a href="copyright.htm">Юридическая справка и авторские права</a><br>
+&nbsp;&nbsp;&nbsp; <a href="credits.htm">Благодарности</a><br>
+&nbsp;&nbsp;&nbsp; <a href="license.txt">Лицензионное соглашение</a><br>
+&nbsp;&nbsp;&nbsp; <a href="license2.txt">SDK Лицензионное соглашение</a></p>

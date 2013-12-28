@@ -1,0 +1,19 @@
+name "kxm 330";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created ""; 
+comment "2 channel mixer module (kxm 330 v1.1)"
+guid "bac982f3-c431-4e74-9345-c9c5a320fec4";
+
+; Registers
+input in_1, in_2;
+output out
+control vol_1=1, vol_2=1, master=0.5
+static a
+
+; amlify mix & output
+macs a, 0, in_1, vol_1  
+macs a, a, in_2, vol_2 
+macs out, 0, a, master
+
+end

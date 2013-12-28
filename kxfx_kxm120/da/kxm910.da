@@ -1,0 +1,64 @@
+name "kxm 910";
+engine "kX";
+comment "phaser module (kxm 910 v1.1)";
+copyright "2007. stylus, http://stylus.siteboard.de"
+guid "f001167c-6784-4178-bd1b-737e91f8e855";
+
+; registers 
+
+input in
+output out
+control manual=0 
+control feedback=0.5
+control speed=0.05
+control dry_wet=1
+static lp_cut= 0.6 
+static rd_max_shifted=0x78000; (0x800 adress shift (itramsize* 0x800, 0xf0* 0x800 = 0x78000) ) 
+static t, r, s, u, speed_norm, in_half, test_speed, tri_abs, fx,v
+static tri=0.0   
+static dir=1.0
+
+; itramsize
+       
+itramsize 240
+idelay write wrt at 0
+idelay read rd at 1
+
+; triangle lfo 
+   
+macs speed_norm, 0, speed, 0.00020833333 ; should be max. 5 Hz
+macs tri, tri,speed_norm,dir ; counter
+skip ccr, ccr, 0x10, 0x1 ; skip next instruction if tri=1     
+macsn dir, 0.0, dir, 1.0 ; change sign     
+macsn dir, 0.0, dir, 1.0 ; change sign	  
+tstneg tri_abs, tri, tri, 0 ; tri_abs = abs(tri), need only 0..+1       
+macs tri_abs, 0.01, tri_abs, 1 ; offset the triangle amplitude so it´s never 0 and the phaser never does to much output
+
+; half input
+  
+macs in_half, 0, in, 0.5 	
+
+; delay line & lfo/manual check
+
+macs wrt,  in_half,  rd,  feedback; feedback mix
+macs t,  0,  rd_max_shifted, tri_abs; modulate rd_max_shifted by lfo  
+macs test_speed, speed, 0, 0 ; test value for skip instruction
+skip ccr, ccr, 0x100, 1 ; skip next instruction if speed slider is 0
+macs t,  0,  rd_max_shifted, manual; modulate rd_max_shifted by manual 
+macs &rd,  &wrt, t, 1;  calculate readadress (&rd)
+
+; 24 db lowpass cascade (do you like moog? :)) to avoid crackling while readaddress is modulated 
+
+interp r, r, lp_cut, rd ; 1 of 4 6db lowpass filters
+interp s, s, lp_cut, r
+interp u, u, lp_cut, s
+interp v, v, lp_cut, u 
+    
+; fx mix
+
+macs fx, v, in_half, 1 ; the raw phaser 
+
+; dry/wet
+interp out, in, dry_wet, fx
+    
+end

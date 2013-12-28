@@ -1,0 +1,41 @@
+name "microlimiter v1.1";
+copyright "2009. stylus, http://stylus.siteboard.de"
+created "02/25/2009";
+engine "kX";
+comment "stereo limiter with 10 transfer- curves";
+guid "637e97f8-40eb-4564-9775-248c74b33907";
+
+; code
+input in1, in2
+output out1, out2
+control in=0.15
+control curve=0.7
+control out=0.7
+static in1a, in2a, a 
+
+; trim sliders
+interp a, 0x1, curve, 0xA ; 10 curves                       
+
+; left channel *************************
+
+; input in
+macs in1a, 0, in1, in 
+
+; log
+log in1a, in1a, a, 0    
+
+; out
+macs out1, 0, in1a, out
+
+; right channel *************************
+
+; input in
+macs in2a, 0, in2, in 
+
+; log
+log in2a, in2a, a, 0
+
+; out
+macs out2, 0, in2a, out
+
+end

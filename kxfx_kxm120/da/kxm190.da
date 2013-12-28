@@ -1,0 +1,17 @@
+name "kxm 190";
+copyright "2008. stylus";
+created "01/09/2008";
+engine "kx"; 
+comment "inverter (kxm 190 v1.0)"
+guid "027919ee-7585-402d-afb5-674acadbf322";  
+
+; inverter for 180 degrees phaseshift, sign change etc.
+
+input in
+output out
+  
+; output
+macsn out, 0, in, 1
+
+end
+

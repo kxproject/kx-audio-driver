@@ -1,0 +1,54 @@
+
+<h4>Impl&eacute;mentation actuelle du pilote audio kX :</h4>
+
+[outdated - see English version for details]<br>
+
+<pre>
+ 0x80 Note rel&acirc;ch&eacute;e // note off
+ 0x90 Note appuy&eacute;e/rel&acirc;ch&eacute;e // note on / off
+ 0xa0 Pression de touche -- changement de v&eacute;locit&eacute; temps-r&eacute;el // key pressure -- realtime velocity change
+ 0xb0 Contr&ocirc;leur // controller
+ 0xc0 Changement de programme // program change
+ 0xd0 Pression canal (toutes les touches) -- changement de modulation temps-r&eacute;el // channel pressure -- realtime modulation change
+ 0xe0 Modulation de hauteur via la molette // pitchbend
+ 0xf0, 0xf7 Syst&egrave;me exclusif // sysex
+
+ Contr&ocirc;leurs :
+  0 - Banque LSB (octet de poids faible) // bank LSB
+  1 - Modulation de la hauteur // modulation
+  6 - Entr&eacute;e de donn&eacute;es // data entry
+  7 - Volume // volume
+  8 - Balance
+  11 - Expression // expression
+  10 - Panoramique // pan = balance
+  32 - Banque MSB (octet de poids fort) // bank MSB
+  38 - Entr&eacute;e de donn&eacute;es // data entry
+  64 - Maintien // sustain
+  66 - Sostenuto // sostenuto
+  67 - P&eacute;dale de sourdine -- filtre de coupure //soft pedal -- filter_cutoff
+  69 - Tenue 2 -- modulation / volume enveloppe / maintien 2 /// hold2 -- mod/vol env release time
+  91 - R&eacute;verb&eacute;ration // reverb
+  93 - Effet de ch&#156;ur // chorus
+  96 - Augmentation des valeurs //data increment
+  97 - Augmentation des valeurs // data decrement
+  98 - LSB (octet poids faible) NPRN (Param&egrave;tres non enregistr&eacute;s) fine // NRPN lsb fine
+  99 - MSB (octet de poids fort) NPRN (Param&egrave;tres non enregistr&eacute;s) basse r&eacute;solution // NRPN msb coarse
+  100 - LSB (octet de poids faible) RPN (Param&egrave;tres enregistr&eacute;s) fine // RPN lsb fine
+  101 - RPN (Param&egrave;tres enregistr&eacute;s) MSB (octet de poids fort) basse r&eacute;solution // RPN msb coarse
+  120 - Tous les sons arr&ecirc;t&eacute;s [arr&ecirc;te toutes les notes] // all sounds off [terminate all notes]
+  121 - R&eacute;initialisation des contr&ocirc;leurs // reset all controllers
+  123 - Tous les sons arr&ecirc;t&eacute;s [arr&ecirc;te toutes les notes] //all notes off [release all notes]
+
+ RPNs (Param&egrave;tres enregistr&eacute;s) :
+  00 - Sensitivit&eacute; de la molette hauteur de son //pitchbend sensivity
+  01 - R&eacute;glage fin g&eacute;n&eacute;ral // master fine tuning
+  02 - R&eacute;glage basse r&eacute;solution g&eacute;n&eacute;ral // master coarse tuning
+  7f - R&eacute;initialisation RPN // RPN reset
+
+ Syst&egrave;me Exclusif :
+  f0 7f 7f 04 01 LL MM f7 - Volume synth&eacute;tiseur // synth volume
+</pre>
+
+
+
+

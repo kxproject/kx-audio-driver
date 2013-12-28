@@ -1,0 +1,167 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "vers.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#define VER_FILEFLAGSMASK		VS_FFI_FILEFLAGSMASK
+#define VER_FILEOS          		VOS_NT_WINDOWS32
+#define VER_FILEFLAGS			0
+
+#define VER_COMPANYNAME_STR 		KX_COMPANY_NAME
+#define VER_PRODUCTNAME_STR 		"kX Audio Driver DSP Effects Library - EF-X Tube"
+#define VER_LEGALCOPYRIGHT_YEARS    	KX_COPYRIGHT_YEARS_STR
+#define VER_LEGALCOPYRIGHT_STR		KX_COPYRIGHT_STR_R
+#define VER_LEGALTRADEMARKS_STR     	""
+#define VER_PRODUCTVERSION		KX_DRIVER_VERSION
+#define VER_PRODUCTVERSION_STR		KX_DRIVER_VERSION_STR
+#define VER_FILEVERSION			VER_PRODUCTVERSION
+#define VER_FILEVERSION_STR		VER_PRODUCTVERSION_STR
+#define VER_PRODUCTVERSION_DW       	(0x01000000 | VER_PRODUCTBUILD)
+
+#define VER_FILETYPE			VFT_DRV
+#define VER_FILESUBTYPE			VFT2_DRV_SYSTEM
+#define VER_FILEDESCRIPTION_STR		"kX Audio Driver DSP Effects Library EF-X Tube"
+#define VER_INTERNALNAME_STR		"kxefxtube.kxl"
+#define VER_ORIGINALFILENAME_STR	VER_INTERNALNAME_STR
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 5,10,0,3538
+ PRODUCTVERSION 5,10,0,3538
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x3L
+ FILESUBTYPE 0x7L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",     VER_COMPANYNAME_STR
+            VALUE "FileDescription", VER_FILEDESCRIPTION_STR 
+            VALUE "FileVersion",     VER_FILEVERSION_STR
+            VALUE "InternalName",    VER_INTERNALNAME_STR
+            VALUE "LegalCopyright",  VER_LEGALCOPYRIGHT_STR
+            VALUE "OriginalFilename",VER_ORIGINALFILENAME_STR
+            VALUE "ProductName",     VER_PRODUCTNAME_STR
+            VALUE "ProductVersion",  VER_PRODUCTVERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""vers.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "res\\red_style\\icon_red.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKRED             BITMAP  DISCARDABLE     "res\\red_style\\skin_red.bmp"
+IDB_BUTTONS             BITMAP  DISCARDABLE     "res\\red_style\\Skin_Buttons.bmp"
+IDB_THMB21              BITMAP  DISCARDABLE     "res\\red_style\\thumb_small_21.bmp"
+IDB_SLD110              BITMAP  DISCARDABLE     "res\\red_style\\slider_back_21x110_256.bmp"
+IDB_ENAON               BITMAP  DISCARDABLE     "res\\red_style\\E_on.bmp"
+IDB_ENAOFF              BITMAP  DISCARDABLE     "res\\red_style\\E_of.bmp"
+IDB_GANG_ON             BITMAP  DISCARDABLE     "res\\red_style\\gang_on.bmp"
+IDB_GANG_OFF            BITMAP  DISCARDABLE     "res\\red_style\\gang_off.bmp"
+IDB_UDA_ON              BITMAP  DISCARDABLE     "res\\red_style\\uda_on.bmp"
+IDB_BOOST_OFF           BITMAP  DISCARDABLE     "res\\red_style\\micboost_off.bmp"
+IDB_BOOST_ON            BITMAP  DISCARDABLE     "res\\red_style\\micboost_on.bmp"
+IDB_UDA_OFF             BITMAP  DISCARDABLE     "res\\red_style\\uda_off.bmp"
+IDB_ARROW_DOWN          BITMAP  DISCARDABLE     "res\\red_style\\red_arrow_down_8b.bmp"
+IDB_TXTBOX              BITMAP  DISCARDABLE     "res\\red_style\\red_txtbox_8b.bmp"
+IDB_ARROW_DOWN_O        BITMAP  DISCARDABLE     "res\\red_style\\red_arrow_down_o_8b.bmp"
+IDB_DSP_O               BITMAP  DISCARDABLE     "res\\red_style\\dsp_o.bmp"
+IDB_DSP                 BITMAP  DISCARDABLE     "res\\red_style\\dsp.bmp"
+IDB_KFX_O               BITMAP  DISCARDABLE     "res\\red_style\\kfx_o.bmp"
+IDB_KFX                 BITMAP  DISCARDABLE     "res\\red_style\\kfx.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

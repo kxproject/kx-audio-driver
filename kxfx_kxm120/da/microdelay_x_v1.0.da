@@ -1,0 +1,46 @@
+name "microdelay[x] v1.0";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "09/10/2007";
+engine "kX";
+comment "please recalculate delay time in dane! (preset is 500ms (120 Bpm)) loop can be infinte so take care :))";
+guid "43808ddf-0283-44b0-b45f-a15ffdda8293";
+
+; how to generate the xtramsize for instance 120 bpm ?
+; 60s/120(bpm) = 0.5s, 48000samples/s * 0,5s = 24000samples 
+; 24000 is the full xtramsize
+; type in xtram values below !
+; (can also be used as "stereo delay" by changing rd1-, rd2- pointers as you want)
+
+; registers 
+
+  input in
+  output out1, out2    
+  control loop=0.5
+  control dry_wet=0.5 
+  static dry, wet1, wet2, tin 
+
+; xtramsize
+
+  xtramsize 24000 ; full xtramsize here !
+  xdelay write wrt1 at 0 
+  xdelay read rd1 at 12000 ; half xtramsize here !
+  xdelay read rd2 at 24000 ; full xtramsize here !
+
+; temp input register
+  macs tin, in, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  
+; delay line loop 
+
+  macs wrt1, tin, rd2, loop ; couple back full delay rd2
+
+; dry_wet
+
+  macs wet1, 0, rd1, dry_wet ; make a wet register  
+  macs wet2, 0, rd2, dry_wet ; make a wet register  
+  macsn dry, tin, tin, dry_wet ; make a dry register 
+
+; output
+  macs out1, dry, wet1, 1 
+  macs out2, dry, wet2, 1 
+
+end               

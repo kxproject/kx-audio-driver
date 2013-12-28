@@ -1,0 +1,80 @@
+
+name    "Wibrato"
+; ................................................
+
+control Depth     = .12            
+control	Rate      = .50  
+control	Panning   = .50 
+control	FadeIn    = .50 
+control	Threshold = 1
+ 
+input 	inx, iny
+output 	out, oud      
+ 
+static  osc, a, b, k, e, f 
+temp    x
+
+; delay lines
+idelay write d1 at 0
+idelay read d11 at 100
+idelay read d12 at 100 
+idelay write d2 at 102
+idelay read d21 at 202
+idelay read d22 at 202 
+itramsize 		   204 
+const  maxtime = 0x30000; (100 - 4) * 0x800    
+
+; delay/out/in
+macintw	a, 0, a, 0x100000
+macintw	b, 0, b, 0x100000
+interp	out, d11, a, d12 
+interp	oud, d21, b, d22
+macs	d1, inx, 0, 0 
+macs	d2, iny, 0, 0
+
+; retriggering
+interp  x, d1, .5, d2
+exp		b, Threshold, 15, 2
+macs    x, b, x, x
+interp  e, e, .00048828, x
+limit   e, x, x, e
+limitn  f, e, f, 0
+macs    x, 0, .00048828, .125
+macs    f, f, FadeIn, x
+
+; left							
+; osc a
+macwn	osc, osc, Rate, .00048828
+macsn   a, 1, osc, osc
+macs    a, 0, a, a
+
+; modulation
+macints b, 0, .00048828, 8
+macs    x, 0, f, Depth
+interp  k, k, b, x
+macs  	x, 0, maxtime, k
+macs	a, &d1, a, x	
+macints	&d11, a, 0x800, 2
+macints	&d12, a, 0x800, 3
+
+; right
+; osc b
+macw	b, osc, Panning, 1
+macsn   b, 1, b, b
+macs    b, 0, b, b
+
+; modulation
+macs	b, &d2, b, x	
+macints	&d21, b, 0x800, 2
+macints	&d22, b, 0x800, 3
+
+; ................................................
+
+guid 		"7013B431-AFE1-40b3-AA3F-B49AB0877FBE"        
+copyright 	"© Max Mikhailov, 2001-2006"
+created 	"August 24 2006"
+comment 	"Retriggering vibrato."
+engine 		"Who's modulating there, eh?"  
+
+end
+
