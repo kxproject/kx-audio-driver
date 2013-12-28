@@ -1,0 +1,69 @@
+;Filename: Rotary_Lt.da
+;This is the Rotary 'light' version.
+;-------------------------------------------
+name "Rotary Lt";
+copyright "(public domain) by LeMury 2003";
+engine "KX";
+created "23-06-2003";
+comment "Leslie simulator";
+guid "4e9d13f4-1bdd-4c83-9388-fb2ac81b124e";
+
+;registers
+	input 	in
+	output 	outL, outR
+	control Speed=0.4
+	control Vibrato=0.7
+	control Tremelo=0.45
+	control Width=0.6
+	control Dry=1
+	static xsin, xcos=0.5
+	static	t1, t2
+	temp 	a, b, c, d
+	temp	tmpin
+	
+	itramsize	142
+;Internal TRAM delay line	
+	idelay write d1 at	0
+	idelay read d11 at	70
+	idelay read d12 at	70
+	idelay write d2 at	71
+	idelay read d21 at	141
+	idelay read d22 at	141
+;code
+	macs	tmpin, 0 , in, 1
+	macs	d1, 0, tmpin, 1
+	macs	d2, 0, tmpin, 1    
+
+	macs	b, 0, Speed, 0.001
+	macs	xsin, xsin, b, xcos
+	macsn	xcos, xcos, b, xsin  
+	macsn   a, 0, xsin, 1
+	macints b, 0, xcos, 2i
+	interp  a, b, Width, a 
+	interp  b, xsin, Width, b
+	interp  b, b, Width, a
+	macs	a, 0.5, xsin, 1
+	macs 	b, 0.5, b, 1
+	interp	a, 0, a, 1
+	interp	b, 0, b, 1
+
+	macintw	t1, 0, t1, 0x100000
+	macintw	t2, 0, t2, 0x100000
+	interp	t1, d11, t1, d12;
+	interp	t2, d21, t2, d22;
+
+	macsn	c, 1, a, Tremelo
+	macsn	d, 1, b, Tremelo
+	macs	t1, t1, tmpin, Dry
+	macs	t2, t2, tmpin, Dry
+	macs	outL, 0, t1, c
+	macs	outR, 0, t2, d
+
+	macs  	t2, 0, 0x21800, Vibrato
+	macs	t1, &d1, t2, a   
+	macints	&d11, t1, 0x800, 1
+	macints	&d12, t1, 0x800, 2
+	macs	t2, &d2, t2, b
+	macints	&d21, t2, 0x800, 1
+	macints	&d22, t2, 0x800, 2
+end

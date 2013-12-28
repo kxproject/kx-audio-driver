@@ -1,0 +1,16 @@
+; New microcode
+	name "Kevins Rectifier";
+	copyright "Copyright (c) 2003.";
+	created "11/27/2003";
+	engine "kX";
+	; comment "";
+	guid "c0c46274-4776-4ed9-9499-1b390691173b";
+	; -- generated GUID
+
+
+; itramsize 0
+; xtramsize 0
+
+; code
+
+end

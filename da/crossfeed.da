@@ -1,0 +1,25 @@
+name "Crossfeed";
+copyright "LeMury 2003";
+engine "kX";
+created "now";
+comment "Headphones Crossfeed";
+guid "6fa996e3-857e-4456-9865-a6cf624fc349";
+
+input inl, inr 
+output outl, outr 
+control Freq=0.5 
+control X-Mix=0.16
+static tl1=0x0, hl1=0x0 
+static tr1=0x0, hr1=0x0 
+temp tmpl, tmpr, f
+
+exp f, freq, 0x7, 0x0
+macs tmpl, inl, 0, 0 
+macsn hl1, tmpl, tl1, 1
+macs tl1, tl1, hl1, f
+macs tmpr, inr, 0, 0
+macsn hr1, tmpr, tr1, 1
+macs tr1, tr1, hr1, f
+interp outl, tmpl, x-mix, tr1
+interp outr, tmpr, x-mix, tl1
+end;

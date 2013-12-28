@@ -1,0 +1,18 @@
+; New microcode
+	name "HQ Crossfade";
+	copyright "Copyright (c) 2004.";
+	created "02/18/2005";
+	engine "kX";
+	; comment "by Colonel HQ";
+	guid "065978a8-a1d9-4ecb-b5f1-d8006b292bfb";
+	; -- generated GUID
+
+input l, r, l1, r1;
+output out_l, out_r;
+control crossfading=0
+
+; code
+interp out_l, l, crossfading, l1
+interp out_r, r, crossfading, r1
+
+end

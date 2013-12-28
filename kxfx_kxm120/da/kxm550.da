@@ -1,0 +1,16 @@
+name "kxm 550";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/19/2007";
+engine "kX";    
+comment "- 6db/oct lowpass filter (kxm 550 v1.1)"
+guid "c1a4bd26-72a8-4198-9b53-bc532e1ef994";
+
+; registers
+input in
+output out 
+control cutoff=0.5    
+
+; filter
+interp out, out, cutoff, in ; 6db lowpass 
+
+end

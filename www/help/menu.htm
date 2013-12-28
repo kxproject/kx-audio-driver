@@ -1,0 +1,114 @@
+<title>kX System Tray Menu</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX Menu</h2>
+<hr>
+
+<h4>
+
+<p>The kX Menu provides access to the kX driver functions, both directly and through the <a href="#kX Control Applets">kX Control Applets</a>.
+</p>
+<p>The kX Menu can be displayed by right-clicking the kX system tray icon, <img  src="images/kxicon.gif" width="16" height="16" >, which is found in the Windows System Tray (typically found at the lower right corner of the desktop), or by right-clicking within the display area of the <a href="mixer.htm">kX Mixer</a> or any of the kX control applets.</p>
+<p>The kX Menu will appear as follows:</p>
+<p><img  src="images/device3.gif" width="113" height="322" ></p>
+<h3>Menu Options:</h3>
+<b><a name="kX Control Applets">kX Control Applets:</b></a><br>
+<div align="left">
+  <table width="348" cellpadding="3">
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><p><a href="mixer.htm">kX Mixer</a></p></td>
+      <td nowrap width="252" valign="top" align="left">Opens the main kX Mixer applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><p><a href="dspguide.htm">kX DSP</a></p></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX DSP control applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><a href="kxrouter.htm">kX Router</a></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX Router applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><a href="editor.htm">kX Editor</a></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX Editor applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><a href="automation.htm">kX Automation</a></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX Automation control applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><a href="remote.htm">kX Remote</a></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX Remote control applet.</td>
+    </tr>
+    <tr>
+      <td nowrap width="96" valign="top" align="left"><a href="soundfonts.htm">kX SoundFont</a></td>
+      <td nowrap width="252" valign="top" align="left">Opens the kX SoundFont control applet.</td>
+    </tr>
+  </table>
+</div>
+<hr>
+<p align="left"><b><a name="Device Selection">Device</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the device selection sub-menu:
+<p align="left">
+<img  src="images/device2.gif" width="155" height="57" ></p>
+<p align="left">For systems with multiple <a href="glossary.htm#kX Compatible">kX-compatible</a> cards, this menu allows the user to change the currently selected card.<br>Changes made in any kX control applet will affect currently selected card only.</p>
+<hr>
+<p align="left"><b>Settings</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Settings sub-menu:</p>
+<p align="left">
+<img  src="images/settings.gif" width="184" height="203" ></p>
+<table  width="99%" cellpadding="3">
+  <tr>
+    <td valign="top" align="left" width="1010"><p><b>Save Settings</b><br>Save settings for all kX applets as a file with the extension .kx. Default filename is kxdefault.kx, however, any filename may be used.</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" width="1010"><p><b>Load Settings</b><br>Load previously saved kX settings for all kX applets. The file extension for kX settings is .kx</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" width="1010"><p><b>Reset Settings</b><br>Resets all the kX Audio Driver and kX Mixer settings to their default values. Be sure to save your current settings before resetting.</td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" width="1010"><p><b>Setup Buffers</b><br>
+      <br><img  src="images/buffers.gif" width="299" height="149" ><br>
+      <br>Setup the kX buffers. In normal usage no adjustments will be required to the default buffer setup, however, facility is provided for adjusting the following settings:
+      <ul>
+        <li>Set Tank Memory (TRAM) Size. Range is from None to 2048kB. Adjusts the amount of host memory available for use by certain DSP effects (TRAM is typically used for delay lines). Default setting is 256kB. Note that this setting does not affect the total amount of memory available for DSP microcode (value fixed in hardware).<br></li>
+        <li>Set Playback Buffer Size. Ranges from 16384 bytes (estimated 17.07ms latency) to 256 bytes (estimated latency 0.26 ms). Smaller is faster, but may not be usable depending on system hardware and software configuration.<br></li>
+        <li>Set Recording Buffer Size. Range is from 384 to 65536. Default value is 16384 bytes. Normally no adjustment to this setting is required.<br></li>
+        <li>Set Number of AC3 Buffers. Range is from 2 to 8.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" width="1010"><p><b>Generate GUID</b><br>GUID (Globally Unique IDentifier) generation utility. Generates and copies a GUID to the clipboard, ready to be pasted. GUIDs are used in skin editing and also to identify DSP plug-ins. Typical users will not need to access this function.</td>
+  </tr>
+</table>
+<hr>
+<p><b>Effects</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Effects Plug-ins sub-menu:</p>
+<p><img  src="images/effects.gif" width="216" height="151" ></p>
+<p>This menu allows new DSP objects and plugins to be <a href="dspguide.htm#Adding Objects and Effects">registered</a> for use in the <a href="dspguide.htm">kX DSP</a> applet.<br> Also, currently registered DSP objects having User Interfaces can be accessed directly from this menu (for tweaking effects settings).</p>
+<hr>
+<p><b>Skin</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Open the Skins sub-menu:</p>
+<p><img  src="images/skin.gif" width="141" height="49" ></p>
+<p>This menu allows new skins to be registered for use with the <a href="mixer.htm">kX Mixer</a> and other <a href="#kX Control Applets">kX control applets</a>. Default extension for kX skins is kxs (note that kxs files are in fact zip or rar files, and can be opened for inspection or modification by renaming to zip or rar, depending on file).<br>Also, currently registered skins can be selected from this menu and will be displayed the next time the kX Mixer (or other kX applet) is opened.</p>
+<hr>
+<p><b>Internet</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Internet link sub-menu:</p>
+<p><img  src="images/internet.gif" width="161" height="74" ></p>
+<p>This menu provides a link to the <a href="http://www.kxproject.com" target="_blank"> kxproject website</a>, and allows automatic checking for driver updates, as well as facilitating DSP effect and skin downloads via direct links (note that this feature is under development).</p>
+<hr>
+<p><b>Language</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the language selection sub-menu.</p>
+<p>Currently supported languages are English, Russian, Deutsch, Polish, Espanol, Romanian, French, Italian, Swedish, Norwegian, Dutch, Brasilian, Bulgarian, Croatian and Hungarian. Note that additional language support can be added by editing the file kxskin.ini. This file can be found within the file kxskin.kxs, which is in a fact a zip file (right-click and select &quot;open with...&quot;, then choose winzip (or equivalent) to open, or simply rename to .zip - and don't forget to rename back to .kxs when you're done).</p>
+<hr>
+<p><b><a name="Information/About">About...</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the kX Information applet:</p>
+<p><img  src="images/info.gif" width="450" height="92" ></p>
+<p>Scroll down for a detailed information listing,including kX Control Version Number, Skin Info, Copyright, PCI Card Info and Credits.<br>Any bug reports should include the entire contents of this window. Copy to the clipboard by right-clicking within the text window, then choosing &quot;select all&quot; and then &quot;copy&quot;. Paste into bug report.</p>
+<hr>
+<p><b>Help</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens this <a href="index.htm"> Help</a> window.</p>
+<hr>
+<p><b>Speaker Test</b>&nbsp; Opens the <a href="spktest.htm"> kX Speaker Test</a> applet</p>
+<hr>
+<p><b>Quit</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Closes and Quits the kX Mixer.</p>
+<p>After selecting Quit from the kX menu, both the kX Driver and the Windows mixer will still remain active, although the kX mixer and all kX applets will be closed. Run kxmixer again to re-activate - double-click <img  src="images/kxicon.gif" width="16" height="16" >&nbsp;kxmixer.exe in the windows/system32 directory, or from the Windows Start menu select Run, then type kxmixer.exe in the text box and click OK. Newer versions also can be run from a folder 'kX Audio Driver' in Start Menu\Programs.</p>
+
+</h4>

@@ -1,0 +1,20 @@
+; New microcode
+	name "kxtest";
+	copyright "Copyright (c) Dmitry Gorelov, 2004";
+	created "06/07/2004";
+	engine "kX";
+	comment "Part of KXTEST program";
+	guid "6b580f68-6c54-4806-a4d0-5a2647830b31";
+	; -- generated GUID
+
+	input i1, i2;
+	output o1, o2;
+	static iL, iR, oL, oR;
+
+; Code
+	 
+	 macs    iL,  i1,    0,    0;
+	 macs    o1,  oL,    0,    0;
+	 macs    iR,  i2,    0,    0;
+	 macs    o2,  oR,    0,    0;
+end

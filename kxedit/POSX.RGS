@@ -1,0 +1,20 @@
+HKCR
+{
+	CodeMax.Position = s 'Position Class'
+	{
+		CLSID = s '{ECEDB944-AC41-11d2-AB20-000000000000}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECEDB944-AC41-11d2-AB20-000000000000} = s 'Position Class'
+		{
+			ProgID = s 'CodeMax.Position'
+			VersionIndependentProgID = s 'CodeMax.Position'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

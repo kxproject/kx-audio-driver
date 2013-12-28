@@ -1,0 +1,22 @@
+name "kxm 170";
+copyright "2007. stylus";
+created "01/09/2008";
+engine "kx"; 
+comment "16x multiplier (kxm 170 v1.0)"
+guid "358a7157-e550-409e-89c7-b5c2c3a707e1";  
+
+;
+
+input in
+output out
+control multiply=1 
+static a
+  
+; trim sliders 
+interp a, 0x1, multiply, 0x11
+
+; divide 
+macints out, 0, in, a
+
+end
+

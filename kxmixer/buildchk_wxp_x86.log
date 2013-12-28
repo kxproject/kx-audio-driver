@@ -1,0 +1,203 @@
+BUILD: Computing Include file dependencies:
+BUILD: null byte at offset 0x000039cf
+BUILD: 6 null bytes in file
+BUILD: Examining f:\audio\10kx\kxmixer directory for files to compile.
+1>Compiling and Linking f:\audio\10kx\kxmixer *************
+1>'nmake.exe /nologo BUILDMSG=Stop. -i /nologo /f e:\ntddk7600\bin\makefile.def BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR='
+1>BUILDMSG: _NT_TARGET_VERSION SET TO WINXP
+1>Rebuilding f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\_objects.mac .\sources.
+1>BUILD: Compile and Link for x86
+1>nmake : error: f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\_objects.mac was changed during the build process and the build results may not be valid. Please re-build this directory.
+1>errors in directory f:\audio\10kx\kxmixer
+1>nmake : error: f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\_objects.mac was changed during the build process and the build results may not be valid. Please re-build this directory.
+1>cl /Ii386 /I. /Ie:\ntddk7600\inc\mfc42 /Ie:\ntddk7600\inc\api\dao350 /I..\h /I..\h\codemax /I..\h\rmaa /I..\h\dxutil /If:\audio\10kx\kxmixer\objchk_wxp_x86\i386 /Ie:\ntddk7600\inc\api /Ie:\ntddk7600\inc\api /Ie:\ntddk7600\inc\crt /D_X86_=1 /Di386=1 /DCONDITION_HANDLING=1 /DNT_UP=1 /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0501 /DWINVER=0x0501 /D_WIN32_IE=0x0603 /DWIN32_LEAN_AND_MEAN=1 /DDEVL=1 /DDBG=1 /D__BUILDMACHINE__=WinDDK /DFPO=0 /D_DLL=1 /D_MT=1 -DBUILD_OUTPUT_DIR="\"objCHK_wxp_x86\\i386\"" /D"_MBCS" /D"KXMANAGER_INTERFACE" /DDEPRECATE_DDK_FUNCTIONS=1 /DMSC_NOOPT /DNTDDI_VERSION=0x05010200 -DKX_DEBUG /D_AFX_NOFORCE_LIBS /D_MFC_VER=0x0600 /D_AFXDLL /c /Zc:wchar_t- /Zl /Zp8 /Gy /Gm- -W3 -WX /Gd /hotpatch /EHsc /GR /GF /GS /Zi /Od /Oi /Oy- /Zi /Fdf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\ /DKMDF_MAJOR_VERSION_STRING=01 /DKMDF_MINOR_VERSION_STRING=009 /wd4603 /wd4627 /typedil- /FIe:\ntddk7600\inc\api\warning.h /Ylkxmixer /Ycstdinc.h /Fpf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\stdinc.pch /Fo"f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\stdinc.obj" /Tp
+1>#include "stdinc.h"
+1>Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 15.00.30729.207 for 80x86
+1>Copyright (C) Microsoft Corporation.  All rights reserved.
+1>cl 
+1> /Ii386
+1> /I.
+1> /Ie:\ntddk7600\inc\mfc42
+1> /Ie:\ntddk7600\inc\api\dao350
+1> /I..\h
+1> /I..\h\codemax
+1> /I..\h\rmaa
+1> /I..\h\dxutil
+1> /If:\audio\10kx\kxmixer\objchk_wxp_x86\i386
+1> /Ie:\ntddk7600\inc\api
+1> /Ie:\ntddk7600\inc\api
+1> /Ie:\ntddk7600\inc\crt
+1> /D_X86_=1
+1> /Di386=1
+1> /DCONDITION_HANDLING=1
+1> /DNT_UP=1
+1> /DNT_INST=0
+1> /DWIN32=100
+1> /D_NT1X_=100
+1> /DWINNT=1
+1> /D_WIN32_WINNT=0x0501
+1> /DWINVER=0x0501
+1> /D_WIN32_IE=0x0603
+1> /DWIN32_LEAN_AND_MEAN=1
+1> /DDEVL=1
+1> /DDBG=1
+1> /D__BUILDMACHINE__=WinDDK
+1> /DFPO=0
+1> /D_DLL=1
+1> /D_MT=1
+1> -DBUILD_OUTPUT_DIR="\"objCHK_wxp_x86\\i386\""
+1> /D"_MBCS"
+1> /D"KXMANAGER_INTERFACE"
+1> /DDEPRECATE_DDK_FUNCTIONS=1
+1> /DMSC_NOOPT
+1> /DNTDDI_VERSION=0x05010200
+1> -DKX_DEBUG
+1> /D_AFX_NOFORCE_LIBS
+1> /D_MFC_VER=0x0600
+1> /D_AFXDLL
+1> /c
+1> /Zc:wchar_t-
+1> /Zl
+1> /Zp8
+1> /Gy
+1> /Gm-
+1> -W3
+1> -WX
+1> /Gd
+1> /hotpatch
+1> /EHsc
+1> /GR
+1> /GF
+1> /GS
+1> /Zi
+1> /Od
+1> /Oi
+1> /Oy-
+1> /Zi
+1> /Fdf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\
+1> /DKMDF_MAJOR_VERSION_STRING=01
+1> /DKMDF_MINOR_VERSION_STRING=009
+1> /wd4603
+1> /wd4627
+1> /typedil-
+1> /FIe:\ntddk7600\inc\api\warning.h
+1> /Ylkxmixer /Ycstdinc.h /Fpf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\stdinc.pch /Fo"f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\stdinc.obj"
+1>pch_hdr.src
+1> rc.exe -l 409 -DSXS_PROCESSOR_ARCHITECTURE="""x86"""  -DSXS_TARGET="""kxmixer.exe"""   -DSYSTEM_COMPATIBLE_ASSEMBLY_NAME="""Microsoft.Windows.SystemCompatible"""  -DLSYSTEM_COMPATIBLE_ASSEMBLY_NAME=L"""Microsoft.Windows.SystemCompatible"""   -DSXS_ASSEMBLY_VERSION=""""""  /r /fo f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\control.res /D_X86_=1 /Di386=1   /DCONDITION_HANDLING=1 /DNT_UP=1  /DNT_INST=0 /DWIN32=100 /D_NT1X_=100 /DWINNT=1 /D_WIN32_WINNT=0x0501 /DWINVER=0x0501 /D_WIN32_IE=0x0603    /DWIN32_LEAN_AND_MEAN=1  /DDEVL=1 /DDBG=1 /D__BUILDMACHINE__=WinDDK /DFPO=0   /D_DLL=1 /D_MT=1 -DBUILD_OUTPUT_DIR="\"objCHK_wxp_x86\\i386\""  /D"_MBCS" /D"KXMANAGER_INTERFACE" /DDEPRECATE_DDK_FUNCTIONS=1 /DMSC_NOOPT /DNTDDI_VERSION=0x05010200 -DKX_DEBUG    /D_AFX_NOFORCE_LIBS /D_MFC_VER=0x0600 /D_AFXDLL /Ie:\ntddk7600\inc\mfc42 /Ie:\ntddk7600\inc\api\dao350 /I..\h /I..\h\codemax /I..\h\rmaa /I..\h\dxutil /If:\audio\10kx\kxmixer\objchk_wxp_x86\i386 /Ie:\ntddk7600\inc\api /Ie:\ntddk7600\inc\api /Ie:\ntddk7600\inc\crt .\control.rc
+1>Microsoft (R) Windows (R) Resource Compiler Version 6.1.6908.0
+1>Copyright (C) Microsoft Corporation.  All rights reserved.
+1> cl @f:\audio\10kx\kxmixer\objchk_wxp_x86\i386\cl.rsp
+1>Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 15.00.30729.207 for 80x86
+1>Copyright (C) Microsoft Corporation.  All rights reserved.
+1>cl /Fo"f:\audio\10kx\kxmixer\objchk_wxp_x86\i386/"
+1> /FC
+1> /Ii386
+1> /I.
+1> /Ie:\ntddk7600\inc\mfc42
+1> /Ie:\ntddk7600\inc\api\dao350
+1> /I..\h
+1> /I..\h\codemax
+1> /I..\h\rmaa
+1> /I..\h\dxutil
+1> /If:\audio\10kx\kxmixer\objchk_wxp_x86\i386
+1> /Ie:\ntddk7600\inc\api
+1> /Ie:\ntddk7600\inc\api
+1> /Ie:\ntddk7600\inc\crt
+1> /D_X86_=1
+1> /Di386=1
+1> /DCONDITION_HANDLING=1
+1> /DNT_UP=1
+1> /DNT_INST=0
+1> /DWIN32=100
+1> /D_NT1X_=100
+1> /DWINNT=1
+1> /D_WIN32_WINNT=0x0501
+1> /DWINVER=0x0501
+1> /D_WIN32_IE=0x0603
+1> /DWIN32_LEAN_AND_MEAN=1
+1> /DDEVL=1
+1> /DDBG=1
+1> /D__BUILDMACHINE__=WinDDK
+1> /DFPO=0
+1> /D_DLL=1
+1> /D_MT=1
+1> -DBUILD_OUTPUT_DIR="\"objCHK_wxp_x86\\i386\""
+1> /D"_MBCS"
+1> /D"KXMANAGER_INTERFACE"
+1> /DDEPRECATE_DDK_FUNCTIONS=1
+1> /DMSC_NOOPT
+1> /DNTDDI_VERSION=0x05010200
+1> -DKX_DEBUG
+1> /D_AFX_NOFORCE_LIBS
+1> /D_MFC_VER=0x0600
+1> /D_AFXDLL
+1> /c
+1> /Zc:wchar_t-
+1> /Zl
+1> /Zp8
+1> /Gy
+1> /Gm-
+1> -W3
+1> -WX
+1> /Gd
+1> /hotpatch
+1> /EHsc
+1> /GR
+1> /GF
+1> /GS
+1> /Zi
+1> /Od
+1> /Oi
+1> /Oy-
+1> /Zi
+1> /Fdf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\
+1> /DKMDF_MAJOR_VERSION_STRING=01
+1> /DKMDF_MINOR_VERSION_STRING=009
+1> /wd4603
+1> /wd4627
+1> /typedil-
+1> /FIe:\ntddk7600\inc\api\warning.h
+1> /Yustdinc.h
+1> /Fpf:\audio\10kx\kxmixer\objchk_wxp_x86\i386\stdinc.pch
+1> .\dsutil.cpp .\console.cpp .\guids.cpp .\debug.cpp .\remote.cpp .\iostatus_dlg.cpp .\router_dlg.cpp .\kxcode.cpp .\spectrum_dlg.cpp .\speaker_dlg.cpp .\notify.cpp .\notify_gui.cpp .\edit_dlg.cpp .\kxdspdlg.cpp .\info_dlg.cpp .\asio.cpp .\tray.cpp .\midirouter.cpp .\ac3decode.cpp .\p16v_r_dlg.cpp .\tools.cpp .\kxdialog.cpp .\remote_dlg.cpp .\midiparser.cpp .\plugin.cpp .\manager.cpp .\skin.cpp .\hotkey.cpp .\addon.cpp .\addonmgr.cpp .\main_dlg.cpp .\main.cpp .\settings.cpp 
+1>dsutil.cpp
+1>console.cpp
+1>guids.cpp
+1>debug.cpp
+1>remote.cpp
+1>iostatus_dlg.cpp
+1>router_dlg.cpp
+1>kxcode.cpp
+1>spectrum_dlg.cpp
+1>speaker_dlg.cpp
+1>notify.cpp
+1>notify_gui.cpp
+1>edit_dlg.cpp
+1>kxdspdlg.cpp
+1>info_dlg.cpp
+1>asio.cpp
+1>tray.cpp
+1>midirouter.cpp
+1>ac3decode.cpp
+1>p16v_r_dlg.cpp
+1>Generating Code...
+1>Compiling...
+1>tools.cpp
+1>kxdialog.cpp
+1>remote_dlg.cpp
+1>midiparser.cpp
+1>plugin.cpp
+1>manager.cpp
+1>skin.cpp
+1>hotkey.cpp
+1>addon.cpp
+1>addonmgr.cpp
+1>main_dlg.cpp
+1>main.cpp
+1>settings.cpp
+1>Generating Code...
+1>NMAKE : fatal error U1073: don't know how to make 'f:\audio\10kx\kxmixer\..\kxapi\objchk_wxp_x86\i386\kxapi.lib'
+1>NMAKE : fatal error U1073: don't know how to make 'f:\audio\10kx\kxmixer\..\kxapi\objchk_wxp_x86\i386\kxapi.lib'
+1>Stop.
+1>nmake.exe /nologo BUILDMSG=Stop. -i /nologo /f e:\ntddk7600\bin\makefile.def BUILD_PASS=PASS2 LINKONLY=1 NOPASS0=1 MAKEDIR_RELATIVE_TO_BASEDIR= failed - rc = 2
+

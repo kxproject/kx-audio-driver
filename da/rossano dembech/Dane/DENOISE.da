@@ -1,0 +1,22 @@
+; New microcode
+	name "HQ Denoise";
+	copyright "Copyright (c) 2004.";
+	created "06/19/2005";
+	engine "kX";
+	; comment "";
+	guid "894c0f8d-8923-4c5f-9bb0-0702b2b09c4d";
+	; -- generated GUID
+
+input inl, inr
+output outl, outr
+static pl, pr
+control Denoise=0
+static k=0x0
+
+macs k, 0, denoise, 0.5
+interp outl, pl, k, inl
+interp outr, pr, k, inr
+macs pl, inl, 0, 0
+macs pr, inr, 0, 0
+
+end

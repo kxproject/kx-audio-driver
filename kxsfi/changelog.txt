@@ -1,0 +1,92 @@
+	kXSFi - A kX-Project VSTi Soundfont 'wrapper' for Cubase SX
+	------------------------------------------------------------
+
+v 2.0 [by E.]
+-------------
+
+- updated to VST 2.4 and x64
+
+v 1.0.3538b [by E.]
+-------------------
+- completely re-written
+
+v 1.0.3538a [by E.]
+-----------
+- source files re-arranged
+- kX API v3538-related changes
+- copyright updated
+- resources updated
+
+
+v 1.0.4.3537 : released
+----------------------------------------------------------
+- Fixed; Soundfont Bank name could be to long causing plug to crash.
+see eNumSFbanks(). tempstr set to 128, strncpy set to limit at 64 chars.
+
+- CFileSelector used instead of openFileSelector.
+If host does not provide dialog, a default windows dialog is now opened.
+Plug's fileselector now works in non-cubase hosts.
+Also; code revised. Fileselector is now lauched from editor.
+
+- Many code changes. setParamAutomated no longer used,
+ plugs set parameter not used anymore.
+
+- kNumParams = 0,  so we dont see default editor anymore.
+
+- 'FirstRunFlag' method changed.
+Timeout on chunkload in processReplacing() solves
+the Soundfont fxb/project loading problem on first and cold(pc reboot) startup:
+a. At SX project load, chunk must be loaded when Host auto-calls suspend().
+If we dont, sf loading may corrupt.
+b. At 'warm' first Plugin start, manual fxb loading fails because we
+already passed the host's suspend call.
+Now, processReplacing() times out if a newChunk is pending,
+forcing the plug into suspend to load the fxb chunk.
+
+
+v 1.0.3.3537 : released
+----------------------------------------------------------
+-removed; (we dont need this)
+//	virtual float getParameter (long index);
+//	virtual void getParameterLabel(long index, char *label);
+//	virtual void getParameterDisplay(long index, char *text);
+//	virtual void getParameterName(long index, char *text);
+
+- Since we only use 1 vst program, Removed;
+// class KXSFIProgram and all its components and refs.
+//	long channelPrograms[16];
+//	KXSFIProgram *programs;
+
+- Reload function improved;
+Now checks if there is something to reload. see 'isEmpty'
+
+- Reset plugin function added;
+A reset button resets and re-inits the midi devices, ikx interface,
+and sets the plug back as it started.
+Handy for checking errors on opening midi devices.
+
+- Added 'firstRunFlag' method.
+This finaly solved the first reload problem of large SF sets after a clean boot.
+Now, only the very first loadSFchunk() at plug+project load time,
+is initiated by suspend(), not by proccesreplacing()..!!
+
+
+
+v 1.0.2.3537 :
+----------------------------------------------------------
+- Reload button 'font highlight on sf banks present' added.
+
+v 1.0.1.3537 : released
+-----------------------------------------------------------
+- Gui status bar reports Ok--Error opening midiout device.
+- Debug file removed.
+- Compiled as a Multithreaded-DLL (instead of debug MD).
+- setSamplerate() and setBlocksize() functions removed (we don't need them).
+- kX gui related stuff removed from kx headers. kxapi now only needs;
+- Some kX AFX forward declaration stuff removed to avoid linker errors
+ efx.h
+ i386.h
+ ikx.h
+ kxapi.h
+ kxi.h
+

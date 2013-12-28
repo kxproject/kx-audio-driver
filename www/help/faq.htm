@@ -1,0 +1,563 @@
+<title>FAQ</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>FAQ (Frequently asked questions)</h3>
+
+<h4>
+
+<p class=Darken>General</p>
+<ul>
+ <li><a href='#Q1'>What is the kX Project?</a></li>
+ <li><a href='#Q2'>Is the kX Driver FREE?</a></li>
+ <li><a href='#Q15'>Which soundcards can I use with the kX driver?</a></li>
+ <li><a href='#Q54'>Does kX Driver support SB Live! 24 Bit, Extigy, Audigy LS, Audigy2 NX, USB, Firewire or AC97 audio hardware?</a></li>
+ <li><a href='#Q18'>Why should I use the kX driver and not the drivers that came with my soundcard? What are the advantages of the kX Audio driver? </a></li>
+ <li><a href='#Q18a'>Are the kX drivers aimed at musicians or gamers or both?</a></li>
+ <li><a href='#Q17'>Under which Operating Systems can I use the kX driver?</a></li>
+ <li><a href='#Q22'>Does the kX driver incorporate DirectX support?</a></li>
+ <li><a href='#Q55'>Where can I find the latest version?</a></li>
+ <li><a href='#Q48'>Why do I experience clicks and audio artifacts in games?</a></li>
+ <li><a href='#Q19'>Does the kX driver have ASIO support? ASIOv2?</a></li>
+ <li><a href='#Q21'>Will I get low latency with Cakewalk's Sonar?</a></li>
+ <li><a href='#Q23'>Does the kX driver support multiple soundcards? How many?</a></li>
+ <li><a href='#Q29'>Can I use the standard Windows Mixer with the kX driver?</a></li>
+ <li><a href='#Q30'>Is there a dedicated mixer included with the kX driver set?</a></li>
+ <li><a href='#Q31'>What are the mixer features? Can I save and restore my mixer settings?</a></li>
+ <li><a href='#Q4'>Will there be GSIF support?</a></li>
+ <li><a href='#Q16'>Will there be support for the Extigy and Audigy2 NX USB cards?</a></li>
+ <li><a href='#Q5'>Why am I experiencing serious CPU load when I use kX ASIO driver under Logic?</a></li>
+ <li><a href='#Q6'>Why are the Front and Rear outputs swapped by default?</a></li>
+ <li><a href='#Q36'>Where can I get support for the kX Audio Driver?</a></li>
+ <li><a href='#Q42'>Why is there no 'Wave 2/3' device?</a></li>
+ <li><a href='#Q43'>Why is my CT4830/SB0090/SB0220 recognized as CT4832/SB0092/SB0222? Does it affect sound quality?</a></li>
+ <li><a href='#Q52'>Why cannot I hear any sound when using GigaStudio / GigaSampler?</a></li>
+ <li><a href='#Q53'>Where can I find additional information?</a></li>
+</ul>
+
+<p class=Darken>Installation / Uninstallation</p>
+<ul>
+ <li><a href='#Q8'>Why does Windows tell me that I am missing required DLLs when I try to install the kX driver?</a></li>
+ <li><a href='#Q3'>How do I install the kX driver under <strike>Windows 2000,</strike> Windows XP, Windows Vista or Windows 7?</a></li>
+ <li><a href='#Q9'>How can I uninstall kX drivers?</a></li>
+ <li><a href='#Q10'>What are the minimum system requirements for running the kX driver?</a></li>
+ <li><a href='#Q8'>Why does Windows tell me that I am missing required DLLs when I try to install the kX driver?</a></li>
+ <li><a href='#Q11'>Why do I get the following message: 'The ordinal 11 could not be located in the dynamic link library DSOUND.DLL'?</a></li>
+ <li><a href='#Q13'>Why do I get the message that kxsetup.exe is linked to missing export SHELL32.DLL:SHGetSpecialFolderPathA?</a></li>
+</ul>
+
+<p class=Darken>ASIO</p>
+<ul>
+ <li><a href='#Q19'>Does the kX driver have ASIO support? ASIOv2?</a></li>
+ <li><a href='#Q12'>Why do I get the following message: "Error creating input buffer: -2147467263 (#0) [size=4096] ret=-2147467263"?</a></li>
+ <li><a href='#Q20'>What kind of latency can I expect to see?</a></li>
+ <li><a href='#Q44'>Does kX support ASIO 2 Direct Monitoring?</a></li>
+ <li><a href='#Q49'>Why my audio application doesn't detect any ASIO inputs?</a></li>
+</ul>
+
+<p class=Darken>DSP</p>
+<ul>
+ <li><a href='#Q32'>Are DSP effects supported by the kX driver?</a></li>
+ <li><a href='#Q33'>Is there an effects control panel included with the kX driver set?</a></li>
+ <li><a href='#Q34'>Are there new effects included with the kX driver set?</a></li>
+ <li><a href='#Q35'>Can I write my own DSP effects for use with the kX driver set?</a></li>
+</ul>
+
+<p class=Darken>SoundFonts</p>
+<ul>
+ <li><a href='#Q24'>Can I use SoundFonts with the kX driver?</a></li>
+ <li><a href='#Q25'>Is there a SoundFont control panel included with the kX driver set?</a></li>
+ <li><a href='#Q26'>Can I use the Vienna SoundFont editor with the kX drivers?</a></li>
+ <li><a href='#Q27'>Can I use the Alive SoundFont editor with the kX drivers?</a></li>
+ <li><a href='#Q28'>Is there a 32MB limit on sample playback? Does this apply to the Audigy as well?</a></li>
+ <li><a href='#Q39'>Why cann't I load large SoundFonts?</a></li>
+ <li><a href='#Q50'>How to get quadrophonic MIDI out of an SBLive with SoundFonts using VMM?</a></li>
+ <li><a href='#Q51'>How to setup an SBLive for quadraphonic audio playback?</a></li> 
+</ul>
+
+<p class=Darken>Troubleshooting</p>
+<ul>
+ <li><a href='#Q46'>After installing kX Driver I cannot hear anything. Why?</a></li>
+ <li><a href='#Q47'>Why do I hear audio feedback when using NetMeeting?</a></li>
+ <li><a href='#Q47'>How do I turn off the recording feedback?</a></li>
+ <li><a href='#Q45'>Why cannot kX Mixer find kxskin.kxs file, although it is in the same folder?</a></li>
+ <li><a href='#Q7'>Why do I experience clicks and data corruption while copying / burning CDs? I have a VIA 686B Southbridge chipset.</a></li>
+ <li><a href='#Q8'>Why does Windows tell me that I am missing required DLLs when I try to install the kX driver?</a></li>
+ <li><a href='#Q11'>Why do I get the following message: 'The ordinal 11 could not be located in the dynamic link library DSOUND.DLL'?</a></li>
+ <li><a href='#Q12'>Why do I get the following message: "Error creating input buffer: -2147467263 (#0) [size=4096] ret=-2147467263"?</a></li>
+ <li><a href='#Q14'>Why does Cubase cause Unrecoverable Application Error (Blue Screens) in the file emuaps.vxd?</a></li>
+ <li><a href='#Q13'>Why do I get the message that kxsetup.exe is linked to missing export SHELL32.DLL:SHGetSpecialFolderPathA?</a></li>
+ <li><a href='#Q37'>Why do I experience shutdown problems with the kX Mixer?</a></li>
+ <li><a href='#Q38'>Why do I get 'Debug assertion failed' error?</a></li>
+ <li><a href='#Q40'>How do I tweak my computer for optimum performance?</a></li>
+ <li><a href='#Q41'>My MIDI playback is crackling no matter what SoundFont I use - what should I do? I have VIA chipset and AMD processor.</a></li>
+ <li><a href='#Q52'>Why cannot I hear any sound when using GigaStudio / GigaSampler?</a></li>
+</ul>
+
+<hr width=80%>
+
+<a name=Q1>
+<p><i>Q. What is the kX Project?</i></p>
+<p>A. The kX Project is a totally independent development project whose aim is to provide WDM Audio Drivers for newer operating systems for kX-Compatible audio cards. The kX Project is led by Eugene Gavrilov, Max Mikhailov and Hanz Petrov (full list of contributors <!-- <? echo("--"); echo(">"); klink("credits"); echo("<!--"); ?>-->here</a>).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q2>
+<p><i>Q. Is the kX Driver FREE?</i></p>
+<p>A. Yes, the kX Driver is FREE and will remain FREE. However, you can support the development effort by donating to the <!-- <? echo("--"); echo(">"); klink("fund"); echo("<!--"); ?>-->kX Fund</a>.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q3>
+<p><i>Q. How do I install the kX driver under <strike>Windows 2000,</strike> Windows XP, Windows Vista or Windows 7?</i></p>
+<p>A. <strike>Windows 2000, </strike> Windows XP, Windows Server 2003, Windows Vista and Windows 7 provide their own certified drivers for some EMU10kX-based audio cards. Our kX Audio Driver has not been certified by Microsoft (WHQL-ed) and thus a special installation procedure might be required. It is recommended that you first try running kXSetup, and if that fails, follow our <!-- <? echo("--"); echo(">"); klink("xp"); echo("<!--"); ?>-->Windows XP installation guide</a>.
+      Windows 7 is not officially supported yet [April'2009].
+</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q4>
+<p><i>Q. Will there be GSIF support?</i></p>
+<p>A. GSIF is supported since 3533 release.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q5>
+<p><i>Q. Why am I experiencing serious CPU load when I use kX ASIO driver under Logic?</i></p>
+<p>A. You should try disabling unused kX ASIO inputs and outputs. Logic opens all 16 inputs and 16 outputs by default.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q6>
+<p><i>Q. Why are the Front and Rear outputs swapped by default?</i></p>
+<p>A. Refer to the <!-- <? echo("--"); echo(">"); klink("rear"); echo("<!--"); ?>-->Front and Rear outputs explanation</a> for details.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q7>
+<p><i>Q. Why do I experience clicks and data corruption while copying / burning CDs? I have a VIA 686B Southbridge chipset.</i></p>                                     
+<p> Please read our article <!-- <? echo("--"); echo(">"); klink("686b"); echo("<!--"); ?>-->Via 686B Southbridge and SBLive / Audigy issues</a>.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q8>
+<p><i>Q. Why does Windows tell me that I am missing required DLLs when I try to install the kX driver?</i></p>
+<p>A. The kX Mixer and kX Setup are statically linked to certain Windows DLLs, which may or may not be found on every system. You can download the required files from the <!-- <? echo("--"); echo(">"); klink("down"); echo("<!--"); ?>--> kX Download</a> page if they are not present on your system.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q9>
+<p><i>Q. How can I uninstall kX drivers? </i></u></p>
+<p>A. Execute: Start Menu - Programs - kX Project - Uninstall or Re-install kX Audio Driver (Version xxxx) - and click 'Remove'. After the driver is removed, uninstall kX Project installation files by choosing 'Uninstall kX Project Package (Version xxxx)'</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q10>
+<p><i>Q. What are the minimum system requirements for running the kX driver?</i></p>
+<p>A. Most recent kX driver versions will only install on systems running <strike>Microsoft Windows 98 Second Edition, 
+        Windows Millenium Edition, Windows 2000 or</strike> Windows XP, Windows Server 2003, Windows Vista or Windows 7 (both x86 and x64 versions are supported).
+        At least one Creative Labs Audigy or EMU10k1/EMU10k2-based soundcard, or E-mu Systems APS/E-DSP soundcard, is 
+        also required. DirectX 9 or newer should be downloaded and installed prior to installing the kX driver. A 
+        minimum of 32 MB of RAM and a video adapter capable of displaying HiColor (16 bit) or TrueColor (24bit) are also highly recommended (actually - required).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q11>
+<p><i>Q. Why do I get the following message: 'The ordinal 11 could not be located in the dynamic link library DSOUND.DLL'?</i></p>
+<p>A. You have not installed DirectX 8 or newer.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q12>
+<p><i>Q. Why do I get the following message: "Error creating input buffer: -2147467263 (#0) [size=4096] ret=-2147467263"?</i></p>
+<p>A. You have not set 'Hardware Acceleration' to 'Full' in the Control Panel.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q13>
+<p><i>Q. Why do I get the message that kxsetup.exe is linked to missing export SHELL32.DLL:SHGetSpecialFolderPathA?</i></p>
+<p>A. Your Operating System is Windows 98 Lite - this OS is <strike>partially supported by the latest kX Driver releases</strike> no longer supported.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q14>
+<p><i>Q. Why does Cubase cause Unrecoverable Application Error (Blue Screens) in the file emuaps.vxd</i></p>
+<p>A. You haven't completely uninstalled E-mu APS drivers and removed all APS-related files from your Windows\System32 directory.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q15>
+<a name='cards'></a>
+<p><i>Q. Which soundcards can I use with the kX driver?</i></p>
+<p>A. Currently, kX-compatible soundcards include all EMU10k1 and EMU10k2-based PC soundcards manufactured by Creative Technology Ltd. and/or E-mu Systems Inc., including:
+ <li>The E-mu Audio Production Studio (APS) card</li>
+ <li>The motherboard models of 10k1 cards (M002, M003 and others)</li>
+ <li>PCI256 (CT4890, CT4891 and CT4893) and PCI512 (CT4820 and SB0150) including OEM model (CT4790)</li>
+ <li>The original Live! (CT4620) and Live! Value cards (CT4670)</li>
+ <li>The Live! X-Gamer, Live! MP3+, Live! Player 1024, Live! Platinum cards (CT4760) and value cards (CT4780)</li>
+ <li>The Live! X-Gamer 5.1, Live! MP3+ 5.1, Live! Player 5.1, Live! Platinum 5.1, Live! Digital Entertainment 5.1 cards (SB0060, SB0100, SB0102, SB0220, SB0222, SB0103 and SB0105) and Value 5.1 (SB0101)</li>
+ <li>The generic and custom OEM Live cards (CT4830, CT4831, CT4832, CT4850, CT4870, CT4871 and CT4872)</li>
+ <li>The Audigy series, including the Audigy MP3+, X-Gamer, Platinum and OEM cards (CT0070, CT0072, SB0090 and SB0092).</li>
+
+ <li>The Audigy 2 series, including Gamer, Platinum,  Platinum eX and OEM cards (SB0242, SB0244, SB0320, SB0240, SB0240P, SB0280).</li>
+ <li>The Audigy 2 ZS series, including Audigy 2 ZS Gamer, Platinum and OEM cards (SB0350).</li>
+ <p>The Audigy 2 ZS Platinum Pro is not fully supported yet. There are issues with the line in ADC.</p>
+ <p> 24/96 support for the Audigy 2 and Audigy 2 ZS cards is under development.<br>
+ <li>Audigy 2 Value (SB0400), Audigy 2 ZS Notebook (SB0350) and Audigy 4 Pro (SB0380) cards are partially supported.<br>
+ <li>The Dell OEM SB Live! (SB020x) is not yet supported since it uses a custom version of 
+      the EMU10k1, whose details are unknown. Experimental support may be provided when more 
+      information about it becomes available.  
+ <li>Soundblaster Live! 5.1 cards (SB022x) are supported.
+ <li>Soundblaster Live! 24 Bit and Audigy LS are <b>incompatible</b> with kX, since they do not use the 10kX chips.</h4>
+ <li>Audigy2 ZS Notebook is supported, although some limitations apply.
+ <li>E-mu E-DSP based PCI devices are supported (0404, 1212, 1820, ...).
+ <li>Extigy is NOT supported and will not be supported.
+ <li>X-Fi is NOT supported and will not be supported.<br><br>
+ Full list of supported boards can be found <a href='http://kb.kxproject.com/list.html'>here</a>, in our
+ knowledgebase article.<br>
+
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q16>
+<p><i>Q. Will there be support for the Creative Labs Extigy and Audigy2 NX?</i></p>
+<p>A. The Extigy and Audigy2 NX cards are NOT 10k1/10k2-based card (most of their functionallity 
+is software-based), and since they are USB audio devices they are not kX-compatible.
+However, we are currently working on ASIO drivers for these cards. In order to finish 
+we will need test samples -- please <!-- <? echo("--"); echo(">"); klink("fund"); echo("<!--"); ?>-->donate</a> to our kX Fund in order
+to help us to support both cards.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q17>
+<p><i>Q. Under which Operating Systems can I use the kX driver?</i></p>
+<p>A. The kX driver conforms to the WDM (Windows Driver Model) specification and is therefore 
+      compatible with the following Microsoft Windows operating systems: 
+      Windows XP, <strike>Windows 2000, Windows 98 (Second Edition only), and Windows Me</strike>. 
+      Windows Server 2003, Vista, Vista x64, Windows XP x64, Windows 7, Windows 7 x64 are supported. 
+      Windows 98 (First Edition) will not be supported since it has no built-in support for WDM drivers (v1.1 or later).<br>
+      Mac OS X version is available on our support forums.
+      </p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q18>
+<p><i>Q. Why should I use the kX driver and not the drivers that came with my soundcard? What are the advantages of the kX Audio Driver?</i></p>
+<p>A. The kX driver may or may not suit your own particular needs, although you have little to lose by giving it a try. The kX driver is part of an independent development project, and already offers most if not all of the same features included in the original manufacturers' drivers. In fact, the kX driver set is continually being updated and improved, with frequent driver and supporting application releases.</p>
+<p>
+  <i>general advantages</i><br>
+  <ul>
+   <li>smaller download / software takes up less space on disk</li>
+   <li>mixer is skinnable</li>
+   <li>API is open -- SDK, documentation and sample code available for download</li>
+   <li>skilled users can write their own effects and plugins</li>
+   <li>open API allows development of custom mixers and other software applications</li>
+  </ul>
+  <i>better functionality</i><br>
+  <ul>
+   <li>better DSP support [hardware-accelerated custom sound effects]</li>
+   <li>virtually unlimited signal routing possibilities</li>
+   <li>complete and flexible control over hardware (without artificially imposed limitations)</li>
+   <li>direct uninterpolated SPDIF recording from Optical, Coaxial and CDSPDIF sources</li>
+   <li>GSIF support</li>
+   <li>bit-to-bit 16/48 playback and recording (SPDIF, Audigy)</li>
+  </ul>
+  <i>better ASIO support</i><br>
+  <ul>
+   <li>ASIO is supported for all the 10k1 & 10k2-based boards</li>
+   <li>ASIO v2 based hosts are fully supported</li>
+  </ul>
+  <i>better MIDI support</i><br>
+  <ul>
+   <li>kX VSTi and kX Automation provide MIDI-based control of DSP effects</li>
+   <li>extended MIDI CC support</li>
+   <li>both SoundFont 2.01 & AWE NRPN support</li>
+  </ul>
+ </p>
+</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q18>
+<p><i>Q. Are the kX drivers aimed at musicians or gamers or both?</i></p>
+<p>A. At present the kX driver is aimed primarily at musicians, and especially those who wish to get the most out of their soundcards (and who have traditionally been left behind by the big soundcard manufacturers, who prefer to concentrate their efforts on the more lucrative gamers market). Features designed specifically for gamers will however be added as development of the drivers continues.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q19>
+<p><i>Q. Does the kX driver have ASIO support? ASIOv2?</i></p>
+<p>A. ASIO v2.0 - based hosts are fully supported, however, some ASIO2 features are 
+not implemented due to hardware limitations. 24-bit ASIO support is planned for 10k2-based boards.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q20>
+<p><i>Q. What kind of latency can I expect to see?</i></p>
+<p>A. The minimum expected ASIO latency is expected to be 5.33 ms (and possibly as low as 2.66 ms, depending on your hardware/software setup).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q21>
+<p><i>Q. Will I get low latency with Cakewalk's Sonar?</i></p>
+<p>A. The kX driver is a kernel-streaming WDM driver, and a latency as low as 10 ms can be expected under Sonar (depending on your hardware/software setup).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q22>
+<p><i>Q. Does the kX driver incorporate DirectX support?</i></p>
+<p>A. Currently, DirectSound2D and DirectSound3D are fully supported. 
+DirectSound3D support is under constant development, however it can cause issues with some games.
+Any offers to help with implementing support for DirectSound3D would be gladly accepted (skilled programmers only please!).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q23>
+<p><i>Q. Does the kX driver support multiple soundcards? How many?</i></p>
+<p>A. Multiple soundcards are indeed supported by the kX driver. In theory, an unlimited number of soundcards could be used at once, but in reality you're likely to be limited by the number of PCI slots in your machine. Any combination of EMU10k1 and/or EMU10k2-based cards can be used with the kX driver (together with soundcards by other manufacturers, running their own drivers), provided the BIOS and the OS recognize the cards and assign the resources correctly.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+
+<a name=Q24>
+<p><i>Q. Can I use SoundFonts with the kX driver?</i></p>
+<p>A. Yes, your soundcard will continue to function as a SoundFont-compatible device under the kX driver. SoundFonts can be loaded and unloaded via SoundFont-aware applications, or via the kX Mixer's SoundFont control page. Currently only SF2 files are supported, however SF1 (SBK) files can be converted to SF2 files using a freely available utility.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+
+<a name=Q25>
+<p><i>Q. Is there a SoundFont control panel included with the kX driver set?</i></p>
+<p>A. Yes, the kX Mixer includes a SoundFont control panel, which allows loading and unloading of SoundFonts to compatible soundcards running under the kX drivers.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q26>
+<p><i>Q. Can I use the Vienna SoundFont editor with the kX drivers?</i></p>
+<p>A. The current kX driver version provides support for the Vienna SoundFont editor (with the exception of 'wave playback' feature).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q27>
+<p><i>Q. Can I use the Alive SoundFont editor with the kX drivers?</i></p>
+<p>A. The Alive editor is currently not fully compatible with the kX driver (improved support is under investigation -- please contact SoundFaction for details).</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q28>
+<p><i>Q. Is there a 32MB limit on sample playback? Does this apply to the Audigy as well?</i></p>
+<p>A. SoundFont sample playback is limited to 32MB of wave data at one time, although SoundFonts larger than 32MB can be loaded.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+
+<a name=Q29>
+<p><i>Q. Can I use the standard Windows Mixer with the kX driver?</i></p>
+<p>A. Basic Windows Mixer functionality is provided, although the audio mixer (kX Mixer) included with the driver package allows access to many more features. The Windows mixer allows Master, Wave and Synth Playback and Record levels to be controlled. 
+
+A Line-in slider has also been added for compatibilty with TV-card software.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q30>
+<p><i>Q. Is there a dedicated mixer included with the kX driver set?</i></p>
+<p>A. Yes, the kX driver package includes a feature-rich audio mixer, the kX Mixer.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q31>
+<p><i>Q. What are the mixer features? Can I save and restore my mixer settings?</i></p>
+<p>A. The kX mixer includes level controls for all inputs and outputs, full control over the AC97 Codec, separate record level controls, selectable digital output mode, etc., etc. The kX Mixer supports save, load and restore of all mixer settings.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q32>
+<p><i>Q. Are DSP effects supported by the kX driver?</i></p>
+<p>A. Yes, the kX driver supports DSP effects, with Reverb and Chorus loaded by default for MIDI Synth compatibility.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q33>
+<p><i>Q. Is there an effects control panel included with the kX driver set?</i></p>
+<p>A. The kX mixer includes a DSP control panel, allowing editing, loading, patching and unloading of custom DSP effects. A command-line utility is also included with the kX driver package, allowing direct access to many functions.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q34>
+<p><i>Q. Are there new effects included with the kX driver set?</i></p>
+<p>A. Yes, in fact all effects included with the kX driver package are new, custom-programmed DSP effects. Currently, Reverb Lite, Stereo Chorus, Delay, Overdrive, M4Tube (TubeSound), Chorus, AutoWah, CL Reverb, ProLogica, RingMod, Eq10a, APS Flanger, APS AutoWah, Stereo/Mono Vocoders, Overdrive2, Encode4, APS Fuzz, Stereo Mix, Mono Mix, Pan, Pan x2, EQ Bandpass, EQ Highpass, EQ Highshelf, EQ Lowpass, EQ Lowshelf, EQ Notch, EQ Peaking, Frequency Splitter and Timbre effects are included with the kX driver package (full list is available <a href='http://www.kxproject.com/dsp.php'>here</a>); other effects will be available in the near future.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q35> 
+<p><i>Q. Can I write my own DSP effects for use with the kX driver set?</i></p>
+<p>A. Yes, the kX driver package includes a DSP compiler and loader, allowing skilled users to program their own DSP effects.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q36>
+<p><i>Q. Where can I get support for the kX Audio Driver?</i></p>
+<p>A. The <!-- <? echo("--"); echo(">"); klink("forums"); echo("<!--"); ?>-->kX Forums</a> have been set up to allow users to ask questions and exchange helpful tips and information with each other. kX developers and collaborators will sometimes drop in to answer questions, but on a limited basis (mainly due to time constraints :-P). Note that the kX Project email address should be used for Bug Reports and suggestions only - support questions will be referred to the kX Forums. </p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q37>
+<p><i>Q. Why do I experience shutdown problems with the kX Mixer?</i></p>
+<p>A. This is a known issue with Windows 2000 / Windows XP. See <a href='http://support.microsoft.com/default.aspx?scid=kb;EN-US;q262575' target=_blank>Microsoft support site</a> for details. Windows 2000 users are advised to install the latest Service Pack - this has reportedly solved the shut-down problem for many kX users.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q38>
+<p><i>Q. Why do I get 'Debug assertion failed' message (Expression 'SUCCEEDED(hr)&&gpPicture')?</i></p>
+<p>A. This error indicates that your Internet Explorer installation is corrupted. In order to solve this, re-install Internet Explorer 5.0 or higher.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q39>
+<p><i>Q. Why can't I load large SoundFonts?</i></p>
+<p>A. This is caused by Windows memory management restrictions. Try tweaking the following register keys (for Windows 2000 and Windows XP only):
+<pre>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\
+PagedPoolSize
+NonPagedPoolSize
+NonPagedPoolQuota
+PagedPoolQuota</pre>
+Please search our forum and Microsoft Knowledge Base for details.<br>
+Setting PagedPoolSize to 0xffffffff may solve the issue.
+Review <a href='http://www.oui.com.br/nando/essays/audigy/t03audigy07.htm' class=fade>this link</a>
+for details.
+</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a><!--'; ?> -->
+
+<a name=Q40>
+<p><i>Q. How do I tweak my computer for optimum performance?</i></p>
+<p>A. Start by reading the following explanatory documents: <a href="http://www.tascam.com/products/computer_recording/W2k_XP_Optimize.pdf">W2k_XP_Optimize.pdf</a>, <a href="http://www.tascam.com/support/faq/pc_optimize/pcopt.pdf">pcopt.pdf</a> and
+ <a href="http://www.tascam.com/Products/US-428/W2k_XP_Optimize.pdf">W2k_XP_Optimize.pdf</a>.</p>
+<!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a><!--'; ?> -->
+
+<a name=Q41>
+<p><i>Q: My MIDI playback is crackling no matter what
+SoundFont I use - what should I do? I have VIA chipset and AMD processor.</i></p>
+<p>A: If you are using any cooling software like VCool, CPUCool, CPUIdle, etc
+you need to disable it(in VCool you need to disable
+NB Cool Bit, in CPUIdle disable 'AMD hardware-specific' options).
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q42>
+<p><i>Q: Why is there no 'Wave 2/3' device?</i></p>
+<p>A: 'Wave 0/1', 'Wave 4/5', 'Wave 6/7', 'Wave 8/9' are the only wave devices available for
+WinMM / DirectSound applications. They are routed to the corresponding FxBusses, that is,
+'Wave 0/1' is routed to 'stereo' mix which goes to 'front' output by default,
+'Wave 4/5' is routed to front only,
+'Wave 6/7' is routed to rear only,
+'Wave 8/9' is routed to center and subwoofer.<br>
+Read our <!-- <? print "--"; print ">"; klink("routings"); print "<!--"?> -->Routing guide</a> for details.
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q43>
+<p><i>Q: Why is my CT4830/SB0090/SB0220 recognized as CT4832/SB0092/SB0222?? Does this affect sound quality?</i></p>
+<p>A: 
+
+The CT4830 and CT4832 are almost identical cards with different PCI IDs (as programmed into 
+the onboard EEPROM). A CT4832 card is generally an OEM version of the CT4830, although 
+both cards might be marked as 'CT4830'. Neither kX Audio driver performance nor sound quality 
+are affected by the way in which these cards are recognized by kX (the 
+same applies to SB0090/SB0092 and SB0220/SB0222 cards).
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q44>
+<p><i>Q: Does kX support ASIO 2 Direct Monitoring?</i></p>
+<p>A:
+When this option in the Audio System Setup dialog is activated, monitoring is handled by the 
+actual audio hardware, that is, the monitored signal does not pass through Cubase VST. 
+Instead, the ASIO driver for the audio hardware is instructed to send the audio from the 
+monitored input directly back to a specified output, thus providing monitoring with 
+practically no latency, 
+i.e. ASIO2 Direct Monitoring simply provides zero latency monitoring of inputs. However, 
+zero latency monitoring is already provided by kX ("direct monitoring" is enabled when 
+you unmute an input on the kX Mixer's "Ins'n'Outs" page), so there is no reason to tax 
+your CPU with ASIO2 direct Monitoring. Contrary to what many people believe, ASIO 
+direct monitoring does not allow monitoring of the incoming signal with VST effects; it 
+only provides monitoring of the dry input signal. In other words, this means that the 
+only thing missing without ASIO2 "direct monitoring" in kX is the lack of direct 
+control from Cubase (or other ASIO host) over hardware pan/level/peakmeter for unprocessed dry 
+signal, although even these can be controlled via the kX Mixer. And of course you 
+can always apply VST/DirectX plug-ins to as many input channels as you want using the 
+kX ASIO driver.
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q45>
+<p><i>Q:Why cannot kX Mixer find kxskin.kxs file, although it is in the same folder?</i></p>
+<p>A: You should not try executing kX Mixer from the folder you have manually copied it to.
+<strike>kX Mixer should be installed into your Windows/System32 folder by the setup application</strike>.
+Do not try to install it manually - simply re-run the installation program.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q46>
+<p><i>Q:After installing kX Driver I cannot hear anything. Why?</i></p>
+<p>A: Before you can enjoy the sound quality offered by the kX Audio driver you need to make
+sure it is configured correctly. For example, Front and Rear outputs are swapped by default --
+make sure you have your speakers plugged into the 'Rear' jack, or disable the
+swap on the 'Master' page of the kX Mixer. If you have more than 2 speakers
+(4.0/4.1 or 5.0/5.1 speaker set) - set the desired configuration in the 'Surrounder' window
+(you can access it via 'Effects' submenu or by clicking the 'Surrounder' button on the main
+page of the kX Mixer).<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q47>
+<p><i>Q:Why do I hear audio feedback when using NetMeeting? How do I turn off the recording feedback?</i></p>
+<p>A: kX Audio driver enables 'What you hear' recording mode by default. In order to
+turn it off, open the kX Mixer, and set Wave and Synth recording levels to
+the appropriate values on the 'Recording' page.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q48>
+<p><i>Q:Why do I experience clicks and audio artifacts in games?</i></p>
+<p>A: Our 3-D Engine is under constant development and might be not 100% compatible with certain
+games. In order to avoid audio artifacts either disable hardware acceleration in your game or
+select 'Wave 4/5' as your preferred device.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q49>
+<p><i>Q:Why my audio application doesn't detect any ASIO inputs?</i></p>
+<p>A: Select 48000 sampling rate. Due to hardware limitations, the recording functionality
+is available for this sampling rate only.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+
+<a name=Q50>
+<p><i>Q:How to get quadrophonic MIDI out of an SBLive with SoundFonts using VMM?</i></p>
+<p>A: Please follow <a href='http://vmm.audionetwork.be/tutorials/VMM_and_kX-drivers_Quadraphonic_MIDI_with_SoundFonts/' class=fade target=_blank>this link</a>.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q51>
+<p><i>Q:How to setup an SBLive for quadraphonic audio playback?</i></p>
+<p>A: Please follow <a href='http://vmm.audionetwork.be/tutorials/VMM_and_kX-drivers_Quadraphonic_audio_playback_setup/' class=fade target=_blank>this link</a>.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+
+<a name=Q52>
+<p><i>Q:Why cannot I hear any sound when using GigaStudio / GigaSampler?</i></p>
+<p>A: kX Audio Driver fully supports GSIF specification. There are currently two GSIF driver sub-sets:
+ VxD and WDM-based. Since kX Audio Driver is a WDM driver, it supports WDM GSIF <b>only</b>.
+ Under certain circumstances, this causes certain compatibility problems with GSIF-aware applications
+ (such as GigaStudio and GigaSampler), especially under Windows 9x / Millenium.
+ Please upgrade your Giga application (and install any patches available from Tascam). 
+ If this doesn't solve your problem, the solution is either install Windows 2000 / Windows XP or
+ use the original Creative VxD drivers.<br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q53>
+<p><i>Q:Where can I find additional information?</i></p>
+<p>A: The main sources of information: 
+ <ul>
+   <li>kX Help file (also available <a href='http://www.kxproject.com/help.php'>online</a>)
+   <li><a href='http://www.kxproject.com/docs.php'>Additional documentation and articles</a>
+   <li><a href='http://www.kxproject.com/forums.php'>kX Forums</a>
+   <li><a href="http://kb.kxproject.com/index.html">kX knowledgebase</a>               
+   <li><a href='http://www.kxproject.com/links.php'>Additinal links</a>
+ </ul>
+ <br>
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q54>
+<p><i>Q: Does kX Driver support SB Live! 24 Bit, Extigy, Audigy2 NX, Audigy LS, USB, Firewire or AC97 audio hardware?</i></p>
+<p>A: NO. These cards are not compatible and there will be NO support for them.
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q55>
+<p><i>Q: Where can I find the latest version?</i></p>
+<p>A: A. The latest stable release can be found on the <a href="http://www.kxproject.com/down.php">Downloads</a> page.<br>
+      If you are looking for the latest beta version, these releases are posted on the <a href='http://www.kxproject.com/forums.php' class=fade>kX Forums</a>. It is only recommended for experienced users to try these experimental releases.
+</p>
+
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+</h4>

@@ -1,0 +1,55 @@
+/*
+// Copyright (c) kX Project, 2001-2004. All rights reserved
+// Updates to help done by Vedran Miletic.
+// kX Help Style based on the kX Audio Driver version 3531; Last Update: Mar 23 2003 23:21:30
+*/
+
+H1 { font-size: 32pt; font-weight: bold;   font-style: normal; color: #000066/*#ffd800*/; font-family: Tahoma, Arial, Helvetica, sans-serif; text-indent: 2pt;}
+H2 { font-size: 18pt; font-weight: bold;   font-style: normal; color: #000066/*#ffd800*/; font-family: Tahoma, Arial, Helvetica, sans-serif; text-indent: 2pt; }
+H3 { font-size: 14pt; font-weight: bold;   font-style: normal; color: #000066; background-image: url('/images/gradient.gif'); font-family: Tahoma, Arial, Helvetica, sans-serif; text-indent: 2pt; background-repeat: no-repeat }
+H4 { font-size: 10pt; font-weight: normal; font-style: normal; color: #000066; font-family: Arial, Helvetica, sans-serif;}
+H5 { font-size: 9pt;  font-weight: normal; font-style: normal; color: #000066; font-family: Arial, Helvetica, sans-serif;}
+
+
+P   { text-align: justify; }
+HR  { background-color: #008080 }
+IMG { border-width: 0; border-style: none;}
+TD  { vertical-align: top; }
+
+a:link 		{ text-decoration: underline; cursor:hand; }
+a:hover 	{ text-decoration: underline; cursor:hand; }
+a:visited 	{ cursor:hand; }
+a:visited:hover { text-decoration: underline; }
+a:active 	{ text-decoration: underline; cursor:hand; }
+
+
+BODY
+{
+background-color: white;
+font-family: Arial, Verdana, Helvetica, Sans-Serif;
+font-size: 10pt;
+font-weight: normal;
+font-style: normal;
+
+color: #000066;
+scrollbar-face-color: #6565cb; 
+scrollbar-shadow-color: #888888; 
+scrollbar-highlight-color: #000099; 
+scrollbar-3dlight-color: #FFFFFF; 
+scrollbar-darkshadow-color: #FFFFFF; 
+scrollbar-track-color: #303098; 
+scrollbar-arrow-color: white;
+
+padding: 2px 2px 2px 2px;
+margin: 2px 2px 2px 2px;
+}
+
+TABLE
+{
+font-family:  Tahoma, Arial, Helvetica, Sans-Serif;
+font-size: 10pt;
+font-weight: normal;
+font-style: normal;
+
+color: #000066;
+}

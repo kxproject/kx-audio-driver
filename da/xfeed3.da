@@ -1,0 +1,33 @@
+name "Xfeed";
+copyright "By LeMury 2003";
+engine "kX";
+created "07-19-2003";
+comment "Headphones Crossfeed Filter";
+guid "c7c0735d-ab70-4dd1-b743-d658b8c210f7";
+
+;registers
+	input	inl, inr
+	output	suml, sumr
+	control Hipass=0.5
+	control Lopass=0.5
+	control X-Mix=0.5
+	static tl1=0x0, tl2=0x0, hl2=0x0
+	static tr1=0x0, tr2=0x0, hr2=0x0
+	temp tmp, tmpl, tmpr, f
+;code
+	macs	tmpl, inl, 0, 0	
+	macs	tmpr, inr, 0, 0
+	exp	f, Lopass, 0x7, 0x0
+	macsn	tmp, tmpl, tl1, 1
+	macs	tl1, tl1, tmp, f
+	macsn	tmp, tmpr, tr1, 1
+	macs	tr1, tr1, tmp, f
+	exp	f, hipass, 0x7, 0x0
+	macsn	hl2, tl1, tl2, 1
+	macs	tl2, tl2, hl2, f
+	macsn	hr2, tr1, tr2, 1
+	macs	tr2, tr2, hr2, f
+	macs	suml, tmpl, hr2, x-mix
+	macs	sumr, tmpr, hl2, x-mix
+end;
+

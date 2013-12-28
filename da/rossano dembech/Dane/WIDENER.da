@@ -1,0 +1,19 @@
+; New microcode
+	name "HQ Widener";
+	copyright "Copyright (c) 2004.";
+	created "09/15/2005";
+	engine "kX";
+	; comment "";
+	guid "a14609e8-dc1f-4a30-b3d9-eafb63df82fb";
+	; -- generated GUID
+
+input inl, inr
+output outl, outr
+temp t
+control WIDE=0
+macs outl, inl, 0, 0
+macs outr, inr, 0, 0
+macs t, outl, outr, -1
+macs outl, outl, t, WIDE
+macsn outr, outr, t, WIDE
+end

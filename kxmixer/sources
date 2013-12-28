@@ -1,0 +1,47 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxmixer
+TARGETTYPE=PROGRAM
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+TARGETLIBS=$(MFC_LIBS)	\
+	$(OBJ_PATH)\..\kxapi\$O\kxapi.lib \
+	$(OBJ_PATH)\..\kxgui\$O\kxgui.lib \
+    $(OBJ_PATH)\..\asio_sdk\$O\asio_lib.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\htmlhelp.lib \
+	$(SDK_LIB_PATH)\dsound.lib \
+    $(SDK_LIB_PATH)\dxguid.lib \
+	$(SDK_LIB_PATH)\oldnames.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\shell32.lib \
+	$(SDK_LIB_PATH)\newdev.lib \
+	$(SDK_LIB_PATH)\setupapi.lib \
+    $(SDK_LIB_PATH)\winmm.lib \
+    $(SDK_LIB_PATH)\shlwapi.lib
+
+INCLUDES=..\h;..\h\codemax;..\h\rmaa;..\h\dxutil
+
+SOURCES=dsutil.cpp console.cpp guids.cpp control.rc debug.cpp remote.cpp \
+        iostatus_dlg.cpp router_dlg.cpp kxcode.cpp spectrum_dlg.cpp speaker_dlg.cpp \
+        notify.cpp notify_gui.cpp edit_dlg.cpp kxdspdlg.cpp info_dlg.cpp asio.cpp \
+        tray.cpp midirouter.cpp ac3decode.cpp p16v_r_dlg.cpp tools.cpp kxdialog.cpp \
+        remote_dlg.cpp midiparser.cpp plugin.cpp manager.cpp skin.cpp hotkey.cpp \
+        addon.cpp addonmgr.cpp main_dlg.cpp main.cpp settings.cpp
+
+C_DEFINES=$(C_DEFINES) /D"_MBCS" /D"KXMANAGER_INTERFACE"
+
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdinc.h

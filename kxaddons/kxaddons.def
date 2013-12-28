@@ -1,0 +1,3 @@
+LIBRARY			kxaddons
+;DESCRIPTION		'kX Driver Add-Ons Library'
+EXPORTS	

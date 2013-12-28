@@ -1,0 +1,47 @@
+name "ac3passthru_x"
+guid "64824522-f847-4bca-ac45-7a58c321d4e3"
+
+static	counter=0.0
+const	buf_size =  1536
+xtramsize 6144
+
+; 4 buffers
+
+; if buf_size=6144+2, then we should add:
+; xdelay write clear at 0
+; macs clear, 0, 0, 0
+; и подвинуть все смещения на единицу
+; (идея очистки буфера "на всякий случай")
+
+static	dbac_value=0.0
+
+xdelay read buf_l at 0
+xdelay read buf_r at 3072
+; pseudo-stereo
+
+temp t     
+
+output out_l,out_r
+
+; крутим счетчик от нуля до buf_size (включительно)
+macsn	counter, counter, -1, 1i	
+limitl	counter, buf_size, 0, counter
+
+; когда стетчик равен нулю высылаем прерывание  
+skip	ccr, ccr, 0x100, 2			
+macs	dbac_value, dbac, &buf_l, 0x100000
+
+macs	irq, 0, 0, 0
+
+; (тут надо со знаками разобраться)
+
+; читаем, декодируем
+andxor	t, buf_l, 0xfffff000, 0;
+log		t, t, 7, 0;
+andxor	out_l, t, 0xffff0000, 0;    
+
+andxor	t, buf_r, 0xfffff000, 0;
+log		t, t, 7, 0;
+andxor	out_r, t, 0xffff0000, 0;    
+ 
+end                        

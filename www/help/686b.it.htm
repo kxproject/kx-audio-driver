@@ -1,0 +1,65 @@
+<i>Introduzione</i><br>
+
+<p>Nel dicembre 2000 VIA ha annunciato il nuovo chipset 686B Southbridge, in abbinamento al chipset KT133A. 
+Il nuovo Southbridge differiva dal suo predecessore in quanto includeva il supporto nativo ATA100. 
+</p>
+
+<p>
+Molti utenti con schede madri basate sul nuovo Southbridge e sul chipset KT133A hanno iniziato a sperimentare problemi di 
+perdita di dati e di instabilit&agrave generale del sistema durante il trasferimento di file, l'ascolto di musica 
+ovvero con tutto ci&ograve che utilizza il bus PCI. Venivano ad essere sistematicamente interessati dal problema 
+gli utenti con chipset KT133A, 686B Southbridge e scheda audio Creative Labs Sound Blaster.
+</p>
+
+<p>
+I nostri test dimostrano che il problema non &egrave circosritto alla SBLive! ma che possono essere interessati anche i 
+sistemi con scheda audio Audigy. Peggio ancora, in un sistema interessato dal problema, pu&ograve capitare che i driver 
+<i>kX</i> non vengano riconosciuti dal pacchetto dei driver VIA 4in1, indicando che la "fix" prodotta da VIA potrebbe non 
+essere stata correttamente installata.
+</p>
+
+<p>Le varie "fix" fornite dai produttori BIOS e da VIA non sono in grado di risolvere completamete questo problema.
+Anche dopo aver risolto l'aspetto relativo alla perdita di dati, capita ancora di sperimentare "click" durante la 
+riproduzione audio nonch&eacute distorsioni durante la copia, la masterizzazione ed il trasferimento via rete di file audio.
+</p>
+
+<p>Ad ogni modo, noi abbiamo trovato una soluzione che risolve completamente questo problema. La soluzione consiste dei 
+seguenti passi:<br>
+<ul>
+ <li>scaricate ed installate la versione BIOS pi&ugrave aggiornata che trovate sul sito del produttore della vostra scheda madre</li>
+ <li>scaricate ed installate la versione pi&ugrave aggiornata che trovate dei driver VIA 4in1, ed installateli</li>
+ <li>installate la 'George's PCI Latency Patch' (questo, in molti casi, &egrave l'unico modo per risolvere il problema)</li>
+</ul>
+</p>
+
+
+<i>A chi occorre questa patch</i><br>
+<p>
+ A tutti coloro che utilizzano una scheda madre basata sul chipset VIA 686B, quale che sia il Sistema Operativo installato.
+</p>
+
+<i>Conclusioni</i><br>
+<p>
+ Raccomandiamo di fare uso della 'George's PCI Latency Patch' versione 0.19, disponibile 
+ <a href=http://download.viahardware.com/vlatency_v019.zip class=fade target=_new>qui</a> o
+ <a href=http://www.georgebreese.com/net/software/ class=fade target=_new>qui</a>*.<br>
+ Dovreste anche installare i driver VIA 4inA pi&ugrave aggiornati, disponibili 
+ <a href=http://www.via.com.tw class=fade target=_blank>qui</a> e inoltre aggiornare anche il BIOS di sistema.
+ <br><br>
+
+<i>Riferimenti</i><br>
+<p>
+ <a href=http://www.viahardware.com/686b_1.shtm class=fade  target=_blank>http://www.viahardware.com/686b_1.shtm</a>
+</p>
+
+<h5>
+ -- testo originale:  kX Project<br>
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>
+
+
+
+<hr>
+* Il link indicato dovrebbe essere corretto; ad ogni modo potrebbe essere necessario andare su 
+<a href=http://www.viahardware.com class=fade target=_blank>www.viahardware.com</a> per reperire il file.
+

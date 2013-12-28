@@ -1,0 +1,3 @@
+LIBRARY			kxapi
+;DESCRIPTION		'kX Driver Interface'
+EXPORTS	

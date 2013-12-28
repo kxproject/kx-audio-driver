@@ -1,0 +1,22 @@
+name "ac3pass-A2";
+copyright "---";
+engine "kX";
+created "10/08/2002";
+comment "Modified original ac3passthrough plugin for work with Audigy2 boards with their left channel lag";
+guid "9382936c-63a8-4481-9868-ea3044ac10df";
+; Registers
+input inl, inr;
+output outl, outr;
+static _AC4000=0x4000, ROld=0x0;
+temp t
+
+temp a
+macs a, inl, 0, 0
+macs t, _AC4000, a, 1;
+limit outl, _AC4000, a, t;
+macints outr, ROld, 0, 0;
+macs a, inr, 0, 0
+macs t, _AC4000, a, 1;
+limit ROld, _AC4000, a, t;
+
+end 

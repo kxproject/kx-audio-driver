@@ -1,0 +1,263 @@
+<title>Guida kX per principianti</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Guida kX per principianti</b></p>
+
+<h4>
+
+<p class=Darken><b></b></p>
+<p>
+Il driver audio <i>kX</i> &egrave stato sviluppato per schede audio basate sui chip Emu10k1 ed
+Emu10k2, come SBLive, Audigy ed altre. I chip Emu10kX sono di fatto dei
+processori audio digitali (DSP) [Digital Sound Processors]. Se esaminate la
+parte DSP del driver audio <i>kX</i>, potrete constatare come sia
+effettivamente possible modificare le propriet&agrave ed il comportamento dei
+circuiti integrati della vostra scheda audio, variando gli instradamenti
+[routing] del segnale, il caricamento, gli effetti e cos&igrave via.
+</p>
+
+<p>
+Per spiegare tutto ci&ograve in modo un p&ograve pi&ugrave preciso, esminiamo innanzitutto le sezioni
+principali della finestra <i>kX DSP</i>. Il modo migliore per descriverla &egrave di
+immaginarla come una sorta di rack, con differenti dispositivi di ingresso, di
+uscita e dispositivi per effetti, tutti collegati fra di loro da cavi audio (di
+qualit&agrave altissima). Tutti i "dispositivi" che vedete nella finestra <i>kX DSP </i>hanno
+o ingressi (a sinistra), o uscite (a destra) ovvero entrambi e sono collegati
+l'uno all'altro con cavi audio virtuali (le linee blu).
+</p>
+
+<p>
+Nella finestra <i>kX DSP</i>, oltre ai vari plugin degli effetti, vi sono 4 diversi
+dispositivi di "I/O": FXbus (2 se si tratta di una scheda basata sul
+10k2), Prolog, Epilog e (X) Routing. Nel seguito analizzeremo questi quattro
+dispositivi con maggiore dettaglio, daremo poi uno sguardo all'instradamento
+ASIO e, infine, al funzionamento generale della finestra <i>kX Routing</i>.
+</p>
+
+<p class=Darken><b>1. FXBus</b></p>
+<p>
+Il dispositivo FXbus ha 16 uscite (32 per le schede basate su 10k2, 64 se &egrave anche
+presente un effetto supplementare FXbus2) per i flussi audio generati dai
+software installati sul PC (per esempio: da un player mp3, da un sintetizzatore
+WaveTable MIDI o da un'altra delle uscite ASIO). Tutti i dati audio generati
+via software confluiranno su questo dispositivo.
+</p>
+
+<p class=Darken><b>2. Prolog</b></p>
+<p>
+Il Prolog invece &egrave l'uscita per tutti i dati audio provenienti dall'ESTERNO del PC (per
+esempio, dall'ingresso 'Digital Optical In' del LiveDrive o dal connettore
+'Digital CD' (CDSPDIF) collegato alla scheda audio). Un'uscita speciale del
+Prolog, che &egrave causa di molta confusione fra i nuovi utenti del driver <i>kX</i>,
+&egrave l'uscita AC97.
+</p>
+<p>
+I chip 10k1 e 10k2 sono circuiti integrati digitali (per i puristi: non tutti i circuiti
+integrati sono digitali!) e, di conseguenza, non presentano entrate analogiche
+dirette. Infatti, sulla scheda audio Live! (Audigy) &egrave presente un ulteriore
+chip, il codec AC97, che si occupa di ci&ograve. Questo chip connette tutte le
+entrate analogiche presenti sulla scheda Live! (ad eccezione degli ingressi
+LiveDrive), le mixa e le convoglia al chip Emu10kX. Il codec AC97 gestisce, fra
+gli altri, gli ingressi 'Line In' e 'Mic In' nonch&eacute 'CD Analog In' della scheda
+(ma non l'ingresso 'CD Digital In'). E' possibile sovrintendere al
+funzionamento di questo codec grazie alla sezione <i>AC97</i> della finestra <i>kX
+Mixer</i>, tenendo presente che i dati audio provengono dalla linea AC97 del
+Prolog (il Prolog &egrave inoltre il luogo in cui si ritrovano tutti gli altri
+ingressi presenti sulla scheda e sul LiveDrive). Si noti che il LiveDrive usa
+convertitori analogico-digitale (ADC) [Analog to Digital Converter] di alta
+qualit&agrave, generalmente superiori ai codec AC97 (l'E-mu APS e l'Audigy2 Platinum
+non hanno affatto alcun codec AC97).
+</p>
+
+<p class=Darken><b>3. Epilog</b></p>
+<p>
+Il dispositivo Epilog &egrave l'uscita verso cui confluiscono tutti i dati. E' costituito
+da 2 parti: uscite "reali" ("fisiche") ed uscite "campionate" (ad
+esempio, ASIO). Le uscite reali corrispondono semplicemente a tutte le uscite
+fisiche (sia analogiche che digitali) presenti sul chip Emu10kX. Si noti che il
+chip Emu10kX supporta 4 uscite digitali stereo (dunque, la Live! e perfino la
+512PCI sono schede 7.1!). Per avvantaggiarsi di questo fatto, senza usare un
+LiveDrive, si ossono utilizzare i connettori "AUD_EXT" presenti sulla
+maggior parte delle schede 10kX (anche se per questo occorrono, generalmente,
+sia conoscenze che esperienze specialistiche).
+</p>
+
+<p>
+Sulla maggior parte delle schede 10kX, l'uscita anteriore analogica ("front") &egrave
+generata dal codec AC97 mentre l'uscita posteriore ("rear") &egrave prodotta da un
+codec I2S. Per questo motivo (essendo l'uscita I2S generalmente superiore in
+termini qualit&agrave audio rispetto all'uscita AC97), il driver audio <i>kX</i> inverte 
+per default le connessioni anteriore ('Front') e posteriore ('Rear'). 
+Si osservi per&ograve che invece, nel caso delle schede Audigy e Audigy2, il codec I2S &egrave usato 
+per l'uscita anteriore mentre il codec AC97 &egrave usato solamente per la registrazione analogica 
+dai connettori di ingresso presenti sulla scheda. Nonostante ci&ograve, anche per queste
+schede, si racomanda comunque di invertire le connessioni anteriore e
+posteriore perch&egrave i segnali in uscita dal codec AC97 (quantunque se disattivato
+[mute]) restano comunque collegati all'uscita anteriore ('Front') della scheda
+(e questo influenza la qualit&agrave del suono).</p>
+
+<p>
+Il modo migliore per comprendere tutto questo (e per trarne vangtaggio) &egrave quello di
+pensare alle schede basate sui chip 10k1 e 10k2 non gi&agrave come schede audio con
+delle uscite anteriori e posteriori ma, semplicemente, come schede con 4 canali
+di uscita stereofonica (che, di fatto, &egrave esattamente ci&ograve che sono). Siccome non
+&egrave obbligatorio utilizzare il connettore "verde" ('Line Out') per gli
+altoparlanti anteriori, lo si pu&ograve invece usare per collegarvi le cuffie e,
+piuttosto, utilizzare il connettore "nero" ('Rear Out') degli
+altoparlanti posteriori come ingresso verso il vostro sistema audio: a questo
+connettore, in virt&ugrave dell'impostazione di default che inverte le connessioni,
+risulter&agrave collegata proprio l'uscita anteriore: in tal modo, poich&eacute cos&igrave si sta
+sfruttando il codec I2S dell'uscita "rear" ('Rear Out'), si ottiene un suono
+migliore!
+</p>
+
+<p>
+La seconda parte del dispositivo Epilog &egrave quella delle uscite di
+registrazione/campionamento. Queste uscite ('RecL/R' ed i 16 canali ASIO di
+registrazione) sono usate per convogliare sul PC i flussi audio provenienti
+dall'esterno (dal connettore 'Line In' della scheda). Se collegate l'uscita di
+un sistema audio esterno alle porte 'RecL/R' di Epilog, potrete, ad esempio,
+registrare/campionare l'audio sul disco rigido usando il registratore standard
+di Windows. Potete inoltre usare i 16 canali ASIO per campionare dati, per
+esempio verso Cubase, oppure per inviare i dati ai processori di effetti
+SpinAudio/SoundDT. In sostanza, le porte di Epliog costituiscono la connessione
+dalla scheda audio in ingresso verso le applicazioni (all'opposto del
+dispositivo FXbus che costituisce la connessione dalle applicazioni in uscita
+verso la scheda audio).
+</p>
+
+<p class=Darken><b>4. Instradamento [Routing]</b></p>
+<p>
+Se ora torniamo al rack immaginario, dovrebbe essere gi&agrave abbastanza chiaro che cosa
+sia il dispositivo di Routing. E' il cuore del mixer. Il Routing, usando le
+impostazioni del pannello di controllo della finestra <i>kX Mixer</i> (ad
+esempio, i cursori), mixa le uscite standard di FXbus e di Prolog con gli
+ingressi standard di Epilog. In entrata al Routing, sono inoltre collegati due
+speciali gruppi FX [effetti] che, appunto, vengono usati per aggiungere effetti
+speciali al suono. Tipicamente, tuttavia, l'instradatore convoglia questi due
+speciali gruppi FX soltanto verso i canali "reali" di uscita, e non verso i
+canali di registrazione. Si noti che il livello di registrazione degli effetti
+pu&ograve essere regolato tramite la sottofinestra <i>Rec</i> [Registrazione] del <i>kX
+Mixer</i>.
+</p>
+
+<p>
+MA (ed &egrave in questo che sta la potenza del <i style='mso-bidi-font-style:normal'>kX</i>), si
+pu&ograve anche non usare alcunch&eacute di tutto ci&ograve! La configurazione personalizzata del
+DSP pu&ograve essere memorizzata e quindi successivamente ripristinata, gestendo
+anche configurazioni diverse da poter richiamare a seconda dei casi. Ad
+esempio: connettete la chitarra al 'Line In 2' del vostro LiveDrive; svuotate
+l'intera finestra del DSP e caricate soltanto i dispositivi Prolog ed Epilog
+(usando la sottovoce 'default' della voce 'aggiungi effetto/plugin' del men&ugrave a
+discesa attivabile cliccando col tasto destro); collegate 'Line In 2' agli
+altoparlanti anteriori. Risultato: instradamento diretto. Se poi aggiungete
+un'altra 'linea', dallo stesso 'Line In 2' alla porta 'RecL/R' di Epilog, ecco
+che sar&agrave ora possibile registrare. Se magari adesso volete anche inserire un
+qualche effetto da qualche parte... beh, gi&agrave avete idea di come fare!
+</p>
+
+<p class=Darken><b>5. Instradamento [Routing] ASIO</b></p>
+<p>
+ASIO &egrave il nome di un driver "API" realizzato dalla Steinberg allo scopo di
+permettere ai driver audio di operare con la minima latenza possibile. In altre
+parole, significa far s&igrave che il calcolatore possa elaborare tutti i dati audio
+(quelli provenienti, ad esempio, da un certo software installato sul PC o da un
+ingresso esterno della scheda audio, e poi inviati in uscita al sistema audio),
+con una latenza tanto piccola da far s&igrave di operare praticamente in tempo reale.
+Quando strimpelliamo sulla chitarra &egrave allora possibile, ad esempio, aggiungere
+degli effetti, operando pressoch&egrave in tempo reale, al segnale audio che poi
+viene inviato al sistema audio esterno.
+</p>
+
+<p>
+Il supporto ASIO offerto dal driver <i style='mso-bidi-font-style:normal'>kX</i> permette,
+con un sistema operativo veloce e opportunamente ottimizzato, che l'audio possa
+fluire attraverso i 16 canali di ingresso ed uscita con una latenza molto
+bassa, anche 2.66ms, sia durante la registrazione che la riproduzione audio.
+</p>
+
+<p>Ingressi ASIO</p>
+<p>
+Abbiamo gi&agrave chiarito dove si trovano gli ingressi ASIO (16 canali sul dispositivo Epilog) e
+come instradare ogni cosa verso di essi; gli ingressi ASIO si possono
+utilizzare, con qualsiasi applicazione, come "monitor", come mezzo per
+aggiungere effetti o per campionare il segnale sul disco rigido, come uscita
+verso lo stesso driver ASIO o verso qualsiasi altro dispositivo di uscita (ma
+in quest'ultimo caso senza il vantaggio della bassa latenza che &egrave, appunto, il
+punto di forza di ASIO).
+</p>
+
+<p>Uscite ASIO</p>
+<p>
+Sono disponibili 16 uscite ASIO. Come default, questi 16 canali sono mappati 1:1 sul
+FXbus; in tal modo, il primo canale ASIO di uscita &egrave connesso al primo canale
+FXbus (FXbus #0). Riprendendo l'esempio della chitarra, collegate 'Line In 2'
+del dispositivo Prolog ad un insieme di canali ASIO di registrazione, diciamo
+agli ultimi due canali ASIO (sono consigliati questi canali soltanto perch&eacute vi
+&egrave un piccolo problema con le schede SB006x, che non supportano la registrazione
+sul secondo e terzo canale ASIO - per maggiori dettagli, si vedano le FAQ).
+Dunque la chitarra &egrave ora collegata agli ultimi due canali ASIO. Attivate
+SpinAudio per aggiungere alcuni effetti: l'ingresso sar&agrave sugli ultimi due
+canali ASIO. Torniamo anche all'esempio del rack; ora occorre portare
+nuovamente l'uscita SpinAudio dentro al DSP, cos&igrave da poter connettere una
+qualche uscita reale (supponiamo, per esempio, altoparlanti anteriori e
+registratore). Con SpinAudio, impostiamo l'uscita sui primi due canali ASIO,
+cos&igrave da ritrovare il segnale sulle prime due uscite di FXbus. Tracciamo allora,
+nella finestra <i>kX DSP</i>, alcuni cavi audio virtuali verso gli altoparlanti
+anteriori e magari anche verso un registratore analogico o verso un altro
+registratore ASIO. Agendo in questo modo, potete impostare tutti i collegamenti che
+desiderate; ricordate per&ograve che ogni "collegamento" che utilizza i
+canali ASIO di ingresso e di uscita, verso e dal DSP, aumenta la latenza (si
+noti che invece i collegamenti tracciati nella finestra <i>kX DSP </i>non hanno
+alcuna influenza sulla latenza: potete quindi averne tanti quanti ne volete).
+Aggiungete e abilitate gli effetti SpinAudio ed iniziate a suonare: avete
+appena completato il vostro primo instradamento ASIO con effetti
+personalizzati!
+</p>
+
+<p class=Darken><b>6. La finestra del <i>kX Router</i></b></p>
+<p>
+I nuovi utenti talvolta trovano che la finestra <i>kX Router</i> sia confusa, ci&ograve anche
+perch&egrave non sembra avere nulla a che fare col dispositivo di instradamento del
+DSP e tutto da fare col dispositivo FXbus. Se si osserva la finestra di percorso, si vedono 
+in una lista gerarchica ad albero posta a sinistra, tutte le uscite
+generate dal software. Vi sono 'Wave 0/1', 'Wave 4/5', 'Wave 6/7' e 'Wave 8/9'
+che corrispondono ai quattro dispositivi 'Wave Out'; i loro nomi si riferiscono
+ai canali "standard" di instradamento FX: 4/5, 6/7 e 8/9 sono
+essenzialmente copie dei canali 'DirectSound/AC3', di 'Front/Rear' e
+'Center/Sub' mentre 0/1 corrisponde all'uscita 'Wave Out' "standard".
+Vi sono inoltre le uscite AC-3 (e DirectSound, come detto precedentemente), i 2
+synth e le uscite ASIO.
+</p>
+<p>
+Ma come &egrave che tutto ci&ograve si riconduce a FXbus?
+</p>
+<p>
+Allora, il dispositivo FXbus ha il suo instradatore/mixer [routing/mixing] interno e tutte
+le uscite dei software sono mappate ad una delle uscite di FXbus. Normalmente, l'onda
+stereo 0/1 &egrave instradata sui canali 0 e 1 (ed anche 13 e 14 per gli effetti). Le
+uscite ASIO sono normalmente mappate 1:1 su FXbus (canale 1 su FXbus #1), i due
+Synths su FXbus #2 e FXbus #3, e cos&igrave via (consultate la tabella completa degli
+instradamenti che si trova nel file della <i>Guida kX</i>). Potete modificare qualsiasi
+impostazione anche se la configurazione di default va in genere benissimo per
+la maggior parte degli scopi. Un esempio di configurazione particolare potrebbe
+essere l'aggiunta di effetti multipli mixati su particolari uscite (del tipo degli
+effetti standard 'Reverb/Chorus' sui canali 13/14).
+</p>
+<p>
+Questa
+rapida descrizione del funzionamento di <i>kX</i> ed ASIO si conclude qui.
+Buona fortuna col driver e col DSP e... sperimentate molto : -) &egrave il modo migliore
+per imparare!
+</p>
+</p>
+
+
+<h5>
+ -- testo originale scritto da Mata Hari<br>
+ -- (con alcune piccole correzioni del kX Team)<br>
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>
+
+</h4>

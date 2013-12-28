@@ -1,0 +1,22 @@
+; New microcode
+	name "kxm120";
+	copyright "2008. russ, stylus";
+	created "05/19/2008";
+	engine "kX";
+	comment "keyboard unit with fast midi support (kxm 120 v1.0)";
+	guid "005b7557-4136-424e-bfc5-f1ab428c7322";
+	; -- generated GUID
+
+
+; itramsize 0
+; xtramsize 0
+output cv;
+output gate;
+static cv_val=0;
+static gate_val=0;
+; code        
+
+macs cv, cv_val, 0, 0;
+macs gate, gate_val, 0, 0;
+
+end

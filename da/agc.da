@@ -1,0 +1,80 @@
+; New microcode
+	name "agc";
+	copyright "eyagos - Copyright (c) 2005.";
+	created "03/13/2005";
+	engine "kX";
+	; comment "";
+	guid "1b63e04c-6f88-4d03-afca-e86887cc6a23";
+	; -- generated GUID 
+	
+	;== CONTROLS description ============================================================================================
+	;  Slowness->   Controls how the plugin reacts to level changes.
+	;               0%   = Fast (and more 'dynamic range' modification) 
+	;               50%  = Mid
+	;               100% = Slow (and less 'dynamic range' modification) 
+	;  Threshold->  If input level is bellow this value, gain is not modyfied.
+	;               It should be set at noise floor, bellow wich we dont want that plugin
+	;               amplificate the sound.
+    ;============================================================================================   
+    input   in_L, in_R
+	output  out_L, out_R
+
+		
+	static  gain=0.001
+	static  gain1=0.001
+	static  thres=0.01
+	static  step2=0.0001
+	static  c2=-1                 
+	
+	const   mil=1000,gain_I=700
+	const   max=1,max1=.7943282347
+	const   interval=0.001
+	
+	temp    t1,t2,t3
+	
+	;Record inputs
+	macs    out_L,0,in_L,1
+	macs    out_R,0,in_R,1
+	
+	;Absolut value & Maximum
+	tstneg  t1,out_L,out_L,0
+	tstneg  t2,out_R,out_R,0
+	limit   t2,t1,t1,t2 
+	
+	;Store input value
+	macints t3,0,t2,0x4
+	
+	;Store input value with gain aplyed
+	macs    t2,0,t3,gain
+	macints t2,0,t2,mil
+	 
+	;Reduce Gain if greater than max -* instantaneous (1 sample = 20 us)
+    macsn   t1,t2,max,1
+	skip    ccr,ccr,0x4,0x3
+	    macsn   t1,1,interval,1
+	    macs    gain,0,gain,t1
+	    macs    c2,-1,0,0
+	
+	;Increase Gain if lower than max -* delayed by counter c2 (1000 samples = 20 ms)
+	macs    c2,c2,step2,1
+	skip    ccr,ccr,0x4,0x6
+        macs    c2,-1,0,0	        
+        macsn   t1,max1,t2,1
+        skip    ccr,ccr,0x4,0x3
+            macsn   t1,t3,thres,1;Only if input greater than threshold
+            skip    ccr,ccr,0x4,0x1
+                macs    gain,gain,gain,interval
+
+    ;Litle gain interpolation
+    interp  gain1,gain1,0.01,gain
+    
+    ;Output
+    macs    out_L,0,out_L,gain1
+    macs    out_R,0,out_R,gain1
+    macints out_L,0,out_L,gain_I
+	macints out_R,0,out_R,gain_I 
+	
+end
+
+
+

@@ -1,0 +1,108 @@
+<title>Généralités sur le pilote kX</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><b><font face="Arial">G&eacute;n&eacute;ralit&eacute;s sur les pilotes audio 
+  kX </font></b></p>
+<hr>
+<p><font size="2">Les<b> Pilotes audio kX </b> sont de type WDM (Windows Driver 
+  Model), ils ont &eacute;t&eacute; con&ccedil;us pour fonctionner avec n'importe 
+  quelle des cartes-son PCI <a href="glossary.htm#kX Compatible">compatibles-kX</a> 
+  (principalement les s&eacute;ries SoundBlaster Live! et Audigy de Creative, 
+  et les cartes E-mu Systems' Audio Production Studio).</font></p>
+<p><font size="2">Les fonctionnalit&eacute;s suivantes sont soit totalement soit 
+  partiellement support&eacute;es par les pilotes kX :</font></p>
+<ul>
+  <li><font size="2"> Lecture et enregistrement audio (Wave)</font></li>
+  <li><font size="2"> Synth&eacute;tiseur MIDI (Synth Engine)&nbsp;</font></li>
+  <li><font size="2">Entr&eacute;es/sorties MIDI UART&nbsp;</font></li>
+  <li><font size="2">DirectSound 2D</font></li>
+  <li><font size="2">DirectSound 3D / EAX</font></li>
+  <li><font size="2">Fontes sonores (SoundFonts)</font></li>
+  <li><font size="2">Lecture et enregistrement ASIO&nbsp;</font></li>
+  <li><font size="2">&Eacute;dition, chargement/d&eacute;chargement du microcode 
+    du DSP&nbsp;</font></li>
+  <li><font size="2">Contr&ocirc;le complet des entr&eacute;es/sorties AC97</font></li>
+  <li><font size="2">D&eacute;codage logiciel des flux AC-3&nbsp;</font></li>
+</ul>
+<p><font size="2">Les pilotes kX sont conformes aux sp&eacute;cifications WDM 
+  et ne sont compatibles qu'avec les syst&egrave;mes d'exploitations suivants 
+  : Windows 98 (Deuxi&egrave;me &Eacute;dition), Windows Me, Windows 2000 et Windows 
+  XP.</font></p>
+<hr>
+<p><b><font face="Arial">&Eacute;crans de contr&ocirc;le kX</font></b></p>
+<p><font size="2">Les &eacute;crans de contr&ocirc;le suivants sont accessibles 
+  &agrave; partir du <b><a href="menu.htm">Menu kX</a></b> (via l'ic&ocirc;ne 
+  syst&egrave;me ou &agrave; l'int&eacute;rieur de la fen&ecirc;tre <b><a href="mixer.htm">Mixeur 
+  kX</a></b>) :</font></p>
+<table  cellpadding="4" width="100%">
+  <tr>
+    <td width="19%" valign="top" align="left"><font size="2"><b><a href="mixer.htm">Mixeur 
+      kX</a></b></font></td>
+    <td width="81%" valign="top" align="left"><font size="2">L'application principale 
+      est utilis&eacute;e pour contr&ocirc;ler les pilotes kX. Elle comprend les 
+      niveaux et boutons d'activation du <a href="master.htm">Volume g&eacute;n&eacute;ral</a>, 
+      les <a href="insnouts.htm">Entr&eacute;es &amp; sorties</a>, l'<a href="recording.htm">Enregistrement</a>, 
+      le <a href="ac97.htm">Codec AC97</a>, les <a href="fxlevels.htm">Niveaux 
+      d'effets</a>, les <a href="soundfonts.htm">Fontes sonores</a> et l'<a href="analyser.htm">Analyseur 
+      de spectre</a>, elle permet &eacute;galement d'acc&eacute;der aux autres 
+      &eacute;crans de contr&ocirc;le kX.</font></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left" height="64"><font size="2"><b><a href="dspguide.htm">DSP 
+      kX</a></b></font></td>
+    <td width="81%" valign="top" align="left" height="64"><font size="2">L'&eacute;cran 
+      de contr&ocirc;le du DSP permet de charger, de d&eacute;charger et de modifier 
+      des effets. Cet &eacute;cran permet &eacute;galement d'acc&eacute;der &agrave; 
+      l'&eacute;diteur kX et aux modules d'extension (pour modifier les param&egrave;tres 
+      des effets).</font></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left" height="44"><font size="2"><b><a href="kxrouter.htm">Routeur 
+      kX</a></b></font></td>
+    <td width="81%" valign="top" align="left" height="44"> 
+      <p><font size="-1">Cet &eacute;cran permet d'acc&eacute;der aux tables de 
+        routages des canaux d'entr&eacute;es, notamment audio PCM, AC3 et Synth&eacute;tiseur 
+        MIDI (16 canaux).</font></p>
+      </td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"><font size="2"><b><a href="asio.htm">ASIO 
+      kX</a></b></font></td>
+    <td width="81%" valign="top" align="left"><font size="2">&Eacute;cran de contr&ocirc;le 
+      permettant l'acc&egrave;s aux niveaux et au routage des 16 canaux ASIO</font></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"><font size="2"><b><a href="editor.htm">&Eacute;diteur 
+      kX&nbsp;</a></b></font></td>
+    <td width="81%" valign="top" align="left"><font size="2">&Eacute;diteur de 
+      microcode du DSP. Accessible &agrave; l'int&eacute;rieur du <a href="dspguide.htm"> 
+      DSP kX</a> ou directement &agrave; partir du <a href="menu.htm"> Menu kX</a>.</font></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"><font size="2"><b><a href="spktest.htm">Test 
+      des haut-parleurs kX </a></b></font></td>
+    <td width="81%" valign="top" align="left"><font size="2">Utilitaire de test 
+      et de r&eacute;solution des probl&egrave;me de configuration des haut-parleurs.</font></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"></td>
+    <td width="81%" valign="top" align="left"></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"></td>
+    <td width="81%" valign="top" align="left"></td>
+  </tr>
+  <tr>
+    <td width="19%" valign="top" align="left"></td>
+    <td width="81%" valign="top" align="left"></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p><font size="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b></font></p>
+<p><font size="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></font></p>
+<p><font size="2"><br>
+</font></p>
+

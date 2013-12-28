@@ -1,0 +1,36 @@
+name "HQ FX-BOX";
+copyright "Copyright (c) 2004";
+engine "kX";
+created "09/12/2005";
+comment "by ColHQ";
+guid "b3490b8d-a38b-439f-9eb3-03315ca65569";  
+
+;registers
+input inl, inr
+output l, r
+control In-level=0.5, Sharpen=0.5, Wideness=0.2;
+	static tl, tr
+	static pl=0x0, pr=0x0, dl=0x0;
+	static dr=0x0, bl=0x0, br=0x0
+    static tmpsl, tmpsr, t;
+;code
+;input buffer
+macs tl, 0, inl, in-level
+macs tr, 0, inr, in-level
+
+; sharpening
+macints dl, tl, pl, -1
+macints dr, tr, pr, -1
+macs    tmpsl,  0, dl, sharpen
+macs    tmpsr,  0, dr, sharpen
+macs    pl, tl, 0, 0
+macs    pr, tr, 0, 0
+;in+wideness
+macints    t, tl, tr, -1
+macs    l, tl, t, wideness
+macsn   r, tr, t, wideness 
+;out
+macints l, l, tmpsl, 1
+macints r, r, tmpsr, 1
+
+end

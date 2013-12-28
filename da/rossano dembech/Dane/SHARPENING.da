@@ -1,0 +1,30 @@
+
+name "HQ Sharpening";
+copyright "Copyright (c) 2004";
+engine "kX";
+created "05/11/2005";
+comment "by ColHQ";
+guid "b0639f05-8c92-4445-ac83-3795797bcef8";  
+
+; Registers
+	input inL, inR;
+	output L, R;
+	control SHARP=0.25;
+	static tl, tr
+	static PL=0x0, PR=0x0, DL=0x0;
+	static DR=0x0, BL=0x0, BR=0x0
+    static tmpl, tmpr
+; Code
+; input buffer
+macints tl, 0, inl, 1
+macints tr, 0, inr, 1
+; sharpening
+macints dl, tl, pl, -1
+macints dr, tr, pr, -1
+macs    tmpl,  0, dl, sharp
+macs    tmpr,  0, dr, sharp
+macs    pl, tl, 0, 0
+macs    pr, tr, 0, 0
+macints l, tl, tmpl, 1
+macints r, tr, tmpr, 1
+end

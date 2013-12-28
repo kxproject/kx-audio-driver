@@ -1,0 +1,80 @@
+name "cross"
+guid "12dcd040-169c-11d8-b0d0-f2dc5a29df10"         
+
+; входы/выходы
+input 	in1, in2
+output	l1, h1, l2, h2  
+
+; коэффициенты фильтров
+static	lb = 0.0378047541708965           
+static	hb = 0.9621952458291030
+static	a  = 0.9243904916582070
+
+static  lz1, lz2, lz3, lz4    
+static  hz1, hz2, hz3, hz4 
+
+temp	i, x, y
+
+; ....................              
+; левый канал      
+
+macs	i, in1, 0, 0             
+              
+; первый фнч
+macs	x, 0, i, lb
+macs	y, x, lz1, 1
+macs   	lz1, x, y, a        
+
+; второй фнч
+macs	x, 0, y, lb
+macs	y, x, lz2, 1
+macs   	lz2, x, y, a 
+
+; левый нч выход
+macs	l1, y, 0, 0
+
+; первый фвч
+macs	x, 0, i, hb
+macs	y, x, hz1, -1
+macsn   hz1, x, y, a        
+
+; второй фвч
+macsn	x, 0, y, hb
+macs	y, x, hz2, -1
+macsn   hz2, x, y, a       
+
+; левый вч выход
+macs	h1, y, 0, 0
+
+; ....................              
+; правый канал    
+
+macs	i, in2, 0, 0           
+              
+; первый фнч
+macs	x, 0, i, lb
+macs	y, x, lz3, 1
+macs   	lz3, x, y, a        
+
+; второй фнч
+macs	x, 0, y, lb
+macs	y, x, lz4, 1
+macs   	lz4, x, y, a 
+
+; правый нч выход
+macs	l2, y, 0, 0
+
+; первый фвч
+macs	x, 0, i, hb
+macs	y, x, hz3, -1
+macsn   hz3, x, y, a        
+
+; второй фвч
+macsn	x, 0, y, hb
+macs	y, x, hz4, -1
+macsn   hz4, x, y, a       
+
+; правый вч выход
+macs	h2, y, 0, 0
+
+end 

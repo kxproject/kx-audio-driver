@@ -1,0 +1,29 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxrar
+TARGETTYPE=LIBRARY
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -DKX_INTERFACE -D"_MBCS" -DUNRAR -DSILENT
+MSC_WARNING_LEVEL=-W0
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=rar.hpp
+
+INCLUDES=..\h;..\h\rar
+
+SOURCES=filestr.cpp recvol.cpp rs.cpp scantree.cpp \
+	strlist.cpp strfn.cpp pathfn.cpp int64.cpp savepos.cpp global.cpp \
+	file.cpp filefn.cpp filcreat.cpp archive.cpp arcread.cpp unicode.cpp \
+	system.cpp isnt.cpp crypt.cpp crc.cpp rawread.cpp encname.cpp resource.cpp \
+	match.cpp timefn.cpp rdwrfn.cpp consio.cpp options.cpp ulinks.cpp errhnd.cpp \
+	rarvm.cpp rijndael.cpp getbits.cpp sha1.cpp extinfo.cpp extract.cpp volume.cpp \
+	find.cpp unpack.cpp cmddata.cpp

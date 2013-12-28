@@ -1,0 +1,58 @@
+name "kxm 210";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/05/2007";
+engine "kX";  
+comment "multi voltage controlled oscillator, aliasingfree! (kxm 210 v1.1)" 
+guid "b7480492-9a02-4b5a-9b9f-c3339db9ed9e";
+
+; multi vco provides saw, triangle, 
+; square, pulsewidthed square (bandlimited, aliasingfree)
+; bandlimiting occurs when test functions like tstneg, limit,
+; limitn, skip are used!
+; i think the testcycles decrease the samplerate and harmonics
+; so we go right with nyquist. 
+
+;registers
+input cv, envelope, lfo_1, lfo_2, pw_mod
+output saw, triangle, square
+static a, b, c, d, e, h, i, k, l, n
+control finetune=0.5, semitune=0.5, octave=0, pulsewidth=0
+control env_mod=0, lfo_mod=0
+  
+; trim sliders
+interp e, 0.48, finetune, 0.52  
+interp d, 0.5, semitune, 1
+interp c, 0x1, octave, 0x5 
+interp h, 0, pulsewidth, 0.245 
+interp k, 0, env_mod, 0.01
+interp l, 0, lfo_mod, 0.01 
+
+; tune
+macs b, 0, cv, 0.18466 ; match note "c" (base is 0,554) 
+macs b, 0, b, e ; finetune +/- ~10%  
+macs b, 0, b, d ; semitones + 12 
+macints b, 0, b, c ; octave switch 1..2
+
+; modulation
+macs b, b, envelope, k ; add envelope to tune (0..1)*k 
+macs b, b, lfo_1, l ; add lfo_1 to tune (0..1)*l
+macs b, b, lfo_2, l ; add lfo_2 to tune (0..1)*l
+macs n, 0, pw_mod, 0.245 ; trim pw_mod input (0..0.245) 
+macs h, h, n, 1 ; add pw_mod to pulsewidth 
+
+; base saw
+macs a, a, b, 1 ; ramp up 
+limitn a, 0.5, 0, a ; if a>0.5 a=0 else a=a
+
+; saw & spaced saw  
+macsn saw, a, 0.25, 1 ; base saw osc 
+                      ; signal output must have a lower range (-0.25..0.25)!
+; triangle
+tstneg i, saw, saw, 0 ; if saw>0 i=saw else i=-saw    
+macsn i, i, 0.125, 1 ; dc offset -0.125
+macints triangle, 0, i, 0x2 ; gain x2
+ 
+; square & pulsewidthed square
+tstneg  square,  saw,  0.25,  h ; if saw>h square=0.25 else -0.25
+      
+end

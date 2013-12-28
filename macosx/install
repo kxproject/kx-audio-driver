@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+
+echo === Installing kX Audio driver...
+
+sudo mkdir /Applications/Utilities/kX
+sudo cp -R "./build/Deployment/kX Manager.app" /Applications/Utilities/kX
+sudo cp -R "./build/Deployment/kX AC97.app" /Applications/Utilities/kX
+
+sudo cp "./build/Deployment/kxctrl" /usr/bin
+sudo cp "./build/Deployment/edspctrl" /usr/bin
+sudo cp "./build/Deployment/kXAPI.dylib" /usr/lib
+sudo chown root:admin /usr/bin/kxctrl
+sudo chown root:admin /usr/bin/edspctrl
+sudo chown root:admin /usr/lib/kXAPI.dylib
+sudo chmod 0755 /usr/bin/kxctrl
+sudo chmod 0755 /usr/bin/edspctrl
+sudo chmod 0755 /usr/lib/kXAPI.dylib
+
+# copy KEXT and repair permissions
+sudo cp -R ./build/Deployment/kXAudioDriver.kext /System/Library/Extensions
+sudo chown -R root:wheel /System/Library/Extensions/kXAudioDriver.kext
+sudo find /System/Library/Extensions/kXAudioDriver.kext -type d -exec /bin/chmod 0755 {} \;
+sudo find /System/Library/Extensions/kXAudioDriver.kext -type f -exec /bin/chmod 0644 {} \;
+
+sync

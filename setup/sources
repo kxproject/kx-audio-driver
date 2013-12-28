@@ -1,0 +1,39 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxsetup
+TARGETTYPE=PROGRAM
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+TARGETLIBS=$(SDK_LIB_PATH)\oldnames.lib \
+    $(SDK_LIB_PATH)\newdev.lib \
+    $(SDK_LIB_PATH)\setupapi.lib\
+    $(SDK_LIB_PATH)\shell32.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\msimg32.lib \
+    $(SDK_LIB_PATH)\oleaut32.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\shlwapi.lib \
+    $(SDK_LIB_PATH)\advapi32.lib \
+    $(OBJ_PATH)\..\kxapi\$O\kxapi.lib   \
+    $(OBJ_PATH)\..\kxgui\$O\kxgui.lib
+
+INCLUDES=..\h
+
+SOURCES=main.cpp setup.rc debug.cpp setup.cpp
+
+MSC_WARNING_LEVEL=-W4 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+C_DEFINES=$(C_DEFINES) /D"_MBCS" 

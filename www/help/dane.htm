@@ -1,0 +1,748 @@
+<p align="center"><font size="5">A Beginner's Guide to Programming Digital Audio 
+  Effects in the kX Project environment</font></p>
+
+<p align='right'>most recent <a href='http://www.geocities.com/ef_x_team/guide.html'>online version</a></p>
+  
+  <div align="center"> 
+  <blockquote>&nbsp;</blockquote>
+  </div>
+<blockquote> 
+  <p align="center"><strong>Martin Borisov (Tiger M)<br>
+    Santiago Munoz (eYagos)<br>
+    revised by<br>
+    Max Mikhailov (Max M.)</strong></p>
+  <p align="center">&nbsp;</p>
+  <p align="center"><strong><font size="4">Introduction</font></strong></p>
+</blockquote>
+<p>Digital audio effects are a small branch of the science of digital signal processing 
+  (DSP), which comprises many different types of applications such as image processing, 
+  communications, medical instrumentation, military instrumentation, deep sea 
+  and space exploration etc. All these deal with processing different signals 
+  (a signal being a stream of continuous data) and so does audio processing.<br>
+  The digital signal processor of the sound card driven by kX gives us many possibilities 
+  for audio effects implementation and kX itself consists of tools that help us 
+  a lot in achieving this. Not many people comprehend the power that this combination 
+  puts in our hands. In fact we have a fully programmable digital effects processor, 
+  which we can command in the most subtle way possible by using the lowest level 
+  assembly instructions provided. We can program all possible types of effects 
+  known in the audio world. Some things might seem complicated, but don't be scared, 
+  I can assure you that you would be able to comprehend it.<br>
+  In this guide I've tried to keep things as simple as possible and give examples, 
+  which are the essence of learning DSP techniques in kX. We willl use the kX 
+  Editor (Dane) which is a very convenient assembler. Although it doesn't give 
+  the flexibility of C++ programming, it will be enough for the basics and will 
+  give you a jump start on DSP programming. And if you are familiar with object 
+  oriented programming in C++, than you have all the power in your hands. But 
+  note: no C++ knowledge is required for understanding the information in this 
+  guide. <br>
+  The structure of the guide is practicaly oriented. I'll give examples coupled 
+  with explanations of the 16 instructions used in programming the E-mu10kx chips. 
+  You can copy/paste and test them in Dane. The instructions are the programming 
+  language of the processor, often called the microcode/opcode.<br>
+  In the end we'll &quot;disect&quot; several of the commonly used simple kX Project 
+  effects. </p>
+<p align="center">&nbsp;</p>
+<p align="center"><strong><font size="4">The digital signal processor </font></strong></p>
+<p>When a signal (in our case analog audio signal) enters the input of the soundcard 
+  it goes into an ADC (analog to digital converter), which transforms the voltage 
+  of the sound signal in regular intervals of time (in our case it does this 48000 
+  times per second - 48KHz) to a number, thus making it digital (discrete). So, 
+  48000 numbers form 1 second of audio signal or vice-versa. Then every number 
+  of this continuous array of values passes through the digital signal processor 
+  where it gets transformed by the effects. After that it goes into the DAC (digital 
+  to analog converter) where it gets analog again and goes to the sound card outputs. 
+  In some cases the signal might be extracted before it gets transformed by the 
+  DAC, and sent to the digital output of the sound card in digital form.<br>
+  We transform the signal with audio effects when it is in the form of numbers 
+  and this means we have to deal with math and nothing else! So, DSP effects are 
+  just mathematical functions, which most of us study in school. Actually each 
+  instruction is a small mathematical function all by itself. A combination of 
+  these forms a system - the audio effect. This system of mathematical functions 
+  is performed on each value of the transformed signal and the processor does 
+  this 48000 times per second.</p>
+<p>&nbsp;</p>
+<p align="center"><strong><font size="4">Let's begin</font></strong></p>
+<p>Let's start by opening kX Editor. Rigt-click the kX icon in the taskbar and 
+  open kX Editor. <br>
+  In the editor window you'll see lines starting with ; - these are just comments, 
+  in the upcomming examples there will be many of these. You'll see lines like 
+  &quot;name&quot;, &quot;copyright&quot; and so on, which are only for providing 
+  information for the plugin and are not related to DSP. You can write your own 
+  information there for each effect. The &quot;guid&quot; line is important, because 
+  it guarantees the uniqueness of the plugin, so it doesn't overwrite existing 
+  effects when it is registered in kX. You can obtain an unique guid by going 
+  to the 'settings' tab and selecting 'generate guid'. This copies the new guid 
+  to the clipboard and you just have to paste it in your code. You'll also see 
+  an &quot;end&quot; word, which indicates where the code ends. It should always 
+  be there for the code to get compiled (parsed).</p>
+<p>NOTE: In kX editor you can use both the decimal and hexadecimal (aka machine) 
+  number systems. It is advisable to use decimal, because this is the natural 
+  &#8220;human&#8221; number system and decimal numbers are automaticly transformed 
+  into hexadecimal. <br>
+  For example, if you write 1 it will be transformed to 0x7fffffff. You don't 
+  have to know hexadecimal numbers to program audio effects in kX, in fact it 
+  will just be a waste of time. You can convert hexadecimal to decimal in windows 
+  calculator for instance, with the following formula: hex/(2^31 + 1) = dec, or 
+  decimal to hexadecimal: dec*(2^31 &#8211; 1) = hex.<br>
+  Numbers processed by the E-mu10kx digital signal processor are fixed-point 32 
+  bit fractional between -1 and 1 or integer values (whole numbers).</p>
+<p>&nbsp;</p>
+<p align="center"><strong><font size="4">Registers</font></strong></p>
+<p>Unprocessed, intermediate and processed data of the audio signal stream is 
+  stored in physical registers. There are several types of registers:</p>
+<p>1. <strong>Input</strong> and <strong>output</strong> registers. Incomming 
+  data unprocessed by the current effect is stored in the input register, so subsequently 
+  it can get processed. Already processed data is stored in the output register, 
+  so it can be rooted to physical outputs or other effects. Each microcode can 
+  have several input and output registers depending on how many channels we want 
+  it to have. For example, if it's going to be stereo we would need two of each 
+  type. If it's only mono we will need just one of each type. The use of such 
+  registers is not necessary for effects which don't need both inputs or outputs 
+  &#8211; for instance peak meters or wave generating effects. But at least one 
+  type is needed, otherwise the system would be meaningless and useless.</p>
+<p>Declaration:</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out <font color="#000000"><em>; in and out are just 
+  names, you can assign the registers any name</em></font></code></p>
+<p><br>
+  NOTE: the value of the output register can be reused in the next sample cycle 
+  before the processor gets to calculating the operation, the result of which 
+  is written to the same output register, when it gets overwritten with the next 
+  output value.</p>
+<p>2.<strong>Static</strong> and <strong>temp</strong> registers. They are used 
+  for storing intermediate data during instruction execution. The value of a static 
+  register is preserved until it is overwritten (next sample cycle), or the microcode 
+  is reinitialized (reloading or resetting the plugin). Temp registers are used 
+  for the present sample cycle only, so their last value can not be used in the 
+  next cycle &#8211; it will be zero. The idea behind the temp register is that 
+  it can be shared by all loaded effects, but such sharing is not supported by 
+  kX at the present time, so it is recommended that static be used most of the 
+  time. Despite that we'll use temp registers in the examples for learning purposes 
+  only.</p>
+<p>Declaration:</p>
+<p><strong><code>static</code></strong><code> st <br>
+  <strong>temp</strong> tmp <em>; st and tmp are again just names</em></code></p>
+<p>Static and temp registers don't have to be initialized with a value, but if 
+  an initial value is needed you can assign such to a static register:</p>
+<p><strong><code>static</code></strong><code> st = 0.8</code></p>
+<p>NOTE: when you use certain numbers (constants) directly in the microcode which 
+  are not present in hardware (in a special read-only memory), they are automatically 
+  transferred to static registers when the code is compiled.</p>
+<p>3.<strong>Control</strong> register. This is a read-only register and has to 
+  be initialized with a value. When the code is compiled, a fader is automatically 
+  created for that register, so it can be user controlled. It can have values 
+  between 0 and 1 (although you can assign values greater than that, when you 
+  move the corresponding slider the value is automaticaly transformed between 
+  0 and 1). </p>
+<p>Declaration:</p>
+<p><strong><code>control</code></strong><code> volume = 0.2</code></p>
+<p>The assigned value is the default value, so each time the code is reinitialized 
+  the control register will have this value.</p>
+<p>4. <strong>Constants</strong>. There are certain constant values, which are 
+  defined in hardware in a read-only memory on the chip and can be used directly 
+  in the code (not with a static register) for the purpose of saving some resources. 
+  Such are 0, 0.125, 0.5, 0.75, -1, 1, 2, 3, 4, 8, 10, 20, 100, etc. If not hardware-defined 
+  constants are used, they will be automatically transformed to static registers, 
+  as mentioned before.</p>
+<p>5. <strong>Accum</strong> register. This register gives us access to the dsp 
+  accumulator. When an instruction is executed, its result is automatically stored 
+  in it overwriting the previous value and then copied to the result register 
+  of that particular instruction. You can access the accumulator with the accum 
+  keyword and it can be used only as an A operand. It is 67 bit wide and has 4 
+  guard bits. It can be used when we want an unsaturated or unwrapped intermediate 
+  result, for instance:</p>
+<p><code><font color="#000000"><strong>macs</strong> 0, 1, 0.5, 1 <em>;1+ 0.5 
+  = 1.5</em> </font></code></p>
+<p><font color="#000000"><code><strong>macsn</strong> out, <strong>accum</strong>, 
+  0.6, 1 <em>;out=1.5-0.6=0.9</em></code></font></p>
+<p>6.<strong>CCR</strong> (Condition Code Register). This register is used in 
+  the skip instruction. Its value is set after each instruction, based on its 
+  result. You can acces it with the ccr keyword. </p>
+<p>7.<strong>TRAM Access Data Registers</strong>. These registers are for delay 
+  lines. There are write registers (which write samples in the delay line) and 
+  read registers (which read (extract) samples from the delay line). You can change 
+  the address of these registers within the declared delay line, thus changing 
+  the lenght of the delay line and the lenght of the actual delay. In Dane this 
+  is done by putting an &amp; sign before the name of the corresponding register. 
+</p>
+<p>&nbsp;</p>
+<p align="center"><strong><font size="4">Instructions</font></strong></p>
+<p>All instructions have the following syntax:</p>
+<p><strong>instruction result R ,operand A, operand X, operand Y</strong></p>
+<p>Operands are registers.</p>
+<p>1.<strong>MACS</strong> and <strong>MACSN</strong> (multiply-accumulate with 
+  saturation on overflow) That means that you multiply two numbers, then add them 
+  to a third number and store the value in the result register. These instructions 
+  operate with fractional numbers only (they perform fractional multiplication)! 
+  If the result exeeds -1 or 1 it is truncated to -1 or 1. This means that you 
+  can't use whole (integer) numbers with these two instructions except &#8220;fractional&#8221; 
+  1.</p>
+<p>Formulae:</p>
+<p>MACS R = A + X*Y<br>
+  MACSN R = A - X*Y</p>
+<p>Example:</p>
+<p>This is a simple volume control program.<br>
+  <br>
+  <strong><code>name</code></strong> <code>&quot;Volume control&quot;; <br>
+  <strong>copyright</strong> &quot;Copyright (c) 2004.&quot;; <br>
+  <strong>created</strong> &quot;06/27/2004&quot;; <br>
+  <strong>engine</strong> &quot;kX&quot;; <br>
+  <strong>guid</strong> &quot;...It will be automatically generated!!!...&quot;; 
+  Don't copy this </code></p>
+<p><code><em>;we define the registers </em><br>
+  <strong>input</strong> in <br>
+  <strong>output</strong> out <br>
+  <strong>control</strong> volume=1 </code></p>
+<p><code><strong>macs</strong> out, 0, in, volume <em>;out = 0 + in * volume </em><br>
+  <strong>end</strong> <em>;don't forget this</em></code></p>
+<p>You can try it in kX Editor. Click on &quot;Save Dane Source&quot; (on the 
+  right of the window) not &quot;Export to C++&quot;. Save it, then right click 
+  on the DSP window and select &quot;Register Plugin&quot;. Open the file and 
+  it should now be with the other effects - you know where they are. Or you can 
+  find the file in windows explorer and double-click on it &#8211; it will automatically 
+  get registered.</p>
+<p>2.<strong>MACW</strong> and <strong>MACWN</strong> (MAC with wraparound on 
+  overflow) Same as MACS and MACSN, but when the value exeeds -1 or 1 it wraps 
+  around. This is presumably to minimize noise when saturation occurs with MACS 
+  and MACSN. If you have 0.5 + 0.7, the result instead of 1 on saturation, will 
+  be -0.8 with warparound.</p>
+<p>3.<strong>MACINTS</strong> (saturation) and <strong>MACINTW</strong> (wraparound). 
+  Same as MACS and MACW, but they perform integer multiplication. That means that 
+  you can multiply a fractional value with an integer value as well as integer 
+  with an integer. These two instructions always assume that the Y operand is 
+  an integer. </p>
+<p>Formulae:</p>
+<p>MACINTS R = A + X*Y<br>
+  MACINTW R = A + X*Y</p>
+<p>Example 1:</p>
+<p>NOTE: I won't write the info part (name, copyright etc.) anymore. You can do 
+  that yourselves.</p>
+<p><br>
+  A simple gain. We multiply the input by 4 (that's a mono version of the x4 effect).</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out </code></p>
+<p><code><strong>macints</strong> out, 0, in, 0x4<em> ; out = 0 + in * 4</em> 
+  <br>
+  <strong>end</strong></code></p>
+<p><br>
+  Example 2 :</p>
+<p>If we want to control the amount of gain:</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out <br>
+  <strong>control</strong> gain=0.25 <br>
+  <strong>temp</strong> t </code></p>
+<p><code><strong>macints</strong> t, 0, in, 0x4<em> ; t = 0 + in * 4 </em><br>
+  <strong>macs</strong> out, 0, t ,gain <em>; out = 0 + t * gain - its actually 
+  a level control </em><br>
+  <strong>end</strong></code></p>
+<p>4. <strong>ACC3</strong>. This instruction just sums three numbers. It saturates 
+  on overflow. The values of the operands can be all fractional (we treat the 
+  result as fractional) or all integer (we treat the result as integer).</p>
+<p>Formula:</p>
+<p>ACC3 R = A +X +Y</p>
+<p>Example:</p>
+<p>Mix of three mono sources plus a volume control.</p>
+<p><strong><code>input</code></strong><code> in1, in2, in3 <br>
+  <strong>output</strong> out <br>
+  <strong>temp</strong> t <br>
+  <strong>control</strong> volume = 0.33 </code></p>
+<p><code><strong>acc3</strong> t, in1, in2, in3 <em>;t=in1 + in2 + in3</em> <br>
+  <strong>macs</strong> out, 0 , t , volume <em>; out = 0 + t * volume</em> <br>
+  <strong>end</strong></code></p>
+<p>5. <strong>MACMV</strong> (MAC plus parallel move of operand A to operand R). 
+  The result of X*Y is added to the previous value of the accumulator and the 
+  result is again moved into the accumulator. At the same time the value of A 
+  is copied to R. This is very useful for filters, since it simultaneously accomplishes 
+  the MAC and the data shift required for filtering. </p>
+<p>Formula:</p>
+<p>R = A, accum += X * Y; or (accum = accum + X*Y)</p>
+<p>Example:</p>
+<p>See the EQ Lowpass disection at the end of the document.</p>
+<p>6.<strong>ANDXOR</strong> used for generating standard logical instructions. 
+  I haven't had any experience with this instruction and there doesn't seem to 
+  be much use of it. If you want more details take a look at the As10k1 manual. 
+  If anyone wants to add to this section, please contact me (info in the end of 
+  the document).</p>
+<p>7. <strong>TSTNEG</strong>, <strong>LIMIT</strong>, <strong>LIMITN</strong> 
+  give the possibility of using something close to &quot;if... then...&quot; statements 
+  in the microcode.</p>
+<p>Formulae:</p>
+<p>TSTNEG R = (A &gt;= Y) ? X : ~X </p>
+<p>If A&gt;=Y, the result will be X, else (if A&lt;Y) X is complemented (becomes 
+  negative).<br>
+  This instruction could be used for obtaining the absolute value of a number:</p>
+<p><strong><code>tstneg</code></strong><code> out, in, in, 0 <em>;out = abs(in)</em></code></p>
+<p>LIMIT R = (A &gt;= Y) ? X : Y</p>
+<p>If A&gt;=Y the result will be X, else (if A&lt;Y) the result will be Y.</p>
+<p>LIMITN R = (A &lt; Y) ? X : Y</p>
+<p>If A&lt;Y the result will be X, else (if A&gt;Y) the result will be Y</p>
+<p>Example:</p>
+<p>A simple hard clipping fuzz. It cuts the wave over 0.05 and under -0.05, thus 
+  producing harmonics.</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out <br>
+  <strong>static</strong> negclip=-0.05, posclip=0.05<em> ;negative and positive 
+  clip limits </em><br>
+  <strong>control</strong> volume=0.8 <br>
+  <strong>temp</strong> t </code></p>
+<p><code><strong>limitn</strong> t, posclip, posclip, in <em>;if in&gt;posclip, 
+  t=posclip; else t=in </em><br>
+  <strong>limit</strong> t,negclip, negclip, t <em>;if t&lt;negclip, t=negclip; 
+  else t=t</em> <br>
+  <strong>macs</strong> out, 0, volume, t <em>;level control </em><br>
+  <strong>end</strong></code></p>
+<p>8. <strong>LOG</strong> and <strong>EXP</strong>. LOG converts linear data 
+  into sign-exponent-mantissa (scientiffic/logarithmic) and EXP does the oposite. 
+  They have many uses as one E-mu/Creative Technology Center official states: 
+  &quot;for data compression, dB conversion, waveshaping and log domain arithmetic 
+  approximating division and roots&quot;. </p>
+<p><br>
+  Formulae:</p>
+<p>LOG R, Lin_data, Max_exponent, Sign_register<br>
+  EXP R, Log_data, Max_exponent, Sign_register</p>
+<p>Lin_data: Data to be converted. It would be interpreted as fractional format. 
+  <br>
+  Max_exponent: Must be between 1 (0x1) and 31 (0x1F). This parameter controls, 
+  in simple words, the quantity of scale conversion made by the instruction. A 
+  value of 1 means no scale conversion. A value of 31 means maximum scale conversion 
+  (see gaphs 3, 4, 5, 6). For this reason, we sometimes refer to this parameter 
+  as 'Resolution' . <br>
+  Sign_register: Must be between 0 (0x0) and 3 (0x3). This parameter is used to 
+  control the sign of the result:</p>
+<p>0x0 - normal<br>
+  0x1 - absolute value (allways positive)<br>
+  0x2 - negative of absolute value (allways negative)<br>
+  0x3 - negative (inverted)</p>
+<p>Since the EXP instruction has exactly the opposite behaviour than LOG, we should 
+  only discuss the LOG one. The opposite behaviour means that if you calculate 
+  the EXP of the result of a LOG instruction, you get the operand of the LOG instruction 
+  again (if the same resolutions are used):</p>
+<p>&nbsp; <strong><code>log</code></strong><code> tmp1, x, res, sign <em> ;tmp1 
+  = LOG (x, res, sign)</em><br>
+  &nbsp;<strong>exp</strong> tmp2, tmp1, res, sign <em> ;tmp2 = EXP (tmp1, res, 
+  sign) = x</em></code> </p>
+<p><strong>Graphs</strong><br>
+  Here you have some plots that can help to understand the behaviour of the parameters 
+  of these two instructions.</p>
+<p>Plots of LOG for the full input range. We can see the difference between Max_exp=0x1F 
+  (maximum allowed value) and Max_exp=0x1 (minimum allowed value). We can also 
+  see, comparing the two graphs, how the sign_register parameter acts.</p>
+<p><img src="images/log_0.gif" width="366" height="256"><img src="images/log_1.gif" width="366" height="256"></p>
+<p>Plots of the various max_exponent values.</p>
+<p><img src="images/logs-c.gif" width="366" height="256"><img src="images/logs-31.gif" width="366" height="256"></p>
+<p><img src="images/logs-15.gif" width="366" height="256"><img src="images/logs-7.gif" width="365" height="256"></p>
+<p>&nbsp;</p>
+<p>Why are these instructions called LOG and EXP?</p>
+<p><br>
+  Let's talk about the difference between LOG/EXP instructions, and the log/exp 
+  functions in math (I will use upper case for the dane instructions, and lower 
+  case for the mathl functions). The LOG/EXP dane instructions are instructions 
+  to convert linear data into exponent + mantissa data, and exponent + mantissa 
+  data into linear data, respectively. But then..., why are they named LOG and 
+  EXP? Well, there is a powerful reason for this - these two functions are good 
+  approximations to the mathematical log/exp functions. And the greater the resolution 
+  parameter (Max_exp_size), the better the approximation. </p>
+<p>NOTE: We allways remember trigonometry, but not always remeber logarithms. 
+  Take a look at your old math notes if you don't remember what a neperian logarithm 
+  is. -;)</p>
+<p>LOG y, x, res, 0x1 approximates to y = log[base](x) + 1 = ln(x) / ln(base) 
+  + 1 with:</p>
+<table width="54%" border="1" cellspacing="1" cellpadding="1">
+  <tr> 
+    <td width="48%"><div align="left"><font size="+1">ln(base)</font></div></td>
+    <td width="52%"><div align="left"><font size="+1">res</font></div></td>
+  </tr>
+  <tr> 
+    <td>~ 22.18 </td>
+    <td>0x1F (31</td>
+  </tr>
+  <tr> 
+    <td>~ 11.09</td>
+    <td>0xA (15)</td>
+  </tr>
+  <tr> 
+    <td>~ 5.68 </td>
+    <td>0x7 (7</td>
+  </tr>
+</table>
+<p>)</p>
+<p><img src="images/LOG1.gif" width="367" height="256"></p>
+<p>Once again, as the EXP instruction has the opposite behaviour than LOG, it 
+  can be approximated to the mathematical exp instruction.</p>
+<p>EXP y, x, res, 0x1 approximates to y = base^(x - 1) = exp( (x - 1) * ln(base) 
+  ) with:</p>
+<table width="39%" border="1" cellspacing="1" cellpadding="1">
+  <tr> 
+    <td width="48%"><font size="+1">ln(base)</font></td>
+    <td width="52%"><font size="+1">res</font></td>
+  </tr>
+  <tr> 
+    <td>~ 22.18</td>
+    <td>0x1F (31)</td>
+  </tr>
+  <tr> 
+    <td>~ 11.09</td>
+    <td>0xA (15)</td>
+  </tr>
+  <tr> 
+    <td>~ 5.68</td>
+    <td>0x7 (7)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p><img src="images/EXP1.gif" width="367" height="256"></p>
+<p>&nbsp;</p>
+<p>Absolute value with the LOG instruction</p>
+<p><br>
+  The LOG instruction can perform the absolute value of the input data using Max_exp_size=1 
+  and the sign_register parameter:</p>
+<p>Operation: |x|</p>
+<p><code><strong>log</strong> y, x, 0x1, 0x1<em>; y = abs (x)</em> </code></p>
+<p>Operation: -|x| </p>
+<p><code><strong>log</strong> y, x, 0x1, 0x2 <em>;y = - abs (x) </em></code></p>
+<p>There is a loss of two (maybe tree) bits with these expressions. Although the 
+  loss of two or tree bits is really insignificant (we still have 32-3 = 29 bits), 
+  it is better to use the TSTNEG instruction to do the normal absolute value operation.</p>
+<p> Log domain arithmetic</p>
+<p>We can use the LOG and EXP instructions to perform operations like divisions 
+  and/or roots. But don't forget these two important things:</p>
+<p>1.Since LOG and EXP are not exactly the log and exp functions, the next is 
+  only an approximation, and may not be enough in many cases. <br>
+  2.In general, we must use always the max allowed value of Max_exp_size (0x1F) 
+  parameter to get a better approximation. </p>
+<p>These algorithms are based on the formulas: </p>
+<p> log (a ^ b) = b * log (a) <br>
+  a ^ b = exp ( log(a^b) ) = exp ( b*log(a) ) </p>
+<p><u>Square root approximation:</u><br>
+  Operation: a ^ (1/2)</p>
+<p><strong><code>log</code></strong><code> tmp1, a, 0x1F, 0x1 <em>;tmp1 = log[base] 
+  (a) + 1 </em><br>
+  <strong>macs</strong> tmp1, 0.5, tmp1, 0.5<em> ;tmp1 = 1/2 + ( log[base] (a) 
+  + 1) / 2</em>= log[base] (a) / 2 + 1 <br>
+  <strong>exp</strong> result, tmp1, 0x1F, 0x1 <em>;result = base ^ ( log[base] 
+  (a) / 2 + 1 - 1 ) = base ^ ( log[base] (a) / 2 )</em></code><code><em>= base 
+  ^ ( log[base] ( a^(1 / 2) ) = a ^ (1/2</em></code><em>)</em></p>
+<p>As we can see in the graph, this algorihtm gives a very good aproximation to 
+  the square root:</p>
+<p><img src="images/POWER1.gif" width="364" height="255"></p>
+<p><u>Cubic root approximation:</u></p>
+<p><code><strong>log</strong> tmp1, a, 0x1F, 0x1 <em>;tmp1 = log[base] (a) + 1</em> 
+  <br>
+  <strong>macs</strong> tmp1, 0.6666666666, tmp1, 0.3333333333 <em>;tmp1 = 2 /3 
+  + ( log[base] (a) + 1 ) / 3</em> <br>
+  <em>;= log[base] (a) / 3 + 1</em> <br>
+  <strong>exp</strong> result, tmp1, 0x1F, 0x1 <em>;result = base ^ ( log[base] 
+  (a) / 3 + 1 - 1 ) </em><br>
+  <em>;= base ^ ( log[base] (a) / 3 ) <br>
+  ;= base ^ ( log[base] ( a^(1 / 3) ) = a ^ (1/3)</em> </code></p>
+<p>Wors aproximation to the cubic root than to the square root, but still very 
+  good.</p>
+<p><img src="images/POWER2.gif" width="365" height="256"></p>
+<p>&nbsp;</p>
+<p><u>Division approximation with an unsigned result:</u></p>
+<p>Based on the following formula:</p>
+<p>a / b = exp ( log(a / b) ) = exp ( log(a) - log(b) )</p>
+<p> <strong><code>log</code></strong><code> tmp1, a, 0x1F, 0x1 <em>;tmp1 = log[base] 
+  (a) + 1</em> <br>
+  <strong>log</strong> tmp2, b, 0x1F, 0x1 <em>;tmp2 = log[base] (b) + 1</em> <br>
+  <strong>macsn</strong> tmp2, tmp2, 1, 1 <em>;tmp2 = log[base] (b</em>) <br>
+  <strong>macsn</strong> tmp3, tmp1, tmp2, 1 <em>;tmp3 = log[base] (a) - log[base] 
+  (b) + 1 </em><br>
+  <strong>exp</strong> result, tmp3, 0x1F, 0x1 <em>;result = base ^ ( log[base] 
+  (a) - log[base] (b) + 1 - 1 </em>) <br>
+  <em>;= base ^ ( log[base] (a) - log[base] (b) )<br>
+  ;= base ^ ( log[base] ( a / b ) ) = a / b </em></code></p>
+<p><img src="images/division1.gif" width="363" height="259"><img src="images/division2.gif" width="363" height="255"></p>
+<p><img src="images/division3.gif" width="362" height="259"><img src="images/division4.gif" width="363" height="259"></p>
+<p>Observations:</p>
+<p>-We can't store a fractional number greater than 1.0, so the operand <strong>b</strong> 
+  must be greater than operand <strong>a</strong> in order to get a result smaller 
+  than 1.0. <br>
+  -We must take the sign = 0x1, since logarithm of a negative number is not defined, 
+  and the mathematical formula would not be valid. This restricts the result to 
+  be allways positive (the operands still can be positive or negative). <br>
+  -The above restriction can be solved adding two more lines to the algorithm 
+  (see next paragraph). <br>
+  -The precission of this algorithm oscillates a lot, depending on the value of 
+  the two operands (see above graphs) . The maximum error is 0.086. </p>
+<p><u>Division approximation with a signed result:</u></p>
+<p><strong><code>macints</code></strong><code> tmp_sign, 0, a, b <em>;tmp_sign 
+  = +1, if a and b has the same sign.</em><br>
+  <em>;tmp_sign = -1, if a and b has opposite signs. </em><br>
+  <strong>limitl</strong> tmp_sign, tmp_sign, 0x3, 0x1 <em>;If tmp_sign = +1 Then 
+  tmp_sign = 0x1</em><br>
+  <em>;If tmp_sign = -1 Then tmp_sign = 0x3 </em><br>
+  <strong>log</strong> tmp1, a, 0x1F, 0x1 <em>;tmp1 = log[base] (a) + 1 </em><br>
+  <strong>log</strong> tmp2, b, 0x1F, 0x1 <em>;tmp2 = log[base] (b) + 1 </em><br>
+  <strong>macsn</strong> tmp2, tmp2, 1, 1 <em>;tmp2 = log[base] (b)</em> <br>
+  <strong>macsn</strong> tmp3, tmp1, tmp2, 1 <em>;tmp3 = log[base] (a) - log[base] 
+  (b) + 1</em> <br>
+  <strong>exp</strong> result, tmp3, 0x1F, tmp_sign <em>;result = base ^ ( log[base] 
+  (a) - log[base] (b) + 1 - 1 )</em> <br>
+  <em>;= base ^ ( log[base] (a) - log[base] (b) )<br>
+  ;= base ^ ( log[base] ( a / b ) ) = a / b </em></code></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>9. <strong>INTERP</strong> - this instruction performs linear interpolation 
+  between two points. The main use of this operation is for simple single instruction 
+  low-pass filter for reverberation and other not very demanding filtering tasks. 
+  It is also useful for wet/dry signal mixing or pan control, a simple high-pass 
+  filter, envelopes, waveshaping and many other things.</p>
+<p>Formula:</p>
+<p>INTERP R = (1 - X) * A + X * Y</p>
+<p>Example 1:</p>
+<p>This is very useful for one instruction one-pole low-pass filter, which has 
+  the following formula:</p>
+<p><strong>out = coef * in + (1 - coef) * out</strong><br>
+  where coef is the filter coefficient.</p>
+<p>The coefficient can be calculated with the following formula:<br>
+  <strong>coef = 2 &#8211; cos(2*pi*(Fc/Fs)) &#8211; sqrt((cos(2*pi*(Fc/Fs)) &#8211; 
+  2)^2 &#8211; 1)</strong><br>
+  where Fc is the cutoff frequency, Fs is the sampling frequency (which is fixed 
+  at 48000Hz for the Emu10kx signal processors), pi is 3,14 which we know from 
+  pre-highschool math. In this function the only parameter is the cutoff frequency. 
+  This is the frequency at which the frequency range is cut and all frequencies 
+  above the cutoff will be removed (filtered), all below &#8211; passed. </p>
+<p><br>
+  <code><strong>input</strong> in <br>
+  <strong>output</strong> out <br>
+  <strong>control</strong> filter=0.5</code></p>
+<p><strong><code>interp</code></strong><code> out, out, filter, in <em>;the value 
+  of out is preserved for the next sampe cycl</em>e <br>
+  <strong>end</strong> <em>;thus forming a one sample delay line</em></code></p>
+<p><br>
+  We can also utilize this instruction for a simple high-pass filter:</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out <br>
+  <strong>control</strong> filter=0.5 <br>
+  <strong>static</strong> st </code></p>
+<p><code><strong>interp</strong> st, st, filter, in <br>
+  <strong>macsn</strong> out, in, st, 1<br>
+  <strong>end</strong></code></p>
+<p><br>
+  Example 2:</p>
+<p>We can combine the low-pass filter with the soft clipping log instruction. 
+</p>
+<p><strong><code>input</code></strong><code> in <br>
+  <strong>output</strong> out <br>
+  <strong>static</strong> exponent=0.35 <br>
+  <strong>control</strong> volume=0.2, filter=0.5 <br>
+  <strong>temp</strong> t </code></p>
+<p><code><strong>log</strong> t, in, exponent, 0x0 <em>;log soft clipping</em><br>
+  <strong>macs</strong> t, 0, t, volume <em>;volume control </em><br>
+  <strong>interp</strong> out, out, filter, t <em>;low-pass filter</em> <br>
+  <strong>end</strong> </code></p>
+<p>We get a simple soft clipping fuzz/overdrive effect.</p>
+<p>&nbsp;</p>
+<p>10. The <strong>SKIP</strong> instruction provides flow control in the dsp 
+  code. It skips a given number of instructions under certain conditions, making 
+  use of the already mentioned CCR. </p>
+<p>SKIP R, CCR, TEST_VALUE, number of instructions to skip</p>
+<p>TEST_VALUE is a register containing a value which indicates under which conditions 
+  to skip. <br>
+  CCR is the address of the CCR register. This can be any register, thus a previously 
+  saved CCR can be reused, or a constant can be used to implement an always skip 
+  (a NOP). </p>
+<p>The CCR is set after each instruction based upon the result of the instruction 
+  (R operand). Thus, to make a skip into our program we need two instructions. 
+  The first can be any instruction that sets the value to be tested. The second 
+  is the skip instruction which tests the value, and sets the amount of skipped 
+  instructions. So, simply said, the result of the instruction before the skip 
+  instruction is tested by the skip instruction, and based on it a given number 
+  of instructions below the skip one are omited.</p>
+<p>These are the most common cases and they are used for almost all situations:</p>
+<p>&nbsp;<code> <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x8, n <em>;skip 
+  n number of instruction if previous result is =0</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x100, n <em>;if 
+  previous result is !=0 (different from 0)</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x4, n <em>;&lt;0</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x1008, n <em>;&lt;=0 
+  (less or equal to 0)</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x180, n<em> 
+  ;&gt;0</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x80, n <em>;=&gt;0 
+  (equal or more than 0)</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x10, n <em>;on 
+  saturation</em></code></p>
+<p><code>&nbsp; <strong>skip</strong>&nbsp;&nbsp;&nbsp; ccr, ccr, 0x7FFFFFFF, 
+  n <em>;skip always</em></code></p>
+<p>&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center"><strong><font size="4">Delay lines</font></strong></p>
+<p>They are a necessary part of effects like delay, echo, reverb, chorus and many 
+  others.<br>
+  For complete information on delay lines look at the As10k1 manual and Dane help 
+  (in the kX help file). Here I'll discuss the practical side only.<br>
+  In Dane we declare delay lines by specifying the number of samples in internal 
+  (on chip) or external memory (ram) . Remember that 48000 samples form 1 second 
+  of audio data, so a delay line of 48000 will give us 1 second of delay.<br>
+  We declare delay lines like this:</p>
+<p><code>itramsize 6000 ;(0.125sec delay)</code><br>
+  or<br>
+  <code>xtramsize 12000 ;(0.25 sec of delay)</code></p>
+<p>We declare delay data registers like that:</p>
+<p><code>idelay write wr at 0 ;wr is just a name;the write register is generally 
+  at 0 <br>
+  idelay read rd at 12000 ;rd is just a name</code><br>
+  or<br>
+  <code>xdelay write... etc.</code></p>
+<p>We can have as many read and write registers as the dsp has and they should 
+  not overlap. We can also have several read registers following one write register, 
+  so we have one point at which data is entered into the delay line and many points 
+  at which it is read/extracted. This is the best way to think of delay lines 
+  and their registers &#8211; as points. The further one read point is away from 
+  the write point, the more delayed the data at it will be. </p>
+<p><br>
+  Example:<br>
+  Simplest static 0.25 sec delay.</p>
+<p><code>input in <br>
+  output out <br>
+  xtramsize 12000 ;we declare the number of samples(the delay line) </code></p>
+<p><code>xdelay write wr at 0 ;write data register at 0 <br>
+  xdelay read rd at 12000 ;read data register at 12000 </code></p>
+<p><code>macs wr, in, 0, 0 ;we write the value of in to wr <br>
+  macs out, rd, in, 1 ;we mix the input with the 0.25 sec delayed input in rd 
+  <br>
+  end</code></p>
+<p>Example2:<br>
+  Now we will make a feedback echo with a damping filter.</p>
+<p><code>input in <br>
+  output out <br>
+  control filter, feedback </code></p>
+<p><code>xtramsize 12000 </code></p>
+<p><code>xdelay write wr at 0 <br>
+  xdelay read rd at 12000 </code></p>
+<p><code>macs out, in, rd, feedback <br>
+  interp wr, out, filter, wr ;we re-use the output register <br>
+  end</code></p>
+<p>&nbsp;</p>
+<p align="center"><strong><font size="4">Some simple effects &quot;disection&quot; 
+  and explanation</font></strong></p>
+<p>Let's start simple.</p>
+<p>1.Stereo Mix</p>
+<p><code>; Registers<br>
+  input in1L, in1R, in2L, in2R; <br>
+  output outL, outR; <br>
+  control In1 Level=0x0, In2 Level=0x0; <br>
+  temp tmp</code></p>
+<p><code>; Code<br>
+  macs tmp, 0x0, in1L, In1 Level; ;tmp = 0 + in1L * In1 Level <br>
+  ;this is a level control for the left input of channel 1 </code></p>
+<p><code>macs outL, tmp, in2L, In2 Level;;oulL = tmp + in2L * In2 Level <br>
+  ;here we mix the left input of channel 1 with the left input of channel 2 <br>
+  ; + level control for the left input of channel 2<br>
+  <br>
+  macs tmp, 0x0, in1R, In1 Level;<br>
+  ;level control for the right input of channel 1<br>
+  <br>
+  macs outR, tmp, in2R, In2 Level<br>
+  ;here we mix the right input of channel 1 with the right input of channel 2 
+  <br>
+  ;+ level control for the right input of channel 2</code></p>
+<p><code>end</code></p>
+<p></p>
+<p>It is as simple as that. For more input channels the concept is the same - 
+  we mix all left channels to the output left channel and all right channels to 
+  the output right channel.</p>
+<p>2.Delay Old</p>
+<p><code>; Registers<br>
+  input in;<br>
+  output out;<br>
+  control level=0x7fffffff, feedback=0x40000000, delay=0x1c20000;</code></p>
+<p><code> xtramsize 14400 ;we declare external tram size (number of samples)<br>
+  ; External TRAM delay line (14400 samples; ~0.300000 msec)<br>
+  <br>
+  xdelay write wrt at 0x0; ;write data register<br>
+  xdelay read rd at 0x0; ;read data register</code></p>
+<p><code><br>
+  ; Code<br>
+  acc3 &amp;rd, delay, &amp;wrt, 0x0;<br>
+  ;here we produce the delay time by offsetting the rd addres register<br>
+  ;by the value of &quot;delay&quot;, which is user controllable. We use the wrt 
+  register as <br>
+  ;the initial point.<br>
+  ;We acces the adress register with &quot;&amp;rd&quot;</code></p>
+<p><code> macs out, in, level, rd;<br>
+  ;out = in + level * rd<br>
+  ;here we mix the input with the delayed rd with level control for rd<br>
+  <br>
+  macs wrt, in, rd, feedback;<br>
+  ;wrt = in + rd * feedback<br>
+  ;here we create the feedback amount</code></p>
+<p><code>end</code></p>
+<p>3. EQ Lowpass, Bandpass, Highpass, Notch</p>
+<p>The example is a biquadratic (aka biquad) lowpass, but all four are basically 
+  the same, olny the coefficients are different. Although better methods exist, 
+  we'll use this one because of it's simplicity.</p>
+<p>NOTE: The values of the registers containing the filter coefficients are C++ 
+  controlled. You can't control them with faders created by Dane only by copying 
+  the code. For our example we'll assume that they are static and not user controllable.</p>
+<p>These filters are IIR (Infinite Impulse Response) and their difference equation 
+  is:</p>
+<p>y[n] = b0*x[n] + b1*x[n-1] + b2*x[n-2]<br>
+  - a1*y[n-1] - a2*y[n-2]</p>
+<p>x[n]= input <br>
+  y[n]=output<br>
+  x[n-1] = delayed input by one sample<br>
+  x[n-2] = delayed input by two samples<br>
+  y[n-1] = delayed output by one sample<br>
+  y[n-2] = delayed output by two samples</p>
+<p>Because the effect is stereo there are actually two filters, so we can get 
+  rid of the second (right channel) part, because it is the same thing. Of course 
+  we're doing this for learning purposes, if we want the effect to remain stereo 
+  we have to use one filter for each channel &#8211; left and right.</p>
+<p>NOTE:. Remember that the values of static registers are preserved for the next 
+  sample cycle and can be reused until they are overwritten. Thus they form a 
+  delay line from which we get the delayed samples for the above formula.<br>
+</p>
+<p></p>
+<p><code>; Registers<br>
+  input inl ; inr<br>
+  output outl ; outr<br>
+  static b0=0x1b40d9, b1=0x3681b2, b2=0x1b40d9; filter coefficients<br>
+  static a1=0x7b4cfa5d, a2=0xc446023e, sca=0x2;<br>
+  static lx1=0x0, lx2=0x0, ly1=0x0;static registers for the delayed samples<br>
+  static ly2=0x0 ; rx1=0x0, rx2=0x0; we don't need this<br>
+  ;static ry1=0x0, ry2=0x0; and this, because they are for the right cahnnel<br>
+  temp t1, t2</code></p>
+<p><code>; Code<br>
+  macs 0x0, 0x0, 0x0, 0x0;<br>
+  ;we null the accumulator (note that the result of that operation is 0) <br>
+  ;so previous values won't get mixed with the ones we need</code></p>
+<p><code> macmv lx2, lx1, lx2, b2;<br>
+  ;b2*x[n-2]<br>
+  macmv lx1, inl, lx1, b1;<br>
+  ;b1*x[n-1]<br>
+  macmv t1, t1, inl, b0;<br>
+  ;b0*x[n]<br>
+  macmv ly2, ly1, ly2, a2;<br>
+  ;a2*y[n-2]<br>
+  macmv t1, t1, ly1, a1;<br>
+  ;a1*y[n-1]<br>
+  macs t2, accum, 0x0, 0x0;<br>
+  ;we copy the value of the accumulator to t2, so we can use it<br>
+  macints ly1, 0x0, t2, sca;<br>
+  ;we scale it up by 2, because the coefficients have been initially scaled down<br>
+  ;to prevent overflow<br>
+  macs outl, ly1, 0x0, 0x0;<br>
+  ;we copy everything to the output <br>
+  end<br>
+  ;we get rid of the second part, because it's the same as the first<br>
+  ; macs 0x0, 0x0, 0x0, 0x0;<br>
+  ; macmv rx2, rx1, rx2, b2;<br>
+  ; macmv rx1, inr, rx1, b1;<br>
+  ; macmv t1, t1, inr, b0;<br>
+  ; macmv ry2, ry1, ry2, a2;<br>
+  ; macmv t1, t1, ry1, a1;<br>
+  ; macs t2, accum, 0x0, 0x0;<br>
+  ; macints ry1, 0x0, t2, sca;<br>
+  ; macs outr, ry1, 0x0, 0x0;</code></p>
+<p>&nbsp;</p>
+<p>That's all for now. I hope this guide helps you start programming dsp effects. 
+  Ater you learn the basics, you might want to start studying more complex kX 
+  effects and search for dsp code on the web, which you can port to the kX environment.</p>
+<p>Feel free to ask anything related to digital audio.<br>
+  You can send me an e-mail - martintiger@abv.bg, or start a thread on the kX 
+  forum. I'm also open for suggestions, new ideas, criticism, and of course, if 
+  anyone finds something that's wrong in this document, please contact me.</p>
+<p>Have fun with DSP.</p>

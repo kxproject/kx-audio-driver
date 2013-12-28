@@ -1,0 +1,30 @@
+name "kxm 600";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "11/28/2007";
+engine "kX";  
+comment "voltage controlled amplifier (kxm 600 v1.1)"
+guid "20eb582e-dae6-4ba3-920f-558669eef931";
+
+; registers
+input in, envelope, lfo_1, lfo_2
+output out
+control level=1
+static b, a, c, d
+
+; input spike filter
+interp a, a, 0.01, envelope ; -6db lowpass 
+acc3 b, 0, lfo_1, lfo_2; add lfos
+interp c, c, 0.01, b ; -6db lowpass
+
+; amplitude modulation 
+macs d, 1, c, 1 ; use with 0..-1 
+macs d, 0, a, d ; mult. with envelope
+limit d, d, d, 0 ; b must be greater or equal zero, if b>0 b=b else b=0
+
+; level
+macs d, 0, d, level ; level control mix
+
+; output
+macs out, 0, in, d
+
+end

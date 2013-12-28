@@ -1,0 +1,66 @@
+<title>Instradamenti [routings] Audigy2</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Instradamenti P16V</h3>
+
+<h4>
+
+<p class=Darkeb>Instradamenti [routings] P16V</p>
+
+
+<p>
+Nelle schede Audigy2-based il flusso del segnale risulta essere un poco pi&ugrave 
+complesso rispetto alle schede 10k1 e Audigy1 (si veda il diagramma seguente).
+</p>
+
+<img width=747 height=303 src="images/p16v.gif">
+
+<p>
+Vi &egrave un'unit&agrave speciale, che si occupa dei segnali audio 24/96, denominata 'p16v'. 
+Questa unit&agrave supporta la registrazione in modalit&agrave 24/96 dei segnali provenienti 
+da SPDIF e I2S.
+Per default, il driver audio kX permette, sia a p16v che a 10k2, di accedere agli ingressi ed 
+alle uscite (come mostrato qui sopra sopra). 
+Di fatto, tuttavia, l'instradamento [routing] via hardware avviene in modo ancor più complesso. 
+Nella modalità di default, il chip Audigy2 agisce comportandosi come un Audigy1 che opera in 
+parallelo con unità p16v.
+</p>
+
+<p>
+Per default, il colegamento p16v->10k2 &egrave disabilitato. Per poterlo abilitare, occorre quindi 
+carcare l'effetto 'p16v' nella finestra del DSP kX.
+Per esempio, se desiderate elaborare l'uscita p16v aggiungendovi qualche effetto reverb 10k2-based, 
+potete utilizzare lo schema di instradamento seguente:
+</p>
+
+<img src="images/p16v_route.gif">
+
+<p>
+(Nota: L'opzione 'Inversione ingessi frontale e posteriore' ['Swap Front and Rear'] potrebbe
+di fatto interessare le uscite p16v che userete.
+In questo caso, per esempio, l'inversione &egrave attiva, lo si vede perch&egrave risluta in uso 
+p16v.'in7/in8' anzich&eacute p16v.'in0/in1'. 
+I numeri delle entrate corrispondono a particolari uscite i2s/spdif 
+elencate nella nostra guida 'IO / DSP Assignments').
+</p>
+
+<p class=Darken>Registrazione</p>
+
+<p>
+Circa la registrazione audio p16V 24/96, valgono le stesse considerazioni fatte nelle nostra 
+guida 'Registrazione SPDIF diretta' ['Direct SPDIF Recording'].
+Ovvero, la frequenza di campionamento non viene riconosciuta automaticamente per cui
+spetta sempre all'utente la scelta della frequenza appropriata da usare con l'applicazione 
+audio di registrazione.
+Nota: Potrebbe essere necessario reimpostare la frequenza di campionamento una volta effettuata 
+la registrazione (non 'ricampionare' l'audio, ma semplicemente riassegnare la frequenza di 
+campionamento :) ).
+</p>
+
+<h5>
+ -- testo originale:  kX Project<br> 
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>
+
+</h4>

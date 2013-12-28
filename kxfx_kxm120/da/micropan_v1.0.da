@@ -1,0 +1,45 @@
+name "micropan v1.0";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "09/12/2007";
+engine "kX";
+comment "lfo rate 0-10 hz";
+guid "0ca6907d-8bbb-4259-abb7-14c6381c65df";
+
+; registers
+
+  input in
+  output out1, out2
+  control speed=0.4
+  control dry_wet=1.0 
+  static speed_norm, triangle, wet, in_half, tin
+  static tri=0.0   
+  static dir=1.0  
+
+; temp input register
+  macs tin, in, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  
+; triangle lfo 
+   
+  macs speed_norm, 0, speed, 0.0008333333 ; should be max. 10 Hz, (10 Hz*4)/48000 Hz, (a tri consists of 4 ramps to count)
+  macs tri, tri,speed_norm,dir ; counter
+  skip ccr, ccr, 0x10, 0x1 ; skip next instruction if tri=1     
+  macsn dir, 0.0, dir, 1.0 ; change sign     
+  macsn dir, 0.0, dir, 1.0 ; change sign	  
+  macs  triangle, 0.0, tri, 1.0 ; triangle wave
+
+; half input
+
+  macs in_half, 0, tin, 0.5 ; half the input, because we don´t want overdrive
+
+; dry_wet
+
+  macs wet, 0, tin, dry_wet ; make a wet register
+
+; autopan & output
+
+  macs out1, tin, wet, triangle ; pan left 
+  macsn out2, tin, wet, triangle ; pan right
+
+end
+
+	 

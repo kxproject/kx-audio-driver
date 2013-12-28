@@ -1,0 +1,26 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxzlib
+TARGETTYPE=LIBRARY
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES)
+MSC_WARNING_LEVEL=-W2 -WX
+
+INCLUDES=..\h\zlib
+
+# source files: zlib library
+
+SOURCES= unzip.c      adler32.c    compress.c   crc32.c      deflate.c  \
+	gzio.c       infblock.c   infcodes.c   inffast.c    inflate.c    inftrees.c \
+	infutil.c    trees.c      uncompr.c    zutil.c
+

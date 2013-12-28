@@ -1,0 +1,33 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=edspctrl
+TARGETTYPE=PROGRAM
+
+NTTARGETFILE2=install_sign
+
+UMTYPE=console
+UMBASE=0x400000
+UMENTRY=mainCRTStartup
+
+INCLUDES=..\h
+
+SOURCES=edspctrl.cpp edsplib.cpp edspctrl.rc
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+TARGETLIBS=$(MFC_LIBS)	\
+	$(OBJ_PATH)\..\kxapi\$O\kxapi.lib
+
+MSC_WARNING_LEVEL=-W4 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+C_DEFINES=$(C_DEFINES) /D"_MBCS" /D"_CONSOLE"

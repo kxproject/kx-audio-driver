@@ -1,0 +1,45 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxapi
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -DKX_INTERFACE -D"_MBCS"
+MSC_WARNING_LEVEL=-W4 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+USE_STL=1
+
+INCLUDES=..\h
+
+TARGETLIBS=$(SDK_LIB_PATH)\oldnames.lib \
+    $(SDK_LIB_PATH)\newdev.lib \
+    $(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\setupapi.lib \
+        $(SDK_LIB_PATH)\winmm.lib\
+        $(SDK_LIB_PATH)\advapi32.lib\
+        $(SDK_LIB_PATH)\dsound.lib \
+        $(SDK_LIB_PATH)\ksguid.lib \
+        $(SDK_LIB_PATH)\ole32.lib \
+        $(SDK_LIB_PATH)\kernel32.lib \
+        $(SDK_LIB_PATH)\gdi32.lib \
+        $(OBJ_PATH)\..\sfark\$O\sfark.lib \
+        $(OBJ_PATH)\..\kxgui\$O\kxgui.lib \
+        $(OBJ_PATH)\..\kstream\$O\kstream.lib
+
+SOURCES=interface.cpp interface.rc rifx.cpp parse.cpp compile.cpp sfont.cpp \
+    dane.cpp plugin.cpp asio.cpp debug.cpp kxdirect.cpp kxplugingui.cpp \
+    danesrc.cpp dspwnd.cpp defplugingui.cpp idane.cpp \
+    danestd.cpp error.cpp gendic.cpp imobj.cpp parser.cpp scanner.cpp

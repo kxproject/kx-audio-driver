@@ -1,0 +1,27 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=sfman32
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+
+# USE_MFC=0
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=/D"_MBCS" $(C_DEFINES)
+MSC_WARNING_LEVEL=-W4 -WX
+
+INCLUDES=..\h;..\h\sfman
+
+SOURCES=sfman32.rc sfman32.cpp debug.cpp
+
+TARGETLIBS=$(SDK_LIB_PATH)\advapi32.lib	\
+	$(SDK_LIB_PATH)\kernel32.lib
+# DLLENTRY=DllEntryPoint

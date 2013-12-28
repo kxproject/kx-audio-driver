@@ -1,0 +1,50 @@
+<title>Setup &amp; Installation</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX Setup</h2>
+<hr>
+
+<h4>
+<p>Note: this set-up guide is slightly outdated. Our new installer automatically installs the driver
+without any need for manual actions. However, you can still use manual method -- the driver
+files are usually extracted into the following folder: "C:\Program Files\kX Project\35xx".
+You can run the setup.exe program or use Windows hardware wizard for manual installation.
+</p>
+
+<p><b>Before starting kX Setup</b> you must extract debug libs (MFC42D.DLL and MSVCRTD.DLL) into system directory (Windows\System - Win98SE/WinMe; WINNT\System32 - Win2000; Windows\System32 - WinXP). Otherwise, kX Setup will refuse to run.</p>
+<p><b>kX Mixer installation</b> begins with running setup.exe<!--, which launches kxsetup.exe-->:</p>
+<p><img  src="images/setup.jpg" width="600" height="300"></p>
+<p>1. When you click on 'Install', License agreement is shown and if you want to install you must accept it.<br>
+2. kX Setup removes original drivers (if older version is present, it tries to update).<br>
+3. kX Driver is not WHQL certified, so you need to click 'Continue Anyway' if it asks.<br>
+4. If there are no gameport drivers, kX Setup installs them too (if there are, kX Setup doesn't touch them).<br>
+5. After installation is done, you need to point to your VST Hosts folder (or click 'Cancel' if you don't have something like Cubase VST installed).<br>
+6. Reboot and when you are back to Windows, you can start working.</p>
+<p><b>Minimum installation requirements</b> are Microsoft Windows 98 Second Edition, Windows Millenium Edition, Windows 2000 or Windows XP. At least one Creative Labs Audigy or EMU10k1-based soundcard, or E-mu Systems APS soundcard, is also required. DirectX 8 or newer should be downloaded and installed prior to installing the kX Driver. A minimum of 32 MB of RAM and a video adapter capable of displaying HiColor (16 bit) or TrueColor (24bit) are also highly recommended (actually - required).</p>
+<p><b>Multiple card installation notes</b>:</p>
+<p>For systems with more than one <a href="glossary.htm#kX Compatible">kX-compatible</a> card; All cards will be automatically installed, so you will see more popups with WHQL certification warning. If you want to use one card with kX drivers, and another with original manafacturer, you will need to do manual installation (it is a rare and special case).</p>
+<p><b>Manual Install Method</b>:</p>
+<p>First try installing using setup.exe, if it fails, install using manual installation method.</p>
+<p>1. Extract all files from RAR or ZIP to a tempoary folder.<br>
+2. Click on your device in Device Manager under Control Panel/System.<br>
+3. On 'Driver' tab, click on 'Update Driver' and point to kx.inf in temporary dir.<br>
+4. It will automatically select appropriate drivers for your particular device (by detecting the PCI ID) and will install them.<br>
+5. After installation is done, reboot.</p>
+<p>So, in Windows Control Panel you need to go to applet Sounds and Audio Devices (Sounds and Multimedia, or something similar) and under 'audio' tab you need to select kX Wave 0/1 as default device if it isn't and unded 'Advanced' there are two things that must be set so kX Driver can work:</p>
+<p><b>Speakers</b>:<br>'Speaker Setup' --&gt; '5.1 Surround Sound Speakers' or 'Surround Sound Speakers'</p>
+<p><b>Preformance</b>:<br>'Hardware acceleration' --&gt; 'FULL'<br>'Sample rate conversion quality' --&gt; 'BEST'</p>
+<p><b>Removing the kX audio driver</b>:</p>
+<p>1. Close kX Mixer.<br>
+2. In 'Start Menu/Programs/kX Audio Driver' select 'Uninstall kX Software'.<br>
+3. Wait until it finishes, and if there are devices left, uninstall them manually in Device Manager.</p>
+
+<!-- FIXME !!! <p><b>kX Registry Entries</b>:</p> -->
+
+<p><b>Notes</b>:</p>
+<p>A second re-boot after installation may be required under Windows 98SE due to the multimedia device name changes (they are dinamically changed, depending on device name).</p>
+<p>Under the kX Audio Driver, the Windows Mixer will display basic functions (Master, Wave, CD, LineIn, Synth). Use kX Mixer for additional functionality.</p>
+<p>Note that under Windows 98SE &quot;phantom&quot; controls may appear (phantom control doesn't control any audio source, it doesn't affect anything and kX Driver doesn't ask Windows to draw that slider -- it's a Windows bug).</p>
+
+</h4>

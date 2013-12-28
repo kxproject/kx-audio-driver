@@ -1,0 +1,20 @@
+name "AllPass";
+copyright "Copyright (c) 2003 Eugeniy & Valentine Sokol.";
+created "10/17/2003";
+engine "kX";
+comment "it can be useful for pseudo-stereo effect";
+guid "17ce8538-1a9e-4242-819f-c8eb5204e70f";
+
+input in;
+output AP, iAP; 
+control freq90=0.1;
+static Uc=0;
+temp tmp;
+
+macs tmp, 0, freq90, freq90;
+macsn Uc, Uc, Uc, tmp;
+macsn Uc, Uc, in, tmp;
+macints AP, in, Uc, 2;
+macsn iAP, 0, AP, 1;
+
+end

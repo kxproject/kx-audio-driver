@@ -1,0 +1,15 @@
+name "kxm 220";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/07/2007";
+engine "kX";
+comment "white & pink noise (kxm 220 v1.0)"
+guid "7d40a4ff-38a9-4df1-ab35-97f0817b9c4c";
+
+; registers
+output white, pink
+
+; output
+macs white, 0, noise1, 1 
+interp pink, pink, 0.1, noise1   
+  
+end

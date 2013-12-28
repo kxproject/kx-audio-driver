@@ -1,0 +1,37 @@
+name "tremelo"
+
+input in1, in2
+output out1, out2
+static xsin, xcos = 0.5
+control freq = 0.5 	; modulation speed/frequency
+control depth = 0.5      ; modulation depth
+temp a, b
+control panning = 0	; panning/width 
+
+; freq control workaround
+macs	b, 0, freq, 0.002 
+
+; osc
+macs	xsin, xsin, b, xcos
+macsn	xcos, xcos, b, xsin  
+
+; make shifted osc (interpolation between sin, cos and -sin) - it's kinda huge :(
+macsn a, 0, xsin, 1
+macints b, 0, xcos, 2i
+interp a, b, panning, a 
+interp b, xsin, panning, b
+interp b, b, panning, a
+
+; osc range -0.5..0.5 -> 0..1
+macs	a, 0.5, xsin, 1
+macs b, 0.5, b, 1
+
+; depth control workaround
+macsn	a, 1, a, depth  
+macsn	b, 1, b, depth 
+
+; modulate and output
+macs	out1, 0, in1, a      
+macs	out2, 0, in2, b 
+
+end;

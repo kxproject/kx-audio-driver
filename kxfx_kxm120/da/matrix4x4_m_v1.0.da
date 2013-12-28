@@ -1,0 +1,65 @@
+name "matrix4x4[m] v1.0";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "10/26/2007";
+engine "kX";
+comment "4x4 mono routing matrix for effects";
+guid "43b4f0bc-a6e9-4d30-b3ce-f2c0e9785732";
+
+;registers  
+
+  input in1,in2,in3,in4
+  output out1,out2,out3,out4
+  control send1to1=0
+  control send1to2=0
+  control send1to3=0
+  control send1to4=0 
+  control send2to1=0
+  control send2to2=0
+  control send2to3=0
+  control send2to4=0
+  control send3to1=0
+  control send3to2=0
+  control send3to3=0
+  control send3to4=0
+  control send4to1=0
+  control send4to2=0
+  control send4to3=0
+  control send4to4=0  
+  static a,b,c,d, tin1, tin2, tin3, tin4   
+
+; temp input register
+  macs tin1, in1, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  macs tin2, in2, 0, 0
+  macs tin3, in3, 0, 0
+  macs tin4, in4, 0, 0
+  
+; 4x4 channel mixer
+
+  macs a,0,tin1,send1to1
+  macs a,a,tin2,send2to1
+  macs a,a,tin3,send3to1
+  macs a,a,tin4,send4to1
+
+  macs b,0,tin1,send1to2
+  macs b,b,tin2,send2to2
+  macs b,b,tin3,send3to2
+  macs b,b,tin4,send4to2  
+
+  macs c,0,tin1,send1to3
+  macs c,c,tin2,send2to3
+  macs c,c,tin3,send3to3
+  macs c,c,tin4,send4to3
+
+  macs d,0,tin1,send1to4
+  macs d,d,tin2,send2to4
+  macs d,d,tin3,send3to4
+  macs d,d,tin4,send4to4
+
+; output
+
+  macs out1,0,a,1
+  macs out2,0,b,1
+  macs out3,0,c,1
+  macs out4,0,d,1
+
+end

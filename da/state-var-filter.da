@@ -1,0 +1,168 @@
+name "State Variable Filter";
+copyright "Copyright (c) Thomas Reitmayr, 2004. All rights reserved";
+engine "kX";
+created "02/09/2004";
+guid "svf001";
+
+; Registers
+
+  input inl, inr;
+
+  output outl_hp, outr_hp;
+  output outl_lp, outr_lp;
+  output outl_bp, outr_bp;
+  output outl_no, outr_no;
+  
+  control Q=0xf000000, f_cutoff=0xf000000;
+
+  temp q_mod;
+  temp fc;
+  temp in;
+
+  static regl_bp=0;
+  static regr_bp=0;
+  static regl_lp=0;
+  static regr_lp=0;
+  
+
+; Code
+  ; create a nice Q range: q_mod = 1-(0.9*Q^2)
+  macs    q_mod, 0, Q, Q;
+  macsn   q_mod, 1, q_mod, 0.9;
+
+  ; create a nice frequency range: fc = exp(0.75+0.18*f_cutoff)
+  ; -> frequency range: 180Hz - 10kHz
+  macs    fc, 0.75, f_cutoff, 0.18;
+  exp     fc, fc, 0x1f, 0x0;
+
+  ; left channel, 6x oversampling
+  macs    in, inl, 0, 0;                     could create some headroom here...
+  
+  macsn   outl_no, in, q_mod, regl_bp;
+  macs    outl_lp, regl_lp, fc, regl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, regl_bp, fc, outl_hp;
+
+  macsn   outl_no, in, q_mod, outl_bp;
+  macs    outl_lp, outl_lp, fc, outl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, outl_bp, fc, outl_hp;
+  
+  macsn   outl_no, in, q_mod, outl_bp;
+  macs    outl_lp, outl_lp, fc, outl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, outl_bp, fc, outl_hp;
+  
+  macsn   outl_no, in, q_mod, outl_bp;
+  macs    outl_lp, outl_lp, fc, outl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, outl_bp, fc, outl_hp;
+  
+  macsn   outl_no, in, q_mod, outl_bp;
+  macs    outl_lp, outl_lp, fc, outl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, outl_bp, fc, outl_hp;
+  
+  macsn   outl_no, in, q_mod, outl_bp;
+  macs    outl_lp, outl_lp, fc, outl_bp;
+  macsn   outl_hp, outl_no, 1, outl_lp;
+  macs    outl_bp, outl_bp, fc, outl_hp;
+  
+  ; right channel, 6x oversampling
+  macs    in, inr, 0, 0;                     could create some headroom here...
+
+  macsn   outr_no, in, q_mod, regr_bp;
+  macs    outr_lp, regr_lp, fc, regr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, regr_bp, fc, outr_hp;
+
+  macsn   outr_no, in, q_mod, outr_bp;
+  macs    outr_lp, outr_lp, fc, outr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, outr_bp, fc, outr_hp;
+  
+  macsn   outr_no, in, q_mod, outr_bp;
+  macs    outr_lp, outr_lp, fc, outr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, outr_bp, fc, outr_hp;
+  
+  macsn   outr_no, in, q_mod, outr_bp;
+  macs    outr_lp, outr_lp, fc, outr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, outr_bp, fc, outr_hp;
+  
+  macsn   outr_no, in, q_mod, outr_bp;
+  macs    outr_lp, outr_lp, fc, outr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, outr_bp, fc, outr_hp;
+  
+  macsn   outr_no, in, q_mod, outr_bp;
+  macs    outr_lp, outr_lp, fc, outr_bp;
+  macsn   outr_hp, outr_no, 1, outr_lp;
+  macs    outr_bp, outr_bp, fc, outr_hp;
+
+  ; store a few registers for next cycle
+  macs    regl_bp, outl_bp, 0, 0;
+  macs    regl_lp, outl_lp, 0, 0;
+  macs    regr_bp, outr_bp, 0, 0;
+  macs    regr_lp, outr_lp, 0, 0;
+
+  ; when f_cutoff==0% -> HP-Output := Input-Signal
+  macs    q_mod, f_cutoff, 0, 0;
+  skip    ccr, ccr, 0x100, 0x2;
+  macs    outl_hp, inl, 0, 0;
+  macs    outr_hp, inr, 0, 0;
+
+  ; when f_cutoff==100% -> LP-Output := Input-Signal
+  macsn   q_mod, f_cutoff, 1, 1;
+  skip    ccr, ccr, 0x100, 0x2;
+  macs    outl_lp, inl, 0, 0;
+  macs    outr_lp, inr, 0, 0;
+
+end
+
+;The above was inspired various sources on the Internet,
+;expecially this:
+;
+;State Variable Filter (Double Sampled, Stable)
+;
+;Type : 2 Pole Low, High, Band, Notch and Peaking
+;References : Posted by Andrew Simper
+;
+;Notes : 
+;Thanks to Laurent de Soras for the stability limit
+;and Steffan Diedrichsen for the correct notch output.
+;
+;Code : 
+;input  = input buffer;
+;output = output buffer;
+;fs     = sampling frequency; 
+;fc     = cutoff frequency normally something like: 
+;         440.0*pow(2.0, (midi_note - 69.0)/12.0); 
+;res    = resonance 0 to 1; 
+;drive  = internal distortion 0 to 0.1
+;freq   = 2.0*sin(PI*MIN(0.25, fc/(fs*2)));  // the fs*2 is because it's double sampled
+;damp   = MIN(2.0*(1.0 - pow(res, 0.25)), MIN(2.0, 2.0/freq - freq*0.5));
+;notch  = notch output 
+;low    = low pass output 
+;high   = high pass output 
+;band   = band pass output 
+;peak   = peaking output = low - high
+;--
+;double sampled svf loop:
+;for (i=0; i<numSamples; i++)
+;{
+;  in    = input[i]; 
+;  notch = in - damp*band;
+;  low   = low + freq*band;
+;  high  = notch - low;
+;  band  = freq*high + band - drive*band*band*band;
+;  out   = 0.5*(notch or low or high or band or peak);
+;  notch = in - damp*band;
+;  low   = low + freq*band;
+;  high  = notch - low;
+;  band  = freq*high + band - drive*band*band*band;
+;  out  += 0.5*(same out as above);
+;  output[i] = out;
+;}
+

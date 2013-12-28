@@ -1,0 +1,22 @@
+;DESCRIPTION  'CodeMax Edit Control'
+
+EXPORTS
+	CMRegisterControl			@1
+	CMUnregisterControl			@2
+	CMRegisterLanguage			@3
+	CMUnregisterLanguage		@4
+	CMUnregisterAllLanguages	@5
+	CMGetLanguageDef			@6
+	CMGetHotKeys				@7
+	CMSetHotKeys				@8
+	CMResetDefaultHotKeys		@9
+	CMGetHotKeysForCmd			@10
+	CMRegisterHotKey			@11
+	CMUnregisterHotKey			@12
+	CMGetCommandString			@13
+	CMGetMacro					@14
+	CMSetMacro					@15
+	CMSetFindReplaceMRUList		@16
+	CMGetFindReplaceMRUList		@17
+	CMRegisterCommand			@18
+	CMUnregisterCommand			@19

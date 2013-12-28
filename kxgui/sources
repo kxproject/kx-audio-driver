@@ -1,0 +1,41 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxgui
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=/D"_MBCS" $(C_DEFINES) -D"kGUI_INTERNAL" -D"TEST_KGUI"
+MSC_WARNING_LEVEL=-W4 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+INCLUDES=..\h;..\h\zlib;..\h\png;..\h\rar
+
+SOURCES=gui.rc button.cpp static.cpp dialog.cpp logo.cpp debug.cpp knob.cpp \
+	window.cpp indicator.cpp gui.cpp slider.cpp textbutton.cpp  settings.cpp \
+	file.cpp  peak.cpp combo.cpp list.cpp progress.cpp menu.cpp
+
+TARGETLIBS=$(MFC_LIBS)	\
+	$(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\advapi32.lib\
+    $(SDK_LIB_PATH)\kernel32.lib\
+    $(SDK_LIB_PATH)\gdi32.lib\
+    $(SDK_LIB_PATH)\msimg32.lib\
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\oleaut32.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\shlwapi.lib \
+    $(OBJ_PATH)\..\kxrar\$O\kxrar.lib \
+    $(OBJ_PATH)\..\kxzlib\$O\kxzlib.lib
+

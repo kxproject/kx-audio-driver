@@ -1,0 +1,20 @@
+HKCR
+{
+	CodeMax.Range = s 'Rect Class'
+	{
+		CLSID = s '{8FF88AC1-2AEE-11d4-AE1E-000000000000}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {8FF88AC1-2AEE-11d4-AE1E-000000000000} = s 'Rect Class'
+		{
+			ProgID = s 'CodeMax.Rect'
+			VersionIndependentProgID = s 'CodeMax.Rect'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+
+echo ===========================================
+echo This will uninstall kX Audio driver...
+echo Please type your root password to continue or press 'Ctrl+C' to abort:
+sudo echo
+
+echo ===========================================
+echo Uninstalling the driver, control panel and settings...
+echo
+
+# === preupgrade_kext:
+sync
+sudo kextunload -q /System/Library/Extensions/kXAudioDriver.kext
+sleep 1
+sync
+sudo kextunload -q /System/Library/Extensions/kXAudioDriver.kext
+sync
+
+sudo rm -rf /System/Library/Extensions/kXAudioDriver.kext
+sync
+
+# === preupgrade_cmdline:
+sudo rm -rf "/usr/bin/edspctrl"
+sudo rm -rf "/usr/bin/kxctrl"
+sudo rm -rf "/usr/lib/kXAPI.dylib"
+
+# === preupgrade_app:
+sudo rm -rf "/Applications/Utilities/kX/kX Manager.app"
+sudo rm -rf "/Applications/Utilities/kX/kX AC97.app"
+sudo rm -d  "/Applications/Utilities/kX/"
+
+sudo rm -rf "/Applications/Utilities/kX Manager.app"
+
+# === finally, touch extensions:
+sudo touch /System/Library/Extensions
+sync
+
+# === remove setup script
+sudo rm -rf "/Library/Receipts/Install kX Audio Driver.pkg"
+
+sudo sync
+
+echo
+echo
+echo ===========================================
+echo Done!
+echo It is safe to close terminal window now
+echo ===========================================

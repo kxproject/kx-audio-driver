@@ -1,0 +1,558 @@
+<title>Назначения входов и выходов kX</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Назначения входов и выходов (I/O and DSP assignments)</h3>
+<hr>
+
+<h5>
+
+<p class=dark>Выходы</p>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+ <tr>
+  <td >
+  <p>kX Номер</p>
+  </td>
+  <td >
+  <p>Epilog название</p>
+  </td>
+  <td >
+  <p>Значение</p>
+  </td>
+  <td >
+  <p>10k1 DSP #</p>
+  </td>
+  <td >
+  <p>10k1 mne</p>
+  </td>
+  <td >
+  <p>10k2 DSP #</p>
+  </td>
+  <td >
+  <p>10k2 mne</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0)</p>
+  </td>
+  <td >
+  <p>out0</p>
+  </td>
+  <td >
+  <p>Аналоговый Фронт Левый / A1</p>
+  </td>
+  <td >
+  <p>0x20</p>
+  </td>
+  <td >
+  <p>ac97 L</p>
+  </td>
+  <td >
+  <p>0x68</p>
+  </td>
+  <td >
+  <p>i2s 0 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(1)</p>
+  </td>
+  <td >
+  <p>out1</p>
+  </td>
+  <td >
+  <p>Аналоговый Фронт Правый / A2</p>
+  </td>
+  <td >
+  <p>0x21</p>
+  </td>
+  <td >
+  <p>ac97 R</p>
+  </td>
+  <td >
+  <p>0x69</p>
+  </td>
+  <td >
+  <p>i2s 0 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(2)</p>
+  </td>
+  <td >
+  <p>out2</p>
+  </td>
+  <td >
+  <p>Универсальный SPDIF Левый / Цифровой Фронт  L / D1 L</p>
+  </td>
+  <td >
+  <p>0x22</p>
+  </td>
+  <td >
+  <p>spdif 0 L</p>
+  </td>
+  <td >
+  <p>0x60</p>
+  </td>
+  <td >
+  <p>spdif 0 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(3)</p>
+  </td>
+  <td >
+  <p>out3</p>
+  </td>
+  <td >
+  <p>Универсальный SPDIF Правый / Цифровой Фронт R / D1 R</p>
+  </td>
+  <td >
+  <p>0x23</p>
+  </td>
+  <td >
+  <p>spdif 0 R</p>
+  </td>
+  <td >
+  <p>0x61</p>
+  </td>
+  <td >
+  <p>spdif 0 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(4)</p>
+  </td>
+  <td >
+  <p>out4</p>
+  </td>
+  <td >
+  <p>Цифровой Центр / A3 / D2 L</p>
+  </td>
+  <td >
+  <p>0x24</p>
+  </td>
+  <td >
+  <p>spdif 1 L</p>
+  </td>
+  <td >
+  <p>0x62</p>
+  </td>
+  <td >
+  <p>spdif 1 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(5)</p>
+  </td>
+  <td >
+  <p>out5</p>
+  </td>
+  <td >
+  <p>Цифровой LFE / A4 / D2 R</p>
+  </td>
+  <td >
+  <p>0x25</p>
+  </td>
+  <td >
+  <p>spdif 1 R</p>
+  </td>
+  <td >
+  <p>0x63</p>
+  </td>
+  <td >
+  <p>spdif 1 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(6)</p>
+  </td>
+  <td >
+  <p>out6</p>
+  </td>
+  <td >
+  <p>Наушники L / A5</p>
+  </td>
+  <td >
+  <p>0x26</p>
+  </td>
+  <td >
+  <p>spdif 2 L</p>
+  </td>
+  <td >
+  <p>0x64</p>
+  </td>
+  <td >
+  <p>spdif 2 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(7)</p>
+  </td>
+  <td >
+  <p>out7</p>
+  </td>
+  <td >
+  <p>Наушники R / A6</p>
+  </td>
+  <td >
+  <p>0x27</p>
+  </td>
+  <td >
+  <p>spdif 2 R</p>
+  </td>
+  <td >
+  <p>0x65</p>
+  </td>
+  <td >
+  <p>spdif 2 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(8)</p>
+  </td>
+  <td >
+  <p>out8</p>
+  </td>
+  <td >
+  <p>Тыл L / A7</p>
+  </td>
+  <td >
+  <p>0x28</p>
+  </td>
+  <td >
+  <p>spdif 3 L</p>
+  <p>аналоговый и цифровой тыл</p>
+  </td>
+  <td >
+  <p>0x6e</p>
+  </td>
+  <td >
+  <p>i2s 3 L</p>
+  <p>только аналоговый тыл</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(9)</p>
+  </td>
+  <td >
+  <p>out9</p>
+  </td>
+  <td >
+  <p>Тыл R / A8</p>
+  </td>
+  <td >
+  <p>0x29</p>
+  </td>
+  <td >
+  <p>spdif 3 R</p>
+  <p>аналоговый и цифровой тыл</p>
+  </td>
+  <td >
+  <p>0x6f</p>
+  </td>
+  <td >
+  <p>i2s 3 R</p>
+  <p>только аналоговый тыл</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x11)</p>
+  </td>
+  <td >
+  <p>out17</p>
+  </td>
+  <td >
+  <p>аналоговый Центр</p>
+  </td>
+  <td >
+  <p>0x31</p>
+  </td>
+  <td >
+  <p>ac97 S L</p>
+  </td>
+  <td >
+  <p>0x6a</p>
+  </td>
+  <td >
+  <p>i2s 1 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x12)</p>
+  </td>
+  <td >
+  <p>out18</p>
+  </td>
+  <td >
+  <p>Аналоговый LFE</p>
+  </td>
+  <td >
+  <p>0x32</p>
+  </td>
+  <td >
+  <p>ac97 S R</p>
+  </td>
+  <td >
+  <p>0x6b</p>
+  </td>
+  <td >
+  <p>i2s 1 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x20)</p>
+  </td>
+  <td >
+  <p>(не существует)</p>
+  <p>не управляемый</p>
+  </td>
+  <td >
+  <p>AC97 псевдо L</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x70</p>
+  </td>
+  <td >
+  <p>ac97 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x21)</p>
+  </td>
+  <td >
+  <p>(не существует)</p>
+  <p>не управляемый</p>
+  </td>
+  <td >
+  <p>AC97 псевдо R</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x71</p>
+  </td>
+  <td >
+  <p>ac97 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x28)</p>
+  </td>
+  <td >
+  <p>(не существует)</p>
+  <p>управляется out8</p>
+  </td>
+  <td >
+  <p>Цифровой Тыл</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x66</p>
+  </td>
+  <td >
+  <p>spdif 3 L</p>
+  <p>только цифровой</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x29)</p>
+  </td>
+  <td >
+  <p>(не существует)</p>
+  <p>управляется out9</p>
+  </td>
+  <td >
+  <p>Цифровой Тыл</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x67</p>
+  </td>
+  <td >
+  <p>spdif 3 R </p>
+  <p>только цифровой</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x30)</p>
+  </td>
+  <td >
+  <p>out30</p>
+  </td>
+  <td >
+  <p>Неизвестный L</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x6c</p>
+  </td>
+  <td >
+  <p>i2s 2 L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0x31)</p>
+  </td>
+  <td >
+  <p>out31</p>
+  </td>
+  <td >
+  <p>Неизвестный R</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>-</p>
+  </td>
+  <td >
+  <p>0x6d</p>
+  </td>
+  <td >
+  <p>i2s 2 R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0xa)</p>
+  </td>
+  <td >
+  <p>RecL</p>
+  </td>
+  <td >
+  <p>ADC Rec L</p>
+  </td>
+  <td >
+  <p>0x2a</p>
+  </td>
+  <td >
+  <p>ADC Rec L</p>
+  </td>
+  <td >
+  <p>0x76</p>
+  </td>
+  <td >
+  <p>ADC Rec L</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0xb)</p>
+  </td>
+  <td >
+  <p>RecR</p>
+  </td>
+  <td >
+  <p>ADC Rec R</p>
+  </td>
+  <td >
+  <p>0x2b</p>
+  </td>
+  <td >
+  <p>ADC Rec R</p>
+  </td>
+  <td >
+  <p>0x77</p>
+  </td>
+  <td >
+  <p>ADC Rec R</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>KX_OUT(0xc)</p>
+  </td>
+  <td >
+  <p>(не существует)</p>
+  </td>
+  <td ><p>Mic Rec</p>
+  </td>
+  <td >
+  <p>0x2c</p>
+  </td>
+  <td >
+  <p>Mic Rec</p>
+  </td>
+  <td >
+  <p>0x78</p>
+  </td>
+  <td >
+  <p>Mic Rec</p>
+  </td>
+ </tr>
+</table>
+<br>
+
+<p class=dark>Выходы</p>
+
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr><td>kX Номер</td><td>Prolog название</td><td>10k2 mne</td><td>10k2 DSP #</td><td>10k1 mne</td><td>10k1 DSP #</td><td>Значение</td></tr>
+ <tr><td>KX_IN(0x0)</td><td>in0</td><td>AC97 ADC Left</td><td>0x40</td><td>-""-</td><td>0x10</td><td>AC97 line-in/mic-in L / A1</td></tr>
+ <tr><td>KX_IN(0x1)</td><td>in1</td><td>AC97 ADC Right</td><td>0x41</td><td>-""-</td><td>0x11</td><td>AC97 line-in/mic/in R / A2</td></tr>
+ <tr><td>KX_IN(0x2)</td><td>in2</td><td>SPDIF A Left</td><td>0x42</td><td>-""-</td><td>0x12</td><td>CD SPDIF L / D1 L</td></tr>
+ <tr><td>KX_IN(0x3)</td><td>in3</td><td>SPDIF A Right</td><td>0x43</td><td>-""-</td><td>0x13</td><td>CD SPDIF R / D1 R</td></tr>
+
+ <tr><td>KX_IN(0x4)</td><td>in4</td><td>SPDIF C Left</td><td>0x46</td><td>(?)</td><td>0x14</td><td>Unknown 1 In L (ZVideo I2S)</td></tr>
+ <tr><td>KX_IN(0x5)</td><td>in5</td><td>SPDIF C Right</td><td>0x47</td><td>(?)</td><td>0x15</td><td>Unknown 1 In R (ZVideo I2S)</td></tr>
+ <tr><td>KX_IN(0x6)</td><td>in6</td><td>SPDIF B Left</td><td>0x44</td><td>-""-</td><td>0x16</td><td>Coaxial+Optical In L / D2 L</td></tr>
+ <tr><td>KX_IN(0x7)</td><td>in7</td><td>SPDIF B Right</td><td>0x45</td><td>-""-</td><td>0x17</td><td>Coaxial+Optical In R / D2 R</td></tr>
+
+ <tr><td>KX_IN(0x8)</td><td>in8</td><td>I2S 0 Left</td><td>0x48</td><td>-""-</td><td>0x18</td><td>Line2/Mic2 / Line1(A2Ex) L / A3</td></tr>
+ <tr><td>KX_IN(0x9)</td><td>in9</td><td>I2S 0 Right</td><td>0x49</td><td>-""-</td><td>0x19</td><td>Line2/Mic2 / Line1(A2Ex) R / A4</td></tr>
+ <tr><td>KX_IN(0xa)</td><td>in10</td><td>I2S 1 Left</td><td>0x4a</td><td>-""-</td><td>0x1a</td><td>10k1? / AC97.2 L / Line2(A2Ex) L</td></tr>
+ <tr><td>KX_IN(0xb)</td><td>in11</td><td>I2S 1 Right</td><td>0x4b</td><td>-""-</td><td>0x1b</td><td>10k1? / AC97.2 R / Line2(A2Ex) R</td></tr>
+ <tr><td>KX_IN(0xc)</td><td>in12</td><td>I2S 2 Left</td><td>0x4c</td><td>-""-</td><td>0x1c</td><td>Aux2 L / Line3(A2Ex) L</td></tr>
+ <tr><td>KX_IN(0xd)</td><td>in13</td><td>I2S 2 Right</td><td>0x4d</td><td>-""-</td><td>0x1d</td><td>Aux2 R / Line3(A2Ex) R</td></tr>
+ <tr><td>KX_IN(0xe)</td><td>in14</td><td>AC97 Mic ADC</td><td>0x4e</td><td>-""-</td><td>0x1e</td><td>неиспользуемый</td></tr>
+ <tr><td>KX_IN(0xf)</td><td>(не существует)</td><td>Неиспользуемый</td><td>0x4f</td><td>-""-</td><td>0x1f</td><td>неиспользуемый</td></tr>
+</table>
+
+<br><br>
+
+</h5>

@@ -1,0 +1,127 @@
+name "space'80 v1.5";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "01/16/2008";
+engine "kX";
+comment "sounds grainy & metallic like first digital reverb processors in the 70큦/80큦, (reduced version)";
+guid "af5be2bc-1d4f-4b9c-8606-4a670e30497c";
+  
+; schroeder design reverb consists of (originaly 4) 6 comb filters 
+; followed by 2 allpass filters for frequency compensation.
+; sounds grainy & metallic like first digital reverb 
+; processors in the 70큦/80큦.  
+; note: the allpasses are modified. they have fixed feedback and
+; variable feedforward amplification, which color the reverb in 
+; a special way. for do that try out "freq_comp".
+ 
+; registers
+
+  input in1, in2
+  output out1, out2  
+  static a0, a1, a2, a3, a4, a5, b1, b2, c, d, d1, d2, dry1, dry2, wet, f, f1, f2
+  static tin1, tin2
+  control decay=0.95
+  control freq_comp=0.25
+  control gain=0.5
+  control damping=1
+  control lowpass=1 
+  control highpass=0
+  control dry_wet=0.5
+
+; xtramsize
+
+  xtramsize 3958; 82 ms for 6 late reflections  
+  xdelay write wrt0 at 0 
+  xdelay read rd0 at 727 ; max. 15 ms for 1 reflection (room with 5m side length)
+  xdelay write wrt1 at 728 
+  xdelay read rd1 at 1427 
+  xdelay write wrt2 at 1428 
+  xdelay read rd2 at 2107
+  xdelay write wrt3 at 2108 
+  xdelay read rd3 at 2761 
+  xdelay write wrt4 at 2762 
+  xdelay read rd4 at 3371  
+  xdelay write wrt5 at 3372 
+  xdelay read rd5 at 3958
+
+; itramsize
+
+  itramsize 24 ; 0.5 ms delay for 2 allpasses 
+  idelay write wrt6 at 0 
+  idelay read rd6 at 12 ; 0,25 ms / allpass  
+  idelay write wrt7 at 13 
+  idelay read rd7 at 24 
+
+; temp input register
+  macs tin1, in1, 0, 0 ; this should be done with all inputs to let run save the microcode 
+  macs tin2, in2, 0, 0
+  
+; input adder
+
+  macs wet, tin1, tin2, 1
+
+; dry_wet
+
+  macs wet, 0, wet, dry_wet ; make a wet register
+  macsn dry1, tin1, tin1, dry_wet ; make a dry register 
+  macsn dry2, tin2, tin2, dry_wet
+
+; wet divider
+
+  macs wet, 0, wet, 0.0834 ; divide by 12 (doubled input & 6 layered delays)
+
+; delay lines (6 comb filters with lowpass damping)
+
+  interp a0, a0, damping, rd0
+  macs wrt0, wet, a0, decay 
+
+  interp a1, a1, damping, rd1
+  macs wrt1, wet, a1, decay 
+
+  interp a2, a2, damping, rd2
+  macs wrt2, wet, a2, decay 
+
+  interp a3, a3, damping, rd3
+  macs wrt3, wet, a3, decay 
+
+  interp a4, a4, damping, rd4 
+  macs wrt4, wet, a4, decay 
+ 
+  interp a5, a5, damping, rd5
+  macs wrt5, wet, a5, decay
+
+; add & gain taps 
+
+  acc3 b1, a0, a1, a2 ; add tap 0-2
+  acc3 b2, a3, a4, a5 ; add tap 3-5
+  macs c, b1, b2, 1 ; add all taps
+  macs c, 0, c, gain ; gain taps
+
+; simple lowpass
+
+  interp f1, f1, lowpass, c
+
+; simple higpass
+
+  interp f2, f2, highpass, f1
+  macsn f, f1, f2, 1  
+
+; allpass 1 (fixed feedback)
+
+  macs wrt6, f, rd6, -0.5
+  macs d1, rd6, wrt6, freq_comp 
+
+; allpass 2 (fixed feedback)
+
+  macs wrt7, d1, rd7, -0.5
+  macs d2, rd7, wrt7, freq_comp
+
+; out (out2 is inverted out1)
+
+  macs out1, dry1, d2, 1
+  macs out2, dry2, d2, -1  
+
+ 
+end               
+
+
+

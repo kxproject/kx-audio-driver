@@ -1,0 +1,78 @@
+
+name    "Жremolo"
+; .....................................
+
+control depth   = .50           
+control	rate    = .54   
+control	shape   = .00  
+control panning = .12                     
+ 
+input 	inx, iny;
+output 	x, y
+temp    z 
+temp    a, b, c  
+
+static  osc1, osc2;  
+
+; .....................................
+; left 
+; osc, sin'->tri->saw oscillator													
+macw	osc1, osc1, rate, .00048828
+
+macs    a, 0, shape, .9
+limitn  z, a, a, osc1
+macints z, osc1, z, -2
+macs    z, z, osc1, a
+
+macsn   b, a, a, a
+macs    z, z, b, 1
+exp		c, a, 14, 0
+macs    x, 0, z, c
+macints z, z, x, 6
+
+interp  x, z, z, 1
+macs    x, 0, x, x
+interp  z, x, shape, z
+
+; output
+interp  z, .707, depth, z
+macs    x, 0, inx, z
+
+; .....................................
+; right
+; osc
+macwn   osc2, osc1, panning, 1
+
+limitn  y, a, a, osc2
+macints y, osc2, y, -2
+macs    y, y, osc2, a
+
+macs    y, y, b, 1
+macs    b, 0, y, c
+macints y, y, b, 6
+
+interp  b, y, y, 1
+macs    b, 0, b, b
+interp  b, b, shape, y
+
+; output
+interp  b, .707, depth, b
+macs    y, 0, iny, b
+
+; .....................................
+
+guid        "C27CE4A1-2717-48C1-AF56-E6C0737B3361"     
+copyright 	"© Max Mikhailov, 2001-2006"
+created 	"August 22 2006"
+comment 	"Just tremolo..."
+engine 		"ѕользу€сь случаем, передаю привет маме, папе, сестре и дедушке!"  
+
+end
+
+; .....................................
+; debug 
+output  osca, oscb
+macs    osca, 0, z, .25
+macs    oscb, 0, b, .25
+
+; .....................................

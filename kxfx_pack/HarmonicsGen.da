@@ -1,0 +1,136 @@
+; New microcode
+	name "HarmonicsGen";
+	copyright "Copyright (c) 2005. Tril";
+	created "11/24/2005";
+	engine "kX";
+	; comment "";
+	guid "251a33a7-412d-4ee4-a8b6-c6503c1bd23b";
+	; -- generated GUID
+
+
+; Left and Right
+
+input inL, inR;
+output outL, outR;   
+control Vol = 1;
+temp test;
+
+temp h1, h2, h3;
+temp h4, h5;
+temp camplitude1, uamplitude1;
+temp camplitude2, uamplitude2; current amplitude and used amplitude
+
+; Left
+
+static amplitude1L = 0;                    
+static amplitude2L = 0;                    
+
+; Right
+
+static amplitude1R = 0;                    
+static amplitude2R = 0;                    
+
+; code
+
+;Left
+
+; Reduce amplitude (by a factor every sample).
+; This factor was chosen carefully so that
+; the output has no DC.
+macs amplitude1L, amplitude1L, 0.00001, -1;
+macs amplitude2L, amplitude2L, 0.00001, -1;
+
+macs h1, inL, 0, 0;
+
+; Find current amplitude.
+macs camplitude1, h1, 0, 0;
+log camplitude1, camplitude1, 0x1, 0x1 ; camplitude1 = abs(camplitude1)
+
+; if (camplitude > amplitude)
+;   amplitude = camplitude               
+macints test, amplitude1L, camplitude1, -1;
+skip    ccr, ccr, 0x180, 1 ;>0
+    macs amplitude1L, camplitude1,0, 0; 
+
+macs uamplitude1, 0, amplitude1L, amplitude1L;
+  
+macs h2, 0, h1, h1;
+macs h3, 0, h1, h2;
+                     
+macs h2, h2, uamplitude1, -0.5;
+macints h2, 0, h2, 2;
+
+macs h4, 0, h2, h2;
+                        
+; Find current amplitude.                        
+macs camplitude2, h2, 0, 0;
+log camplitude2, camplitude2, 0x1, 0x1 ; camplitude2 = abs(camplitude2)
+    
+; if (camplitude > amplitude)
+;   amplitude = camplitude
+macints test, amplitude2L, camplitude2, -1;
+skip    ccr, ccr, 0x180, 1 ;>0
+    macs amplitude2L, camplitude2,0, 0; 
+
+macs uamplitude2, 0, amplitude2L, amplitude2L;
+          
+macs h4, h4, uamplitude2, -0.5;
+macints h4, 0, h4, 2;          
+macs h5, 0, h3, h2;                    
+
+acc3 h5, h5, h4, h3;
+acc3 outL, h5, h2, h1;
+
+
+; Right
+
+; Reduce amplitude (by a factor every sample).
+; This factor was chosen carefully so that
+; the output has no DC.
+macs amplitude1R, amplitude1R, 0.00001, -1;
+macs amplitude2R, amplitude2R, 0.00001, -1;
+
+macs h1, inR, 0, 0;
+
+; Find current amplitude.
+macs camplitude1, h1, 0, 0;
+log camplitude1, camplitude1, 0x1, 0x1 ; camplitude1 = abs(camplitude1)
+                
+; if (camplitude > amplitude)
+;   amplitude = camplitude               
+macints test, amplitude1R, camplitude1, -1;
+skip    ccr, ccr, 0x180, 1 ;>0
+    macs amplitude1R, camplitude1,0, 0; 
+
+macs uamplitude1, 0, amplitude1R, amplitude1R;
+  
+macs h2, 0, h1, h1;
+macs h3, 0, h1, h2;
+                     
+macs h2, h2, uamplitude1, -0.5;
+macints h2, 0, h2, 2;
+
+macs h4, 0, h2, h2;
+                        
+; Find current amplitude.                        
+macs camplitude2, h2, 0, 0;
+log camplitude2, camplitude2, 0x1, 0x1 ; camplitude2 = abs(camplitude2)
+    
+; if (camplitude > amplitude)
+;   amplitude = camplitude
+macints test, amplitude2R, camplitude2, -1;
+skip    ccr, ccr, 0x180, 1 ;>0
+    macs amplitude2R, camplitude2,0, 0; 
+
+macs uamplitude2, 0, amplitude2R, amplitude2R;          
+          
+macs h4, h4, uamplitude2, -0.5;
+macints h4, 0, h4, 2;          
+macs h5, 0, h3, h2;                    
+
+acc3 h5, h5, h4, h3;
+acc3 outR, h5, h2, h1;
+
+end
+
+

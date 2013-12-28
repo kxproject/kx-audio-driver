@@ -1,0 +1,54 @@
+name "hphones";
+copyright "By LeMury 2003";
+engine "kX";
+created "08/23/2003";
+comment "Headphones Crossfeed/Vocal Remover";
+guid "6fa996e3-857e-4456-9865-a6cf624fc349";
+
+input inl, inr ;
+output outl, outr ;
+control Lopass=1 ; lopass cuttoff freq
+control Hipass=0 ; hipass cuttoff freq
+control XPhase=1 ; xfeed phase 'select'
+control Dry_Wet=0.5 ; direct/xfeed mix
+static tl1=0x0
+static tl2=0x0, hl2=0x0
+static tr1=0x0
+static tr2=0x0, hr2=0x0
+temp tmp, tmpl, tmpr, f
+
+; read inputs
+macs tmpl, inl, 0, 0 ; get L dry sample
+macs tmpr, inr, 0, 0 ; get R dry sample
+
+exp f, Lopass, 0x7, 0x0 ; exp scale lp filter coef
+; left lopass
+macsn tmp, tmpl, tl1, 1 ;
+macs tl1, tl1, tmp, f ; (tl1 is lp out) 
+; right lopass
+macsn tmp, tmpr, tr1, 1 ; 
+macs tr1, tr1, tmp, f ; (tr1 is lp out)
+
+; feed lopass output into hipass
+exp f, Hipass, 0x7, 0x0 ; exp scale hp filter coef
+; left hipass
+macsn hl2, tl1, tl2, 1 ; tl1 is input to hp
+macs tl2, tl2, hl2, f ; (hl2 is hp out)
+
+; right hipass
+macsn hr2, tr1, tr2, 1 ; tr1 is input to hp
+macs tr2, tr2, hr2, f ; (hr2 is hp out)
+
+; make inverted xfeed signals
+macsn f, 0, hr2, 1
+macsn tmp, 0, hl2, 1
+
+; pan/'select' between normal and inverted xfeed signal
+interp hr2, f, XPhase, hr2
+interp hl2, tmp, XPhase, hl2
+
+; pan/mix between dry and crossfeed sigal, output
+interp outl, tmpl, dry_wet, hr2
+interp outr, tmpr, dry_wet, hl2
+;-----------------------------------------------------------------
+end;

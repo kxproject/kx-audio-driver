@@ -1,0 +1,79 @@
+// kX Driver Interface / kX DSP Effects Library
+// Copyright (c) Eugene Gavrilov and Max Mikhailov, 2001-2005.
+// All rights reserved
+
+/*
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the Free Software
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+
+#include <windows.h>
+
+#include "vers.h"
+
+#define VER_FILEFLAGSMASK		VS_FFI_FILEFLAGSMASK
+#define VER_FILEOS          		VOS_NT_WINDOWS32
+#define VER_FILEFLAGS			0
+
+#define VER_COMPANYNAME_STR 		KX_COMPANY_NAME
+#define VER_PRODUCTNAME_STR 		"kX Audio Driver DSP Effects Library"
+#define VER_LEGALCOPYRIGHT_YEARS    	KX_COPYRIGHT_YEARS_STR
+#define VER_LEGALCOPYRIGHT_STR		KX_COPYRIGHT_STR_R
+#define VER_LEGALTRADEMARKS_STR     	""
+#define VER_PRODUCTVERSION		KX_DRIVER_VERSION
+#define VER_PRODUCTVERSION_STR		KX_DRIVER_VERSION_STR
+#define VER_FILEVERSION			VER_PRODUCTVERSION
+#define VER_FILEVERSION_STR		VER_PRODUCTVERSION_STR
+#define VER_PRODUCTVERSION_DW       	(0x01000000 | VER_PRODUCTBUILD)
+
+#define VER_FILETYPE			VFT_DRV
+#define VER_FILESUBTYPE			VFT2_DRV_SYSTEM
+#define VER_FILEDESCRIPTION_STR		"kX Audio Driver DSP Effects Library"
+#define VER_INTERNALNAME_STR		"kxfxlib.kxl"
+#define VER_ORIGINALFILENAME_STR	VER_INTERNALNAME_STR
+
+#ifdef RC_INVOKED
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION    VER_FILEVERSION
+PRODUCTVERSION VER_PRODUCTVERSION
+FILEFLAGSMASK  VER_FILEFLAGSMASK
+FILEFLAGS      VER_FILEFLAGS
+FILEOS         VER_FILEOS
+FILETYPE       VER_FILETYPE
+FILESUBTYPE    VER_FILESUBTYPE
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"   /* LANG_ENGLISH/SUBLANG_ENGLISH_US, Unicode CP */
+        BEGIN
+            VALUE "CompanyName",     VER_COMPANYNAME_STR
+            VALUE "FileDescription", VER_FILEDESCRIPTION_STR 
+            VALUE "FileVersion",     VER_FILEVERSION_STR
+            VALUE "InternalName",    VER_INTERNALNAME_STR
+            VALUE "LegalCopyright",  VER_LEGALCOPYRIGHT_STR
+            VALUE "OriginalFilename",VER_ORIGINALFILENAME_STR
+            VALUE "ProductName",     VER_PRODUCTNAME_STR
+            VALUE "ProductVersion",  VER_PRODUCTVERSION_STR
+        END
+
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04B0
+    END
+END
+
+#endif

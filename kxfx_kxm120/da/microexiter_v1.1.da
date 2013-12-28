@@ -1,0 +1,55 @@
+name "microexiter v1.1";
+copyright "2009. stylus, http://stylus.siteboard.de";
+engine "kX";
+created "";  
+comment "simulates an 'aphex aural exciter typ b' (treble enhancer)"
+guid "d983e916-769b-4a0b-a4bb-be766e5ff5c8";
+
+; simulates an "aphex aural exciter typ b" (treble enhancer)
+; with 12 db highpass filter and antiparallel diode limiter/overdrive. 
+
+; Registers
+input in1, in2
+output out1, out2
+control in=1.0, cutoff=0.5, out=0.3
+static t1, t2, t5, t7 
+static t11, t21, t51, t71, b, r, s
+
+; trim sliders
+interp b, 0.7, cutoff, 1
+
+; left channel ******************************* 
+
+; input level 
+macs r, 0, in1, in
+ 
+; 12 db highpass 
+interp t1, t1, b, r; 6db lowpass 
+interp t2, t2, b, t1 
+macsn t5, r, t2, 1
+
+; diode transfer function (produces harmonics), gain 
+log t7, t5, 0x8, 0 ; LOG R, Lin_data, Max_exponent, Sign_register
+;macints t7, 0, t7, 0x4 ; x4
+
+; out
+macs out1, r, t7, out     
+
+; right channel *******************************  
+
+; input level 
+macs s, 0, in2, in
+
+; 12db highpass
+interp t11, t11, b, s; 6db lowpass 
+interp t21, t21, b, t11; 
+macsn t51, s, t21, 1
+
+; diode transfer function (produces harmonics), gain
+log t71, t51, 0x8, 0 ; LOG R, Lin_data, Max_exponent, Sign_register
+;macints t71, 0, t71, 0x4 ; x4
+
+; out
+macs out2, s, t71, out
+
+end

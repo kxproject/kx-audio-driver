@@ -1,0 +1,34 @@
+name "kxm 830";
+copyright "2007. stylus, http://stylus.siteboard.de"
+created "10/25/2007";
+engine "kX";
+comment "bit crusher 8..1 bit, go in with full amplitude! (kmx 830 v1.0)";
+guid "64f02db0-0d92-4941-ab3d-546478b47162";
+    
+; registers
+input in
+output out
+control resolution=1
+control gain_comp=0.01
+control dry_wet=1 
+static a, b, c, d, dry
+
+; norm resolution
+macs c, 0.000000000466,resolution, 0.0000000596 ; div by 24 bit (results in max. 8bit) 
+
+; norm gain
+macs d, 0.000000000466, gain_comp, 0.0000000037 ; 16x
+
+; crush inputs
+macs a, 0, in, c
+
+; bring up the squares :) 
+macints a, 0, a, 16777216 ; mult. with 24 bit 
+
+; gain it steppy 
+macints a, 0, a, d ; gain compensation   
+
+; dry_wet
+interp out, dry, dry_wet, a 
+
+end

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+
+echo === Loading kX Audio driver....
+
+./prepare
+sync
+sync
+sudo kextutil -v /System/Library/Extensions/kXAudioDriver.kext
+sync
+sync

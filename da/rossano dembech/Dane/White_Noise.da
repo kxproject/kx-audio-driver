@@ -1,0 +1,15 @@
+; New microcode
+	name "HQ White Noise";
+	copyright "Copyright (c) 2004.";
+	created "06/19/2005";
+	engine "kX";
+	; comment "";
+	guid "cc49b75d-b9e9-4d24-aacf-a8c822e2ab35";
+	; -- generated GUID
+output out
+control Level=0.5
+static tmp=0x0
+macs tmp, 0, noise1, Level
+macs out, 0, tmp, 0.5
+
+end

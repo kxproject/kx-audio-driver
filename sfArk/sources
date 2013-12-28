@@ -1,0 +1,33 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=sfark
+TARGETTYPE=LIBRARY
+
+USE_MFC=1
+# USE_MFCUNICODE=1
+USE_MSVCRT=1
+386_STDCALL=0
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) -DKX_INTERFACE -D"_MBCS" -D__LITTLE_ENDIAN__
+MSC_WARNING_LEVEL=-W4 -WX
+
+INCLUDES=..\h;..\h\zlib
+
+TARGETLIBS=$(SDK_LIB_PATH)\oldnames.lib \
+	$(SDK_LIB_PATH)\newdev.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\setupapi.lib \
+        $(SDK_LIB_PATH)\winmm.lib\
+        $(SDK_LIB_PATH)\advapi32.lib\
+        $(SDK_LIB_PATH)\dsound.lib \
+        $(SDK_LIB_PATH)\ole32.lib \
+        $(SDK_LIB_PATH)\dxguid.lib \
+        $(SDK_LIB_PATH)\kernel32.lib
+
+SOURCES=sfklCoding.cpp sfklCrunch.cpp sfklDiff.cpp sfklFile.cpp sfklLPC.cpp sfklString.cpp \
+	sfklZip.cpp sfark.cpp

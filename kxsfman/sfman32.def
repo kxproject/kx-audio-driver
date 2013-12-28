@@ -1,0 +1,5 @@
+LIBRARY			sfman32
+;DESCRIPTION		'KX SfMan32'
+;EXPORTS	
+;				DllMain	PRIVATE
+

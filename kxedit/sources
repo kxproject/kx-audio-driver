@@ -1,0 +1,45 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=cmax20
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+
+USE_ATL=1
+USE_MSVCRT=1
+USE_NATIVE_EH=1
+USE_STL=1
+
+NOT_LEAN_AND_MEAN=1
+
+MSC_WARNING_LEVEL=-W4 -WX -wd4267 -wd4244 -wd4242
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=precomp.h
+
+TARGETLIBS=$(SDK_LIB_PATH)\oldnames.lib \
+    $(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\dsound.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib \
+    $(SDK_LIB_PATH)\winspool.lib \
+    $(SDK_LIB_PATH)\comdlg32.lib \
+    $(SDK_LIB_PATH)\advapi32.lib \
+    $(SDK_LIB_PATH)\shell32.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\oleaut32.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(SDK_LIB_PATH)\odbc32.lib \
+    $(SDK_LIB_PATH)\odbccp32.lib \
+    $(SDK_LIB_PATH)\comctl32.lib \
+    $(SDK_LIB_PATH)\version.lib
+
+SOURCES=BOOKMARK.CPP BUFFER.CPP CEDIT.CPP CEDITMSG.CPP ceditx.cpp CMDARRY.CPP ctlstate.cpp DEBUG.CPP DRAGDROP.CPP \
+   EDITCMD1.CPP EDITDLGS.CPP EDITSEL.CPP EDITVIEW.CPP EXPORTS.CPP FINDREPL.CPP GLOBALSX.CPP HKEYCTRL.CPP \
+   HOTKEY.CPP hotkeyx.cpp LANGUAGE.CPP LANGX.CPP LINE.CPP MACRO.CPP MISC.CPP MSGPUMP.CPP POSX.CPP \
+   print.cpp  PROPS.CPP RANGEX.CPP rectx.cpp REGEXP.CPP SELFTEST.CPP SPLITTER.CPP SYNTAX.CPP UNDO.CPP \
+   codemax.rc 

@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+
+sudo echo === unloading driver...
+sync
+sudo kextunload -q /System/Library/Extensions/kXAudioDriver.kext
+sleep 1
+sync
+sudo kextunload -q /System/Library/Extensions/kXAudioDriver.kext
+sync
+
+sudo echo === removing driver...
+sudo rm -rf /System/Library/Extensions/kXAudioDriver.kext
+sync
+
+exit 0

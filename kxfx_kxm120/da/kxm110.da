@@ -1,0 +1,52 @@
+name "kxm 110";
+copyright "2008. russ";
+created "01/22/2008";
+engine "kX";
+comment "keyboard unit with cv and gate, midi controlled (kxm 110 v1.0)"
+guid "a06ed1d1-a932-47f4-a11c-88d09db7f1ab";  
+
+; full range keyboard unit 
+
+;registers
+output cv, gate_;
+control note=0x30600000, gate=0x0;
+temp t
+
+macs      cv,  0x0,  note,  0x80;
+macs      gate_,  0x1,  cv,  0xaaaaaab;       
+macints t, 0x0, gate_, 0xc;
+macints t, t, cv, 0xffffffff;
+macints t, 0xc, t, 0xffffffff;
+     
+macs cv, 0.62976, 0, 0;     
+skip      ccr,  ccr,  0x7fffffff,  t; 
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;
+macs      cv,  0x0,  cv,  0x78d0df9c;            
+    
+skip ccr, ccr, 0x7fffffff, gate_;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macs cv, 0, cv, 0x40000000;
+macints cv, 0, cv, 0x2            
+     
+tstneg      gate_,  gate,  0x7fffffff,  0x53e2;
+
+end

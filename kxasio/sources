@@ -1,0 +1,36 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2012
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=kxasio
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE2=install_sign
+# register_dll
+# (this is for debugging the DLL only)
+
+C_DEFINES=$(C_DEFINES) -D"WIN32" -D"_WINDOWS" 
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+NOT_LEAN_AND_MEAN=1
+USE_NATIVE_EH=1
+USE_MSVCRT=1
+386_STDCALL=0
+# DLLENTRY=DllMain
+
+INCLUDES=..\h
+TARGETLIBS=$(OBJ_PATH)\..\kxapi\$O\kxapi.lib \
+        $(SDK_LIB_PATH)\kernel32.lib \
+        $(SDK_LIB_PATH)\ole32.lib \
+        $(SDK_LIB_PATH)\user32.lib \
+        $(SDK_LIB_PATH)\ole32.lib \
+        $(SDK_LIB_PATH)\gdi32.lib \
+        $(SDK_LIB_PATH)\uuid.lib \
+        $(SDK_LIB_PATH)\advapi32.lib \
+        $(SDK_LIB_PATH)\winmm.lib
+
+SOURCES=kxasio.cpp combase.cpp dllentry.cpp register.cpp resource.rc debug.cpp

@@ -1,0 +1,21 @@
+name "kxm 820";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/05/2007";
+engine "kX"; 
+comment "ring modulator (kxm 820 v1.1)"
+guid "79a62c31-0d1b-46b4-8700-a3ff13b3c2c1";
+
+; registers
+input in_1, in_2
+output out
+control gain=0   
+static a, b
+
+; trim sliders
+interp b, 0x1, gain, 0x10
+
+; ring
+macs a, 0, in_1, in_2 ; in_1*in_2
+macints out, 0, a, b ; 16x gain
+
+end

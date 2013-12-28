@@ -1,0 +1,52 @@
+name "kxm 520";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created "03/29/2005";  
+comment "double moog lowpass -48 db/oct (kxm 520 v1.1)"
+guid "f6c7c8a7-d792-416b-8344-3d0011aca2e6";
+
+; double moog lowpass is a cascaded -24 db/oct moog lowpass   
+
+; Registers
+input in, envelope, lfo_1, lfo_2, cv
+output out;
+control cutoff=0.2, emphasis=0.1, contour=0, keytrack=0
+static t1, t2, t3, t4, t5, t6, t7, t8, c    
+static d, e, t10, b, t11, t12, t13
+; Code 
+
+; trim sliders
+interp e, 0x0, keytrack, 0xf
+     
+; adjust controls
+macs c, 0, envelope, contour 
+macints d, 0, cv, e
+
+; cutoff modulation
+acc3 b, cutoff, c, d ; add cutoff, envelope, keytrack
+acc3 b, b, lfo_1, lfo_2 ; add lfos
+limit b, b, b, 0 ; cutoff must be greater or equal 0, if b>0 b=b else b=0
+
+; input adder
+acc3 t8, t10, in, 0 ; add input and feedback
+macs t6, 0, t8, -1 ; invert  
+
+; lowpass section
+interp t1, t1, b, t6; 6db lowpass
+interp t2, t2, b, t1; 
+interp t3, t3, b, t2; 
+interp t4, t4, b, t3;  
+interp t11, t11, b, t4; 
+interp t12, t12, b, t11; 
+interp t13, t13, b, t12; 
+interp out, out, b, t13; (t14 replaced by out)
+
+; feedback path
+macints  t7, 0, out, 6; amplify x 6
+macs 	 t5, 0, t7, emphasis ; set feedback
+interp t10, t10, 0.25, t5  ; post feedback lowpass to reduces highest freq. 
+                             ; in feedback to avoid sharp digital overdrive!
+;output
+;macs out, 0, t14, 1; output
+
+end

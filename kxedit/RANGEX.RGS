@@ -1,0 +1,20 @@
+HKCR
+{
+	CodeMax.Range = s 'Range Class'
+	{
+		CLSID = s '{ECEDB94A-AC41-11d2-AB20-000000000000}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ECEDB94A-AC41-11d2-AB20-000000000000} = s 'Range Class'
+		{
+			ProgID = s 'CodeMax.Range'
+			VersionIndependentProgID = s 'CodeMax.Range'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

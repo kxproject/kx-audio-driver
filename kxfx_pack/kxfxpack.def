@@ -1,0 +1,3 @@
+LIBRARY			kxfxpack
+;DESCRIPTION		'kX Driver DSP Effects Library Pack'
+EXPORTS	

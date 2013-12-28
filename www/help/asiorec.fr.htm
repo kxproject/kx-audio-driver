@@ -1,0 +1,95 @@
+<title>Prise en main de l'enregistrement ASIO</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><B><FONT size=3>Guide d'enregistrement ASIO [OUTDATED]</FONT></B></p>
+<hr>
+<p><font size="2">L'activation de l'enregistrement ASIO n&eacute;cessite d'effectuer 
+  quelques modifications dans<a href="dspguide.htm"> l'&eacute;cran DSP kX</a>. 
+  Cet &eacute;cran s'affiche en s&eacute;lectionnant le bouton DSP kX dans le 
+  mixeur, ou via un clic droit dans l'ic&ocirc;ne syst&egrave;me puis en s&eacute;lectionnant 
+  'DSP kX DSP' depuis le <a href="menu.htm">Menu kX</a>.</font></p>
+<p><font size="2" >Les entr&eacute;es ASIO se trouvent dans l'objet <a href="dspguide.htm#epilog">epilog</a> 
+  (voir le <a href="dspguide.htm">Guide kX DSP </a>pour des informations compl&eacute;mentaires 
+  sur ce sujet ainsi que sur les objets de base). Les 16 derni&egrave;res entr&eacute;es 
+  de cet objet correspondent aux entr&eacute;es ASIO. Celle-ci permettent d'enregistrer 
+  simultan&eacute;ment 7 entr&eacute;es st&eacute;r&eacute;o ou 16 entr&eacute;e 
+  mono (ou n'importe quelle combinaison de celles-ci).</font></p>
+<p><font size="2">Par d&eacute;faut aucune source n'est connect&eacute;e sur ces 
+  entr&eacute;es, vous devrez donc modifier la source que vous voulez enregistrer 
+  en ASIO.</font></p>
+<p><font size="2">Les entr&eacute;es de la carte son sont situ&eacute;es dans 
+  l'objet <a href="dspguide.htm#prolog">prolog</a>. Les sorties sur le 'prolog' 
+  repr&eacute;sentent les entr&eacute;es physiques de votre carte son (ainsi que 
+  des baies frontales, cartes filles et p&eacute;riph&eacute;riques externes connect&eacute;s 
+  sur la carte). Ces connecteurs sont des paires st&eacute;r&eacute;o et correspondent 
+  aux curseurs du bas situ&eacute;s dans la fen&ecirc;tre <a href="insnouts.htm">Entr&eacute;es 
+  &amp; sorties</a> du <a href="mixer.htm">Mixeur kX</a>.</font></p>
+<table width="420"  vspace="0">
+  <tr> 
+    <td width="16%" align="left" valign="top"><IMG src="images/prolog.gif" ></td>
+    <td width="84%" valign="top" align="left"> 
+      <div align="left"> 
+        <p><font size="2"><b>Sur une carte 10k1 le prolog repr&eacute;sente les 
+          signaux d'entr&eacute;es suivants (7 paires st&eacute;r&eacute;o):</b> 
+          </font></p>
+      </div>
+      <blockquote> 
+        <div align="left"><font size="2">In0/1: Entr&eacute;e AC97<br>
+          In2/3: Entr&eacute;e c&eacute;d&eacute;rom digital<br>
+          In4/5: (? 1)<br>
+          In6/7: Entr&eacute;e coaxiale / Entr&eacute;e optique (LiveDrive/Carte fille)<br>
+          In8/9: Ligne 2/micro 2 in (LiveDrive)<br>
+          In10/11: (? 2)<br>
+          In12/13: Entr&eacute;e auxiliaire n&deg; 2 (LiveDrive)</font></div>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<P><B><FONT size=2>Exemple - Enregistrement via l'entr&eacute;e ligne</FONT></B></P>
+<p><font size="2">Les entr&eacute;es analogiques sont situ&eacute;es directement 
+  sur la carte son (Ligne/Micro/Auxiliaire/C&eacute;d&eacute;rom/TAD/Vid&eacute;o) 
+  peuvent &ecirc;tre s&eacute;lectionn&eacute;es &agrave; partir de la fen&ecirc;tre 
+  <a href="ac97.htm">AC97</a> du <a href="mixer.htm">Mixeur kX,</a> elles peuvent 
+  &ecirc;tre enregistr&eacute;es soit seules soit en mixage st&eacute;r&eacute;o 
+  ou mono (mais pas avec toutes les combinaisons - consultez le <a href="signaflow.htm">Diagramme 
+  de flux des signaux kX </a>pour plus d'information). Pour enregistrer l'entr&eacute;e 
+  ligne, &agrave; partir de la fen&ecirc;tre AC97 du mixeur kX s&eacute;lectionnez 
+  Entr&eacute;e ligne, laissez tous les curseurs muets et aller &agrave; la fen&ecirc;tre 
+  </font><font size="2"><a href="insnouts.htm">Entr&eacute;es &amp; sorties</a> 
+  du mixeur. Vous pourrez ici utiliser le curseur AC97 pour ajuster le niveau. 
+  Dans l'&eacute;cran<a href="dspguide.htm"> DSP kX</a> vous devrez connecter 
+  <i>prolog in0 et in1 </i>avec <i>epilog asio0 etasio1</i> comme indiqu&eacute; 
+  ci dessous (consultez le <a href="dspguide.htm">Guide DSP kX</a> pour les d&eacute;tails 
+  sur la mise en place de connexions) :</font></p>
+<table  cellpadding="5" width="100%">
+  <tr>
+    <td width="41%"><IMG src="images/asiocon.gif" ></td>
+    <td width="59%" valign="top" align="left"><font size="2"><i>Le pilote ASIO 
+      est pr&ecirc;t pour enregistrer une entr&eacute;e AC97. Remarquez que le 
+      connecteur par d&eacute;faut sur le prolog n'a pas besoin d'&ecirc;tre supprim&eacute;.</i></font></td>
+  </tr>
+</table>
+<p><font size="2">Maintenant vous devez activer les entr&eacute;es ASIO dans votre 
+  application d'enregistrement ASIO pr&eacute;f&eacute;r&eacute;e (comme Cubase, 
+  Logic, etc.). Il peut &ecirc;tre utile de <b>d&eacute;sactiver le monitoring 
+  logiciel</b> dans le logiciel pour &eacute;viter d'entendre deux signaux. Si 
+  vous enregistrez &agrave; partir d'une autre source simultan&eacute;ment, connectez 
+  simplement le signal sortie du <a href="dspguide.htm#prolog">prolog</a> vers 
+  une autre paire ASIO et activez cette entr&eacute;e dans votre programme h&ocirc;te.</font></p>
+<p><b><font size="3">Autres astuces</font></b></p>
+<p><font size="2">Vous pouvez virtuellement connecter n'importe quel connecteur 
+  de sortie dans l'&eacute;cran <a href="dspguide.htm">kX DSP</a> aux entr&eacute;es 
+  ASIO et enregistrer ce qui est pr&eacute;sent en sortie. Cela signifie que vous 
+  pouvez enregistrer des signaux de type r&eacute;verb&eacute;ration, mixage final 
+  ou canal de synth&eacute;tiseur.</font></p>
+<p><font size="2"><b>Astuces ASIO</b></font></p>
+<p><font size="2">Dans Cubase, vous devez activer l'option jouer en arri&egrave;re 
+  plan pour permettre &agrave; Cubase de continuer &agrave; &eacute;mettre des 
+  sons quand vous effectuez une lecture dans d'autres logiciels (ou ajuster les 
+  param&egrave;tres du DSP).</font></p>
+<hr>
+<p><font size="1"> Cubase et VST sont des marques d&eacute;pos&eacute;es et ASIO 
+  est une marque commerciale de Steinberg Media Technologies AG.</font></p>
+<p>&nbsp;</p>

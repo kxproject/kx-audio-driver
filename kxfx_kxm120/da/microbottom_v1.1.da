@@ -1,0 +1,51 @@
+name "microbottom v1.1";
+copyright "2009. stylus, http://stylus.siteboard.de";
+engine "kX";
+created "";  
+comment "simulates an 'aphex big buttom' (bass enhancer)"
+guid "3b0e30bf-a26a-4673-8463-23172382413d";
+
+; simulates an "aphex big bottom" (bass enhancer) with 
+; 12 db lowpass filter and antiparallel diode limiter. 
+
+; Registers
+input in1, in2
+output out1, out2
+control in=1.0, cutoff=0.3, out=0.1
+static t1, t2, t5, t7 
+static t11, t21, t51, t71, b, r, s
+
+; trim sliders
+interp b, 0, cutoff, 0.05
+
+; left channel ******************************* 
+
+; input level 
+macs r, 0, in1, in
+
+; 12 db lowpass section 
+interp t1, t1, b, r; 6db lowpass 
+interp t2, t2, b, t1; 
+
+; limiter (diode transfer function)
+log t7, t2, 0x6, 0 ; LOG R, Lin_data, Max_exponent, Sign_register
+
+; output mix
+macs out1, r, t7, out  
+
+; right channel *******************************  
+
+; input level
+macs s, 0, in2, in
+
+; 12 db lowpass section
+interp t11, t11, b, s; 6db lowpass 
+interp t21, t21, b, t11; 
+
+; limiter (diode transfer function)
+log t71, t21, 0x6, 0 ; LOG R, Lin_data, Max_exponent, Sign_register
+
+; out
+macs out2, s, t71, out 
+
+end

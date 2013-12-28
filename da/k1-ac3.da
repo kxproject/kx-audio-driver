@@ -1,0 +1,36 @@
+name "k1-ac3"
+guid "80105566-0BDF-11D6-BFBC-D4F706E10C52"
+
+static	counter
+const	buf_size = 999           
+
+static	dbac_copy 
+static  enable    
+
+xdelay write unused at 0
+xdelay read  buf  at 999
+temp t     
+
+output out
+
+; крутим счетчик от нуля до buf_size (включительно)
+macsn	counter, counter, -1, 1i	
+limitl	counter, buf_size, 0, counter
+
+; когда стетчик равен нулю высылаем прерывание  
+skip	ccr, ccr, 0x100, 3			
+macsn	dbac_copy, dbac, &buf, -1 
+macs	enable, 0, 0, 0 ; по получении прерывания драйвер (если все в порядке) должен записать 0x1 в enable 
+macs	irq, 0x80000000, 0, 0 
+
+; читаем, декодируем (один канал)
+macs	t, buf, 0, 0;
+andxor	t, t, 0xfffff000, 0;
+log		t, t, 7, 0;
+andxor	t, t, 0xffff0000, 0;    
+
+; выход
+macints out, 0, t, enable
+ 
+end                        
+

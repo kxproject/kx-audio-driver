@@ -1,0 +1,19 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2004-2014
+# All rights reserved
+# Author: Eugene Gavrilov
+
+TARGETNAME=asio_lib
+TARGETTYPE=LIBRARY
+
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+
+USE_MSVCRT=1
+NOT_LEAN_AND_MEAN=1
+
+SOURCES=asio.cpp ASIOConvertSamples.cpp asiodrivers.cpp asiolist.cpp combase.cpp register.cpp 
+# do not include dllentry.cpp, because it needs special handling
+# (otherwise its DllMain will conflict with msvcrt.dll etc.)
+

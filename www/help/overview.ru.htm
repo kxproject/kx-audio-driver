@@ -1,0 +1,72 @@
+<title>Краткий обзор kX Аудио Драйвера</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>Краткий обзор kX Аудио Драйвера</h2>
+<hr>
+
+
+<p>kX аудио драйвер - WDM (Windows Driver Model) драйвер, разработанный для использования с любой <a href="glossary.htm#kX Compatible">kX-совместимой</a> PCI звуковой платой (особенно Creative Labs SoundBlaster Live! и серией плат Audigy, а также звуковыми платами E-mu Systems' Audio Production Studio).</p>
+<p>Следующие возможности полностью или частично поддерживаются kX аудио драйвером:</p>
+<ul>
+  <li>Воспроизведение и запись WAVE</li>
+  <li>MIDI синтезатор</li>
+  <li>MIDI UART вход/выход</li>
+  <li>DirectSound 2D</li>
+  <li>DirectSound 3D / EAX</li>
+  <li>SoundFonts</li>
+  <li>Воспроизведение и запись ASIO</li>
+  <li>Загрузка/выгрузка/редактирование микрокода DSP </li>
+  <li>Полное управление AC97 кодеком</li>
+  <li>Программное декодирование AC-3 потоков</li>
+  <li>Поддержка GSIF</li>
+</ul>
+<p>Обратите внимание, что kX аудио драйвер соответствует WDM спецификации и совместим со следующими операционными системами Microsoft Windows: Windows 98 (Second Edition), Windows Me, Windows 2000 and Windows XP.</p>
+<hr>
+<p>Окна управления kX драйвером</p>
+<p>К следующим окнам управления kх можно обращаться через <a href="menu.htm">kX меню</a> (клик правой кнопкой мыши на значке в системном трее или в любом свободном месте окна <a href="mixer.htm">kX Микшера</a>):</p>
+<table cellpadding="5" width="99%" height="112">
+  <tr>
+    <td width="12%" valign="top" align="left" height="25"><a href="mixer.htm">kX Микшер</a></td>
+    <td width="88%" valign="top" align="left" height="25">Главное приложение, 
+      используемое для управления kX аудио драйвером. Содержит <a href="master.htm">главные</a> 
+      фэйдеры и переключатели, <a href="insnouts.htm">входы и выходы</a>, <a href="recording.htm">уровни 
+      записи</a>, <a href="ac97.htm">кодек AC97</a>, <a href="fxlevels.htm">уровни 
+      эффектов</a>, <a href="soundfonts.htm">загрузку/выгрузку SoundFonts</a> и <a href="analyser.htm">анализатор</a>, 
+      а также доступ к другим окнам управления kX.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="26"><a href="dspguide.htm">kX DSP</a></td>
+    <td width="88%" valign="top" align="left" height="26">Окно управления DSP для загрузки, выгрузки и редактирования микрокода. Этот апплет также обеспечивает доступ к kX редактору и другим интерфейсным плагинам DSP (для настройки параметров эффектов).</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="11"><a href="kxrouter.htm">kX Router</a></td>
+    <td width="88%" valign="top" align="left" height="11">Окно управления, обеспечивающее доступ к маршрутизации программных входных каналов, включая PCM Wave, AC3, MIDI Синтерзатор (16 каналов) и 16 kX ASIO каналов.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="10"><a href="editor.htm">kX Редактор</a></td>
+    <td width="88%" valign="top" align="left" height="10">Редактор DSP микрокоманд. Доступен из окна управления<a href="dspguide.htm"> kX DSP</a>, или непосредственно из <a href="menu.htm"> kX Меню</a>.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="automation.htm">kX автоматизация</a></td>
+    <td width="88%" valign="top" align="left" height="1">Окно управления в котором MIDI каналам могут быть назначены параметры регулировок микшера и других обьектов управления kX драйвером.</td>
+  </tr>
+  <tr>
+    <td width="12%" valign="top" align="left" height="10"><a href="remote.htm">kX Пульт</a></td>
+    <td width="88%" valign="top" align="left" height="10">Удаленный контроллер для kX. На данный момент не имеет каких либо кнопок, но планируется в будущем.</td>
+  </tr>  
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="soundfonts.htm">kX SoundFont</a></td>
+    <td width="88%" valign="top" align="left" height="1">Загрузчик SF2 банков. Обеспечивает загрузку SoundFonts в оперативную память для воспроизведения MIDI Синтезатором.</td>
+  
+  <tr>
+    <td width="12%" valign="top" align="left" height="1"><a href="spktest.htm">kX 
+      проверка колонок</a></td>
+    <td width="88%" valign="top" align="left" height="1">Утилита для тестирования 
+      и решения проблем установки колонок.</td>
+    
+  </tr>
+  </table>
+
+

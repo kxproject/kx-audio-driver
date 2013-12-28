@@ -1,0 +1,47 @@
+Saving user data in registry 
+You will need to create a kSettings object:
+
+// storing
+{
+kSettings cfg;
+cfg.write("plugin_name","parameter_name","any_text_data");
+}
+
+// restoring
+{
+kSettings cfg; 
+char string[64];
+
+cfg.read("plugin_name","parameter_name",string,sizeof(string));
+}
+
+----- browse settings.h for details -------
+
+note: the settings will be stored in the registry and will be shared between all the plugin instances
+(that is, kSettings uses HKEY_CURRENT_USER\Software\kX as a root key
+if you specify 'AAA' for 'plugin_name', it will create a HKEY_CURRENT_USER\Software\kX\AAA subkey)
+
+if you wish to create per-card settings, use "kSettings cfg(ikx->get_device_name());" instead
+(in this case the root key will be HKEY_CURRENT_USER\Software\kX\Config\<CARD_NAME>\<AAA subkey>)
+
+if you wish to create per-plugin settings (thus, allowing multiple independent plugin instances),
+you will need to do the following:
+save and restore the parameters in the following key:
+"pgm_%d", where %d is plugin ID
+pgm_id and ikx objects are found in the iKXPlugin class
+
+that is:
+char key_name[32];
+sprintf(key_name,"pgm_%d",get_plugin()->pgm_id);
+kSettings cfg(get_plugin()->ikx->get_device_name());
+
+cfg.read(key_name,"parameter_name",.....);
+
+===========
+
+please explore the present registry layout for details
+also, make sure the reg key you use won't affect kxmixer internals .
+
+keep in mind some of the registry keys are removed on driver re-install
+
+/LeMury

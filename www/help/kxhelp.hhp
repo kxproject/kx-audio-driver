@@ -1,0 +1,59 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=kxhelp.chm
+Contents file=contents.hhc
+Default Window=Default
+Default topic=index.htm
+Display compile progress=No
+Full-text search=Yes
+Language=0x409 English (United States)
+; Language=0x419 Русский
+Title=kX Help
+
+[WINDOWS]
+Default=,"contents.hhc",,"index.htm",,,,,,0x42520,,0x3006,[112,84,912,684],,,,,,,0
+
+
+[FILES]
+ac97.htm
+analyser.htm
+asio.htm
+asiorec.htm
+automation.htm
+basic.htm
+commandline.htm
+copyright.htm
+credits.htm
+dspguide.htm
+editor.htm
+faq.htm
+fxlevels.htm
+rear.htm
+glossary.htm
+hardware.htm
+index.htm
+insnouts.htm
+io.htm
+issues.htm
+license.txt
+license2.txt
+master.htm
+menu.htm
+midi.htm
+mission.htm
+mixer.htm
+overview.htm
+recording.htm
+remote.htm
+kxrouter.htm
+setup.htm
+signaflow.htm
+p16v.htm
+skins.htm
+soundfonts.htm
+spktest.htm
+surrounder.htm
+direct.htm
+
+[INFOTYPES]
+

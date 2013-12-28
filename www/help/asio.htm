@@ -1,0 +1,54 @@
+<title>kX ASIO Routing and Playback</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX ASIO Routing and Playback</h2>
+<hr>
+
+<h4>
+
+<p><b>Overview</b></p>
+<p>The ASIO playback section consists of 16 mono busses appearing at the FXBus 0-15 outputs in the <a href="dspguide.htm">kX DSP applet</a>. By default the busses are shared with other soundstreams like wave, synth and effect sends. You can always make your own ASIO routing setups, and customize them for personal use. This could include use of internal DSP effects and/or surround mixing.</p>
+<p><b>kX ASIO Router</b></a></p>
+<p>The kX ASIO Router functions are done in the <a href="kxrouter.htm">kX Router window</a>. Previously known kX ASIO Router is &quot;moved&quot; to kX Router (because of their similarity). However, some of the sliders are not yet available. Routing of the ASIO channels is done similar way as normal routing in kX Router.</p>
+<table width="99%" cellpadding="4">
+  <tr>
+    <td width="31%" align="center" valign="middle">
+    <img src="images/asioroute.gif" width="450" height="365" ></td>
+    <td width="69%" valign="top">
+      <p>The ASIO router window is opened by selecting the kX ASIO button in the <a href="mixer.htm">kX Mixer</a>. Each mono bus has its own routing settings and can be routed simultaneously to a total of four  busses. (A stereo output in your ASIO host consists of two FXBusses paired with even/odd consecutive numbers.)</p>
+      <p>A single bus can not be routed to the same bus more than once.</p>
+      <p>In the example to the left kX Out 0 is routed to bus 0, 15, 13 and 14, and only 0 and 14 are turned up. In this case bus 0 is the dry signal, while bus 14 is connected to the stereo chorus which acts like a send/return effect.</p>
+      <p>Note: This will depend on your current <a href="dspguide.htm">DSP window settings</a>.</p>
+    </td>
+  </tr>
+</table>
+<p>To use different busses in your ASIO host you must:</p>
+<ul>
+  <li>Make sure that the outputs are enabled in the ASIO host program(s)</li>
+  <li>Select the corresponding output (mono or stereo) in your program.</li>
+</ul>
+<p><b>kX ASIO Control Panel</b></p>
+<table width="630" cellpadding="5">
+  <tr> 
+    <td width="285" align="center" valign="middle" height="131">
+    <img src="images/asiosetup.gif" width="285" height="177" ></td>
+    <td width="319" valign="top" height="131"> 
+      <p>The ASIO setup is opened from within your ASIO host program. Use this window to adjust the ASIO latency.</p>
+      <p>The kX ASIO <i> </i>button opens the <a href="automation.htm">kX Automation</a> window.</p>
+      </td>
+  </tr>
+</table>
+<p>Increasing the latency can be useful if you are experiencing clicks and glitches in your wave recordings or when using software synths. The lowest usable latency depends on your hardware, system resources and current system load.</p>
+<p>The ASIO driver supports latencies ranging from an 'almost realtime' 2.66ms to 341.33ms.</p>
+<p>Note that due to hardware limitations the kX ASIO driver is locked at a sample rate of 48kHz (both 10k1 and 10k2 have fixed samplerate).</p>
+<p><b>Tips and tricks</b></p>
+<p>Cubase VST only enables one stereo output by default (the 'Master'). New outputs are enabled in the Cubase Master mixer. Expand the window to reveal a total of 8 stereo outputs. These are enabled by pressing 'Active' for each bus you want to activate. The actual kX FXBus pair is selectable below each fader. The new outputs are then accessible from the VST mixer for each channel.</p>
+<p>Logic Audio automatically enables all ASIO inputs and outputs when this driver type is selected. Inputs and outputs are selectable from the Audio mixer. You can decrease the number of ASIO I/Os in the 'Audio Hardware and Drivers setup' in Logic.</p>
+<p>Logic Audio Platinum automatically sets up four speaker surround mixing through output 1-4 (FXBus 0-3) - but can actually be set up to mix to a total of 9 speakers (8 channels + LFE).</p>
+<p>For more information on using and setting up ASIO in general, please consult the documentation for your particular software.</p>
+<hr>
+<h5>Cubase and VST are registered trademarks and ASIO is a trademark of Steinberg Media Technologies AG.</h5>
+
+</h4>

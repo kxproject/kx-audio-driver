@@ -1,0 +1,26 @@
+# kX Audio Driver
+# Copyright (c) Eugene Gavrilov, 2001-2014
+# All rights reserved
+
+!include ../oem_env.mak
+
+TARGETNAME=spy
+TARGETTYPE=PROGRAM
+
+UMTYPE=console
+UMBASE=0x400000
+UMENTRY=mainCRTStartup
+
+
+INCLUDES=..\h
+
+SOURCES=spy.cpp spy.rc
+
+USE_MSVCRT=1
+
+MSC_WARNING_LEVEL=-W3 -WX
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=stdafx.h
+C_DEFINES=$(C_DEFINES) -DKX_INTERNAL
+
+TARGETLIBS=$(OBJ_PATH)\..\driver\$O\kx.lib

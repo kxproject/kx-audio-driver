@@ -1,0 +1,12 @@
+# build script
+# Copyright (c) Eugene Gavrilov. All rights reserved
+
+DIRS= \
+	kxskin kstream asio_sdk krnlguids ac3 driver kxzlib kxrar kxgui sfark kxapi kxsfman kxfxlib kxasio kxctrl edspctrl wdm vst \
+    kxedit kxmixer kxvsti kxsfi setup kxfx_dynamica kxfx_efx_library kxfx_efx_reverb kxfx_kxm120 \
+    kxfx_efx_tube kxfx_efx_skin kxfx_pack kxfx_mixy42 kxfx_mixy82 kxfx_loudness kxfx_adc kxfx_fxrouter kxaddons sample_addon \
+    nccg \
+    inf \
+    nsis
+
+# kxfx_saminus - won't compile TODO

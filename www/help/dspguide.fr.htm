@@ -1,0 +1,256 @@
+<title>Guide du DSP kX</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<P><B><FONT size=3> Guide DSP kX</FONT></B></P>
+<hr>
+<p><font><b><font size="2">G&eacute;n&eacute;ralit&eacute;s<br>
+  </font></b><font size="2">L'&eacute;cran DSP kX repr&eacute;sente les connexions 
+  internes du pilote kX de mani&egrave;re graphique, et est l'une des possibilit&eacute;s 
+  les plus puissantes offertes par le pilote audio kX. Le routage des signaux 
+  est effectu&eacute; en connectant les entr&eacute;es sorties virtuelles via 
+  des c&acirc;bles virtuels par lesquels les flux digitaux sont transmis, de la 
+  m&ecirc;me mani&egrave;re que vous connecteriez les diff&eacute;rents appareils 
+  de votre studio ou la configuration de votre cha&icirc;ne haute-fid&eacute;lit&eacute;.</font></font></p>
+<p><font size="2">La fen&ecirc;tre DSP est compos&eacute;e de quatre objets principaux 
+  :</font></p>
+<p><font size="2"><b><A href="#fxbus">Bus Fx</A><br>
+  <A href="#prolog">Prolog</A><br>
+  <A href="#routing">Routage</A><br>
+  <A href="#epilog">Epilog</A></b></font></p>
+<p><font size="2">D'autres objets (Effets DSP comme l'&eacute;galiseur etc ...) 
+  peuvent &ecirc;tre ajout&eacute;s ou enlev&eacute;s en fonction des besoins.</font></p>
+<p><font size="2"><b>Connexions<br>
+  </b></font><font  size="2" >A l'exception du Bus Fx il est possible de faire 
+  afficher la configuration des entr&eacute;es/sorties en pla&ccedil;ant la souris 
+  au dessus des points de connexion (les entr&eacute;es sont rouges et les sorties 
+  sont bleues). Cette action permet de faire appara&icirc;tre une petite fen&ecirc;tre 
+  qui affiche le nom du connecteur. De nombreuses connexions ne n&eacute;cessitent 
+  pas de configuration personnalis&eacute;e, et sont activ&eacute;es par d&eacute;faut 
+  afin de permettre que la plupart des fonctionnalit&eacute;s de la carte son 
+  soient actives. Cela vaut aussi bien pour les connecteurs analogiques et digitaux 
+  d'entr&eacute;e que pour ceux de sortie.</font></p>
+<P> <font size="2" ><b>Connexions et d&eacute;connexions</b></font><font ><br>
+  <font size="2"> Les connexions sont effectu&eacute;es via un cliquer-glisser 
+  avec la souris vers la destination d&eacute;sir&eacute;e. Les entr&eacute;es 
+  sont toujours situ&eacute;es sur la face gauche des objets, les entr&eacute;es 
+  &eacute;tant sur la face droite. Les sorties peuvent &ecirc;tre connect&eacute;es 
+  &agrave; plusieurs entr&eacute;es, cependant les entr&eacute;es ne peuvent &ecirc;tre 
+  connect&eacute;es &agrave; plus d'une sortie, vous ne pouvez pas connecter des 
+  entr&eacute;es sur des entr&eacute;es ni des sorties sur des sorties. Remarque 
+  : les connexions vers un Bus Fx sont toujours effectu&eacute;es depuis une destination 
+  vers le bus. Pour d&eacute;connecter n'importe quelle entr&eacute;e ou sortie, 
+  effectuer simplement un clic-droit sur le point de connexion et s&eacute;lection 
+  &quot;D&eacute;connecter la sortie&quot;</font></font><font size="2">. </font></P>
+<p><font ><b><font size="2">R&eacute;initialisation du DSP</font></b><br>
+  <font size="2">La fen&ecirc;tre DSP peut &ecirc;tre remise &agrave; z&eacute;ro 
+  ou r&eacute;initialis&eacute;e via un clic-droit sur l'arri&egrave;re plan et 
+  en s&eacute;lectionnant la fonction appropri&eacute;e su menu. <i>Remettre &agrave; 
+  z&eacute;ro le DSP </i> efface tous les effets et objets (&agrave; l'exception 
+  des Bus Fx)</font></font><font >.<font size="2"> <i>R&eacute;initialiser le 
+  DSP</i> recharge la configuration par d&eacute;faut.</font></font></p>
+<p><font ><b><font size="2"><a name="Adding Objects and Effects">Ajout d'objet 
+  et d'effets</a></font></b><br>
+  <font size="2">De nouveaux objets DSP ainsi que de nouveaux effets peuvent &ecirc;tre 
+  ajout&eacute;s dans la fen&ecirc;tre DSP via un clic-droit sur l'arri&egrave;re 
+  plan en s&eacute;lectionnant 'ajouter un effet / module d'extension' dans le 
+  menu qui appara&icirc;t. Il vous est possible de choisir dans la liste des objets 
+  et effets, t&eacute;l&eacute;chargez des effets additionnels &agrave; partir 
+  du site du projet kX, ou cr&eacute;er vos propres objets ou effets. Remarque 
+  : les effets doivent &ecirc;tre enregistr&eacute;s avant de pouvoir &ecirc;tre 
+  utilis&eacute;s dans la fen&ecirc;tre DSP. S&eacute;lectionnez 'Enregistrer 
+  un module d'extension (Dane/RIFX/DLL...)' dans le menu et cliquez sur l'effet 
+  ou le module d'extension que vous avez choisi. Apr&egrave;s avoir &eacute;t&eacute; 
+  correctement enregistr&eacute;s les nouveaux effets appara&icirc;tront dans 
+  la liste des objets disponibles.</font></font></p>
+<P><font  size="2">Quand de nouveaux objets sont ajout&eacute;s dans la fen&ecirc;tre 
+  DSP ils apparaissent avec une bordure rouge. Les objets doivent &ecirc;tre translat&eacute;s 
+  avant de pouvoir &ecirc;tre t&eacute;l&eacute;charg&eacute;s et utilis&eacute;s 
+  (la phase de translation est n&eacute;cessaire pour l'allocation des ressources 
+  physique ; m&eacute;moire microcode, TRAM et registres). Apr&egrave;s un clic 
+  droit, s&eacute;lectionnez 'Translation ...' et appuyez sur la case OK. En r&egrave;gle 
+  g&eacute;n&eacute;rale le mode 'Position : Indiff&eacute;rente' est utilis&eacute;, 
+  cependant, dans l'avenir il sera possible de choisir la localisation physique 
+  de l'effet dans la m&eacute;moire du microcode - cela pourra &ecirc;tre utile 
+  pour corriger le routage dans certaines circonstances. Si les ressources sont 
+  suffisantes, l'objet sera translat&eacute; - la couleur de la trame se change 
+  en bleu (remarque : la disponibilit&eacute; des ressources comme la TRAM, la 
+  m&eacute;moire microcode, les registres ... d&eacute;pend &agrave; la fois du 
+  mod&egrave;le de carte son et de la taille et de la quantit&eacute; des objets 
+  et effets charg&eacute;s). Connectez la source et la destination &agrave; l'objet. 
+  Activez l'effet par un clic-droit puis s&eacute;lectionnez 'Activer'.</font></P>
+<P><font ><b><font size="2"><a name="Tweaking DSP Settings">Ajustement de la configuration 
+  DSP</a><br>
+  </font></b><font size="2">Si l'objet DSP est dot&eacute; d'une configuration 
+  ajustable, vous pouvez modifier celle ci en s&eacute;lectionnant 'ajuster' dans 
+  le menu objet (via un clic-droit). La configuration est &eacute;galement accessible 
+  &agrave; partir du menu kX (qui s'affiche soit en effectuant un clic-droit soit 
+  sur le mixeur kX principal, soit dans l'ic&ocirc;ne syst&egrave;me). Le param&eacute;trage 
+  est accessible dans le sous-menu 'Effets'. Pour r&eacute;initialiser le param&eacute;trage 
+  des objets, s&eacute;lectionnez 'R&eacute;initialiser la configuration' &agrave; 
+  partir du menu objet de la fen&ecirc;tre DSP.</font></font></P>
+<p><font ><IMG src="images/stchorus.gif" ><br>
+  <i><font size="2">Exemple: Param&eacute;trage des effet pour l'effet Chorus 
+  st&eacute;r&eacute;o en version 3514</font></i></font></p>
+<P><font ><b><font size="2">D&eacute;chargement et suppression d'objets DSP<br>
+  </font></b><font size="2">Les objets du DSP peuvent &ecirc;tre inhib&eacute;s 
+  et d&eacute;charg&eacute;s en s&eacute;lectionnant les commandes appropri&eacute;es 
+  du menu objet de la fen&ecirc;tre DSP (clic-droit)</font>.<font size="2"> Inhiber 
+  un objet d&eacute;sactive simplement sa sortie, les objets doivent &ecirc;tre 
+  d&eacute;-translat&eacute;s ou d&eacute;sactiv&eacute;s afin d'&ecirc;tre enlev&eacute;s 
+  compl&egrave;tement de la m&eacute;moire du DSP. La commande 'D&eacute;translation' 
+  lib&eacute;rera les ressources mat&eacute;rielle associ&eacute;es &agrave; l'objet 
+  sans pour autant d&eacute;charger les objets de la m&eacute;moire syst&egrave;me. 
+  Un objet peut &ecirc;tre compl&egrave;tement d&eacute;charg&eacute;, lib&eacute;rant 
+  ainsi toutes les ressources allou&eacute;es en s&eacute;lectionnant la commande 
+  'D&eacute;charger'.</font></font></P>
+<p><font ><b><font size="2">S&eacute;lection de p&eacute;riph&eacute;rique dans 
+  la fen&ecirc;tre DSP<br>
+  </font></b><font size="2">La configuration du DSP est unique pour chaque carte 
+  son compatible. La carte son actuellement s&eacute;lectionn&eacute;e est affich&eacute;e 
+  (et peut &ecirc;tre chang&eacute;e) dans le coin en bas &agrave; droite de la 
+  fen&ecirc;tre DSP.</font></font> </p>
+<hr>
+<p><font  ><b><font size="3">Blocs d'objet de base</font></b></font></p>
+<p><font  size="2" >Lors de la premi&egrave;re ouverture de la fen&ecirc;tre DSP 
+  kX, les objets DSP qui sont charg&eacute;s par d&eacute;faut sont affich&eacute;s. 
+  C'est &agrave; dire : les objets <a href="#fxbus">Bus FX</a>, <a href="#prolog">Prolog</a>, 
+  <a href="#routing">Routage</a>, et <a href="#epilog">Epilog</a>. Ce sont les 
+  objets de base utilis&eacute;s pour repr&eacute;senter et connecter les entr&eacute;es/sorties 
+  mat&eacute;rielles et logicielles.</font></p>
+<p><font  size="2"><b>BusFx<a name="fxbus"></a> </b></font></p>
+<table width="550" >
+  <tr> 
+    <td width="16%" align="left" valign="top"><font  size="2"><b><IMG src="images/fxbus.gif"></b></font></td>
+    <td width="84%" align="left" valign="top"> 
+      <p><font  size="2" >Les <b>Bus FXBus </b> sont des 'flux' virtuels de l'int&eacute;rieur 
+        de la carte vers la fen&ecirc;tre DSP. Tous les sons g&eacute;n&eacute;r&eacute;s 
+        &agrave; l'int&eacute;rieur de l'ordinateur par les programmes audio et 
+        les s&eacute;quenceurs proviennent d'un ou plusieurs d'entre eux (g&eacute;n&eacute;ralement 
+        2 dans le cas des paires st&eacute;r&eacute;o).</font></p>
+      <P><font   size="2"><b>Configuration par d&eacute;faut :</b></font></P>
+      <P><font  size="2" >Les sorties <b>Audio (Wave) </b> gauche et droite correspondent 
+        au bus FX00 et au bus FX01.<br>
+        Les sorties <b>MIDI Synth&eacute;tiseur&nbsp;</b> gauche et droite correspondent 
+        au Bus FX02 et au Bus FX03.<br>
+        Les flux <b>Spatialis&eacute;s (Surround/AC3) </b>et <STRONG>DirectSound 
+        3-D</STRONG> sont situ&eacute;s sur les Bus Fx de 04 &agrave; 09.</font></P>
+      <p><font  size="2" >Les effets de <b>R&eacute;verb&eacute;ration </b> et 
+        de <STRONG>Chœur/Chorus</STRONG> sont connect&eacute;s &agrave; l'audio 
+        (wave), au synth&eacute;tiseur MIDI et aux Bus FX 13/14. La connexion 
+        directe st&eacute;r&eacute;o &agrave; l'audio(wave)/synth&eacute;tiseur 
+        permet d'ajuster la r&eacute;verb&eacute;ration et le ch&#156;ur/chorus 
+        directement &agrave; partir de la fen&ecirc;tre FX du mixeur kX. <br>
+        Les connexions aux BusFX 13 et 14 sont g&eacute;n&eacute;ralement en mono 
+        et transmettent les connexions de retour vers les effets. <i>Rappelez 
+        vous qu'il est possible de router deux fois les effets ajoutant ainsi 
+        de doubler les effets appliqu&eacute;s aux signaux.</i></font></p>
+      <p><font  size="2" >Les routages par d&eacute;faut peuvent &ecirc;tre modifi&eacute;s 
+        pour chacune des sources. La description des manipulation peut &ecirc;tre 
+        trouv&eacute;e dans les sections <a href="kxrouter.htm"> Routage kX</a> 
+        et <a href="asio.htm"> ASIO kX</a>. </font> </p>
+    </td>
+  </tr>
+</table>
+<p><font  size="2"><b>Prolog<a name="prolog"></a>
+  </b></font></p>
+<table width="550" >
+  <tr> 
+    <td width="16%" align="left" valign="top" height="282"><font  size="2"><b><IMG src="images/prolog.gif" ></b></font></td>
+    <td width="84%" align="left" valign="top" height="282"> 
+      <p><font  size="2" >Les entr&eacute;es de la cartes son sont situ&eacute;es 
+        dans l'objet <i>prolog</i>. Les sorties sur le <i>prolog</i> repr&eacute;sentent 
+        les sorties physiques de votre carte son (ainsi que des baies d'extension, 
+        cartes filles ou p&eacute;riph&eacute;riques externes connect&eacute;s 
+        sur la carte). Ces connecteurs sont des paires st&eacute;r&eacute;os et 
+        correspondent aux curseurs situ&eacute;s dans la partie basse de l'&eacute;cran 
+        <a href="insnouts.htm">Entr&eacute;es &amp; sorties</a> du <a href="mixer.htm">Mixeur 
+        kX</a>. </font></p>
+      <p><font  size="2" >Notez bien que ces curseurs n'affectent pas le mixage 
+        des enregistrements standards, mais <i>uniquement</i> les niveaux ASIO.</font> 
+      </p>
+      <div align="left"> 
+        <p><font  size="2"><b>Sur une carte le prolog repr&eacute;sente les signaux 
+          d'entr&eacute;s suivants (7 paires st&eacute;r&eacute;o) :</b> </font></p>
+      </div>
+      <blockquote>
+        <DIV align=left><font  size="2">In0/1: AC97 G/D<br>
+          In2/3: C&eacute;d&eacute;rom digital G/D<br>
+          In4/5: (? 1)<br>
+          In6/7: Coaxiale / optique G/D (LiveDrive/carte fille)<br>
+          In8/9: Ligne 2/ micro 2 G/D (LiveDrive)<br>
+          In10/11: (? 2)<br>
+          In12/13: Auxiliaire 2 G/D (LiveDrive)</font></DIV>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<p><font  size="2"><b>Routage<a name="routing"></a></b></font></p>
+<table width="550" >
+  <tr> 
+    <td width="16%" align="left" valign="top"><font  size="2"><b><IMG src="images/routing.gif" ></b></font></td>
+    <td width="84%" align="left" valign="top"> 
+      <p><font  size="2">L'objet routage (routing) est l'objet en charge du mixage 
+        des signaux en m&ecirc;me temps que de leur redirection vers les sorties 
+        d&eacute;sir&eacute;es. Il mixe les entr&eacute;es du prolog avec les 
+        signaux du bus Fx et les route vers les diff&eacute;rentes sorties en 
+        fonction du param&eacute;trage, incluant, les sorties avant, arri&egrave;re, 
+        la voie centrale, le caisson de basses, le casque et enfin (mais pas des 
+        moindres ...) l'enregistrement (mais pas l'enregistrement de type ASIO).</font></p>
+    </td>
+  </tr>
+</table>
+<p><font  size="2"><b> Epilog<a name="epilog"></a> 
+  </b></font></p>
+<table width="550" >
+  <tr> 
+    <td width="16%" align="left" valign="top"><font  size="2"><b><IMG src="images/epilog.gif" ></b></font></td>
+    <td width="84%" align="left" valign="top"> 
+      <p><font  size="2">L'epilog repr&eacute;sente les sorties physiques de la 
+        carte son, les entr&eacute;es d'enregistrement, et les 16 entr&eacute;es 
+        d'<a href="asiorec.htm">Enregistrement ASIO</a>.</font></p>
+      <p><font  size="2">Normalement toutes les sorties sont connect&eacute;es, 
+        cependant dans certains circonstances (e.g. configuration de deux haut-parleurs) 
+        vous n'avez besoin que d'une paire de c&acirc;ble pour connecter la sortie 
+        sur laquelle sont connect&eacute;s les haut-parleurs.</font></p>
+      <p><font  size="2">Le mixage de l'enregistrement est effectu&eacute; en 
+        fonction du param&eacute;trage de l'&eacute;cran <a href="recording.htm">Enregistrement</a> 
+        du <a href="mixer.htm">Mixeur kX</a>. Cette configuration n'affecte que 
+        l'enregistrement mais pas &quot;ce que vous entendez&quot;. De la m&ecirc;me 
+        mani&egrave;re, elle n'affecte pas l'enregistrement ASIO.</font></p>
+      <p><font  size="2">Les derniers 16 canaux sont les entr&eacute;es d'enregistrement<a href="asiorec.htm"> 
+        ASIO</a>. Elles sont li&eacute;es en paires st&eacute;r&eacute;o (paire/impaire 
+        correspondant &agrave; gauche/droite) quand un programme h&ocirc;te ASIO 
+        est configur&eacute; pour un enregistrement st&eacute;r&eacute;o.</font></p>
+      <p><font  size="2">Vous pouvez connecter n'importe quelle sortie &agrave; 
+        partir de n'importe quelle de ces entr&eacute;es.</font></p>
+    </td>
+  </tr>
+</table>
+<p><font  ><b><font size="3">Trucs et astuces</font></b></font></p>
+<p><font  size="2" >Vous pouvez vous familiariser avec la fen&ecirc;tre DSP en 
+  d&eacute;pla&ccedil;ant (et en supprimant) quelques c&acirc;bles et objets puis 
+  en observant l'influence de la manipulation dans le <a href="mixer.htm">Mixeur 
+  kX</a>. La suppression d'un objet quelconque du DSP entra&icirc;nera une diminution 
+  des fonctionnalit&eacute;s du mixeur et supprimera les curseurs associ&eacute;s 
+  dans le mixeur kX.</font></p>
+<p><font  size="2" >L'objet <a href="#routing">routage</a> peut &ecirc;tre contourn&eacute; 
+  en connectant un BusFx directement sur une sortie (<a href="#epilog">epilog</a>). 
+  Cela peut &ecirc;tre utile pour param&eacute;trer un mixage spatialis&eacute; 
+  avec un programme h&ocirc;te, comme Emagic Logic Platinum ou Steinberg Nuendo.</font></p>
+<p><font  size="2" >Quand (ou si) vous n'arrivez plus &agrave; ma&icirc;triser 
+  votre routage, ou perdez le contr&ocirc;le de votre r&eacute;alisation vous 
+  pouvez soit r&eacute;initialiser le DSP soit recharger une configuration pr&eacute;alablement 
+  sauvegard&eacute;e (&agrave; partir du menu principal du mixeur ou du <a href="menu.htm">menu</a> 
+  syst&egrave;me).</font></p>
+<p><font size="2">Si vous souhaitez utiliser le module d'extension 'Peak Meter', 
+  connectez le, par exemple, comme indiqu&eacute; dans l'illustration ci-dessous 
+  :<br>
+ <img src=images/peak.jpg><br>
+  Apr&egrave;s cela, vous pourrez visualiser votre sortie avant via l'&eacute;cran 
+  analyseur de spectre du mixeur kX.<br>
+</font></p>
+
+<p>Please review <a href='dane.htm'>A Beginner's Practical Guide to Programming Digital Audio Effects on the E-MU10kx family of DSPs</a>, if you are interested in developing your own DSP effects.</p>
+<p>Please review kX Project <a href='http://www.kxproject.com/links.php'>Links</a> section for some additional kX DSP resources.</p>

@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+
+echo === Loading kX Audio driver....
+
+sudo kextutil -ls ../symbols /System/Library/Extensions/kXAudioDriver.kext
+# sudo chown -R egavrilov:egavrilov ../symbols

@@ -1,0 +1,45 @@
+;Filename: B3_Scanner.da (v2.0)
+;Simulates Hammond B3 vibrato/chorus "Scanner" functon.
+;Use as Organ Add-on before using the "Rotary"
+;-----------------------------------------------------
+name "B3 Scanner";
+copyright "(public domain) written by LeMury 2003";
+engine "KX";
+created "23-06-2003";
+comment "B3 Vibrato simulator";
+guid "3e88da0d-f343-4d44-8ae2-67f3ad937672";
+
+	itramsize 52
+	input 	in
+	output 	out
+	control Speed=1
+	control Depth=0.3
+	control Mix=0.5
+	static	xsin, xcos=0.5, t1
+	temp 	b, tmpin;
+	const	maxtime = 0x17800;
+
+; Internal TRAM delay line	
+	idelay write d1 at 0
+	idelay read d11 at 51
+	idelay read d12 at 51
+
+	macs	tmpin, 0, in, 1
+	macs	d1, 0, tmpin, 1
+
+	macs	b, 0, Speed, 0.001
+	macs	xsin, xsin, b, xcos
+	macsn	xcos, xcos, b, xsin
+	macs	b, 0.5, xsin, 1
+	interp	b, 0, b, 1
+
+	macintw	t1, 0, t1, 0x100000
+	interp	t1, d11, t1, d12
+	interp	out, t1, Mix, tmpin
+
+	macs  	t1, 0, maxtime, Depth
+	macs	t1, &d1, t1, b
+	macints	&d11, t1, 0x800, 1
+	macints	&d12, t1, 0x800, 2
+
+end

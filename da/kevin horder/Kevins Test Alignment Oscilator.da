@@ -1,0 +1,31 @@
+; New microcode
+	name "Kevins Test Alignment Oscilator";
+	copyright "Copyright (c) 2003. Kevin Horden";
+	created "27/11/2003";
+	engine "kX";
+	; comment "";
+	guid "bbdfeccc-f600-41e5-b5d2-af57e894052b";
+	; -- generated GUID
+
+
+; itramsize 0
+; xtramsize 0
+output test
+static sin100
+static cos100=0.33333333
+const delta100=0.01308996939
+static sin1000
+static cos1000=0.33333333
+const delta1000=0.1308996939
+static sin10000
+static cos10000=0.33333333
+const delta10000=0.6544984695
+; code
+ 	 macs 	 sin100,  sin100,  delta100,  cos100
+	 macsn 	 cos100,  cos100,  delta100,  sin100
+ 	 macs 	 sin1000,  sin1000,  delta1000,  cos1000
+	 macsn 	 cos1000,  cos1000,  delta1000,  sin1000
+ 	 macs 	 sin10000,  sin10000,  delta10000,  cos10000
+	 macsn 	 cos10000,  cos10000,  delta10000,  sin10000
+	 acc3 test,sin100,sin1000,sin10000
+end

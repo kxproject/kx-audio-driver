@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+
+echo === This will generate full DMG distribution....
+echo ==============================
+
+echo === Preparing driver distribution...
+sudo rm -R ./distr
+mkdir distr
+mkdir distr/System
+mkdir distr/System/Library
+mkdir distr/System/Library/Extensions
+sudo cp -R ./build/Deployment/kXAudioDriver.kext ./distr/System/Library/Extensions
+sudo chown -R root:wheel ./distr/System
+sudo find ./distr/System -type d -exec /bin/chmod 0755 {} \;
+sudo find ./distr/System -type f -exec /bin/chmod 0644 {} \;
+
+# === applications
+mkdir distr/Applications
+mkdir distr/Applications/Utilities
+mkdir distr/Applications/Utilities/kX
+# === kX Manager
+cp -R "./build/Deployment/kX Manager.app" ./distr/Applications/Utilities/kX
+sudo chmod 0755 "./distr/Applications/Utilities/kX/kX Manager.app/Contents/MacOS/kX Manager"
+# === kX AC97
+cp -R "./build/Deployment/kX AC97.app" ./distr/Applications/Utilities/kX
+sudo chmod 0755 "./distr/Applications/Utilities/kX/kX AC97.app/Contents/MacOS/kX AC97"
+# === fix permissions
+sudo chown -R root:admin "./distr/Applications"
+sudo find "./distr/Applications" -type d -exec /bin/chmod 0775 {} \;
+sudo find "./distr/Applications" -type f -exec /bin/chmod 0664 {} \;
+
+# === command-line tools
+mkdir distr/usr
+mkdir distr/usr/bin
+mkdir distr/usr/lib
+cp "./build/Deployment/kxctrl" ./distr/usr/bin
+cp "./build/Deployment/edspctrl" ./distr/usr/bin
+cp "./build/Deployment/kXAPI.dylib" ./distr/usr/lib
+# === fix permissions
+sudo chown -R root:wheel "./distr/usr"
+sudo find "./distr/usr" -type d -exec /bin/chmod 0755 {} \;
+sudo chmod 0755 "./distr/usr/bin/kxctrl"
+sudo chmod 0755 "./distr/usr/bin/edspctrl"
+sudo chmod 0755 "./distr/usr/lib/kXAPI.dylib"
+
+# === SDK
+mkdir distr/Developer
+mkdir distr/Developer/Examples
+mkdir distr/Developer/Examples/kXSDK
+cp -R ./edspctrl ./distr/Developer/Examples/kXSDK
+cp -R ./kxctrl ./distr/Developer/Examples/kXSDK
+cp -R ./kxapi ./distr/Developer/Examples/kXSDK
+cp -R ./kxac97 ./distr/Developer/Examples/kXSDK
+cp -R ./kxmanager ./distr/Developer/Examples/kXSDK
+# FIXME!!!
+# cp -R ./kxfxlib ./distr/Developer/Examples/kXSDK
+# SDK headers
+mkdir distr/Developer/Examples/kXSDK/h
+mkdir distr/Developer/Examples/kXSDK/h/hw
+mkdir distr/Developer/Examples/kXSDK/h/interface
+mkdir distr/Developer/Examples/kXSDK/h/gui
+cp -R ./h/hw ./distr/Developer/Examples/kXSDK/h
+rm ./distr/Developer/Examples/kXSDK/h/hw/8010x.h
+cp -R ./h/gui ./distr/Developer/Examples/kXSDK/h
+cp -R ./h/interface ./distr/Developer/Examples/kXSDK/h
+cp ./h/debug.h ./distr/Developer/Examples/kXSDK/h/debug.h
+cp ./h/defs.h ./distr/Developer/Examples/kXSDK/h/defs.h
+cp ./h/i386.h ./distr/Developer/Examples/kXSDK/h/i386.h
+cp ./h/vers.h ./distr/Developer/Examples/kXSDK/h/vers.h
+
+echo === Making driver package...
+sudo rm -R ./final
+mkdir final
+sudo rm ./distr/System/Library/Extensions/kXAudioDriver.kext/Contents/pbdevelopment.plist
+sudo /Developer/usr/bin/packagemaker --doc ./package/package.pmdoc --id com.kXProject.driver.kXAudioDriver --out "./final/Install kX Audio Driver.pkg" -v
+sudo cp ./package/uninstall ./final/
+sudo chmod 0775 "./final/uninstall"
+sudo chown root:admin ./final/uninstall
+sudo rm ./kXAudioDriver.dmg
+sudo hdiutil create -srcfolder ./final -volname "kX Audio Driver" -ov ./kXAudioDriver.dmg

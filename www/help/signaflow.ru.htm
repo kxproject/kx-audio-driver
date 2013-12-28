@@ -1,0 +1,30 @@
+<title>kX I/O. Сигнальная блок-схема</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX Входы/Выходы. Сигнальная блок-схема</h2>
+<hr>
+
+<h4>
+
+<p style="text-align:justify;tab-stops:369.0pt">
+<img  src="images/signaf2.gif"></p>
+<p><b>В аналоговом режимe</b> (по умолчанию для не-10k2 плат):<o:p></o:p></p>
+<p>PCM Volume - константа (=0 – нет коэффициента ослабления); Master Volume - константа (=0); Surround Volume - константа (=0); возможность записи/мониторинга одного аналогового источника только через <i>'Rec Source'</i>; уровень всех ac97 входов установлен в <i>'mute'</i>; если не приглушенны, то они идут непосредственно на Передние Колонки. Использование режима 'StereoMix' или не глушение ac97 выходов не рекомендуется. Уровень контролируется через DSP ac97in (in0/in1).<o:p></o:p></p>
+<p><b>В режиме “Только Цифровой Выход”</b></p>
+<p>AC97 PCM, Surround и Master Volumes приглушены; “Rec Source' - 'StereoMix'; это позволяет записывать/контролировать несколько аналоговых источников (с или без PCM – в зависимости от настроек kX DSP); уровни входа могут управляться отдельно. Нужно не заглушать требуемые аналоговые AC97 входы. Уровень управляется исходным ac97 уровнем и DSP ac97in (in0/in1). <o:p></o:p></p>
+<p>Чип 10k2 способен записывать несколько аналоговых источников, когда его PCM уровень установлен в 'muted' и передний выход идет непосредственно в I2S кодек; AC97 выход приглушен по умаолчанию; уровни входа могут управляться раздельно; Толко Цифровой Выход не влияет на AC97 кодек; нет AC97 'surround' выходов – вместо него используется I2S.</p>
+
+<p>The Audigy2-based boards use AC97 codec for recording only. That's why the default
+   signal routing is different compared to 10k1 and 10k2 (Audigy) boards.
+   The AC97 codec outputs are always muted, thus, not affecting front/rear/center+lfe outputs.
+   The 'i2s codec' shown on the diagram above (marked '10k2 only') is used for <b>all</b> the
+   analog outputs.</p>
+
+<img src="images/signaf4.gif">
+
+<p>Audigy2-based boards also have a special 24/96 unit called 'P16V'. More details
+can be found in <a href='p16v.htm'>here</a>.</p>
+
+</h4>

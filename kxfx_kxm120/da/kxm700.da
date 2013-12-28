@@ -1,0 +1,54 @@
+name "kxm 700";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "12/05/2007";
+engine "kX";  
+comment "multi low frequency oscillator (kxm 700 v1.1)" 
+guid "e8d8bb0e-05d1-42c3-9d94-764f3cc7cc3d";
+
+; multi lfo provides saw, spaced saw, triangle, 
+; square, pulsewidthed square
+
+;registers
+output ramp_up, ramp_down, triangle, square, s_h
+static a, b, f, swu, swd, tri, sqr, n, h, i, j 
+static m=0xbb80 ; s&hold start value
+control rate=1, saw_space=0, pulsewidth=0, amount=1, offset=0.5
+  
+; trim sliders 
+interp b, 0, rate, 0.000416; max. 10hz 
+interp h, 0xbb80, rate, 0x12c0 ; s&h, 1-10 hz
+interp f, -1, saw_space, 1 
+interp i, 0, amount, 0.5 ; out range -0.5..0.5
+interp j, -0.5, offset, 0.5
+   
+; base saw
+macw a, a, b, 1 ; base saw osc
+   
+; saw & spaced saw (ramp up) 
+limit swu, a, a, f ; if a>f sw=a else sw=f  
+  
+; saw & spaced saw down (ramp down)
+macs swd, 0, swu, -1 ; negative 
+
+; triangle
+tstneg tri, a, a, 0 ; if a>0 tri=a else tri=-a    
+macs tri, -0.5, tri, 1 ; dc offset -0,5 
+macints tri, 0, tri, 0x2 ; gain x2
+  
+; square & pulsewidthed square
+tstneg  sqr,  a,  1,  pulsewidth ; if a>pulsewidth sqr=1 else -1 
+
+; sample & hold  
+macsn m, m, 0x1, 1 ; downward counter
+skip    ccr, ccr, 0x100, 2 ; jump if m!=0 (different)
+macs m, h, 0, 0 ; take new rate
+macs n, noise1, 0, 0 ; sample a random value
+  
+; output
+macs ramp_up, j, swu, i ; saw & spaced saw 
+macs ramp_down, j, swd, i ; saw & spaced saw 
+macs triangle, j, tri, i ; triangle
+macs square, j, sqr, i ; square & pulsewidthed square
+macs s_h, j, n, i ; s&h
+      
+end

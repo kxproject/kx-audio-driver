@@ -1,0 +1,29 @@
+; New microcode
+	name "HQ 4Ch-Mixer";
+	copyright "Copyright (c) 2004.";
+	created "05/30/2005";
+	engine "kX";
+    comment "by ColHQ";
+	guid "4149abcb-37a0-4fb1-bf7b-5e83dc76e51b";
+
+input in1l, in1r, in2l, in2r, in3l, in3r, in4l, in4r
+output L, R
+static  tmpl, tmpr
+control Ch1_PBack=0, Ch2_PBack=0, Ch3_PBack=0, Ch4_PBack=0
+control MAIN=0;
+
+macs tmpl,    0, in1l, Ch1_PBack
+macs tmpl, tmpl, in2l, Ch2_PBack
+macs tmpl, tmpl, in3l, Ch3_PBack
+macs tmpl, tmpl, in4l, Ch4_PBack
+
+macs tmpr,    0, in1r, Ch1_PBack
+macs tmpr, tmpr, in2r, Ch2_PBack
+macs tmpr, tmpr, in3r, Ch3_PBack
+macs tmpr, tmpr, in4r, Ch4_PBack
+
+macs L, 0, tmpl, MAIN
+macs R, 0, tmpr, MAIN
+
+end
+

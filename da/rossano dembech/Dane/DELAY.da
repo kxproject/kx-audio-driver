@@ -1,0 +1,28 @@
+; New microcode
+	name "HQ Delay";
+	copyright "Copyright (c) 2004.";
+	created "04/04/2005";
+	engine "kX";
+	comment "by ColHQ";
+	guid "588e9abc-ed0a-42a2-aa6e-609739503e4f";
+	
+input inl, inr
+output outl, outr
+control Delay=0.05, Level=0, Feedback=0
+const dt=0x5DC0000
+xtramsize 48000
+xdelay write wl at 0x0  
+xdelay write wr at 0x0
+xdelay read rl at 48000
+xdelay read rr at 48000
+
+macs wl, inl, Feedback, rl
+macs wr, inr, Feedback, rr
+macs outl, inl, Level, rl
+macs outr, inr, Level, rr
+macs &rl, &wl, Delay, dt
+macs &rr, &wr, Delay, dt
+
+
+
+end

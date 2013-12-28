@@ -1,0 +1,28 @@
+; New microcode
+	name "DC Filter";
+	copyright "Copyright (c) 2004.";
+	created "03/09/2005";
+	engine "kX";
+	; comment "";
+	guid "ca774c9e-f034-4ea2-82a7-858ef77153c5";
+	; -- generated GUID       
+	                                          
+    input   inL,inR 
+	output  outL,outR
+	static  prev_xL,accL,prev_xR,accR 
+	static  pole=0.0001
+	
+	macsn   accL,accL,prev_xL,1    
+    macs    prev_xL,inL,0,0
+    macs    accL,accL,prev_xL,1  
+    macsn   accL,accL,outL,pole
+    macs    outL,accL,0,0      
+    
+    macsn   accR,accR,prev_xR,1    
+    macs    prev_xR,inR,0,0
+    macs    accR,accR,prev_xR,1  
+    macsn   accR,accR,outR,pole
+    macs    outR,accR,0,0
+
+
+end

@@ -1,0 +1,23 @@
+name "balanced";
+copyright "eYagos, Copyright (c) 2003.";
+created "04/19/2003";
+engine "kX";
+guid "2b539566-a863-43e9-8288-e2eef25c4b7b";
+
+
+input in
+output out1,out2 
+temp tmpin,tmp1,tmp2
+
+macs tmpin,in,0,0
+macs tmp1,0,0,0
+macs tmp2,tmpin,0,0
+skip ccr,ccr,0x4,0x2
+macs tmp2,0,0,0
+macs tmp1,tmpin,0,0
+
+macs out1,tmp1,0,0
+macs out2,tmp2,0,0
+
+
+end

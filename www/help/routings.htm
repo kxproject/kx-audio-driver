@@ -1,0 +1,240 @@
+<title>Routings</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Routings Guide</h3>
+
+<h4>
+
+<p class=Darken><b>Introduction</b></p>
+
+kX Audio driver exposes 4 different Wave devices: Wave 0/1, Wave 4/5, Wave 6/7 and Wave 8/9.
+Each device has its own capabilities and default routings. (Note: Audigy2 supports additional
+device labelled 'Wave HQ'. Please review p16v routing for details).<br>
+
+<p class=Darken><b>Wave 0/1</b></p>
+This device can be used for multichannel playback (such as Sonar, DirectSound 3-D and DVD applications).
+However, due to multichannel support, it requires slightly more processor power and, thus, it is
+not recommended for latency-critical applications, such as Sonar (but 10ms latency can be
+easily achieved). Note that most applications that open the 'Wave 0/1' device in 'stereo' or
+'mono' mode are not affected by software processing because it is automatically turned off.<br>
+The output of this device is routed to 'Generic Stereo' signal path and it gets mixed with 
+Synthesizer output as well as 'front' outputs of the Surround Effects (Reverb and Chorus).
+It is up to the 'Surrounder' effect to choose, where the 'Generic Stereo' signal gets routed to.
+That is, it can be panned* between 'front' and 'rear' speakers (* this feature is not supported at
+the moment).
+<br>
+
+<p class=Darken><b>Wave 4/5, Wave 6/7, Wave 8/9</b></p>
+These devices route directly to your hardware outputs. Wave 4/5 is routed to 'front',
+Wave 6/7 - to 'rear', Wave 8/9 - to 'center+subwoofer'.<br>
+The Wave 6/7 output additionally gets mixed with 'rear' outputs of the Surround Effects (Reverb and Chorus).
+If you wish to use kX Audio Driver for '5.1' playback (DVD, Games), use the default connections
+(don't forget to swap 'front' and 'rear' speakers). Otherwise, you get 3 independent 
+stereo outputs that can be used separately. Also note, that 'Wave 4/5', 'Wave 6/7' and 'Wave 8/9'
+do not require additional software processing (compared to 'Wave 0/1') and can result better
+latency under Sonar and similar applications which use 'Kernel Streaming'.
+
+<p class=Darken><b>E-mu APS users</b></p>
+E-mu APS has similar routing scheme. The Wave 0/1 device has the same functionality as for the
+other kX Audio cards, and gets routed to A1/A2 by default (this can be changed via 'Surrounder' 
+effect and the kX DSP applet).
+The Wave 4/5 gets routed to 'A1/A2', too.
+The Wave 6/7 gets routed to 'D1' and Wave 8/9 gets routed to 'D2' (A3/A4) physical outputs.
+So, if you wish to get '5.1' sound, simply connect your D2 to 'center/subwoofer' and D1 to
+'rear' speakers. Otherwise, you get 3 independent stereo outputs.
+
+<p class=Darken><b>ASIO</b></p>
+ASIO channels correspond directly to the 'Wave X/Y' devices. That is, ASIO 4/5 are routed to
+FXBUS 4,5 and to the 'Front' speaker, ASIO 6/7 - to the 'Rear' and so on.
+ASIO 2/3 are routed to 'Synth' sound path.
+
+<p class=Darken><b>Headphones</b></p>
+Headphones receive 'Front' audio path by default. You can change that either by tweaking the
+'Surrounder' effect or by re-connecting the Epilog's inputs ('Headphones') to the desired
+'Surrounder' outputs. E-mu APS Headphones cannot be controlled via kX DSP.
+
+<p class=Darken><b>XRouting default signal path</b></p>
+
+(note: this information may not be up-to-date with the very recent xrouting microcode)
+
+<pre>
+xrouting (grouped by Inputs)
+
+WaveL       -|------------------------------------------------> stereo_l
+             |----------> Wave Recording Level      >---------> RecL      
+             
+WaveR       -|------------------------------------------------> stereo_r
+             |----------> Wave Recording Level      >---------> RecR
+             
+SynthL      -|------------------------------------------------> stereo_l
+             |----------> Synth Recording Level     >---------> RecL
+             
+SynthR      -|------------------------------------------------> stereo_r
+             |----------> Synth Recording Level     >---------> RecR
+             
+fL_nw_In    -|------------------------------------------------> nw
+             |----------> Wave Recording Level      >---------> RecL
+             
+fR_ne_In    -|------------------------------------------------> ne
+             |----------> Wave Recording Level      >---------> RecR
+             
+sL_sw_In    -|------------------------------------------------> sw
+             |----------> Rear Recording Level      >---------> RecL       
+             
+sR_se_In    -|------------------------------------------------> se
+             |----------> Rear Recording Level      >---------> RecR
+             
+center_n_In -|------------------------------------------------> n
+             |----------> Center Recording Level    >---------> RecL
+             |----------> Center Recording Level    >---------> RecR
+             
+lfe_In      -|------------------------------------------------> lfe
+             |----------> Subwoofer Recording Level >---------> RecL
+             |----------> Subwoofer Recording Level >---------> RecR
+             
+w_In        --------------------------------------------------> w
+
+e_In        --------------------------------------------------> e
+
+s_In        --------------------------------------------------> s
+
+top_In      --------------------------------------------------> top
+
+FX1_nw      -|------------------------------------------------> nw
+             |----------> FX1 Recording Level       >---------> RecL
+             
+FX1_ne      -|------------------------------------------------> ne
+             |----------> FX1 Recording Level       >---------> RecR
+             
+FX1_L       --------------------------------------------------> w
+
+FX1_R       --------------------------------------------------> e
+
+FX1_sL      --------------------------------------------------> sw
+
+FX1_sR      --------------------------------------------------> se
+
+FX1_n       --------------------------------------------------> n
+
+FX1_s       --------------------------------------------------> *** not used ***
+
+FX1_t       --------------------------------------------------> *** not used ***
+
+FX2_L       -|------------------------------------------------> nw
+             |----------> FX2 Recording Level       >---------> RecL
+             
+FX2_R       -|------------------------------------------------> ne
+             |----------> FX2 Recording Level       >---------> RecR
+             
+FX2_sL      --------------------------------------------------> sw
+
+FX2_sR      --------------------------------------------------> se
+
+In0         --------------------------------------------------> stereo_l
+
+In1         --------------------------------------------------> stereo_r
+
+In2         --------------------------------------------------> stereo_l
+
+In3         --------------------------------------------------> stereo_r
+
+In4         --------------------------------------------------> stereo_l
+
+In5         --------------------------------------------------> stereo_r
+
+In6         --------------------------------------------------> stereo_l
+
+In7         --------------------------------------------------> stereo_r
+
+In8         --------------------------------------------------> stereo_l
+
+In9         --------------------------------------------------> stereo_r
+
+In10        --------------------------------------------------> stereo_l
+
+In11        --------------------------------------------------> stereo_r
+
+In12        --------------------------------------------------> stereo_l
+
+In13        --------------------------------------------------> stereo_r
+</pre>
+
+<pre>
+xrouting (grouped by Outputs)
+
+WaveL       ------------------------------------------------|-> stereo_l
+SynthL      ------------------------------------------------|
+In0         ------------------------------------------------|
+In2         ------------------------------------------------|
+In4         ------------------------------------------------|
+In6         ------------------------------------------------|
+In8         ------------------------------------------------|
+In10        ------------------------------------------------|
+In12        ------------------------------------------------|
+
+WaveR       ------------------------------------------------|-> stereo_r
+SynthR      ------------------------------------------------|
+In1         ------------------------------------------------|
+In3         ------------------------------------------------|
+In5         ------------------------------------------------|
+In7         ------------------------------------------------|
+In9         ------------------------------------------------|
+In11        ------------------------------------------------|
+In13        ------------------------------------------------|
+
+fL_nw_In    ------------------------------------------------|-> nw
+FX1_nw      ------------------------------------------------|
+FX2_L       ------------------------------------------------|
+
+fR_ne_In    ------------------------------------------------|-> ne
+FX1_ne      ------------------------------------------------|
+FX2_R       ------------------------------------------------|
+
+sL_sw_In    ------------------------------------------------|-> sw
+FX1_sL      ------------------------------------------------|
+FX2_sL      ------------------------------------------------|
+
+sL_se_In    ------------------------------------------------|-> se
+FX1_sR      ------------------------------------------------|
+FX2_sR      ------------------------------------------------|
+
+center_n_In ------------------------------------------------|-> n
+FX1_n       ------------------------------------------------|
+
+lfe_In      --------------------------------------------------> lfe
+
+w_In        ------------------------------------------------|-> w
+FX1_L       ------------------------------------------------|
+
+e_In        ------------------------------------------------|-> e
+FX1_R       ------------------------------------------------|
+
+s_In        --------------------------------------------------> s
+
+top_In      --------------------------------------------------> top
+
+WaveL       ------------> Wave Recording Level      >-------|-> RecL
+SynthL      ------------> Synth Recording Level     >-------|
+fL_nw_In    ------------> Wave Recording Level      >-------|
+sL_sw_In    ------------> Rear Recording Level      >-------|
+center_n_In ------------> Center Recording Level    >-------|
+lfe_In      ------------> Subwoofer Recording Level >-------|
+FX1_nw      ------------> FX1 Recording Level       >-------|
+FX2_L       ------------> FX2 Recording Level       >-------|
+
+WaveR       ------------> Wave Recording Level      >-------|-> RecR
+SynthR      ------------> Synth Recording Level     >-------|
+fL_ne_In    ------------> Wave Recording Level      >-------|
+sL_se_In    ------------> Rear Recording Level      >-------|
+center_n_In ------------> Center Recording Level    >-------|
+lfe_In      ------------> Subwoofer Recording Level >-------|
+FX1_ne      ------------> FX1 Recording Level       >-------|
+FX2_R       ------------> FX2 Recording Level       >-------|
+
+FX1_s       ------------------------------------------------|-> *** not used ***
+FX1_t       ------------------------------------------------|   *** not used ***
+</pre>
+
+
+</h4>

@@ -1,0 +1,50 @@
+name "kxm 500";
+copyright "2007. stylus, http://stylus.siteboard.de";
+engine "kX";
+created "03/29/2005";  
+comment "Moog Lowpass -24 db/oct (kxm 500 v1.1)"
+guid "1db3a172-2a7c-4670-a935-41c8cc68e5fc";
+
+; MOOG "ladder" lowpass filter -24 db/oct taken from "Moderne Musikelektronik", S.161
+; thinking about the name: had moog meant a lowpass- adder = ladder? 
+
+; Registers
+input in, envelope, lfo_1, lfo_2, cv
+output out;
+control cutoff=0.2, emphasis=0.1, contour=0, keytrack=0 
+static t1, t2, t3, t5, t6, t7, t8, c    
+static d, e, t10, b
+; Code 
+
+; trim sliders
+interp e, 0x0, keytrack, 0xf
+     
+; adjust controls
+macs c, 0, envelope, contour 
+macints d, 0, cv, e
+
+; cutoff modulation
+acc3 b, cutoff, c, d ; add cutoff, envelope, keytrack
+acc3 b, b, lfo_1, lfo_2 ; add lfos
+limit b, b, b, 0 ; cutoff must be greater or equal 0, if b>0 b=b else b=0
+
+
+; input adder
+acc3 t8, t10, in, 0 ; add input and feedback
+macs t6, 0, t8, -1 ; invert  
+
+; lowpass section
+interp t1, t1, b, t6; 6db lowpass
+interp t2, t2, b, t1; 
+interp t3, t3, b, t2; 
+interp out, out, b, t3; (t4 replaced by out) 
+
+; feedback path
+macints  t7, 0, out, 6; amplify x 6
+macs 	 t5, 0, t7, emphasis ; set feedback
+interp t10, t10, 0.25, t5    ; feedback lowpass to reduces highest freq. 
+                             ; to avoid sharp digital noise!
+;output
+;macs out, 0, t4, 1; output
+
+end

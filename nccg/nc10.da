@@ -1,0 +1,117 @@
+; New microcode
+name "nc10";
+copyright "Copyright (c) 2005. Tril";
+created "2005";
+engine "kX";
+; comment ""
+; guid to add here.  Right-click the mixer icon, go to Settings,
+; click Generate GUID and paste it below in ""
+guid "4f22f056-f4ed-401d-9e6e-d48b85070d0d"
+; -- generated GUID above
+
+; This filter uses the LMS algorithm to adapt dynamically
+; the FIR filter coefficients.
+; Primary is noise and desired signal
+; Reference is noise only
+; It works better at removing periodic noise.
+; There are two outputs :
+; - Correlated output is the output where the noise was substracted.
+; - Uncorrelated output is what was substracted from the output.
+
+input Primary, Reference;
+output OutCorr, OutUncorr;
+
+; Mu is a coefficent to control the convergence speed.  You want it
+; as big as possible without causing the filter to diverge.
+
+control MasterVol=1, CorrVol=1 , UncorrVol=1, Mu=1;
+
+; Coefficients
+static H009=0;
+static H008=0;
+static H007=0;
+static H006=0;
+static H005=0;
+static H004=0;
+static H003=0;
+static H002=0;
+static H001=0;
+static H000=0;
+
+; Delayed Reference
+static R009=0;
+static R008=0;
+static R007=0;
+static R006=0;
+static R005=0;
+static R004=0;
+static R003=0;
+static R002=0;
+static R001=0;
+static R000=0;
+
+static FilterOutput=0, Error=0;
+temp x, MuXError;
+temp CorrVolume, UncorrVolume;
+
+; code
+
+; hn+1[i] = hn[i] + mu*errorn*input[n-i]
+; where
+; hn+1[i] : final LMS coefficient update
+; mu : step-size
+; n : sample
+; i : coefficient number
+
+macs R000, Reference, 0, 0;
+
+; Calculate FilterOutput with Fir filter
+macs 	0,  0,  0,  0;
+macmv   x,  x,  R009, H009;
+macmv   x,  x,  R008, H008;
+macmv   x,  x,  R007, H007;
+macmv   x,  x,  R006, H006;
+macmv   x,  x,  R005, H005;
+macmv   x,  x,  R004, H004;
+macmv   x,  x,  R003, H003;
+macmv   x,  x,  R002, H002;
+macmv   x,  x,  R001, H001;
+macmv   x,  x,  R000, H000;
+macs  x, accum, 0,0;
+macs  FilterOutput, x, 0, 0;
+
+; Calculate error
+macints Error, Primary, FilterOutput, -1;
+
+; Calculate coefficients
+macs MuXError, 0, Mu, Error;
+macs H009, H009, MuXError, R009;
+macs H008, H008, MuXError, R008;
+macs H007, H007, MuXError, R007;
+macs H006, H006, MuXError, R006;
+macs H005, H005, MuXError, R005;
+macs H004, H004, MuXError, R004;
+macs H003, H003, MuXError, R003;
+macs H002, H002, MuXError, R002;
+macs H001, H001, MuXError, R001;
+macs H000, H000, MuXError, R000;
+
+; Output
+macs CorrVolume, 0, CorrVol, MasterVol;
+macs UncorrVolume, 0, UncorrVol, MasterVol;
+macs OutCorr, 0, Error, CorrVolume;
+macs OutUncorr, 0, FilterOutput, UncorrVolume;
+
+; Delay Reference
+macs R009, R008, 0, 0;
+macs R008, R007, 0, 0;
+macs R007, R006, 0, 0;
+macs R006, R005, 0, 0;
+macs R005, R004, 0, 0;
+macs R004, R003, 0, 0;
+macs R003, R002, 0, 0;
+macs R002, R001, 0, 0;
+macs R001, R000, 0, 0;
+
+end
+

@@ -1,0 +1,46 @@
+; New microcode
+	name "HQ Compander";
+	copyright "Copyright (c) 2004.";
+	created "06/17/2005";
+	engine "kX";
+	; comment "division approximation by Tiger";
+	guid "e5d7b349-1aed-495e-a640-ac282ba666d0";
+	; -- generated GUID
+input inl, inr;
+output outl, outr;
+static a, b, abs, tmp_sign, tmp1, tmp2, tmp3, result, tmp;
+control Amount=0;
+
+macints a, 0, inl, 0x4;
+tstneg  abs, a, a, 0;
+macs    tmp, 0.25, 0.75, Amount;
+macs    a, 0, a, tmp;
+macs    tmp, 0, 0.75, Amount;
+macs    b, 0.25, tmp, abs;
+; a/b
+macints tmp_sign, 0, a, b ;
+limit   tmp_sign, tmp_sign, 0x3, 0x1 ;
+log     tmp1, a, 0x1F, 0x1 ;
+log     tmp2, b, 0x1F, 0x1 ;
+macsn   tmp2, tmp2, 1, 1 ;
+macsn   tmp3, tmp1, tmp2, 1 ;
+exp     result, tmp3, 0x1F, tmp_sign ;
+macs    outl, 0, result, 0.25;     
+
+macints a, 0, inr, 0x4;
+tstneg  abs, a, a, 0;
+macs    tmp, 0.25, 0.75, Amount;
+macs    a, 0, a, tmp;
+macs    tmp, 0, 0.75, Amount;
+macs    b, 0.25, tmp, abs;
+; a/b
+macints tmp_sign, 0, a, b ;
+limit   tmp_sign, tmp_sign, 0x3, 0x1 ;
+log     tmp1, a, 0x1F, 0x1 ;
+log     tmp2, b, 0x1F, 0x1 ;
+macsn   tmp2, tmp2, 1, 1 ;
+macsn   tmp3, tmp1, tmp2, 1 ;
+exp     result, tmp3, 0x1F, tmp_sign ;
+macs    outr, 0, result, 0.25;     
+
+end

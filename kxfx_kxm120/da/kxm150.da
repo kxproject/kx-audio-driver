@@ -1,0 +1,17 @@
+name "kxm 150";
+copyright "2007. stylus, http://stylus.siteboard.de";
+created "01/09/2008";
+engine "kx"; 
+comment "divider (kxm 150 v1.1)"
+guid "a0d05afe-90de-4360-b502-8f8eeb436754";  
+
+; 50% = 1 octave down, 25% = 2 octaves down ..
+
+input in
+output out
+control divide=1
+
+; divide 
+macs out, 0, in, divide
+
+end

@@ -1,0 +1,60 @@
+NEW: ProFx AC97 Plugin
+
+http://members.home.nl/nahutec/kxplugins/profx_ac97.png
+
+Introduction;
+Besides saving DSP resources, the major goal of the ProFx plugins is
+to 'bypass' kX Mixer pages as much as possible so we can work at,
+and focus on one place;...the DSP window.
+[SRC] works fine, but when a ac97 source is selected, a user still
+has to go to kX Mixer's ac97 page to make some adjustments.
+
+All and all I think it's better to have 1 single plugin dealing with AC97 inputs;
+
+- User can now select Left/Right AC97 Recording Sources independantly.
+- on Audigy 1/2 cards, UDA device (second and better codec) can be
+ 'switched on' giving a total of 4 mono analog input signals.
+- AC97/UDA settings are conveniently stored in plugin's user presets.
+- All 'muso' relevant ac97 controls can be accessed from plugin's UI.
+
+How it works;
+Upon loading the plugin automaticly detects card type (10k1 or 10k2)
+and the presence of AC97 and UDA device.
+It bails out if no ac97 device is found (i.e. APS since it has no AC97 device).
+After that, the AC97 hardware is reset, and the default preset loaded.
+On Audigy cards the plugin has 4 outputs; AC97_L/R and UDA_L/R.
+On 10k1 cards it has 2 outputs; AC97_L/R.
+All controls write directly to the hardware, so DSP usage is very low.
+
+Usage;
+Since current [SRC] also has ac97 inputs, you can not use it in conjunction with [AC97].
+That's why I wrote an alternative [SRC] version without ac97 inputs.
+It is included in the download.
+The rest is pretty straight forward.
+
+Installation;
+Download and unzip AC97.KXL and SRC.KXL.
+http://members.home.nl/nahutec/kxplugins/profx_ac97.zip
+Register them both. The new [SRC] overwrites the existing one.
+You can verify the newer [SRC] in that it has no ac97 capabilities.
+
+Compatibilty;
+Compiled for 3538.
+[AC97] should work fine with all CL 10k1 cards.
+I have tested the plugin succesfully on an Audigy 1 and 2 OEM,
+but I can't tell if it works on later adg2 cards.
+As usual; this is a beta version. Use at own risk and if you know what you are doing.
+Please report bugs and if it works (or not) on newer Audigy 2 cards.
+
+/LeMury
+
+PS:
+To all 'skin fans';
+I will skin the plug after it prooves itself to be functional/usefull.
+I wrote a kind of 'generic' and scalable skin so I probably do it with the rest.
+
+PPS:
+For those who don't know;
+There is absolutly no use in loading more the one instance of [AC97].
+(Kinda like loading two Epilogs or two Prologs)
+

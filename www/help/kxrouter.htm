@@ -1,0 +1,89 @@
+<title>The kX Router</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<p><b>kX Router</b></p>
+<hr>
+<p><b>Overview</b><br>
+<br>
+  </b>The kX Router applet is activated from the <a href="mixer.htm">kX
+Mixer</a> or from the <a href="menu.htm">kX Menu</a>. This applet displays and lets you change how and where the 
+  audio streams from within the system are mapped to the 16 <a href="dspguide.htm#fxbus">FXBusses</a> in the
+<a href="dspguide.htm">kX DSP</a> applet.</p>
+<p><b>Audio Streams and the
+kX Router&nbsp;</b></p>
+<p>Software outputs include:</p>
+<ul>
+  <li>Wave Left and Right (Windows Multimedia WinMM
+    subsystem)</li>
+  <li>DirectSound2D voices (hardware-accelerated)</li>
+  <li>DirectSound3D voices (hardware-accelerated)</li>
+  <li>AC3 voices (5+1)</li>
+  <li>16 MIDI channels</li>
+  <li>16 ASIO output channels</li>
+</ul>
+<p>These software outputs are grouped as follows:</p>
+<ul>
+  <li>Group 1. Wave Left/Right and DirectSound 2D
+    voices (stereo or mono)</li>
+  <li>Group 2. DirectSound3D and AC3 voices (they
+    use only one mono output that is split by the driver to 2,4 or 6 channels);</li>
+  <li>Group 3. 16 MIDI channels</li>
+  <li>Group 4. 16 ASIO channels</li>
+</ul>
+<p><img  src="images/techni2.gif" ></p>
+<p>These groups can have different routings,
+including 16 different routings for MIDI channels and 16 for <a href="asio.htm">ASIO</a>
+channels (all controllable separately).<br>
+<br>
+Each software voice is hardware-routed to 4 different FXBuses. These routings
+are called 'A', 'B', 'C', 'D', and each send amount can be
+individually adjusted. Send amounts are called 'send_a', 'send_b', 'send_c'
+and 'send_d'. Four additional FXBuses are added in the case of 10k2 cards ('E',
+'F', 'G' and 'H'), for a total of 8. These amounts can be controlled
+by the sliders on the <a href="fxlevels.htm">Fx Amounts</a> page of the <a href="mixer.htm">kX
+Mixer</a>.<br>
+<br>
+Note that Wave, DirectSound and MIDI routings require send_a and send_b to be
+reserved by the kX driver to perform stereo panning. Therefore, the user can
+control only the send_c and send_d amounts (although all 'routings' are
+controllable). For ASIO voices, all 4 amounts are controllable (8 for 10k2
+cards) via the sliders in the <a href="asio.htm">kX ASIO control</a> applet.<br>
+<br>
+The default configuration allows panning of stereo sources using standard
+Windows / DirectX / Midi methods (handled internally by send_a and send_b), and
+to use send_c and send_d as 'FX Send Amounts'. Sends c and d are mapped to
+Reverb and Chorus by default, and controllable via MIDI Controllers as well as
+kX Mixer sliders.<br>
+<br>
+Once a signal is modified by the send amounts and is routed to its target FX
+bus, it can then be controlled via <a href="dspguide.htm">kX DSP</a> applet.
+</p>
+
+<p><b>Using kX Router</b></p>
+<p>The kX Router functions
+are very similar to the <a href="asio.htm">ASIO routing window</a>
+functions, although there are no signal amount sliders present in the kX Router.
+  </p>
+<table>
+  <tr>
+    <td align="center" valign="middle"><img src="images/kxrouter.gif" ></td>
+    <td valign="top"> 
+      <p>The streams in here 
+        are either mono or stereo. </p>
+      <p>Wave and Soundfont 
+        Synth route to FXbus pairs
+        0/1 and 2/3 while the ac3 streams use single busses 4-8.</p>
+      <p>All streams route 
+        to bus 13/14 by default, which acts like send/return for reverb and chorus 
+        effects in the default setup.</p>
+      </td>
+  </tr>
+</table>
+<p><b>Tips 
+  and tricks</b></p>
+<p>Router settings are 
+  unique for each installed soundcard. The currently selected soundcard is displayed
+in the lower right corner of the window. Card selection may be changed by
+clicking on the device name display box.</p>

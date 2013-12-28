@@ -1,0 +1,52 @@
+<title>Getting started with ASIO recording</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>ASIO Recording Guide</h2>
+<hr>
+
+<h4>
+
+<p>Enabling ASIO Recording requires some patching within the <a href="dspguide.htm"> kX DSP applet</a>. The kX DSP applet is opened by selecting the kX DSP button in the mixer window, or by right-clicking on the mixer icon in the system tray and selecting 'kX DSP' from the <a href="menu.htm">kX Menu</a>.</p>
+<p>The ASIO recording inputs are located in the <a href="dspguide.htm#epilog">epilog</a> object (refer to the <a href="dspguide.htm">kX DSP guide</a> for further information on this and other basic objects). The last 16 inputs of this object correspond to the ASIO inputs. These inputs make it possible to simultaneously record 8 stereo inputs or 16 mono inputs (or any combination of these).</p>
+<p>By default no sources are connected to these inputs, so you will need to patch the source you wish to record to an ASIO input.</p>
+<p>The inputs on the soundcard are located in the <a href="dspguide.htm#prolog">prolog</a> object. The outputs on the prolog represents the physical inputs on your soundcard (and on the front bay drives, daughter cards or external input drives connected to the card). These connectors are stereo pairs and correspond to the lower row of faders located on the <a href="insnouts.htm">Inputs and Outputs</a> page of the <a href="mixer.htm"> kX Mixer</a>.</p>
+<table width="420" vspace="0" height="158">
+  <tr> 
+    <td width="50" align="left" valign="top" height="158">
+    <IMG src="images/prolog.gif" width="48" height="172" ></td>
+    <td width="354" valign="top" align="left" height="158"> 
+      <div align="left"> 
+        <p>On a 10k1 card the prolog represents the following input signals (7 stereo pairs):</p>
+      </div>
+      <blockquote> 
+        <div align="left">In0/1: AC97 in<br>
+          In2/3: CD Digital in<br>
+          In4/5: Unknown 1 in<br>
+          In6/7: Coaxial / Optical in (LiveDrive/Daughter Card)<br>
+          In8/9: Line 2/mic 2 in (LiveDrive)<br>
+          In10/11: Unknown 2 in<br>
+          In12/13: AUX 2 in (LiveDrive)</div>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+<p><b>Example - recording Line-in</b></p>
+<p>The analog inputs located on the soundcard itself (Line/Mic/Aux/CD/TAD/Video) are selectable from the <a href="ac97.htm">AC97</a> page of the <a href="mixer.htm">kX Mixer,</a> and they can be recorded either singly or as a stereo or mono mix (but not in any combination - refer to the <a href="signaflow.htm">kX Signal Flow Diagram</a> for more information). To record Line, from the AC97 page of the kX Mixer select LineIn as your source. Leave all faders <i>muted</i> and go to the <a href="insnouts.htm">Inputs and Outputs</a> page of the mixer. Here you can use the AC97 fader to adjust the level. In the <a href="dspguide.htm"> kX DSP</a> applet you should connect <i>prolog in0 and in1</i> with <i>epilog asio0 and asio1</i> as shown below (refer to the <a href="dspguide.htm">kX DSP Guide</a> for details on making connections):</p>
+<table cellpadding="5" width="99%">
+  <tr>
+    <td width="30%"><IMG src="images/asiocon.gif" width="305" height="386" ></td>
+    <td width="70%" valign="top" align="left"><i>The ASIO driver is set for recording AC97 input (which is selected in kX Mixer). Note that the default connectors on the prolog do not need to be removed.</i></td>
+  </tr>
+</table>
+<p>Now you should enable the ASIO input in your favorite ASIO recording application (such as Cubase, Logic, etc.). It may be wise to disable software monitoring in your software to avoid hearing two signals. If you want to record from another input simultaneously, simply connect the signal outputs from <a href="dspguide.htm#prolog">prolog</a> to another ASIO pair and enable this input in your recording host.</p>
+<p><b>Other tips</b></p>
+<p>You can connect virtually any output connector in the <a href="dspguide.htm">kX DSP</a> applet to the ASIO inputs and record whatever is present at that output. This means that you can record things like the wet signal from a reverb, a final mix or a single midi synth channel.</p>
+<p><b>ASIO Tips</b></p>
+<p>In Cubase, you should enable Play In Background to allow Cubase to play while you are inside other programs (or adjusting DSP settings).</p>
+<hr>
+
+<h5>Cubase and VST are registered trademarks and ASIO is a trademark of Steinberg Media Technologies AG.</h5>
+
+</h4>

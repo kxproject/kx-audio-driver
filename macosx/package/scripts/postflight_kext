@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+
+sudo echo === fixing permissions after install...
+sudo chown -R root:wheel /System/Library/Extensions/kXAudioDriver.kext
+sudo find /System/Library/Extensions/kXAudioDriver.kext -type d -exec /bin/chmod 0755 {} \;
+sudo find /System/Library/Extensions/kXAudioDriver.kext -type f -exec /bin/chmod 0644 {} \;
+sudo sync
+
+sudo echo === loading KEXT...
+sudo kextload -v /System/Library/Extensions/kXAudioDriver.kext
+sudo sync
+
+sudo echo === processing kext cache:
+sudo touch /System/Library/Extensions
+sudo sync
+
+exit 0

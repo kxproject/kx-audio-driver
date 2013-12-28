@@ -1,0 +1,59 @@
+<title>Direct Recording Guide</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h3>Guida alla registrazione diretta</h3>
+
+<h4>
+
+<p><b>Introduzione</b></p>
+<p>Le schede audio basate sui chip 10k1 e 10k2 supportano l'ingresso e l'uscita digitale SPDIF.
+E' comunemente noto che i chip 10k1 e 10k2 operano ad una frequenza di campionamento fissa di 48000 Hz.
+Di conseguenza, allo scopo di sincronizzare il clock interno con i segnali SPDIF in ingreso [SPDIF In], 
+il flusso di ingresso viene sempre ricampionato sulla frequenza 48000 (quale che sia la freuenza originale). Inoltre,
+anche quando la frequenza di ingresso &egrave gi&agrave di 48000, questa viene comunque ricampionata cos&igrave da
+prevenire qualsiasi problema di sincronizzazione. Ci&ograve rende teoricamente impossibile la registrazione 
+<i>bit su bit</i> da un ingresso SPDIF (fare cio&egrave una copia 'esatta' del segnale digitale).
+Il problema non può essere risolto sulle schede basate sul chip 10k1; il chip 10k2 (usato sulle schede delle 
+serie Audigy e Audigy2), invece, presenta una speciale funzionalit&agrave di <i>Registrazione SPDIF diretta 
+[Direct SPDIF recording]</i>.
+</p>
+
+<p><b>Descrizione dettagliata</b></p>
+<p>La 'Registrazione SPDIF diretta' viene attivata tramite il <i>kX Mixer</i> 
+(dalla schermata principale). A causa della natura propria di questo metodo di registrazione, il segnale 
+bypassa completamente il DSP: ecco perch&egrave non viene in alcun modo alterato quali che siano gli effetti 
+caricati e le regolazioni ed i livelli di registrazione impostati sul <i>kX Mixer</i>.
+Una volta abilitata la 'Registrazione SPDIF diretta', tutte le altre sorgenti di registrazione non sono pi&ugrave
+disponibili.<br>
+E' possibile scegliere da quale ingresso SPDIF registrare: 'Coassiale/Ottico' [Coaxial/Optical], CD SPDIF, ecc.
+Allo stato attuale di implementazione c'&egrave anche la possibilit&agrave di registrare dalle sorgenti I2S 
+(Line2/Mic2, AUX2) in modalit&agrave 'diretta'. Questa funzionalit&agrave &egrave in fase di test ed il suo 
+funzionamento non ancora chiaramente definito.<br>
+Si osservi che gli ingressi SPDIF possono trasmettere il segnale a varie frequenze di campionamento (44100, 48000, 
+96000, ecc.) per cui spetta all'utente di scegliere la frequenza corretta da usare nelle applicazioni audio.
+Il driver <i>kX</i> non cercher&agrave di riconoscere automaticamente la frequenza di campionamento.
+In ogni caso, la frequenza di campionamento &egrave limitata dalle caratteristiche effettive dell'hardware.
+Dovrebbe essere possibile registrare alla frequenza di 96000 su praticamente tutte le schede basate sul chip 10k2 
+(quali le Audigy e Audigy2).
+Si noti inoltre che all'ingresso SPDIF potrebbero anche occorrere fino a 10 secondi, qualora la frequenza di 
+campionamento sia maggiore di 48000, per sincronizzarsi con il segnale in entrata .
+Se il segnale risulta distorto o l'audio assente, provate a scollegare e ricollegare il cavo SPDIF.
+</p>
+
+<p><b>Conclusioni</b></p>
+<p>La registrazione SPDIF diretta migliora drasticamente la qualit&agrave di registrazione da sorgenti digitali
+quando l'obiettivo principale &egrave quello di fare una copia 'esatta' di un segnale digitale.
+I miglioramenti comprendono migliore ferquenza di risposta e intermodulazione.
+Allo stato attuale di implementazione, la registrazione SPDIF diretta ASIO non &egrave supportata.
+</p>
+
+</h4>
+
+<h5>
+ -- testo originale:  kX Project<br> 
+ -- traduzione italiana ed adattamento a cura di:  alino<br>
+</h5>
+
+

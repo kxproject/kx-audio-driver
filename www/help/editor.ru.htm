@@ -1,0 +1,425 @@
+<title>kX DSP Editor</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style src="style.css"></style>
+
+<h2>kX DSP редактор</h2>
+<hr>
+<p>kX Dane (дизассемблер, ассемблер и редактор) - редактор kX DSP эффектов. Когда 
+  объекты загружены в окне <a href=dspguide.htm>kX DSP</a>, вы можете вызвать 
+  редактор объектов - kX Editor щелчком правой кнопки мыши и выбором команды 'Редактировать' 
+  из всплывающего меню.</p>
+
+<h4> 
+
+<p><b>Please review <a href='dane.htm'>A Beginner's Practical Guide to Programming Digital Audio Effects on the E-MU10kx family of DSPs</a>, if you are interested in developing your own DSP effects.</b></p>
+
+
+  <pre>
+
+; Эта документация, возможно, немного устарела
+; написана Максом Михайловым
+
+Перед чтением этого раздела рекомендуется просмотреть документацию/патенты 
+E-mu/Creative, в которых рассматривается Emu10kx DSP, И настоятельно 
+рекомендуется прочитать &quot;руководство по 10k1&quot; написанное Дэниелом Бертраном
+для его 10k1 ассемблера.
+(все выше перечисленные документы вы  можете найти на сайте &lt;kxproject.com&gt;)
+
+Синтаксис языка Dane.
+-----------------  
+
+Dane Language is use a mix of classic asm and classic C-like syntax
+(maybe too mad mix).
+
+Dane DSP Program is a set of instructions and registers to be used in 
+that instructions. (doh..)
+
+You may treat DSP Program like function which dsp calls every sample 
+cycle feeding it with samples of sound data.
+
+More comments later, let's jump into syntax right now...
+-----------------  
+
+;registers declaration
+
+Each program must have atleast one input and one output register to
+be able to process sound data.
+
+Input is a register where you read sound sample from and output is a
+register you should write processed sample to.
+
+Dane register declaration is C-like:
+
+; declare input register:
+input a; 
+; will allocate one register from dsp memory and says to
+; the driver that it is input of the program
+
+; output
+output b;
+
+You just must to keep in mind the important difference from C,
+semicolon ';' -
+is not the end of expression like in C, but the start of ;comments.
+Anything after ';' until next line will be ignored by dane:
+output x; output y
+; this will produce only one output register
+
+However you can declare more then one register of the same type in one line 
+using comma ',':
+input k, l, m, n; declares four inputs.
+
+Also you may not use ';' at all, dividing declarations just with newline
+; followed lines produce one input and one output
+input i1
+output o1
+
+
+Of coarse you will need some other register where you can store
+intermediate values and some constants needed for effect's algorithm 
+calculation.
+The main basic types of such registers are static and temp:
+
+; example
+static s;
+temp t
+
+Use static when you want register to store its value for next sample cycle
+(in other words value of static register is preserved for next sample cycle).
+
+Use temp when you need value only for current sample cycle, the value of this 
+type of registers is preserved only during one sample cycle and it is
+unpredictable for the next sample cycle.
+
+Another important type of the register you may need is constant.
+Constant registers are defined with const keyword:
+;defines constant with 0.5 value 
+const c = 0.5
+
+Also you may avoid declaration of constant and use numeric values right in code
+(see later). Using numeric value in code causes Dane to automatically allocate
+constant register in DSP memory.  
+
+As well as you can assign numeric value to constant, you can initialize
+static register with value (as always).
+; static intitialized to 0.25
+static quarter = 0.25;
+
+
+Next type: Control.
+This type implemented mostly for future compability, when it will
+say to Dane export some header file for kX DSP Plugin.
+For now it is the same as static except two things:
+It is read-only for dsp code (like const) and its value can be changed
+from the host only.
+And control register must be initialized with some value
+; control register 
+control level = 1
+control nolevel; error!
+
+-----------------
+
+Tip: If you are not sure which register type from above ones to use,
+use static and you'll naver make a mistake. 
+
+-----------------
+
+As you can see Dane is not case sensitive language, so foolowed
+declarations do the same job:
+static s;
+STATIC s;
+static S;
+sTaTic S;
+
+-----------------
+
+Using Delays.
+
+I will not get into details of using fx8010's 'tank memory',
+you can get much deeper guide from 'As10k1 Manual' (thanks to 
+Daniel for the great work) and Patents.
+
+Just some details on declaring and using delays/tankmemory access registers
+in Dane.
+
+It's not so user friendly to use delays in Dane, but i tryed to keep
+Dane syntax simple, and we have what we got.
+
+At first you should declare/request the whole amount of Tank memory (aka TRAM)
+you want to use in program:
+
+; allocate 834 samples in internal tank memory:
+itramsize 834;
+
+; allocate the number of samples in external tram:
+xtramsize 834;
+; or
+xtramsize 0x342;
+
+Then you don't need to declare delayline, it's automatically allocated
+when you are creating tram write access register.
+; declare external tram write access register
+xdelay write delayinput at 0x888;
+; above statement allocates tram write registers pair
+; with address of tram to write with offset 0x888 (2184 samples)
+; + offset of tram allocated for program (doh..)
+
+Did you remember that tram access requires two registers actually?
+Since TRAM Access Data Register and TRAM Access Data Register always
+go together let's use the term &quot;TRAM Access Pair&quot;.
+
+;In code you access Data register using symbol you declared access with,
+;and access Address register with same symbol after '&amp;' operator:  
+idelay write idw at 0x00; in most cases first tram of the programm write will have offset 0 
+; and later in code
+&quot;idw&quot; will represent DATA register and
+&quot;&amp;idw&quot; will represnt ADDRESS register.
+
+(compare with as10k1 syntax where &quot;idw&quot; will be DATA too, but ADDRESS will be
+represented with &quot;idw.a&quot; symbol)
+
+Also don't mess Dane '&amp;' operator with  C/C++ '&amp;' operator:
+In C - &quot;&amp;symbol&quot; means address of memory where value of &quot;symbol&quot; located,
+but in Dane &quot;&amp;symbol&quot; means address of tram memory where &quot;symbol&quot; points
+to!
+
+;Let's declare Tank Memory Read Access Pair:
+xdelay read delayout at 0x1000;
+
+So to get an 0x2000 samples delay line we should:
+;declare write register
+idelay write d at 0x0000;
+;declare read register 
+idelay read dr at 0x2000;
+; Later in code writing to d and reading from dr
+; we will get desired 0x2000 samples delay line
+
+You can convert samples into seconds using equation
+'seconds = samples / 48000' - since emu10kx DSP has 48kHz fixed sample rate. 
+(Dane does not support values in seconds yet, -&gt; todo)
+
+Two important difficulties of using Delays/TankMemory with Dane.
+
+1. Tram access pairs are declared with address offset within whole TRAM
+requested for program.
+So to get two delay lines with size of (for example) 2 seconds
+we should do something like:
+
+xtramsize 0x2EE01; 0x2EE01 = 2 * 2 * 48000 + 1
+xdelay write delayline1write at 0x00000;
+xdelay read delayline1write at 0x17700; 0x17700 = 2 * 48000
+xdelay write delayline2write at 0x17701; 0x17701 = 2 * 48000 + 1  
+xdelay read delayline1write at 0x2EE01; 0x2EDF7 = 0x17701 + 2 * 48000    
+
+Looks very weird, but see echo1 and chorus, it's a bit simplier that it seems.
+
+2. Tram access pairs are declared with address offset within whole TRAM
+requested for program, but when we'll try to access ADDRESS register 
+from fx8010 code (at runtime) it will have other value:
+
+addressvalue = offset_of_reg_within_pgm + offset_of_tram_allocated_for_pgm
+
+This cannot be simply avoided (at least with asm - compiler maybe),
+but good example trick is shown in chorus program source (pgms\chorus1\chor14ti.da). 
+
+Tip: Don't forget to declare delays with 'at' instead of '='!
+
+Future: Of coarse i think of making usage of delay lines with Dane simplier.
+
+-----------------
+       
+Other register declaration keywords. 
+
+wscl, iscl, oscl, intr, coarse.
+They are implemented for RIFX compability and will be removed (or changed)
+in future, don't use them!
+
+-----------------
+
+Reserved keywords and operators: 
+
+&quot;rsaw&quot;.        
+
+-----------------   
+
+DSP and Numeric Values.
+
+As you know fx8010 is a 32 bit fixed-point DSP,
+so we need some tips on using numeric values.
+
+At first read fixed-point math relaited stuff in 'As10k1 Manual',
+then read followed stuff considering Dane:
+
+1. Dane is kind of typeless language, since in most cases values
+are stored in 32 bit register.
+
+2. Default number format is fractional (fixed-point),
+i.e. 1, 1.0, 1., 0.5, 0.2 etc. stored as 32 bit fractionals.
+
+3. Fractional numbers have range from -1.0 to 1.0
+
+4. Numbers having value more then 1 or less then -1 are truncated
+to and stored as 32 bit integers.
+
+5. To assign an integer to a register used C-like hex digit format
+starting with '0x' (e.g. 0x3fff5555)
+
+6. Fractional 0 and integer 0 are the same values.
+
+Some examples:
+
+static fone = 1; stored as 0x7fffffff
+static ione = 0x1; stored as 0x00000001
+control half = 0.5; stored as 0x3fffffff
+control minfract = -1; stored as 0x80000000
+const int = 1024; stored as 0x00000400
+const notfract = 5.2; truncated and stored as 0x00000005
+
+Also see some numbers tips in next section.
+
+-----------------   
+
+Code Syntax.
+
+Code represented with set of instructions in followed format
+
+OPCODE R, A, X, Y
+
+where OPCODE is DSP instruction mnemonic (e.g MACS ;),
+and R, A, X, Y operands representing registers.
+
+What can be used as operand:
+
+1. Symbol representing register you declared before.
+2. Any numeric value (with convenions described in 'DSP and Numeric Values' above).
+
+Examples:
+
+;----------
+input in;
+output out;
+
+;code
+macs out, in, 0, 0
+; writes value of 'in' register to 'out' register
+; i.e. out = in + 0 * 0 or just out = in
+
+;----------
+static S
+const half = 0.5
+
+MACW	s, 0xcccccccc, s, HALF;
+; in fractional tirms: s = -0.40 + s * 0.5
+; in integer: s = 0xcccccccc + s * 0x3fffffff
+
+
+-----------
+
+Note: '1' (as well as '1.' and '1.0') are not always undestantood by Dane as
+fractional 1 in code, for example using 1 as Y operand in MACINTS instruction
+cause Dane to use value 0x1 instead of 0x7fffffff.
+Example:
+           
+static a;           
+const c = 1.0;
+
+MACS	a, 0, c, 1.0;		a = c * 0x7fffffff
+MACINTS a, 0, c, 1.0;		a = c * 0x00000001 
+
+(Guide to follow / Subject to change)
+
+-----------
+
+END Keyword.
+
+Dane DSP Programm must be ended with end keyword,
+and all after end will be ignored.
+
+-----------
+
+
+Critical notes on Beta verion of Dane.
+
+1. (absolute) Use all of input/output registers you've declared in code,
+living unused may cause unexpected execution of program.
+Comment out or remove unused register of such type.
+
+2. Do not use input registers in code more then once,
+this limitation relaited to current format of binary dsp program
+(atleast rfx one) and may cause unexpected execution.
+
+3. Do not use input/output registers in single instruction
+more then once, in future it may cause unpredictable DSP behaviour
+due to nature of Emu10kx architecture.
+(For now it's ok to do this).
+
+4. Dane does not check if your program resources will fit
+into available target dsp resources. So check it yourself
+if program is built successful but cannot be loaded.
+
+
+-----------
+
+OK, more information to follow, and now
+Dane / As10k1 / FxAsm conventions.   
+
++----------------------------------------------------------+
+|                       Instructions                       |
+|----------------------------------------------------------|
+|       Dane          |    As10k1         |    FxAsm       |
++----------------------------------------------------------+
+        macs                macs              n/a
+        macsn               macs1             n/a
+        macw                macw              n/a
+        macwn               macw1             n/a
+        macints 	    macints           n/a
+        macintw             macintw           n/a
+        acc3                acc3              n/a
+        macmv               macmv             n/a
+        andxor         	    andxor            n/a
+        tstneg         	    tstneg            n/a
+        limit         	    limit             n/a
+        limitl        	    limit1            n/a
+        log            	    log               n/a
+        exp                 exp               n/a
+        interp              interp            n/a
+        skip                skip              n/a
++----------------------------------------------------------+
+
+
++----------------------------------------------------------+
+|                       Register Types                     |
+|----------------------------------------------------------|
+|       Dane          |    As10k1         |    FxAsm       |
++----------------------------------------------------------+
+	input                                      ??
+	output                                     ??
+	static                static               GPR
+	control               control              ??
+	static coarse         n/a                BUF GPR
+	const                 constant             ??
+	n/a	       	      n/a		 DELAY
+	idelay read           tread                n/a
+	idelay write          twrite               n/a
+	temp                  dynamic            TEMP GPR
++----------------------------------------------------------+
+
+
+
+------------
+Stuff. 
+
+Yep, Dane is pretty simple (so i prefer to call it Translator instead 
+of Assembler).
+
+------------
+Anyway.  
+
+Don't fear to expirement with it because:
+1. You don't burn you card (well, speakers maybe ;)
+2. Dane can determine and notify you of about 300 errors
+you could make in *.da program
+
+</pre>
+</h4>
