@@ -1,0 +1,92 @@
+//Microsoft Developer Studio generated resource script.
+//  
+#include "ursrc.h"
+#include "ufxkx.rc.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS    
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TIMBREBACK          BITMAP  DISCARDABLE     "ufxkx.graphics\\timbre_back.bmp"
+IDB_EQG10BACK           BITMAP  DISCARDABLE     "ufxkx.graphics\\eqg10_back.bmp"
+IDB_REV2BACK            BITMAP  DISCARDABLE     "ufxkx.graphics\\reverb2_back.bmp" 
+IDB_EQP1BACK            BITMAP  DISCARDABLE     "ufxkx.graphics\\eqp1_back.bmp"
+IDB_EQPLOT_BACK         BITMAP  DISCARDABLE     "ufxkx.graphics\\eq_plot_back.bmp"
+IDB_EQPLOT_FORE         BITMAP  DISCARDABLE     "ufxkx.graphics\\eq_plot_fore.bmp"  
+IDB_EQP5BACK            BITMAP  DISCARDABLE     "ufxkx.graphics\\eqp5_back.bmp"
+IDB_PEAKFORE            BITMAP  DISCARDABLE     "ufxkx.graphics\\peak.bmp"
+IDB_PEAKBACK            BITMAP  DISCARDABLE     "ufxkx.graphics\\peakback.bmp"
+
+IDB_CURVE1              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve1.bmp"
+IDB_CURVE2              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve2.bmp"
+IDB_CURVE3              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve3.bmp"
+IDB_CURVE4              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve4.bmp"
+IDB_CURVE5              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve5.bmp"
+IDB_CURVE6              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve6.bmp"
+IDB_CURVE7              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve7.bmp"
+IDB_CURVE8              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve8.bmp"
+IDB_CURVE9              BITMAP  DISCARDABLE     "ufxkx.graphics\\curve9.bmp"
+
+
+#ifndef _MAC              
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION UCOMMA_VER
+ PRODUCTVERSION UCOMMA_VER
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", UCOMPANY
+            VALUE "FileDescription", UTITLE
+            VALUE "FileVersion", UPOINT_VER
+            VALUE "InternalName", "ufxkx\0"
+            VALUE "LegalCopyright", UCOPYRIGHT
+            VALUE "OriginalFilename", "ufxkx.dll\0"
+            VALUE "ProductName", UPRODUCT
+            VALUE "ProductVersion", UPOINT_VER
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+#endif    // Russian resources
