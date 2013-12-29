@@ -1,0 +1,82 @@
+//Microsoft Developer Studio generated resource script.
+//  
+#include "ursrc.h"
+#include "ufxrc.rc.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION UCOMMA_VER
+ PRODUCTVERSION UCOMMA_VER
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", UCOMPANY
+            VALUE "FileDescription", "UFX Resources\0"
+            VALUE "FileVersion", UPOINT_VER
+            VALUE "InternalName", "ufxrc\0"
+            VALUE "LegalCopyright", UCOPYRIGHT
+            VALUE "OriginalFilename", "ufxrc.dll\0"
+            VALUE "ProductName", UPRODUCT
+            VALUE "ProductVersion", UPOINT_VER
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_DEFAULT             ICON    DISCARDABLE     "ufxrc.graphics\\uicon2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TEXTURE             BITMAP  DISCARDABLE     "ufxrc.graphics\\utexture1.bmp"
+IDB_BSKIN               BITMAP  DISCARDABLE     "ufxrc.graphics\\betaskin.bmp"
+IDB_KNOB                BITMAP  DISCARDABLE     "ufxrc.graphics\\knob.bmp"
+IDB_KNOBS               BITMAP  DISCARDABLE     "ufxrc.graphics\\knobs.bmp"
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,115 @@
+
+name 	"ProPhaser" 
+; ................................................
+
+input 	inx, inz
+output 	out, oud     
+
+control gain = .7
+control	wetmix = 1 
+control feedback = .16 
+         
+control	rate = .05	 
+control center = .4
+control range = .33
+control panning = .5	 
+
+static 	s
+static	ph1, ph2
+static	za1, za2, za3, za4, za5, za6    
+static	zb1, zb2, zb3, zb4, zb5, zb6
+
+temp  i, k, y, w
+												
+macwn	s, s, rate, .00048828			
+tstneg	k, s, s, 0		
+
+; lfo->center mod
+macs	k, k, .5, -1
+macs	k, center, k, range    
+
+; lin freq to allpass coeff
+exp		k, k, 0x7, 0
+macs	k, .994, k, -1
+
+;*> phaser              
+; input
+macs	i, 0, inx, gain    
+
+macs	out, 0, i, wetmix
+macs	w, out, ph1, feedback    
+
+;) allpass
+macsn	y, za1, w, k
+macs	za1, w, y, k        
+macsn	ph1, za2, y, k
+macs	za2, y, ph1, k 
+
+macsn	y, za3, ph1, k
+macs	za3, ph1, y, k        
+macsn	ph1, za4, y, k
+macs	za4, y, ph1, k   
+
+macsn	y, za5, ph1, k
+macs	za5, ph1, y, k 
+
+macsn	ph1, out, ph1, 1
+       
+macsn	out, za6, y, k
+macs	za6, y, out, k
+
+;( output 
+
+macsn	0, i, i, wetmix            
+acc3	out, accum, out, w  
+
+; .....................   
+
+macw	k, s, panning, 1			
+tstneg	k, k, k, 0
+macs	k, k, .5, -1       
+macs	k, center, k, range
+
+; lin freq to allpass coeff
+exp		k, k, 0x7, 0
+macs	k, .994, k, -1     
+
+;*> phaser              
+; input
+macs	i, 0, inz, gain    
+
+macs	oud, 0, i, wetmix
+macs	w, oud, ph2, feedback    
+
+;) allpass
+macsn	y, zb1, w, k
+macs	zb1, w, y, k        
+macsn	ph2, zb2, y, k
+macs	zb2, y, ph2, k 
+
+macsn	y, zb3, ph2, k
+macs	zb3, ph2, y, k        
+macsn	ph2, zb4, y, k
+macs	zb4, y, ph2, k   
+
+macsn	y, zb5, ph2, k
+macs	zb5, ph2, y, k    
+
+macsn	ph2, oud, ph2, 1
+    
+macsn	oud, zb6, y, k
+macs	zb6, y, oud, k
+
+;( output             
+macsn	0, i, i, wetmix            
+acc3	oud, accum, oud, w 
+    
+; ................................................
+
+guid 		"D8DC1380-1122-8904-960F-44E461F818D0"        
+copyright 	"© Max Mikhailov, 2001-2014"
+created 	"May 9 2004"
+comment 	"Phaser. To the ladies i've ever loved..."
+engine 		"What does this field mean?"  
+
+end 

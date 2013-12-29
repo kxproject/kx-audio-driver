@@ -1,0 +1,12 @@
+
+name      "HQ Wire"
+copyright "Copyright © HQHQ Ltd., 1453-2010."
+guid      "14F16F10-11CC-40B6-A06F-1B330024ED22"
+comment   "Digital cable made of silver smelt in the blood of 9 virgins. Provides considerably better transparency, dynamics and clarity."
+
+input     HQ.In
+output    HQ.Out
+const     HQ.Blood  = 0
+const     HQ.Silver = 524288fs
+macsn     HQ.Out, HQ.Blood, HQ.In, HQ.Silver
+end

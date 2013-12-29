@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ufxsdll", "ufxsdll.vcproj", "{656D9D01-FA99-4691-B80B-8DF4C5ECDC88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcproj", "{22638E56-6A8D-47DD-BF0E-0BC8FF292999}"
+	ProjectSection(ProjectDependencies) = postProject
+		{656D9D01-FA99-4691-B80B-8DF4C5ECDC88} = {656D9D01-FA99-4691-B80B-8DF4C5ECDC88}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{656D9D01-FA99-4691-B80B-8DF4C5ECDC88}.Debug|Win32.ActiveCfg = Debug|Win32
+		{656D9D01-FA99-4691-B80B-8DF4C5ECDC88}.Debug|Win32.Build.0 = Debug|Win32
+		{656D9D01-FA99-4691-B80B-8DF4C5ECDC88}.Release|Win32.ActiveCfg = Release|Win32
+		{656D9D01-FA99-4691-B80B-8DF4C5ECDC88}.Release|Win32.Build.0 = Release|Win32
+		{22638E56-6A8D-47DD-BF0E-0BC8FF292999}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22638E56-6A8D-47DD-BF0E-0BC8FF292999}.Debug|Win32.Build.0 = Debug|Win32
+		{22638E56-6A8D-47DD-BF0E-0BC8FF292999}.Release|Win32.ActiveCfg = Release|Win32
+		{22638E56-6A8D-47DD-BF0E-0BC8FF292999}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
