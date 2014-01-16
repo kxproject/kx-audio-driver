@@ -49,6 +49,8 @@
 }
 
 - (void)setDevice:(int)value;
-- (iKX *)kx;
+
+@property (readonly) iKX *kx;
+@property (readonly) NSDictionary *registers;
 
 @end

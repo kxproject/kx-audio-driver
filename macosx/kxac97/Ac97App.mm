@@ -27,29 +27,6 @@
 #import "Ac97App.h"
 #import "Ac97Controller.h"
 
-struct t_kxAc97Keys
-{
-    byte reg;
-    NSString *key;
-    
-} kxAc97Keys[] =
-{
-	{AC97_REG_MASTER_VOL,  @"Master"},
-	{AC97_REG_PC_BEEP_VOL, @"PCBeep"},
-	{AC97_REG_PHONE_VOL,   @"Phone"},
-	{AC97_REG_MIC_VOL,	   @"Mic"},
-	{AC97_REG_LINE_VOL,	   @"Line"},
-	{AC97_REG_CD_VOL,	   @"Cd"},
-	{AC97_REG_VIDEO_VOL,   @"Video"},
-	{AC97_REG_AUX_VOL,	   @"Aux"},
-	{AC97_REG_PCM_VOL,	   @"Dac"},
-	{AC97_REG_REC_SELECT,  @"RecSel"},
-	{AC97_REG_REC_GAIN,	   @"Rec"},
-	{AC97_REG_GENERAL,     @"Gp"}
-};
-
-#define NUM_AC97_KEYS (int)(sizeof(kxAc97Keys) / sizeof(kxAc97Keys[0]))
-
 @implementation Ac97App
 
 //#define TESTING
@@ -142,24 +119,28 @@ struct t_kxAc97Keys
 	
     if (!card)
 		return;
-	
-    for (int i = 0; i < NUM_AC97_KEYS; i++)
-		kx->ac97_write(kxAc97Keys[i].reg, [[card objectForKey:kxAc97Keys[i].key] intValue]);
+    
+    NSDictionary *regs = [ac97 registers];
+
+    for (NSString *key in [regs allKeys])
+        kx->ac97_write([regs[key][0] unsignedCharValue], [[card objectForKey:key] intValue]);
 }
 
 - (void)saveState:(iKX *)kx
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *card = [NSMutableDictionary dictionaryWithCapacity:NUM_AC97_KEYS];
-    
-    for (int i = 0; i < NUM_AC97_KEYS; i++)
+    NSDictionary *regs = [ac97 registers];
+    NSMutableDictionary *card = [NSMutableDictionary dictionaryWithCapacity:[regs count]];
+
+    for (NSString *key in [regs allKeys])
     {
-		word reg;
-		
-		kx->ac97_read(kxAc97Keys[i].reg, &reg);
-		[card setValue:[NSNumber numberWithInt:reg] forKey:kxAc97Keys[i].key];
+        word val;
+
+        kx->ac97_read([regs[key][0] unsignedCharValue], &val);
+
+        [card setValue:[NSNumber numberWithInt:val] forKey:key];
     }
-    
+
     [prefs setObject:card forKey:[NSString stringWithCString:kx->get_device_name() encoding:NSASCIIStringEncoding]];
     [prefs synchronize];
 }

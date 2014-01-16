@@ -29,8 +29,55 @@
 
 @implementation Ac97Controller
 
-// converts real decibels to a harware register value
-//
+@synthesize kx;
+@synthesize registers;
+
+static NSArray *controls = NULL;
+
+- (void)awakeFromNib
+{
+    if (!controls)
+        controls = [@[
+            @"masterMuted",	@"masterLeft",	@"masterRight",
+            @"lineMuted",	@"lineLeft",	@"lineRight",
+            @"cdMuted",		@"cdLeft",		@"cdRight",
+            @"videoMuted",	@"videoLeft",	@"videoRight",
+            @"auxMuted",	@"auxLeft",		@"auxRight",
+            @"dacMuted",	@"dacLeft",		@"dacRight",
+            @"adcMuted",	@"adcLeft",		@"adcRight",
+            @"micMuted",	@"mic",			@"micAmp",
+            @"phoneMuted",	@"phone",
+            @"spkMuted",	@"spk",
+            @"rsLeft",		@"rsRight",		@"digLB"] retain];
+
+    registers = [@{
+        @"Master":  @[@AC97_REG_MASTER_VOL,	[NSValue valueWithPointer: &regMaster]],
+        @"PCBeep":  @[@AC97_REG_PC_BEEP_VOL,[NSValue valueWithPointer: &regPCBeep]],
+        @"Phone":   @[@AC97_REG_PHONE_VOL,	[NSValue valueWithPointer: &regPhone]],
+        @"Mic":     @[@AC97_REG_MIC_VOL,	[NSValue valueWithPointer: &regMic]],
+        @"Line":    @[@AC97_REG_LINE_VOL,   [NSValue valueWithPointer: &regLine]],
+        @"Cd":      @[@AC97_REG_CD_VOL,		[NSValue valueWithPointer: &regCd]],
+        @"Video":   @[@AC97_REG_VIDEO_VOL,	[NSValue valueWithPointer: &regVideo]],
+        @"Aux":     @[@AC97_REG_AUX_VOL,	[NSValue valueWithPointer: &regAux]],
+        @"Dac":     @[@AC97_REG_PCM_VOL,	[NSValue valueWithPointer: &regDac]],
+        @"RecSel":  @[@AC97_REG_REC_SELECT,	[NSValue valueWithPointer: &regRecSel]],
+        @"Rec":     @[@AC97_REG_REC_GAIN,   [NSValue valueWithPointer: &regRec]],
+        @"Gp":      @[@AC97_REG_GENERAL,    [NSValue valueWithPointer: &regGp]]} retain];
+    
+    // bind mute boxes
+    //
+    BIND_MUTED(cd);
+    BIND_MUTED(video);
+    BIND_MUTED(aux);
+    BIND_MUTED(line);
+    BIND_MUTED(dac);
+    BIND_MUTED(master);
+    BIND_MUTED(adc);
+    BIND_MUTED(spk);
+    BIND_MUTED(mic);
+    BIND_MUTED(phone);
+}
+
 - (word)float2reg:(NSSlider *)slider :(CGFloat)value :(BOOL)inv
 {
     CGFloat v = (inv) ? (CGFloat)[slider maxValue] - value : value;
@@ -39,8 +86,6 @@
 			([slider maxValue] - [slider minValue]));
 }
 
-// convers hardware register value to a real decibels
-//
 - (CGFloat)reg2float:(NSSlider *)slider :(word)reg :(word)mask :(int)shift :(BOOL)inv
 {
     CGFloat v = (CGFloat)(([slider maxValue] - [slider minValue]) * ((reg >> shift) & mask) /
@@ -49,8 +94,6 @@
     return (inv) ? (CGFloat)[slider maxValue] - v : v; 
 }
 
-// modify a hardware register
-//
 - (void)set_reg:(word &)reg :(word)mask :(word)bits :(byte)regnum
 {
     reg = (reg & mask) | bits;
@@ -109,22 +152,6 @@ if ([self rsLeft] != [self rsRight])\
 
 IMPLEMENT_PAIR(adc, Adc, regRec, 0x0f, NO, AC97_REG_REC_GAIN)
 
-- (void)awakeFromNib
-{
-    // bind mute boxes
-    //
-    BIND_MUTED(cd);
-    BIND_MUTED(video);
-    BIND_MUTED(aux);
-    BIND_MUTED(line);
-    BIND_MUTED(dac);
-    BIND_MUTED(master);
-    BIND_MUTED(adc);
-    BIND_MUTED(spk);
-    BIND_MUTED(mic);
-    BIND_MUTED(phone);
-}
-
 - (void)setDevice:(int)value
 {
     if (!kx || (kx->get_device_num() != value))
@@ -138,34 +165,11 @@ IMPLEMENT_PAIR(adc, Adc, regRec, 0x0f, NO, AC97_REG_REC_GAIN)
 		{
 			// synchronize with hardware and update UI
 			//
-			NSArray *controls = [NSArray arrayWithObjects:
-								 @"masterMuted",	@"masterLeft",  @"masterRight",
-								 @"lineMuted",	    @"lineLeft",    @"lineRight",
-								 @"cdMuted",	    @"cdLeft",	    @"cdRight",
-								 @"videoMuted",	    @"videoLeft",   @"videoRight",
-								 @"auxMuted",	    @"auxLeft",	    @"auxRight",
-								 @"dacMuted",	    @"dacLeft",	    @"dacRight",
-								 @"adcMuted",	    @"adcLeft",	    @"adcRight",
-								 @"micMuted",	    @"mic",			@"micAmp",
-								 @"phoneMuted",	    @"phone",
-								 @"spkMuted",	    @"spk",
-								 @"rsLeft",			@"rsRight",		@"digLB", nil];
-			
 			for (NSString *key in controls)
 				[self willChangeValueForKey:key];
-			
-			kx->ac97_read(AC97_REG_MASTER_VOL,	&regMaster);
-			kx->ac97_read(AC97_REG_PC_BEEP_VOL,	&regPCBeep);
-			kx->ac97_read(AC97_REG_PHONE_VOL,	&regPhone);
-			kx->ac97_read(AC97_REG_MIC_VOL,		&regMic);
-			kx->ac97_read(AC97_REG_LINE_VOL,	&regLine);
-			kx->ac97_read(AC97_REG_CD_VOL,		&regCd);
-			kx->ac97_read(AC97_REG_VIDEO_VOL,	&regVideo);
-			kx->ac97_read(AC97_REG_AUX_VOL,		&regAux);
-			kx->ac97_read(AC97_REG_PCM_VOL,		&regDac);
-			kx->ac97_read(AC97_REG_REC_SELECT,	&regRecSel);
-			kx->ac97_read(AC97_REG_REC_GAIN,	&regRec);
-			kx->ac97_read(AC97_REG_GENERAL,		&regGp);
+
+			for (NSArray *val in [registers allValues])
+                kx->ac97_read([val[0] unsignedCharValue], (word*)[val[1] pointerValue]);
 			
 			for (NSString *key in controls)
 				[self didChangeValueForKey:key];
@@ -184,8 +188,6 @@ IMPLEMENT_PAIR(adc, Adc, regRec, 0x0f, NO, AC97_REG_REC_GAIN)
     if (([adcL floatValue] == [adcR floatValue]) && ([self rsLeft] == [self rsRight]))
 		[self setAdcLinked: YES];
 }
-
-- (iKX *)kx { return kx; }
 
 - (void)dealloc
 {
