@@ -1,0 +1,72 @@
+
+name    "Sputnik"
+; ................................................
+
+control Depth    = .15            
+control	RateA    = .25  
+control	RateB    = .08 
+control	B2A      = .20 
+control	B2Depth  = .20
+ 
+input 	inx, iny
+output 	out, oud      
+ 
+static  a, b 
+static  k, x
+temp    y, z
+
+; delay lines
+idelay write d1 at 0
+idelay read d11 at 200
+idelay read d12 at 200 
+idelay write d2 at 202
+idelay read d21 at 402
+idelay read d22 at 402 
+itramsize 		   404 
+const  maxtime = 0x62000; (200 - 4) * 0x800    
+
+; delay/out/in
+macintw	x, 0, x, 0x100000
+interp	out, d11, x, d12 
+interp	oud, d21, x, d22
+macs	d1, inx, 0, 0 
+macs	d2, iny, 0, 0
+
+; osc b
+macwn	b, b, RateB, .00048828
+tstneg	z, b, b, 0
+
+; b->depth
+macints x, -1, B2Depth, 2
+macs    x, 0, z, x
+interp  y, Depth, x, 1
+macs    x, Depth, x, Depth
+limit   x, Depth, x, y
+interp  k, k, .00048828, x
+
+; b->a
+interp  x, B2A, RateA, 0
+macs    x, RateA, x, z
+							
+; osc a
+macwn	a, a, x, .00048828
+macsn   y, 1, a, a
+macs    y, 0, y, y
+
+; modulation
+macs  	x, 0, maxtime, k 
+macs	x, 0x800, x, y	
+acc3	&d11, 0x800, &d1, x
+acc3	&d21, 0x800, &d2, x
+acc3	&d12, 0x800, &d11, 0	
+acc3	&d22, 0x800, &d21, 0
+
+; ................................................
+
+guid 		"84B75746-50A1-47df-B100-17AB91BD4606"        
+copyright 	"© Max Mikhailov, 2001-2014"
+created 	"August 23 2006"
+comment 	"Unusual vibrato..."
+engine 		"Oops"  
+
+end 

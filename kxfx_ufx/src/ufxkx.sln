@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ufxrc", "ufxrc.vcproj", "{A28A8FAE-7F6C-48B6-A825-5C2CF1E5747A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ufxkx", "ufxkx.vcproj", "{31ED8B28-BBEB-400B-AF87-CEE353F0E65F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A28A8FAE-7F6C-48B6-A825-5C2CF1E5747A}.Debug|Win32.ActiveCfg = Release|Win32
+		{A28A8FAE-7F6C-48B6-A825-5C2CF1E5747A}.Debug|Win32.Build.0 = Release|Win32
+		{A28A8FAE-7F6C-48B6-A825-5C2CF1E5747A}.Release|Win32.ActiveCfg = Release|Win32
+		{A28A8FAE-7F6C-48B6-A825-5C2CF1E5747A}.Release|Win32.Build.0 = Release|Win32
+		{31ED8B28-BBEB-400B-AF87-CEE353F0E65F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{31ED8B28-BBEB-400B-AF87-CEE353F0E65F}.Debug|Win32.Build.0 = Debug|Win32
+		{31ED8B28-BBEB-400B-AF87-CEE353F0E65F}.Release|Win32.ActiveCfg = Release|Win32
+		{31ED8B28-BBEB-400B-AF87-CEE353F0E65F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
