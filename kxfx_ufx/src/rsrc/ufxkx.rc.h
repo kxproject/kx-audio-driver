@@ -1,0 +1,19 @@
+
+#define IDB_EQG10BACK                   144
+#define IDB_TIMBREBACK                  145
+#define IDB_REV2BACK                    149
+#define IDB_CURVE1                      152
+#define IDB_CURVE2                      153
+#define IDB_CURVE3                      154
+#define IDB_CURVE4                      155
+#define IDB_CURVE5                      156
+#define IDB_CURVE6                      157
+#define IDB_CURVE7                      158
+#define IDB_CURVE8                      159
+#define IDB_CURVE9                      160
+#define IDB_EQP1BACK                    161
+#define IDB_EQPLOT_BACK                 162
+#define IDB_EQPLOT_FORE                 163
+#define IDB_EQP5BACK                    164
+#define IDB_PEAKFORE                    165
+#define IDB_PEAKBACK                    166
