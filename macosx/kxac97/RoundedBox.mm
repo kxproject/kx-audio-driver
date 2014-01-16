@@ -64,8 +64,10 @@ static NSImage *muteOn, *muteOff;
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    if (NSPointInRect([self convertPoint:[theEvent locationInWindow] fromView:nil], clickableArea))
-	[self setMuted:!muted];
+    if (NSPointInRect([self convertPoint:[theEvent locationInWindow]
+                                fromView:nil],
+                      clickableArea))
+        [self setMuted:!muted];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -168,7 +170,9 @@ static NSImage *muteOn, *muteOff;
     // Draw title background
 
     [borderColor set];
-    [[self titlePathWithinRect:bgRect cornerRadius:radius titleRect:titleRect] fill];
+    [[self titlePathWithinRect:bgRect
+                  cornerRadius:radius
+                     titleRect:titleRect] fill];
     
     
     // Draw rounded rect around entire box
@@ -188,7 +192,10 @@ static NSImage *muteOn, *muteOff;
 			   boxRect.origin.y + boxRect.size.height - titleSize.height - 5,
 			   titleSize.width, titleSize.height);
 
-    [box drawInRect:titleRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+    [box drawInRect:titleRect
+           fromRect:NSZeroRect
+          operation:NSCompositeSourceOver
+           fraction:1.0f];
 }
 
 
