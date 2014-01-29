@@ -27,7 +27,7 @@ struct CFont {static CFont* FromHandle(HFONT) {return 0;}};
 #define  kCLASS_TYPE
 #include "interface/kxapi.h"
 #include "gui/kBase.h"
-#undef   kCLASS_TYPE 
+#undef   kCLASS_TYPE
 
 #if KXPLUGIN_VERSION > 0x10
     #define KXAPI_CONST const

@@ -1,16 +1,16 @@
 
 // kX DSP Resource Meter demo library
-// Copyright (c) Max Mikhailov, 2009 
+// Copyright (c) Max Mikhailov, 2009
 
 // Permission to use, copy, modify, distribute, and sell this software
 // for any purpose is hereby granted without fee, provided that the above
 // copyright notice appears in all copies and that both that copyright
 // notice and this permission notice appear in supporting documentation.
 // The author makes no representations about the suitability of this
-// software for any purpose. It is provided "as is" without express or 
+// software for any purpose. It is provided "as is" without express or
 // implied warranty.
 
-// helpers.h 
+// helpers.h
 // helper utilities
 
 #ifndef HELPERS_INCLUDED
@@ -79,10 +79,10 @@ private:
     template <typename T, void (T::*F) (int)>
     static VOID CALLBACK thunk(HWND, UINT, UINT_PTR ptr, DWORD)
     {
-        Timer* timer = (Timer*) ptr; 
-        if (timer && timer->handler)  
+        Timer* timer = (Timer*) ptr;
+        if (timer && timer->handler)
             (((T*) timer->handler)->*F)(++timer->counter);
-    } 
+    }
 };
 
 // ............................................................................
@@ -141,7 +141,7 @@ private:
     HMODULE module;
     HWND    parent;
     HWND    handle;
-   
+
     Tooltips(const Tooltips&);
     Tooltips& operator = (const Tooltips&);
     template <typename T> operator T () const;
@@ -154,9 +154,9 @@ private:
 
     static HWND ctor(HMODULE module, HWND parent)
     {
-        HWND handle = ::CreateWindowEx(WS_EX_TOPMOST, 
+        HWND handle = ::CreateWindowEx(WS_EX_TOPMOST,
             TOOLTIPS_CLASS, 0, WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,
-			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 
+			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
             parent, 0, module, 0);
 
         if (!handle)
@@ -170,28 +170,28 @@ private:
 
 struct Settings
 {
-    explicit Settings(const char* key) 
+    explicit Settings(const char* key)
         : handle(ctor(HKEY_CURRENT_USER, key)) {}
 
-    Settings(const Settings& root, const char* key) 
+    Settings(const Settings& root, const char* key)
         : handle(ctor(root.handle, key)) {}
 
-    Settings(const Settings& root, int index) 
+    Settings(const Settings& root, int index)
         : handle(ctor(root, index)) {}
 
     ~Settings() {::RegCloseKey(handle);}
 
     void set(const char* name, int value)
 	{
-		::RegSetValueEx(handle, name, 0, REG_DWORD, 
+		::RegSetValueEx(handle, name, 0, REG_DWORD,
             (BYTE*) &value, sizeof(value));
 	}
 
     int get(const char* name, int default_) const
 	{
 		DWORD size = sizeof(default_);
-		::RegQueryValueEx(handle, name, 
-            0, 0, (BYTE*) &default_, &size); 
+		::RegQueryValueEx(handle, name,
+            0, 0, (BYTE*) &default_, &size);
 		return default_;
 	}
 
@@ -199,7 +199,7 @@ struct Settings
     {
         FILETIME unused;
         DWORD size = sizeof(key);
-        ::RegEnumKeyEx(handle, index, 
+        ::RegEnumKeyEx(handle, index,
             key, &size, 0, 0, 0, &unused);
         return key;
     }
@@ -213,11 +213,11 @@ private:
     static Handle ctor(Handle root, const char* key)
     {
         Handle handle = 0;
-        REGSAM access = KEY_READ | KEY_WRITE 
+        REGSAM access = KEY_READ | KEY_WRITE
             | KEY_CREATE_SUB_KEY | KEY_ENUMERATE_SUB_KEYS;
-        if (::RegCreateKeyEx(root, key, 0, 
+        if (::RegCreateKeyEx(root, key, 0,
             0, 0, access, NULL, &handle, NULL))
-                trace("%s: - cannot open %x\\%s\n", 
+                trace("%s: - cannot open %x\\%s\n",
                     FUNCTION_, root, key);
         return handle;
 	}
@@ -243,10 +243,10 @@ struct EnumNames
 {
     const char* operator [] (int i) const {return names(i);}
 
-    EnumNames() 
+    EnumNames()
     {
-        if (!names(0)) 
-            _<E(0)>(sizeof(FUNCSIG_) 
+        if (!names(0))
+            _<E(0)>(sizeof(FUNCSIG_)
                 - sizeof("EnumNames()"));
     }
 
