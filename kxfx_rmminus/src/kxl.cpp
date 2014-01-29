@@ -1,16 +1,16 @@
 
 // kX DSP Resource Meter demo library
-// Copyright (c) Max Mikhailov, 2009 
+// Copyright (c) Max Mikhailov, 2009
 
 // Permission to use, copy, modify, distribute, and sell this software
 // for any purpose is hereby granted without fee, provided that the above
 // copyright notice appears in all copies and that both that copyright
 // notice and this permission notice appear in supporting documentation.
 // The author makes no representations about the suitability of this
-// software for any purpose. It is provided "as is" without express or 
+// software for any purpose. It is provided "as is" without express or
 // implied warranty.
 
-// kxl.cpp 
+// kxl.cpp
 // kX Plugin interface
 
 #include "includes.h"
@@ -23,7 +23,7 @@
 template <typename Plugin>
 struct PluginBox : iKXDSPWindow
 {
-    PluginBox(kDialog* parent, kWindow* window, Plugin* plugin, kFile* file) : 
+    PluginBox(kDialog* parent, kWindow* window, Plugin* plugin, kFile* file) :
         iKXDSPWindow(parent, window, plugin, file),
         counter(plugin->ikx),
         display(counter)
@@ -79,33 +79,33 @@ private:
 
 struct Plugin : iKXPlugin
 {
-    static int entry(int command, uintptr_t* ret)										
-    {	
-	    switch (command)																		
-	    {																					
-	    case KXPLUGIN_GET_NAME:
-            strncpy((char*) ret, rm::dsp::name, KX_MAX_STRING);						
-  		    return 0;																
-	    case KXPLUGIN_GET_GUID:					
-            strncpy((char*) ret, rm::dsp::guid, KX_MAX_STRING);						
-  		    return 0;																		
-	    case KXPLUGIN_INSTANTIATE:
-		    *ret = (uintptr_t) new Plugin;
-		    return 0;																		
-	    default:																			
-		    *ret = NULL;																	
-		    return ~0;																		
-	    }	
+    static int entry(int command, uintptr_t* ret)
+    {
+        switch (command)
+        {
+        case KXPLUGIN_GET_NAME:
+            strncpy((char*) ret, rm::dsp::name, KX_MAX_STRING);
+            return 0;
+        case KXPLUGIN_GET_GUID:
+            strncpy((char*) ret, rm::dsp::guid, KX_MAX_STRING);
+            return 0;
+        case KXPLUGIN_INSTANTIATE:
+            *ret = (uintptr_t) new Plugin;
+            return 0;
+        default:
+            *ret = NULL;
+            return ~0;
+        }
     }
 
     int request_microcode()
     {
-        info      = 0;                              	
-        code      = 0;                              	
-        info_size = 0;                 	
-        code_size = 0;                 	
-        itramsize = 0;                    	
-        xtramsize = 0;                     	
+        info      = 0;
+        code      = 0;
+        info_size = 0;
+        code_size = 0;
+        itramsize = 0;
+        xtramsize = 0;
         strncpy(name, rm::dsp::name, sizeof(name));
         return 0;
     }
@@ -114,22 +114,22 @@ struct Plugin : iKXPlugin
     {
         using namespace rm;
 
-	    switch (id)																		
-	    {																					
-            case IKX_PLUGIN_NAME:      return (char*) dsp::name;																		
-	        case IKX_PLUGIN_GUID:      return (char*) dsp::guid;	
-	        case IKX_PLUGIN_ENGINE:    return (char*) dsp::engine;	
-	        case IKX_PLUGIN_CREATED:   return (char*) dsp::created;	
-	        case IKX_PLUGIN_COMMENT:   return (char*) dsp::comment;
+        switch (id)
+        {
+            case IKX_PLUGIN_NAME:      return (char*) dsp::name;
+            case IKX_PLUGIN_GUID:      return (char*) dsp::guid;
+            case IKX_PLUGIN_ENGINE:    return (char*) dsp::engine;
+            case IKX_PLUGIN_CREATED:   return (char*) dsp::created;
+            case IKX_PLUGIN_COMMENT:   return (char*) dsp::comment;
             case IKX_PLUGIN_COPYRIGHT: return (char*) dsp::copyright;
-	    }
+        }
 
         return 0;
     }
 
     iKXDSPWindow* create_dsp_wnd(kDialog* parent, kWindow* window, kFile* file)
     {
-	    return new PluginBox<Plugin>(parent, window, this, file);
+        return new PluginBox<Plugin>(parent, window, this, file);
     }
 
     ~Plugin()
@@ -141,27 +141,27 @@ struct Plugin : iKXPlugin
 
 // ............................................................................
 
-extern "C" __declspec(dllexport) 
+extern "C" __declspec(dllexport)
 int publish_plugins(int command, int param, uintptr_t* ret)
 {
-	switch (command)
-	{
-		case KXPLUGIN_GET_COUNT:
-			*ret = 1;
-			return 0;
+    switch (command)
+    {
+        case KXPLUGIN_GET_COUNT:
+            *ret = 1;
+            return 0;
 
-		case KXPLUGIN_GET_VERSION:
-			*ret = KXPLUGIN_VERSION;
-  			return 0;
-		
-		case KXPLUGIN_GET_NAME:	
-		case KXPLUGIN_GET_GUID:
-		case KXPLUGIN_INSTANTIATE:
-			if (param == 0) 
+        case KXPLUGIN_GET_VERSION:
+            *ret = KXPLUGIN_VERSION;
+            return 0;
+
+        case KXPLUGIN_GET_NAME:
+        case KXPLUGIN_GET_GUID:
+        case KXPLUGIN_INSTANTIATE:
+            if (param == 0)
                 return Plugin::entry(command, ret);
-	}
+    }
 
-	return ~0;
+    return ~0;
 }
 
 // ............................................................................

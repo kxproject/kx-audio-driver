@@ -1,16 +1,16 @@
 
 // kX DSP Resource Meter demo library
-// Copyright (c) Max Mikhailov, 2009 
+// Copyright (c) Max Mikhailov, 2009
 
 // Permission to use, copy, modify, distribute, and sell this software
 // for any purpose is hereby granted without fee, provided that the above
 // copyright notice appears in all copies and that both that copyright
 // notice and this permission notice appear in supporting documentation.
 // The author makes no representations about the suitability of this
-// software for any purpose. It is provided "as is" without express or 
+// software for any purpose. It is provided "as is" without express or
 // implied warranty.
 
-// rm.settings.cpp 
+// rm.settings.cpp
 // RM settings
 
 #ifndef RM_SETTINGS_INCLUDED
@@ -20,38 +20,38 @@
 
 namespace rm       {
 namespace settings {
-    
+
 // ............................................................................
-    
+
 enum Index
 {
     codeColorHi,
     codeColorMid,
     codeColorLow,
-    
+
     regsColorHi,
     regsColorMid,
     regsColorLow,
-    
+
     iTramRegsColorHi,
     iTramRegsColorMid,
     iTramRegsColorLow,
-    
+
     xTramRegsColorHi,
     xTramRegsColorMid,
     xTramRegsColorLow,
-    
+
     iTramSizeColorHi,
     iTramSizeColorMid,
     iTramSizeColorLow,
-    
+
     xTramSizeColorHi,
     xTramSizeColorMid,
     xTramSizeColorLow,
 
     boxWidth,
     boxHeight,
-    
+
     bkgColor,
     borderColor,
     borderRound,
@@ -70,7 +70,7 @@ enum Index
 struct Descriptor
 {
     Index       index;
-    int         min; 
+    int         min;
     int         max;
     int         default_;
 };
@@ -83,7 +83,7 @@ const Descriptor descriptor[] =
     {codeColorHi,       _ 0xCCEE5533},
     {codeColorMid,      _ 0xCCEEEE33},
     {codeColorLow,      _ 0xCC33EE33},
-                                    
+
     {regsColorHi,       _ 0xCCEE5533},
     {regsColorMid,      _ 0xCCEEEE33},
     {regsColorLow,      _ 0xCC33EE33},
@@ -91,22 +91,22 @@ const Descriptor descriptor[] =
     {iTramRegsColorHi,  _ 0xCCEE5533},
     {iTramRegsColorMid, _ 0xCCEEEE33},
     {iTramRegsColorLow, _ 0xCC33EE33},
-                                    
+
     {xTramRegsColorHi,  _ 0xCCEE5533},
     {xTramRegsColorMid, _ 0xCCEEEE33},
     {xTramRegsColorLow, _ 0xCC33EE33},
-                                    
+
     {iTramSizeColorHi,  _ 0xCCEE5533},
     {iTramSizeColorMid, _ 0xCCEEEE33},
     {iTramSizeColorLow, _ 0xCC33EE33},
-                                    
+
     {xTramSizeColorHi,  _ 0xCCEE5533},
     {xTramSizeColorMid, _ 0xCCEEEE33},
     {xTramSizeColorLow, _ 0xCC33EE33},
 
     {boxWidth,            64, 2400, 118},
     {boxHeight,           24, 2400, 88},
-    
+
     {bkgColor,          _ 0x72000000},
     {borderColor,       _ 0x99ffffff},
     {borderRound,         0, 48, 8},
@@ -115,7 +115,7 @@ const Descriptor descriptor[] =
     {labelColor,        _ 0xffffffff},
     {labelSize,           7, 48, 11},
     {ancientNames,        bool(0)}
-    
+
     #undef bool
     #undef _
 };
@@ -140,13 +140,13 @@ struct Type
             key.set(name[i], v);
         }
     }
-    
+
     int operator () (int i) const {return value[i];}
 
 private:
-    int value[Count];  
+    int value[Count];
 };
-    
+
 // ............................................................................
 
 } // ~ namespace settings
@@ -154,7 +154,7 @@ private:
 // ............................................................................
 
 namespace config {
-    
+
 // ............................................................................
 
 using namespace settings;

@@ -1,13 +1,13 @@
 
 // kX DSP Resource Meter demo library
-// Copyright (c) Max Mikhailov, 2009 
+// Copyright (c) Max Mikhailov, 2009
 
 // Permission to use, copy, modify, distribute, and sell this software
 // for any purpose is hereby granted without fee, provided that the above
 // copyright notice appears in all copies and that both that copyright
 // notice and this permission notice appear in supporting documentation.
 // The author makes no representations about the suitability of this
-// software for any purpose. It is provided "as is" without express or 
+// software for any purpose. It is provided "as is" without express or
 // implied warranty.
 
 // rm.counter.h
@@ -52,7 +52,7 @@ struct Counter
         {
             if (!api.enum_microcode(i, &m)
                 && (m.flag & MICROCODE_TRANSLATED)
-                && !api.get_microcode(i, code, 
+                && !api.get_microcode(i, code,
                     m.code_size, regs, m.info_size))
             {
                 m.code = code;
@@ -91,11 +91,11 @@ struct Counter
         {
             int v = used[i];
             int m = max(i);
-            _snprintf(text, n, string[legacyNames][i], 
+            _snprintf(text, n, string[legacyNames][i],
                 100. * v / m, v, m);
             text[n - 1] = 0;
             tt.update(i, text);
-        } 
+        }
     }
 
     double value(int index) const
@@ -147,7 +147,7 @@ struct Counter
         #endif
     }
 
-    Counter(iKX* api) : 
+    Counter(iKX* api) :
         api(*api),
         legacyNames(0),
         k2()
@@ -158,7 +158,7 @@ private:
     int  used[IndexCount];
     bool legacyNames;
     bool k2;
-    
+
     Counter(const Counter&);
     Counter& operator = (const Counter&);
 
@@ -168,15 +168,15 @@ private:
         used[iTramSize] += m.itramsize;
         used[xTramSize] += m.xtramsize;
 
-        int n = m.info_size / sizeof(dsp_register_info); 
+        int n = m.info_size / sizeof(dsp_register_info);
         for (int i = 0; i < n; i++)
         {
             switch (m.info[i].type & GPR_MASK)
             {
-                case GPR_TEMP:    
+                case GPR_TEMP:
                 case GPR_CONST:
                 case GPR_STATIC:
-                case GPR_OUTPUT: 
+                case GPR_OUTPUT:
                 case GPR_CONTROL: ++used[Regs];      break;
                 case GPR_ITRAM:   ++used[iTramRegs]; break;
                 case GPR_XTRAM:   ++used[xTramRegs]; break;
