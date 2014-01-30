@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>358E597C-0A86-4257-BF22-9A313E4A5E85</string>
+	<string>DEA79F86-9780-42E2-B5C5-E1543B5745C7</string>
 	<key>IDESourceControlProjectName</key>
 	<string>kx-project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BFE0D260-55A2-4291-8CE7-2DA1FE7C2EAD</key>
-		<string>https://github.com/kxproject/kx-audio-driver</string>
+		<key>A48ACE72-2F93-4C4E-8B50-60EE9D7B5324</key>
+		<string>https://github.com/kxproject/kx-audio-driver.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>kx-project/kx-project.xcodeproj/project.xcworkspace</string>
+	<string>kx-project.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BFE0D260-55A2-4291-8CE7-2DA1FE7C2EAD</key>
-		<string>../../..</string>
+		<key>A48ACE72-2F93-4C4E-8B50-60EE9D7B5324</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/kxproject/kx-audio-driver</string>
+	<string>https://github.com/kxproject/kx-audio-driver.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BFE0D260-55A2-4291-8CE7-2DA1FE7C2EAD</string>
+	<string>A48ACE72-2F93-4C4E-8B50-60EE9D7B5324</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BFE0D260-55A2-4291-8CE7-2DA1FE7C2EAD</string>
+			<string>A48ACE72-2F93-4C4E-8B50-60EE9D7B5324</string>
 			<key>IDESourceControlWCCName</key>
 			<string>kx-audio-driver</string>
 		</dict>
