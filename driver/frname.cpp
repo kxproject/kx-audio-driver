@@ -415,6 +415,18 @@ int kx_get_friendly_name(unsigned int device,unsigned int subsys,unsigned int ch
         strncpy(tmp_str,"Un4004 10k2",KX_MAX_STRING); // ??
        }
        break;
+     case 0x40051102:
+         if(is_k8)
+         {
+             strncpy(tmp_str,"EM8984 10k8",KX_MAX_STRING); // EM8984: 0404 PCIe
+             is_edsp=1;
+             lack_ac97=1;
+         }
+         else
+         {
+             strncpy(tmp_str,"Un4005 10k2",KX_MAX_STRING); // ??
+         }
+         break;
      case 0x40071102: // EM8982 - 1010 ('PCIe' series)
        {
         if(is_k8)

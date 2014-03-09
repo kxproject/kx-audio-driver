@@ -925,7 +925,9 @@ const TCHAR *file_list[]=
 int kx_clean_all()
 {
     debug(_T("kxsetup: cleaning everything up\n"));
-
+    
+    // this is 'legacy' code, since kX no longer installs into system32, except for sfman32.dll
+    
     TCHAR sys_dir[MAX_PATH]; GetSystemDirectory(sys_dir,sizeof(sys_dir));
     TCHAR file[MAX_PATH];
 

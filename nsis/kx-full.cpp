@@ -340,6 +340,8 @@ Section "Driver" Driver
     HideWindow
 
     ClearErrors
+    // Set current directory once again (kxsetup needs to run from this folder)
+    SetOutPath "$INSTDIR"
     ExecWait '"$INSTDIR\kxsetup" --install'
     Quit
 
