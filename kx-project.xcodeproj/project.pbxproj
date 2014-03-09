@@ -59,6 +59,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E80BEEE0189AB1D400EA2DB7 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		E80BEEE1189AB1D400EA2DB7 /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		E80BEEE3189AB1D400EA2DB7 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		E80BEEE4189AB1D400EA2DB7 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		E80BEEE5189AB1D400EA2DB7 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		E80BEEE6189AB1D400EA2DB7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		E80BEEE8189AB1D400EA2DB7 /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
+		E80BEEE9189AB1D400EA2DB7 /* includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = includes.h; sourceTree = "<group>"; };
+		E80BEEEB189AB1D400EA2DB7 /* dbgutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dbgutils.h; sourceTree = "<group>"; };
+		E80BEEEC189AB1D400EA2DB7 /* kxl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kxl.cpp; sourceTree = "<group>"; };
+		E80BEEED189AB1D400EA2DB7 /* rm.counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rm.counter.h; sourceTree = "<group>"; };
+		E80BEEEE189AB1D400EA2DB7 /* rm.display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rm.display.h; sourceTree = "<group>"; };
+		E80BEEEF189AB1D400EA2DB7 /* rm.dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rm.dsp.h; sourceTree = "<group>"; };
+		E80BEEF0189AB1D400EA2DB7 /* rm.settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rm.settings.h; sourceTree = "<group>"; };
+		E80BEEF2189AB1D400EA2DB7 /* default, alt. colors.reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "default, alt. colors.reg"; sourceTree = "<group>"; };
+		E80BEEF3189AB1D400EA2DB7 /* default, default colors.reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "default, default colors.reg"; sourceTree = "<group>"; };
+		E80BEEF4189AB1D400EA2DB7 /* huge, default colors.reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "huge, default colors.reg"; sourceTree = "<group>"; };
+		E80BEEF5189AB1D400EA2DB7 /* mini, default colors.reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mini, default colors.reg"; sourceTree = "<group>"; };
+		E80BEEF6189AB1D400EA2DB7 /* mini, native colors.reg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "mini, native colors.reg"; sourceTree = "<group>"; };
+		E80BEEF8189AB1D400EA2DB7 /* COPYING */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		E80BEEFA189AB1D400EA2DB7 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		E80BEEFB189AB1D400EA2DB7 /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		E80BEEFC189AB1D400EA2DB7 /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
+		E80BEEFD189AB1D400EA2DB7 /* includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = includes.h; sourceTree = "<group>"; };
+		E80BEEFF189AB1D400EA2DB7 /* dbgutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dbgutils.h; sourceTree = "<group>"; };
+		E80BEF00189AB1D400EA2DB7 /* kxl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kxl.cpp; sourceTree = "<group>"; };
+		E80BEF01189AB1D400EA2DB7 /* makefile.inc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.pascal; path = makefile.inc; sourceTree = "<group>"; };
+		E80BEF02189AB1D400EA2DB7 /* os.window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = os.window.h; sourceTree = "<group>"; };
+		E80BEF03189AB1D400EA2DB7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		E80BEF04189AB1D400EA2DB7 /* sa.dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sa.dsp.h; sourceTree = "<group>"; };
+		E80BEF05189AB1D400EA2DB7 /* sa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sa.h; sourceTree = "<group>"; };
+		E80BEF06189AB1D400EA2DB7 /* sa.minus.def */ = {isa = PBXFileReference; lastKnownFileType = text; path = sa.minus.def; sourceTree = "<group>"; };
+		E80BEF07189AB1D400EA2DB7 /* sa.options.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sa.options.h; sourceTree = "<group>"; };
+		E80BEF08189AB1D400EA2DB7 /* sources */ = {isa = PBXFileReference; lastKnownFileType = text; path = sources; sourceTree = "<group>"; };
 		E89C9AB018882F6F001C2E11 /* bit_allocate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bit_allocate.c; sourceTree = "<group>"; };
 		E89C9AB118882F6F001C2E11 /* bitstream.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
 		E89C9AB218882F6F001C2E11 /* coeff.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = coeff.c; sourceTree = "<group>"; };
@@ -2714,9 +2748,114 @@
 		E89CA5A118882F78001C2E11 /* xp.htm */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = xp.htm; sourceTree = "<group>"; };
 		E89CA5A218882F78001C2E11 /* xp.it.htm */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = xp.it.htm; sourceTree = "<group>"; };
 		E89CA5A318882F78001C2E11 /* xp.ru.htm */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = xp.ru.htm; sourceTree = "<group>"; };
+		E8CD1B5618CA4FBF00F02BE0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		E80BEEDE189AB1D400EA2DB7 /* kxfx_rmminus */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEDF189AB1D400EA2DB7 /* docs */,
+				E80BEEE6189AB1D400EA2DB7 /* README.md */,
+				E80BEEE7189AB1D400EA2DB7 /* src */,
+				E80BEEF1189AB1D400EA2DB7 /* visual presets */,
+			);
+			path = kxfx_rmminus;
+			sourceTree = "<group>";
+		};
+		E80BEEDF189AB1D400EA2DB7 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEE0189AB1D400EA2DB7 /* license.txt */,
+				E80BEEE1189AB1D400EA2DB7 /* readme.txt */,
+				E80BEEE2189AB1D400EA2DB7 /* screenshots */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		E80BEEE2189AB1D400EA2DB7 /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEE3189AB1D400EA2DB7 /* 1.png */,
+				E80BEEE4189AB1D400EA2DB7 /* 2.png */,
+				E80BEEE5189AB1D400EA2DB7 /* 3.png */,
+			);
+			path = screenshots;
+			sourceTree = "<group>";
+		};
+		E80BEEE7189AB1D400EA2DB7 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEE8189AB1D400EA2DB7 /* helpers.h */,
+				E80BEEE9189AB1D400EA2DB7 /* includes.h */,
+				E80BEEEA189AB1D400EA2DB7 /* kali */,
+				E80BEEEC189AB1D400EA2DB7 /* kxl.cpp */,
+				E80BEEED189AB1D400EA2DB7 /* rm.counter.h */,
+				E80BEEEE189AB1D400EA2DB7 /* rm.display.h */,
+				E80BEEEF189AB1D400EA2DB7 /* rm.dsp.h */,
+				E80BEEF0189AB1D400EA2DB7 /* rm.settings.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		E80BEEEA189AB1D400EA2DB7 /* kali */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEEB189AB1D400EA2DB7 /* dbgutils.h */,
+			);
+			path = kali;
+			sourceTree = "<group>";
+		};
+		E80BEEF1189AB1D400EA2DB7 /* visual presets */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEF2189AB1D400EA2DB7 /* default, alt. colors.reg */,
+				E80BEEF3189AB1D400EA2DB7 /* default, default colors.reg */,
+				E80BEEF4189AB1D400EA2DB7 /* huge, default colors.reg */,
+				E80BEEF5189AB1D400EA2DB7 /* mini, default colors.reg */,
+				E80BEEF6189AB1D400EA2DB7 /* mini, native colors.reg */,
+			);
+			path = "visual presets";
+			sourceTree = "<group>";
+		};
+		E80BEEF7189AB1D400EA2DB7 /* kxfx_saminus */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEF8189AB1D400EA2DB7 /* COPYING */,
+				E80BEEF9189AB1D400EA2DB7 /* doc */,
+				E80BEEFC189AB1D400EA2DB7 /* helpers.h */,
+				E80BEEFD189AB1D400EA2DB7 /* includes.h */,
+				E80BEEFE189AB1D400EA2DB7 /* kali */,
+				E80BEF00189AB1D400EA2DB7 /* kxl.cpp */,
+				E80BEF01189AB1D400EA2DB7 /* makefile.inc */,
+				E80BEF02189AB1D400EA2DB7 /* os.window.h */,
+				E80BEF03189AB1D400EA2DB7 /* README.md */,
+				E80BEF04189AB1D400EA2DB7 /* sa.dsp.h */,
+				E80BEF05189AB1D400EA2DB7 /* sa.h */,
+				E80BEF06189AB1D400EA2DB7 /* sa.minus.def */,
+				E80BEF07189AB1D400EA2DB7 /* sa.options.h */,
+				E80BEF08189AB1D400EA2DB7 /* sources */,
+			);
+			path = kxfx_saminus;
+			sourceTree = "<group>";
+		};
+		E80BEEF9189AB1D400EA2DB7 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEFA189AB1D400EA2DB7 /* license.txt */,
+				E80BEEFB189AB1D400EA2DB7 /* readme.txt */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
+		E80BEEFE189AB1D400EA2DB7 /* kali */ = {
+			isa = PBXGroup;
+			children = (
+				E80BEEFF189AB1D400EA2DB7 /* dbgutils.h */,
+			);
+			path = kali;
+			sourceTree = "<group>";
+		};
 		E89C9AA818882F13001C2E11 = {
 			isa = PBXGroup;
 			children = (
@@ -2755,6 +2894,8 @@
 				E89C9F7618882F72001C2E11 /* kxfx_profx */,
 				E89C9F7918882F72001C2E11 /* kxfx_saminus */,
 				E89C9F8A18882F72001C2E11 /* kxfx_synth */,
+				E80BEEDE189AB1D400EA2DB7 /* kxfx_rmminus */,
+				E80BEEF7189AB1D400EA2DB7 /* kxfx_saminus */,
 				E89C9F8E18882F72001C2E11 /* kxfx_ufx */,
 				E89CA04B18882F73001C2E11 /* kxfxlib */,
 				E89CA09E18882F73001C2E11 /* kxgui */,
@@ -4492,6 +4633,7 @@
 		E89C9F8E18882F72001C2E11 /* kxfx_ufx */ = {
 			isa = PBXGroup;
 			children = (
+				E8CD1B5618CA4FBF00F02BE0 /* README.md */,
 				E89C9F8F18882F72001C2E11 /* COPYING */,
 				E89C9F9018882F72001C2E11 /* kxufx_p.da */,
 				E89C9F9118882F72001C2E11 /* kxufx_s.da */,

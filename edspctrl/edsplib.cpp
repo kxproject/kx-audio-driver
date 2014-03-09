@@ -110,11 +110,10 @@ int upload_card_firmware(iKX *ikx)
 		}
 	}
 	
-	if(is_k8) // v2 EM8960 or v2 0404
+	if(is_k8) // v2 EM8960 or v2 0404 or PCIe 0404 EM8982
 	{
-		if(subsys==0x40021102)
+		if(subsys==0x40021102 || subsys==0x40051102) // 0404 or EM8982 PCIe 0404
 		{
-			printf("Warning: your E-DSP 0404 card -might- not work, since it is v2, not v1\n");
 			ret=ikx->upload_fpga_firmware(emu0404_netlist,sizeof(emu0404_netlist));  // 0404 v2
 		}
 		else

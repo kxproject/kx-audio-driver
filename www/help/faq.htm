@@ -53,6 +53,7 @@
  <li><a href='#Q20'>What kind of latency can I expect to see?</a></li>
  <li><a href='#Q44'>Does kX support ASIO 2 Direct Monitoring?</a></li>
  <li><a href='#Q49'>Why my audio application doesn't detect any ASIO inputs?</a></li>
+ <li><a href='#Q57'>ASIO does not work on Windows 8</a></li>
 </ul>
 
 <p class=Darken>DSP</p>
@@ -77,6 +78,10 @@
 
 <p class=Darken>Troubleshooting</p>
 <ul>
+ <li><a href='#Q56'>Everything is ok, but I have only one problem, using "Master Mixer" I have some crakles/popes sometimes. Why?</a></li>
+ <li><a href='#Q57'>ASIO does not work on Windows 8</a></li>
+ <li><a href='#Q57'>kX Mixer does not remember its settings after reboot on Windows 8</a></li>
+
  <li><a href='#Q46'>After installing kX Driver I cannot hear anything. Why?</a></li>
  <li><a href='#Q47'>Why do I hear audio feedback when using NetMeeting?</a></li>
  <li><a href='#Q47'>How do I turn off the recording feedback?</a></li>
@@ -96,7 +101,7 @@
 
 <hr width=80%>
 
-<a name=Q1>
+<a name=Q1 />
 <p><i>Q. What is the kX Project?</i></p>
 <p>A. The kX Project is a totally independent development project whose aim is to provide WDM Audio Drivers for newer operating systems for kX-Compatible audio cards. The kX Project is led by Eugene Gavrilov, Max Mikhailov and Hanz Petrov (full list of contributors <!-- <? echo("--"); echo(">"); klink("credits"); echo("<!--"); ?>-->here</a>).</p>
 <!-- <? print '--> <a href="#top"><img align=right src=images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
@@ -554,10 +559,24 @@ is available for this sampling rate only.<br>
 
 <a name=Q55>
 <p><i>Q: Where can I find the latest version?</i></p>
-<p>A: A. The latest stable release can be found on the <a href="http://www.kxproject.com/down.php">Downloads</a> page.<br>
-      If you are looking for the latest beta version, these releases are posted on the <a href='http://www.kxproject.com/forums.php' class=fade>kX Forums</a>. It is only recommended for experienced users to try these experimental releases.
+<p>A: The latest stable release can be found on the <a href="http://www.kxproject.com/down.php">Downloads</a> page.<br>
+      If you are looking for the latest beta version, these releases are posted on the <a href="http://www.kxproject.com/forums.php" class=fade>kX Forums</a>. It is only recommended for experienced users to try these experimental releases.
 </p>
 
 <!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q56>
+    <p><i>Q: Everything is ok, but I have only one problem, using "Master Mixer" I have some crakles/popes sometimes. Why?</i></p>
+    <p>A: This is a known issue with Windows 7 and later. Right click on KX manager, choose 'Settings', 'Setup Buffers'. Increase second one to 10.00ms (or more if needed).</p>
+        
+<!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
+<a name=Q57>
+    <p><i>Q: ASIO does not work on Windows 8</i></p>
+    <p><i>Q: kX Mixer does not remember its settings after reboot on Windows 8</i></p>
+    <p>A: The problem is caused by UAC (User Access Control) feature of WIndows 8, and possible bugs in kX driver installer. Please visit our support forum for details. You may need to register manually ASIO DLL and fix some registry entries.</p>
+    
+    <!-- <? print '--> <a href="#top"><img align=right src=/images/top.gif alt="Top" width="17" height="8"></a> <!--'; ?> -->
+
 
 </h4>
