@@ -573,7 +573,7 @@ void iMixyPluginDlg::init()
 			break;	
 		}	
 	}
-	char d[5];
+	char d[6];
 	vutop=75;
 	for (int i=1; i<6; i++)
 	{
