@@ -65,6 +65,7 @@ int iKXDaneSource::init(const char *fname,iKX *ikx_)
  	{
  		debug("iKXDaneSource: init - fread failed (%x)\n",GetLastError());
  		fclose(f);
+		free(buff);
  		return -8;
  	}
  	fclose(f);
