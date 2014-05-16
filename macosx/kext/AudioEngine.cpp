@@ -60,8 +60,13 @@ bool kXAudioEngine::init(kx_hw *hw_)
 		bps=16;
     
     n_channels=8; // should be <= MAX_CHANNELS_
-    
-    n_frames = (int)(hw->mtr_buffer.size * 8 / bps / n_channels);
+
+		// Use 4 times the buffer size to prevent some sort of underrun on
+		// Mavericks (related to Timer Coalescing?) causing playback crackle
+		// until streams are restart (e.g. stop/start playback)
+    n_frames = (int)(4 * (hw->mtr_buffer.size * 8 / bps / n_channels));
+
+    debug("kXAudioEngine[%p]::init - n_frames=%d\n", this, n_frames);
     
     is_running=0;
     
