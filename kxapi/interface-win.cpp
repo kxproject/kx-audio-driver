@@ -122,13 +122,9 @@ int iKX::init_winmm()
 
     if(GetVersionEx((OSVERSIONINFO *)&ver)) // ok?
     {
-     if(ver.dwPlatformId==VER_PLATFORM_WIN32_NT &&
-       (
-         (ver.dwMajorVersion==6 && ver.dwMinorVersion==0) ||  // Vista
-         (ver.dwMajorVersion==6 && ver.dwMinorVersion==1)     // Windows 7 
-       ))
+     if(ver.dwPlatformId==VER_PLATFORM_WIN32_NT && ver.dwMajorVersion>=6)
      {
-      debug("iKX(): init_winmm: mixers are not supported. Vista/Windows7 workaround\n");
+      debug("iKX(): init_winmm: mixers are not supported. Vista+ workaround\n");
       return 0;
      }
     }
