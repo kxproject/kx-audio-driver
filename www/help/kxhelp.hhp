@@ -7,7 +7,6 @@ Default topic=index.htm
 Display compile progress=No
 Full-text search=Yes
 Language=0x409 English (United States)
-; Language=0x419 Русский
 Title=kX Help
 
 [WINDOWS]
