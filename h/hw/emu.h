@@ -1,6 +1,6 @@
 // Copyright (c) by Jaroslav Kysela <perex@perex.cz>,
 //		     Creative Labs, Inc.
-//           Eugene Gavrilov, 2008. (http://www.kxproject.com/contact.php)
+//           Eugene Gavrilov, 2008. https://github.com/kxproject/ (previously www.kxproject.com)
 // All rights reserved
 
 /*

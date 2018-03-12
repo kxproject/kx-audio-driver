@@ -2,7 +2,7 @@
 
 Welcome to kX Audio Driver sources.
 
-Review official FAQ on http://www.kxproject.com
+Review official FAQ on https://github.com/kxproject/kX-Audio-driver-website/blob/master/FAQ (previously www.kxproject.com)
 for details on this project and its goals.
 
 Mac OS X sources are included, but 
@@ -38,6 +38,11 @@ Edit \set_env.bat. Find and choose correct DDK root folder:
 
 e.g. set DDKROOT=d:\audio\ntddk
 
+UPDATE: In order to make Windows 10-friendly INF files and digital signatures, it is advised to install
+Windows 10 driver kit. The scripts will attempt to auto-detect presence of WDK.
+The only tools from WDK required are inf2cat.exe and signtool.exe (and their corresponding DLL dependencies).
+These tools are found in "Program Files"\"Windows Kits"\10\bin\x86 and x64.
+
 2. Install NSIS from nsis.sourceforge.net. Tested version: 2.46
 
 Preferred install location: d:\audio\tools\nsis
@@ -63,8 +68,9 @@ You may also need 'sync' utility from SysInternals.
 
 Execute \genall.bat
 
-If code-signing is required, \genall.bat needs to run as Administrator. This is a limitation of Microsoft CodeSign.exe.
-If executed under regular user account, CodeSign will fail.
+If code-signing is required, \genall.bat needs to run as Administrator. This is a limitation of Microsoft SignTool.exe.
+If executed under regular user account, SignTool will fail.
+UPDATE: Windows 10 seems to allow running SignTool.exe from a regular account without administrator rights.
 
 Options found in \genall.bat:
 
@@ -72,11 +78,11 @@ set BUILD_TYPE=FRE
 
 - chooses 'Release' build, set to 'FRE' for 'Debug' build.
 
-'Release' builds are timestamped using VeriSign servers (if correct code signature is present).
-To avoid timestamping, edit \genall.bat and set TIMESTAMP_SIGN=NO
+'Release' builds are timestamped using DigiCert servers (if correct code signature is present).
+To avoid timestamping, edit build scripts accordingly.
 
 CodeSign certificate is configured via \makefile.inc
-Default is: SIGNTOOL=SignTool sign /ac ..\VeriSignG5.cer /s my /n "CEntrance, Inc."
+Default is: SIGNTOOL=SignTool sign /ac ..\DigiCertHighAssuranceEVRootCA.crt /tr http://timestamp.digicert.com /td sha256 /fd sha256 /sha1 "fba99782c2239017468e6e70f5b43c7f96c7f314"
 Certificate (or test certificate) needs to be installed into local certificate storage ("Personal").
 
 If no signing is required or possible, edit \makefile2.inc, find 'SIGNTOOL' command and use siple 'echo' instead.
@@ -148,7 +154,7 @@ Unified driver installer for both 32-bit and 64-bit architectures (NSIS-based) i
 	supports various modes, which need to be enabled in the source code by updating #if's
 
 \www\help:
-	various HTML files and CHM help file are stored on the web site (www.kxproject.com)
+	various HTML files and CHM help file are stored on the web site
 	help file is generated manually, outside of the driver build script
 	see \www\help\do.bat for details
 
@@ -175,7 +181,7 @@ TODO!
 
 ==== Final notes
 
-All source code is Copyright (c) Eugene Gavrilov, 2001-2014, unless specified otherwise.
+All source code is Copyright (c) Eugene Gavrilov, 2001-2018, unless specified otherwise.
 The code can be re-distributed under GPL v2, unless specified otherwise.
 
 Many thanks to kX Community.

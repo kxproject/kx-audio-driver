@@ -69,7 +69,7 @@ void set_font(kWindow *that,kFont &font,const char *section);
 extern iKXManager *manager;
 
 int update_asio_drivers(void);
-int get_mixer_folder(TCHAR *folder);
+int get_mixer_folder(TCHAR *folder,const TCHAR *filename,bool force64,bool force32);
 
 int get_mixer_page_by_guid(const char *guid);
 char *get_mixer_page_guid(int n);

@@ -1,6 +1,6 @@
 // kX kxctrl utility
 // Copyright (c) Eugene Gavrilov, 2001-2008.
-// www.kxproject.com
+//  https://github.com/kxproject/ (previously www.kxproject.com)
 // All rights reserved
 
 /*

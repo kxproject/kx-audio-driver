@@ -164,13 +164,11 @@ void launch_info()
 
 
 extern void launch_asio(void);
-extern int get_mixer_folder(TCHAR *folder);
 
 static void __cdecl thrdFunc(void *)
 { 
  TCHAR tmp_str[MAX_PATH];
- get_mixer_folder(tmp_str);
- _tcscat(tmp_str,_T("kxhelp.chm"));
+ get_mixer_folder(tmp_str_T("kxhelp.chm"),false,false); // launch native help file, 32 on 32, 64 on 64
 
  if(exist(tmp_str))
  {
@@ -179,7 +177,7 @@ static void __cdecl thrdFunc(void *)
   else
    if(MessageBox(NULL,mf.get_profile("menu","help_file"),"kX",MB_YESNO)==IDYES)
    {
-    ShellExecute(NULL,"open","http://www.kxproject.com/help.php",NULL,NULL,SW_SHOWMAXIMIZED);
+    ShellExecute(NULL,"open","https://github.com/kxproject/kX-Audio-driver-Documentation",NULL,NULL,SW_SHOWMAXIMIZED);
    }
 }
 

@@ -1,7 +1,7 @@
 //
 //  Ac97Controller.h
 //  kX AC97 control utility
-//  www.kxproject.com
+//  https://github.com/kxproject/ (previously www.kxproject.com)
 //
 //  Created by Dmitry P. Gorelov on 30.07.09.
 //  Copyright Dmitry Gorelov, 2009. All rights reserved.

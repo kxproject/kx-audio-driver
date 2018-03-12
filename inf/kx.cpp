@@ -1,5 +1,5 @@
 // kX Audio Driver
-// Copyright (c) Eugene Gavrilov, 2001-2014,
+// Copyright (c) Eugene Gavrilov, 2001-2018,
 // All rights reserved
 
 /*
@@ -22,7 +22,7 @@
 #include "vers.h"
 
 ; kX Audio Driver
-; Copyright (c) Eugene Gavrilov, 2001-2012,
+; Copyright (c) Eugene Gavrilov, 2001-2018,
 ; All rights reserved
 ; Version:  KX_DRIVER_VERSION_STR
 ; Built: KX_DRIVER_DATE (__TIME__; __DATE__)

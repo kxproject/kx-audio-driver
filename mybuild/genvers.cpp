@@ -1,5 +1,5 @@
 // kX Driver
-// Copyright (c) Eugene Gavrilov, 2001-2014.
+// Copyright (c) Eugene Gavrilov, 2001-2018.
 // All rights reserved
 
 /*
@@ -28,7 +28,7 @@
 
 char *str=
 "// kX Driver\n"
-"// Copyright (c) Eugene Gavrilov, 2001-2014.\n"
+"// Copyright (c) Eugene Gavrilov, 2001-2018.\n"
 "// All rights reserved\n"
 "\n"
 "// --- automatically generated file - DO NOT EDIT\n"

@@ -1,6 +1,6 @@
 // kX E-DSP Control Utility
 // Copyright (c) Eugene Gavrilov, 2008-2014.
-// www.kxproject.com
+// https://github.com/kxproject/ (previously kxproject.com)
 // All rights reserved
 
 /*

@@ -282,7 +282,8 @@ int launch_menu()
    tray_launcher_menu.add("kX Editor",MENU_TRAYCFG_BASE+4);
    tray_launcher_menu.add("24/96 Router",MENU_TRAYCFG_BASE+5);
    tray_launcher_menu.add("kX DSP",MENU_TRAYCFG_BASE+6);
-   tray_launcher_menu.add("Speaker Test",MENU_TRAYCFG_BASE+7);
+   if((LOBYTE(LOWORD(GetVersion())))<6) // <=Vista
+   		tray_launcher_menu.add("Speaker Test",MENU_TRAYCFG_BASE+7);
    tray_launcher_menu.add("I/O Status",MENU_TRAYCFG_BASE+8);
 
    settings_menu.add("Double click",&tray_launcher_menu);
@@ -360,14 +361,14 @@ int launch_menu()
   menu.add(mf.get_profile("menu","skin"),&skin_menu);
 
   // Internet menu items:
-  internet_menu.add("www.kxproject.com",15);
-  internet_menu.add(mf.get_profile("menu","check"),16);
-  internet_menu.add(mf.get_profile("menu","online"),78);
-  internet_menu.add(mf.get_profile("menu","download_s"),17);
-  internet_menu.add(mf.get_profile("menu","download_e"),20);
+  internet_menu.add("www.github.com/kxproject",15);
+  // internet_menu.add(mf.get_profile("menu","check"),16); // no longer supported
+  // internet_menu.add(mf.get_profile("menu","online"),78); // no longer supported
+  // internet_menu.add(mf.get_profile("menu","download_s"),17); // no longer supported
+  // internet_menu.add(mf.get_profile("menu","download_e"),20); // no longer supported
   manager->addon_mgr->menu(KXADDON_MENU_INTERNET,&internet_menu);
-  internet_menu.separator();
-  internet_menu.add(mf.get_profile("menu","donate"),73);
+  // internet_menu.separator();
+  // internet_menu.add(mf.get_profile("menu","donate"),73); // no longer supported
   menu.add(mf.get_profile("menu","internet"),&internet_menu);
   
 
@@ -556,11 +557,12 @@ CHANGE_DEVICE:
         break;
        case 15:
         {
-         ShellExecute(NULL,"open","http://www.kxproject.com",NULL,NULL,SW_SHOWMAXIMIZED);
+         ShellExecute(NULL,"open","https://www.github.com/kxproject/kX-Audio-driver-binaries",NULL,NULL,SW_SHOWMAXIMIZED);
         }
         break;
        case 16:
        {
+       #if 0
             kString tmp;
             tmp.Format("http://www.kxproject.com/update.php?version=%x",KX_VERSION_DWORD);
 
@@ -598,11 +600,15 @@ CHANGE_DEVICE:
             tmp+=tmp2;
 
             ShellExecute(NULL,"open",(LPCTSTR)tmp,NULL,NULL,SW_SHOWMAXIMIZED);
+        #endif
+        	MessageBox(NULL,_T("Sorry, this function is no longer supported"),_T("kX Mixer"),MB_OK);
+        	break;
         }
         break;
        case 17:
         {
-         ShellExecute(NULL,"open","http://www.kxproject.com/skins.php",NULL,NULL,SW_SHOWMAXIMIZED);
+         MessageBox(NULL,_T("Sorry, this function is no longer supported"),_T("kX Mixer"),MB_OK);
+         // ShellExecute(NULL,"open","http://www.kxproject.com/skins.php",NULL,NULL,SW_SHOWMAXIMIZED);
         }
         break;
        case 18:
@@ -647,7 +653,8 @@ CHANGE_DEVICE:
         break;
        case 20:
         {
-         ShellExecute(NULL,"open","http://www.kxproject.com/dsp.php",NULL,NULL,SW_SHOWMAXIMIZED);
+         // ShellExecute(NULL,"open","http://www.kxproject.com/dsp.php",NULL,NULL,SW_SHOWMAXIMIZED);
+         MessageBox(NULL,_T("Sorry, this function is no longer supported"),_T("kX Mixer"),MB_OK);
         }
         break;
 #define language(logical,id1,id2)                       \
@@ -830,7 +837,8 @@ CHANGE_DEVICE:
         break;
        case 73:
         {
-         ShellExecute(NULL,"open","http://www.kxproject.com/donate.php",NULL,NULL,SW_SHOWMAXIMIZED);
+         // ShellExecute(NULL,"open","http://www.kxproject.com/donate.php",NULL,NULL,SW_SHOWMAXIMIZED);
+         MessageBox(NULL,_T("Sorry, this function is no longer supported"),_T("kX Mixer"),MB_OK);
         }
         break;
        case 74: // kX Console
@@ -863,6 +871,7 @@ CHANGE_DEVICE:
         break;  
        case 78:
        {
+       		/*
             kString tmp;
             tmp.Format("http://www.kxproject.com/online.php?version=%x",KX_VERSION_DWORD);
 
@@ -900,6 +909,8 @@ CHANGE_DEVICE:
             tmp+=tmp2;
 
             ShellExecute(NULL,"open",(LPCTSTR)tmp,NULL,NULL,SW_SHOWMAXIMIZED);
+            */
+            MessageBox(NULL,_T("Sorry, this function is no longer supported"),_T("kX Mixer"),MB_OK);
         }
         break;
        default:
@@ -1470,9 +1481,12 @@ BOOL CControlApp::InitInstance()
           // update ASIO configuration
           if(update_asio_drivers())
           {
-               TCHAR mixer_folder[MAX_PATH]; mixer_folder[0]='"'; mixer_folder[1]=0;
-               get_mixer_folder(mixer_folder);
-               _tcscat(mixer_folder,_T("kxsetup.exe"));
+               TCHAR mixer_folder[MAX_PATH];
+               #if defined(_WIN64)
+               		get_mixer_folder(mixer_folder,_T("kxsetup.exe"),false,false); 	// kxmixer is 64-bit, launch native 64-bit kxsetup
+               #else
+               		get_mixer_folder(mixer_folder,_T("kxsetup.exe"),true,false);	// kxmixer is 32-bit, need to force 64-bit kxsetup here, if running on 64-bit Windows
+               #endif
 
                MessageBox(NULL,mf.get_profile("setup","setup21"),_T("kX Mixer"),MB_OK|MB_ICONINFORMATION);
 

@@ -1,5 +1,5 @@
 <!-- kX Project readme -->
-<!-- Copyright (c) kX Project, 2001-2014. All rights reserved. -->
+<!-- Copyright (c) kX Project, 2001-2018. All rights reserved. -->
 <html>
  <head>
   <title>kX Project Readme</title>
@@ -8,13 +8,13 @@
 <body>
 
 <hr>
-<h2>kX Driver Readme - generated __DATE__ __TIME__<br>kX Audio Driver (c) 2001-2014 Eugene Gavrilov.  All rights reserved.</h2>
+<h2>kX Driver Readme - generated __DATE__ __TIME__<br>kX Audio Driver (c) 2001-2018 Eugene Gavrilov.  All rights reserved.</h2>
 <hr>
 
 <h4>
 The kX Project is an on-going independent development project; visit 
 the kX Project website for the latest news and updates: 
-<a href="http://www.kxproject.com" target=new>www.kxproject.com</a>
+<a href="https://www.github.com/kxproject" target=new>www.github.com/kxproject</a>
 
 <br>
 
@@ -44,7 +44,7 @@ bug reporting procedure prior to submitting bug reports.
 #include "help\\intro.htm"
 
 Development of the kX Driver is on-going and new features are continually 
-being added; visit the <a href="http://www.kxproject.com">kX Project website</a> for news and updates.<br>
+being added; visit the <a href="https://www.github.com/kxproject">kX Project website</a> for news and updates.<br>
 
 A Software Developers Kit (SDK) for the kX Application Programming Interface
 (API) is available as a separate download from the kX Project website.<br>
@@ -110,14 +110,14 @@ might have installed incorrectly.<br>
 Post your comments & bug reports to our support forum.<br>
 
 Visit the kX Project website for the latest updates and more information:
-<a href="http://www.kxproject.com">www.kxproject.com</a><br>
+<a href="https://www.github.com/kxproject">www.github.com/kxproject</a><br>
 
 kX Project Forums:
 <ul>
- <li><a href="http://www.kxproject.com/forums.php" class=fade target=_blank>kX Project Official Forums</a></li>
+ <li><a href="http://www.hardwareheaven.com/community/forums/kx-project-audio-driver-support-forum.67/" class=fade target=_blank>kX Project Official Forums</a></li>
 </ul>
 
-kX Project Contact information: <a href="http://www.kxproject.com/contact.php">www.kxproject.com/contact.php</a><br>
+kX Project Contact information: <a href="https://www.github.com/kxproject">www.github.com/kxproject</a><br>
 
 <a name=toc7></a><h2>6. Version History and Changelog</h2>
 

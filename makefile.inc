@@ -1,5 +1,5 @@
 # kX Driver
-# Copyright (c) Eugene Gavrilov, 2001-2014
+# Copyright (c) Eugene Gavrilov, 2001-2018
 # All rights reserved
 
 # Configuration
@@ -7,7 +7,7 @@
 COPY=copy /b /d
 REGSVR32=regsvr32
 DONE=$(OBJECT_ROOT)\done\$(TARGET_CPU)
-SAY=@echo ==
+SAY=@echo =====
 
 INF_SOURCE=kx
 BLD_INF_FNAME=kx
@@ -18,22 +18,6 @@ C_DEFINES=$(C_DEFINES) -DKX_DEBUG
 SETUP_SETUP_FILE=kxdrv$(KX_VERSION)-full.exe
 KXSDK_ROOT=$(DONE)\..\SDK
 
-# Code signing:
-SIGNTOOL=SignTool sign /ac ..\VeriSignG5.cer /s my /n "CEntrance, Inc."
-# SIGNTOOL=echo -- Warning: no code signing
-!if "$(TIMESTAMP_SIGN)" == "YES"
-SIGNTOOL=$(SIGNTOOL) /t http://timestamp.verisign.com/scripts/timestamp.dll
-!endif
-INF2CAT=inf2cat.exe
-
-!if "$(TARGET_ARCH)" == "amd64"
-# note: nmake is 32-bit application, thus, it cannot install files into 'true' 64-bit system32 and system32/drivers
-# workaround here:
-WINSYS32DIR=$(WINDIR)\Sysnative
-!else
-WINSYS32DIR=$(WINDIR)\System32
-!endif
-
 # generate map files:
 LINKER_FLAGS=$(LINKER_FLAGS) /MAP /MAPINFO:EXPORTS
 
@@ -42,23 +26,12 @@ LINKER_FLAGS=$(LINKER_FLAGS) /MAP /MAPINFO:EXPORTS
 
 # common targets:
 
-sign: $(DONE)\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Signing $(TARGETNAME).$(TARGETEXT)...
-	$(SIGNTOOL) $(DONE)\$(TARGETNAME).$(TARGETEXT)
-
-register_dll: $(DONE)\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Registering with regsvr32...
-	$(REGSVR32) /s $(DONE)\$(TARGETNAME).$(TARGETEXT)
-
 $(DONE)\$(TARGETNAME).$(TARGETEXT): create_folders $(OBJ_PATH)\$(O)\$(TARGETNAME).$(TARGETEXT)
 	$(SAY) Installing into $(DONE)...
 	$(COPY) $(OBJ_PATH)\$(O)\$(TARGETNAME).$(TARGETEXT) $(SKINFILE) $(DONE)\$(TARGETNAME).$(TARGETEXT)
 
 install: $(DONE)\$(TARGETNAME).$(TARGETEXT)
 	$(SAY) Installed into $(DONE)
-
-install_sign: $(DONE)\$(TARGETNAME).$(TARGETEXT) sign
-	$(SAY) Installed and signed $(DONE)\$(TARGETNAME).$(TARGETEXT)
 
 $(DONE)\$(TARGETNAME).pdb: create_folders $(OBJ_PATH)\$(O)\$(TARGETNAME).pdb
 	$(SAY) Installing PDB into $(DONE)...
@@ -67,39 +40,13 @@ $(DONE)\$(TARGETNAME).pdb: create_folders $(OBJ_PATH)\$(O)\$(TARGETNAME).pdb
 pdb: $(DONE)\$(TARGETNAME).pdb
 	$(SAY) PDB copied into $(DONE)
 
-$(WINSYS32DIR)\$(TARGETNAME).$(TARGETEXT): $(DONE)\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Installing into $(WINDIR)\System32...
-	$(COPY) $(DONE)\$(TARGETNAME).$(TARGETEXT) $(WINSYS32DIR)
-
-install_sysdir: $(WINSYS32DIR)\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Installed into System32 folder
-
-$(WINSYS32DIR)\drivers\$(TARGETNAME).$(TARGETEXT): $(DONE)\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Installing into $(WINDIR)\System32\Drivers...
-	$(COPY) $(DONE)\$(TARGETNAME).$(TARGETEXT)  $(WINSYS32DIR)\drivers
-	$(COPY) $(DONE)\$(TARGETNAME).pdb  $(WINSYS32DIR)\drivers
-
-install_sysdir_sys: $(WINSYS32DIR)\drivers\$(TARGETNAME).$(TARGETEXT)
-	$(SAY) Installed into System32/drivers folder
-
 $(DONE):
 	$(SAY) Creating $(DONE) folder
 	if not exist $(DONE) mkdir $(DONE)
 
 create_folders: $(DONE)
 
-sync:
-	sync
-
-TARGET_INF_OS=XP_X86,Server2003_X86,Vista_X86,Server2008_X86,7_X86
-!if "$(TARGET_CPU)" == "amd64"
-TARGET_INF_OS=$(TARGET_INF_OS),XP_X64,Server2003_X64,Vista_X64,Server2008_X64,7_X64
-!endif
-
 # INF file generation
-
-cat: $(DONE)\$(BLD_CAT_FNAME).cat
-	$(SAY) Cat file generated
 
 inf: $(DONE)\$(BLD_INF_FNAME).inf
 	$(SAY) Inf file generated
@@ -107,12 +54,6 @@ inf: $(DONE)\$(BLD_INF_FNAME).inf
 $(DONE)\$(BLD_INF_FNAME).inf: ..\inf\$(INF_SOURCE).cpp create_folders
 	$(SAY) Generating .INF file..
 	cl -nologo -I..\h -EP ..\inf\$(INF_SOURCE).cpp > $(DONE)\$(BLD_INF_FNAME).inf
-
-$(DONE)\$(BLD_CAT_FNAME).cat: $(DONE)\$(BLD_INF_FNAME).inf create_folders $(DONE)\kx.sys
-	$(SAY) Generating .CAT file...
-	$(INF2CAT) /driver:$(DONE) /os:$(TARGET_INF_OS)
-	$(SAY) Signing catalog...
-	$(SIGNTOOL) $(DONE)\$(BLD_CAT_FNAME).cat
 
 # generating NSIS setup
 
@@ -127,7 +68,26 @@ $(DONE)\kx-full.nsi: ../nsis/kx-full.cpp
 	$(SAY) Precompiling NSIS script
 	cl -nologo -I..\h -EP ../nsis/kx-full.cpp -DKXSDK_ROOT="$(KXSDK_ROOT)" -DCE_DONE="$(DONE)" -DKX_HTTPD_ROOT="$(HTTPD_ROOT)" -DKX_SYSTEM_ROOT="$(WINDIR)\system32" > $(DONE)\kx-full.nsi
 
-$(DONE)\$(SETUP_SETUP_FILE): $(DONE)\kx-full.nsi $(DONE)\$(BLD_CAT_FNAME).cat $(DONE)\$(BLD_INF_FNAME).inf $(DONE)\kx.sys create_folders
+$(DONE)\$(SETUP_SETUP_FILE): $(DONE)\kx-full.nsi $(DONE)\$(BLD_INF_FNAME).inf $(DONE)\kx.sys $(DONE)\..\i386\kx.sys create_folders
+	$(SAY) Signing all binaries....
+	$(SIGNTOOL) $(DONE)\cmax20.dll $(DONE)\edspctrl.exe $(DONE)\kx.sys $(DONE)\kxaddons.kxa \
+				$(DONE)\kxapi.dll $(DONE)\kxasio.dll $(DONE)\kxctrl.exe $(DONE)\kxdynamica.kxl \
+				$(DONE)\kxefx.dll $(DONE)\kxefxreverb.kxl $(DONE)\kxefxtube.kxl $(DONE)\kxfxadc.kxl \
+				$(DONE)\kxfxlib.kxl $(DONE)\kxfxloudness.kxl $(DONE)\kxfxmixy42.kxl $(DONE)\kxfxmixy82.kxl \
+				$(DONE)\kxfxpack.kxl $(DONE)\kxfxrouter.kxl $(DONE)\kxgui.dll $(DONE)\kXi.dll \
+				$(DONE)\kxm120.kxl $(DONE)\kxmixer.exe $(DONE)\kxsetup.exe $(DONE)\kXSFi.dll $(DONE)\nccg.exe $(DONE)\sfman32.dll \
+				$(DONE)\..\i386\cmax20.dll $(DONE)\..\i386\edspctrl.exe $(DONE)\..\i386\kx.sys $(DONE)\..\i386\kxaddons.kxa \
+				$(DONE)\..\i386\kxapi.dll $(DONE)\..\i386\kxasio.dll $(DONE)\..\i386\kxctrl.exe $(DONE)\..\i386\kxdynamica.kxl \
+				$(DONE)\..\i386\kxefx.dll $(DONE)\..\i386\kxefxreverb.kxl $(DONE)\..\i386\kxefxtube.kxl $(DONE)\..\i386\kxfxadc.kxl \
+				$(DONE)\..\i386\kxfxlib.kxl $(DONE)\..\i386\kxfxloudness.kxl $(DONE)\..\i386\kxfxmixy42.kxl $(DONE)\..\i386\kxfxmixy82.kxl \
+				$(DONE)\..\i386\kxfxpack.kxl $(DONE)\..\i386\kxfxrouter.kxl $(DONE)\..\i386\kxgui.dll $(DONE)\..\i386\kXi.dll \
+				$(DONE)\..\i386\kxm120.kxl $(DONE)\..\i386\kxmixer.exe $(DONE)\..\i386\kxsetup.exe $(DONE)\..\i386\kXSFi.dll \
+				$(DONE)\..\i386\nccg.exe $(DONE)\..\i386\sfman32.dll
+	$(SAY) !!! FIXME NOW - need to submit kx.sys+kx.inf to Microsoft here
+	$(SAY) (re)Generating .CAT files
+	$(INF2CAT) /driver:$(DONE) /os:$(TARGET_INF_OS_64)
+	$(INF2CAT) /driver:$(DONE)\..\i386 /os:$(TARGET_INF_OS)
+	$(SIGNTOOL) $(DONE)\kx.cat $(DONE)\..\i386\kx.cat
 	$(SAY) Generating NSIS installer
 	$(NSIS_ROOT)\makensis.exe /NOCD $(DONE)\kx-full.nsi > $(DONE)\kx-full.log
 	$(SAY) Signing NSIS installer
