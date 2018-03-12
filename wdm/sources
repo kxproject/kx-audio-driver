@@ -7,7 +7,7 @@
 TARGETNAME=kx
 TARGETTYPE=DRIVER
 
-NTTARGETFILE2=install_sign pdb install_sysdir_sys sync
+NTTARGETFILE2=install pdb
 
 TARGETLIBS=$(OBJ_PATH)\..\driver\$O\kx.lib \
 	$(OBJ_PATH)\..\ac3\$O\kxac3.lib \

@@ -7,9 +7,7 @@
 TARGETNAME=kxasio
 TARGETTYPE=DYNLINK
 
-NTTARGETFILE2=install_sign
-# register_dll
-# (this is for debugging the DLL only)
+NTTARGETFILE2=install
 
 C_DEFINES=$(C_DEFINES) -D"WIN32" -D"_WINDOWS" 
 MSC_WARNING_LEVEL=-W3 -WX

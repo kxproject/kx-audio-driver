@@ -21,13 +21,10 @@
 
 #include "stdinc.h"
 
-extern int get_mixer_folder(TCHAR *folder);
-
 void consolidate()
 {
-         TCHAR mixer_folder[MAX_PATH]; mixer_folder[0]=0;
-         get_mixer_folder(mixer_folder);
-         _tcscat(mixer_folder,_T("kxctrl.exe"));
+         TCHAR mixer_folder[MAX_PATH];
+         get_mixer_folder(mixer_folder,_T("kxctrl.exe"),false,false); // kxctrl is native, 32 on 32, 64 on 64
 
          char tmp_str[MAX_PATH];
          sprintf(tmp_str,"$%d --gui",manager->get_current_device()>=0?manager->get_current_device():0);

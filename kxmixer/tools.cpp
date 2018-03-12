@@ -33,29 +33,7 @@ extern kFile mf2;
 extern HWND systray;
 int add_skin(const char *fname,int force);
 
-int get_mixer_folder(TCHAR *folder)
-{
- GetModuleFileName(NULL,folder,MAX_PATH);
-
- TCHAR *p=0;
- p = _tcsrchr(folder,'\\');
- if(p)
- {
-     p++;
-     if(_tcschr(p,'"'))
-     {
-      *p=0;
-      _tcscat(folder,_T("\""));
-     }
-     else
-     {
-      *p=0;
-     }
- }
-
- return 0;
-}
-
+#include "mixerfolder.h"
 
 BOOL CALLBACK MyEnumWindowsProc(
     HWND hwnd,  // handle to parent window
@@ -324,9 +302,12 @@ void g_reset_settings(int force) // 0: generic 1-first-time 2-inv. version
 
   // call setup's reset_kx_settings();
   {
-         TCHAR mixer_folder[MAX_PATH]; mixer_folder[0]='"'; mixer_folder[1]=0;
-         get_mixer_folder(mixer_folder);
-         _tcscat(mixer_folder,_T("kxsetup.exe"));
+         TCHAR mixer_folder[MAX_PATH];
+         #if defined(_WIN64)
+         		get_mixer_folder(mixer_folder,_T("kxsetup.exe"),false,false); 	// kxmixer is 64-bit, launch native 64-bit kxsetup
+         #else
+         		get_mixer_folder(mixer_folder,_T("kxsetup.exe"),true,false);	// kxmixer is 32-bit, need to force 64-bit kxsetup here, if running on 64-bit Windows
+         #endif
 
          MessageBox(NULL,(LPCTSTR)mf.get_profile("setup","setup20"),_T("kX Mixer"),MB_OK|MB_ICONINFORMATION);
          HINSTANCE hi=ShellExecute(NULL,"open",mixer_folder,"--reset",NULL,SW_SHOWDEFAULT);

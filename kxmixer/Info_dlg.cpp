@@ -72,7 +72,7 @@ void CInfoDialog::init()
 	dword val;
 
 	out.Format("       kX Project\r\nExpanding the Potential Exponentially\r\n"
-	           "       www.kxproject.com\r\n"
+	           "       www.github.com/kxproject\r\n"
         "----------------------------------------------------\r\n"
 	"kX Audio Driver, kX Mixer "
  #ifndef KX_DEBUG
@@ -137,7 +137,7 @@ void CInfoDialog::init()
  	"   Russ\r\n"
     "   Dmitry Gorelov\r\n"
  	" full list is available here:\r\n"
- 	"  www.kxproject.com/credits.php\r\n"
+ 	"  www.github.com/kxproject/\r\n"
  	);
  out+=tmp;
 

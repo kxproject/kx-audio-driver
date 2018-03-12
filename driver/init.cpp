@@ -887,7 +887,7 @@ KX_API(int,kx_get_device_caps(kx_hw *hw,kx_caps *caps,int *sz))
 #define DEFAULT_TANKMEM_SIZE        (256*1024)
 
 // std
-#define DEFAULT_STD_DMA_BUFFER      (4*2088) // from Win Drivers 2088 (0x828) samples
+#define DEFAULT_STD_DMA_BUFFER      (9600) // changed to 9600 for 3553; used to be: (4*2088) // from Win Drivers 2088 (0x828) samples
 
 // rec
 #define DEFAULT_STD_REC_BUFFER      (16384)

@@ -3,7 +3,7 @@
 //  kX Project audio driver for Mac OS X
 //  Created by Eugene Gavrilov.
 //	Copyright 2008-2014 Eugene Gavrilov. All rights reserved.
-//  www.kxproject.com
+//  https://github.com/kxproject/ (previously www.kxproject.com)
 
 /*
  *   This program is free software; you can redistribute it and/or modify

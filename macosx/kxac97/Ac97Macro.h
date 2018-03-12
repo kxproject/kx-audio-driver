@@ -1,7 +1,7 @@
 //
 //  Ac97Macro.h
 //  kX AC97 control utility
-//  www.kxproject.com
+//  https://github.com/kxproject/ (previously www.kxproject.com)
 //
 //  Created by Dmitry P. Gorelov on 27.08.09.
 //  Copyright Dmitry Gorelov, 2009. All rights reserved.
