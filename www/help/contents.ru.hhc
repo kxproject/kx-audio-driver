@@ -10,68 +10,68 @@
 </OBJECT>
 <UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐžÐ³Ð»Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ">
-		<param name="Local" value="index.htm">
+		<param name="Name" value="Îãëàâëåíèå">
+		<param name="Local" value="index.ru.htm">
 		<param name="ImageNumber" value="9">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Ð’Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ">
+		<param name="Name" value="Ââåäåíèå">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐœÐ¸ÑÑÐ¸Ñ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð° kX">
-			<param name="Local" value="mission.htm">
+			<param name="Name" value="Ìèññèÿ ïðîåêòà kX">
+			<param name="Local" value="mission.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐžÐ±Ð·Ð¾Ñ€ Ð·Ð²ÑƒÐºÐ¾Ð²Ð¾Ð³Ð¾ Ð´Ñ€Ð°Ð¹Ð²ÐµÑ€Ð° kX">
-			<param name="Local" value="overview.htm">
+			<param name="Name" value="Îáçîð çâóêîâîãî äðàéâåðà kX">
+			<param name="Local" value="overview.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="kX ÐœÐµÐ½ÑŽ">
-			<param name="Local" value="menu.htm">
+			<param name="Name" value="kX Ìåíþ">
+			<param name="Local" value="menu.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="kX ÐœÐ¸ÐºÑˆÐµÑ€">
+		<param name="Name" value="kX Ìèêøåð">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐžÐ±Ð·Ð¾Ñ€ kX ÐœÐ¸ÐºÑˆÐµÑ€Ð°">
-			<param name="Local" value="mixer.htm">
+			<param name="Name" value="Îáçîð kX Ìèêøåðà">
+			<param name="Local" value="mixer.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð‘Ð°Ð·Ð¾Ð²Ñ‹Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸">
-			<param name="Local" value="basic.htm">
+			<param name="Name" value="Áàçîâûå ôóíêöèè">
+			<param name="Local" value="basic.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð“Ð»Ð°Ð²Ð½Ñ‹Ðµ ÑƒÑ€Ð¾Ð²Ð½Ð¸ Ð¸ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸">
-			<param name="Local" value="master.htm">
+			<param name="Name" value="Ãëàâíûå óðîâíè è íàñòðîéêè">
+			<param name="Local" value="master.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð’Ñ…Ð¾Ð´Ñ‹ &amp; Ð’Ñ‹Ñ…Ð¾Ð´Ñ‹">
-			<param name="Local" value="insnouts.htm">
+			<param name="Name" value="Âõîäû &amp; Âûõîäû">
+			<param name="Local" value="insnouts.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð—Ð°Ð¿Ð¸ÑÑŒ">
-			<param name="Local" value="recording.htm">
+			<param name="Name" value="Çàïèñü">
+			<param name="Local" value="recording.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="AC97 ÐšÐ¾Ð´ÐµÐº">
-			<param name="Local" value="AC97.htm">
+			<param name="Name" value="AC97 Êîäåê">
+			<param name="Local" value="AC97.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð£Ñ€Ð¾Ð²Ð½Ð¸ ÑÑ„Ñ„ÐµÐºÑ‚Ð¾Ð²">
-			<param name="Local" value="fxlevels.htm">
+			<param name="Name" value="Óðîâíè ýôôåêòîâ">
+			<param name="Local" value="fxlevels.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="SoundFonts">
-			<param name="Local" value="soundfonts.htm">
+			<param name="Local" value="soundfonts.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Analyser">
-			<param name="Local" value="analyser.htm">
+			<param name="Local" value="analyser.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
@@ -80,52 +80,52 @@
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾ Ð¿Ð¾ kX DSP">
-			<param name="Local" value="dspguide.htm">
+			<param name="Name" value="Ðóêîâîäñòâî ïî kX DSP">
+			<param name="Local" value="dspguide.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="kX Router (ÐœÐ°Ñ€ÑˆÑ€ÑƒÑ‚Ð¸Ð·Ð°Ñ‚Ð¾Ñ€)">
+		<param name="Name" value="kX Router (Ìàðøðóòèçàòîð)">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾ Ð¿Ð¾ kX Router">
-			<param name="Local" value="kxrouter.htm">
+			<param name="Name" value="Ðóêîâîäñòâî ïî kX Router">
+			<param name="Local" value="kxrouter.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾ Ð¿Ð¾ Ð¼Ð°Ñ€ÑˆÑ€ÑƒÑ‚Ð¸Ð·Ð°Ñ†Ð¸Ð¸">
-			<param name="Local" value="routings.htm">
+			<param name="Name" value="Ðóêîâîäñòâî ïî ìàðøðóòèçàöèè">
+			<param name="Local" value="routings.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€ kX Dane">
+		<param name="Name" value="Ðåäàêòîð kX Dane">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€ kX Dane">
-			<param name="Local" value="editor.htm">
+			<param name="Name" value="Ðåäàêòîð kX Dane">
+			<param name="Local" value="editor.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ kX">
+		<param name="Name" value="Àâòîìàòèçàöèÿ kX">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾ Ð¿Ð¾ kX-ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ð¸">
-			<param name="Local" value="automation.htm">
+			<param name="Name" value="Ðóêîâîäñòâî ïî kX-Àâòîìàòèçàöèè">
+			<param name="Local" value="automation.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="kX ÐŸÑƒÐ»ÑŒÑ‚ Ð”Ð£">
+		<param name="Name" value="kX Ïóëüò ÄÓ">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾ Ð¿Ð¾ kX ÐŸÑƒÐ»ÑŒÑ‚Ñƒ :)">
-			<param name="Local" value="remote.htm">
+			<param name="Name" value="Ðóêîâîäñòâî ïî kX Ïóëüòó :)">
+			<param name="Local" value="remote.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
@@ -134,8 +134,8 @@
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ°">
-			<param name="Local" value="setup.htm">
+			<param name="Name" value="Óñòàíîâêà">
+			<param name="Local" value="setup.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
@@ -144,113 +144,113 @@
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ASIO">
-			<param name="Local" value="asio.htm">
+			<param name="Name" value="Óïðàâëåíèå ASIO">
+			<param name="Local" value="asio.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ASIO Ð—Ð°Ð¿Ð¸ÑÑŒ">
-			<param name="Local" value="asiorec.htm">
+			<param name="Name" value="ASIO Çàïèñü">
+			<param name="Local" value="asiorec.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÐºÐ¾Ð»Ð¾Ð½Ð¾Ðº Ð¸ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€ÐºÑ†Ð¸Ð¸ (kX Speaker Test and Surround Setup)">
+		<param name="Name" value="Ïðîâåðêà êîëîíîê è íàñòðîéêà êîíôèãóðêöèè (kX Speaker Test and Surround Setup)">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÐºÐ¾Ð»Ð¾Ð½Ð¾Ðº">
-			<param name="Local" value="spktest.htm">
+			<param name="Name" value="Ïðîâåðêà êîëîíîê">
+			<param name="Local" value="spktest.ru.htm">
 			</OBJECT>
 	</UL>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="Surrounder">
-			<param name="Local" value="surrounder.htm">
+			<param name="Local" value="surrounder.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Ð£ÑÑ‚Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ Ð¾ÑˆÐ¸Ð±Ð¾Ðº Ð¸ Ð²Ð¾Ð¿Ñ€Ð¾ÑÑ‹">
+		<param name="Name" value="Óñòðàíåíèå îøèáîê è âîïðîñû">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð˜Ð·Ð²ÐµÑÑ‚Ð½Ñ‹Ðµ Ð¾ÑˆÐ¸Ð±ÐºÐ¸ Ð¸ Ð½ÐµÐ´Ð¾Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸">
-			<param name="Local" value="Issues.htm">
+			<param name="Name" value="Èçâåñòíûå îøèáêè è íåäîðàáîòêè">
+			<param name="Local" value="Issues.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="FAQ - Ð§Ð°ÑÑ‚Ð¾ Ð—Ð°Ð´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ð’Ð¾Ð¿Ñ€Ð¾ÑÑ‹">
-			<param name="Local" value="faq.htm">
+			<param name="Name" value="FAQ - ×àñòî Çàäàâàåìûå Âîïðîñû">
+			<param name="Local" value="faq.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐŸÑ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ A: Ð¢ÐµÑ…Ð½Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑÐ¿Ñ€Ð°Ð²ÐºÐ°">
+		<param name="Name" value="Ïðèëîæåíèå A: Òåõíè÷åñêàÿ ñïðàâêà">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð¡Ð¸Ð³Ð½Ð°Ð»ÑŒÐ½Ð°Ñ Ð´Ð¸Ð°Ð³Ñ€Ð°Ð¼Ð¼Ð° kX">
-			<param name="Local" value="signaflow.htm">
+			<param name="Name" value="Ñèãíàëüíàÿ äèàãðàììà kX">
+			<param name="Local" value="signaflow.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð¡Ð¸Ð³Ð½Ð°Ð»ÑŒÐ½Ð°Ñ Ð´Ð¸Ð°Ð³Ñ€Ð°Ð¼Ð¼Ð° Audigy2/p16v">
-			<param name="Local" value="p16v.htm">
+			<param name="Name" value="Ñèãíàëüíàÿ äèàãðàììà Audigy2/p16v">
+			<param name="Local" value="p16v.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð¢ÐµÑ…Ð½. Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¿Ð¾ Ð°Ð¿Ð¿Ð°Ñ€Ð°Ñ‚ÑƒÑ€Ðµ">
-			<param name="Local" value="hardware.htm">
+			<param name="Name" value="Òåõí. èíôîðìàöèÿ ïî àïïàðàòóðå">
+			<param name="Local" value="hardware.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐÐ°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð’Ñ…Ð¾Ð´Ð¾Ð² Ð¸ Ð²Ñ‹Ñ…Ð¾Ð´Ð¾Ð²">
-			<param name="Local" value="io.htm">
+			<param name="Name" value="Íàçíà÷åíèÿ Âõîäîâ è âûõîäîâ">
+			<param name="Local" value="io.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐŸÑ€Ð¸Ð¼ÐµÑ‡Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð¿ÐµÑ€ÐµÐ´Ð½Ð¸Ð¼/Ñ‚Ñ‹Ð»Ð¾Ð²Ñ‹Ð¼ Ð¦ÐÐŸ">
-			<param name="Local" value="rear.htm">
+			<param name="Name" value="Ïðèìå÷àíèå ïî ïåðåäíèì/òûëîâûì ÖÀÏ">
+			<param name="Local" value="rear.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="MIDI Implementation">
-			<param name="Local" value="midi.htm">
+			<param name="Local" value="midi.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐŸÑ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ B: Ð“Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ð¹">
+		<param name="Name" value="Ïðèëîæåíèå B: Ãëîññàðèé">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð“Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ð¹">
-			<param name="Local" value="glossary.htm">
+			<param name="Name" value="Ãëîññàðèé">
+			<param name="Local" value="glossary.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐŸÑ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ C: ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸">
+		<param name="Name" value="Ïðèëîæåíèå C: Ïàðàìåòðû êîìàíäíîé ñòðîêè">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸">
-			<param name="Local" value="commandline.htm">
+			<param name="Name" value="Ïàðàìåòðû êîìàíäíîé ñòðîêè">
+			<param name="Local" value="commandline.ru.htm">
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="ÐÐ²Ñ‚Ð¾Ñ€ÑÐºÐ¸Ðµ Ð¿Ñ€Ð°Ð²Ð° Ð¸ Ð±Ð»Ð°Ð³Ð¾Ð´Ð°Ñ€Ð½Ð¾ÑÑ‚Ð¸">
+		<param name="Name" value="Àâòîðñêèå ïðàâà è áëàãîäàðíîñòè">
 		<param name="ImageNumber" value="1">
 		</OBJECT>
 	<UL>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Copyright - ÐÐ²Ñ‚Ð¾Ñ€ÑÐºÐ¸Ðµ Ð¿Ñ€Ð°Ð²Ð°">
-			<param name="Local" value="copyright.htm">
+			<param name="Name" value="Copyright - Àâòîðñêèå ïðàâà">
+			<param name="Local" value="copyright.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð‘Ð»Ð°Ð³Ð¾Ð´Ð°Ñ€Ð½Ð¾ÑÑ‚Ð¸">
-			<param name="Local" value="credits.htm">
+			<param name="Name" value="Áëàãîäàðíîñòè">
+			<param name="Local" value="credits.ru.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð›Ð¸Ñ†ÐµÐ½Ð·Ð¸Ð¾Ð½Ð½Ð¾Ðµ ÑÐ¾Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ">
+			<param name="Name" value="Ëèöåíçèîííîå ñîãëàøåíèå">
 			<param name="Local" value="license.txt">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Ð›Ð¸Ñ†ÐµÐ½Ð·Ð¸Ð¾Ð½Ð½Ð¾Ðµ ÑÐ¾Ð³Ð»Ð°ÑˆÐµÐ½Ð¸Ðµ Ð½Ð° SDK">
+			<param name="Name" value="Ëèöåíçèîííîå ñîãëàøåíèå íà SDK">
 			<param name="Local" value="license2.txt">
 			</OBJECT>
 	</UL>

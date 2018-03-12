@@ -1,58 +1,58 @@
 [OPTIONS]
 Compatibility=1.1 or later
-Compiled file=kxhelp.chm
-Contents file=contents.hhc
+Compiled file=kxhelp_ru.chm
+Contents file=contents.ru.hhc
 Default Window=Default
-Default topic=index.htm
+Default topic=index.ru.htm
 Display compile progress=No
 Full-text search=Yes
-Language=0x419 Русский
+Language=0x419 Russian (Russia)
 Title=kX Help
 
 [WINDOWS]
-Default=,"contents.hhc",,"index.htm",,,,,,0x42520,,0x3006,[112,84,912,684],,,,,,,0
+Default=,"contents.ru.hhc",,"index.ru.htm",,,,,,0x42520,,0x3006,[112,84,912,684],,,,,,,0
 
 
 [FILES]
-ac97.htm
-analyser.htm
-asio.htm
-asiorec.htm
-automation.htm
-basic.htm
-commandline.htm
-copyright.htm
-credits.htm
-dspguide.htm
-editor.htm
-faq.htm
-fxlevels.htm
-rear.htm
-glossary.htm
-hardware.htm
-index.htm
-insnouts.htm
-io.htm
-issues.htm
+ac97.ru.htm
+analyser.ru.htm
+asio.ru.htm
+asiorec.ru.htm
+automation.ru.htm
+basic.ru.htm
+commandline.ru.htm
+copyright.ru.htm
+credits.ru.htm
+dspguide.ru.htm
+editor.ru.htm
+faq.ru.htm
+fxlevels.ru.htm
+rear.ru.htm
+glossary.ru.htm
+hardware.ru.htm
+index.ru.htm
+insnouts.ru.htm
+io.ru.htm
+issues.ru.htm
 license.txt
 license2.txt
-master.htm
-menu.htm
-midi.htm
-mission.htm
-mixer.htm
-overview.htm
-recording.htm
-remote.htm
-kxrouter.htm
-setup.htm
-signaflow.htm
-p16v.htm
-skins.htm
-soundfonts.htm
-spktest.htm
-surrounder.htm
-direct.htm
+master.ru.htm
+menu.ru.htm
+midi.ru.htm
+mission.ru.htm
+mixer.ru.htm
+overview.ru.htm
+recording.ru.htm
+remote.ru.htm
+kxrouter.ru.htm
+setup.ru.htm
+signaflow.ru.htm
+p16v.ru.htm
+skins.ru.htm
+soundfonts.ru.htm
+spktest.ru.htm
+surrounder.ru.htm
+direct.ru.htm
 
 [INFOTYPES]
 
