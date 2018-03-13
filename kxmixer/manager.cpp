@@ -168,7 +168,7 @@ extern void launch_asio(void);
 static void __cdecl thrdFunc(void *)
 { 
  TCHAR tmp_str[MAX_PATH];
- get_mixer_folder(tmp_str_T("kxhelp.chm"),false,false); // launch native help file, 32 on 32, 64 on 64
+ get_mixer_folder(tmp_str,_T("kxhelp.chm"),false,false); // launch native help file, 32 on 32, 64 on 64
 
  if(exist(tmp_str))
  {
