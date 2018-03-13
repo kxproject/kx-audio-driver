@@ -691,7 +691,7 @@ void register_asio(void)
 
     get_mixer_folder(dir,_T("kxasio.dll"),false,true); // now, force 32-bit path
 
-    debug("kxmixer: calling regsvr to unregister ASIO [%s %s]\n",regsvr_path,dir);
+    debug("kxmixer: calling regsvr to register ASIO [%s %s]\n",regsvr_path,dir);
     debug("kxmixer: regsvr32 returned: %d\n",spawnl(P_WAIT,regsvr_path,regsvr_path,"/s",dir,NULL));
   }
 #endif
