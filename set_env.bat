@@ -15,23 +15,24 @@ echo --- setting up build environment...
 
 if %1.==64. (
 set TARGET_OS=WNet
+rem (should be wnet; also supported: win7, Wlh, WXP, w2k)
 set TARGET_ARCH=amd64
 set TARGET_CPU=amd64
 rem note: WinXP+x64 are not supported
-rem note: TARGET_ARCH=amd64 is not supported by 'native' DDK setenv.bat, need to add this
+rem note: TARGET_ARCH=amd64 is not supported by 'native' DDK setenv.bat, need to add this manually by patching DDK
 shift
+) else (
+if %TARGET_OS%.==. set TARGET_OS=wxp
+if %TARGET_ARCH%.==. set TARGET_ARCH=x86
+rem architecture: folder name for build_output_dir (should be: x86 or amd64) == used for folder suffix
+if %TARGET_CPU%.==. set TARGET_CPU=i386
+rem cpu: x86, amd64 or ia64 == used for folder name
 )
 
 rem -- user-tweakable defaults
 
 if %BUILD_TYPE%.==. set BUILD_TYPE=FRE
 rem can be: CHK or FRE [c / f for win2k]
-if %TARGET_OS%.==. set TARGET_OS=WNet
-rem (should be wnet; also supported: win7, Wlh, WXP, w2k)
-if %TARGET_ARCH%.==. set TARGET_ARCH=amd64
-rem architecture: folder name for build_output_dir (should be: x86 or amd64) == used for folder suffix
-if %TARGET_CPU%.==. set TARGET_CPU=amd64
-rem cpu: x86, amd64 or ia64 == used for folder name
 
 set OBJECT_ROOT=%TEMP%\Build
 rem set OBJECT_ROOT=d:\Build
@@ -85,12 +86,12 @@ if exist %WDKROOT%\"Program Files\Windows Kits\10\bin\x86\Inf2Cat.exe" (
 	set INF2CAT=%WDKROOT%\"Program Files\Windows Kits\10\bin\x86\Inf2Cat.exe"
 	set WDK_INF2CAT=1
 	set TARGET_INF_OS=XP_X86,Server2003_X86,Vista_X86,Server2008_X86,7_X86,8_X86,6_3_X86,10_X86
-	set TARGET_INF_OS_64=$(TARGET_INF_OS),XP_X64,Server2003_X64,Vista_X64,Server2008_X64,7_X64,8_X64,6_3_X64,10_X64
+	set TARGET_INF_OS_64=XP_X64,Server2003_X64,Vista_X64,Server2008_X64,7_X64,8_X64,6_3_X64,10_X64
 	echo --- Using new inf2cat
 	) else (
 	set INF2CAT=Inf2Cat.exe
 	set TARGET_INF_OS=XP_X86,Server2003_X86,Vista_X86,Server2008_X86,7_X86
-	set TARGET_INF_OS_64=$(TARGET_INF_OS),XP_X64,Server2003_X64,Vista_X64,Server2008_X64,7_X64
+	set TARGET_INF_OS_64=XP_X64,Server2003_X64,Vista_X64,Server2008_X64,7_X64
 	echo --- Using old inf2cat
 	)
 

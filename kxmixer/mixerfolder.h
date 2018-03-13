@@ -13,6 +13,13 @@
 
 int get_mixer_folder(TCHAR *folder,const TCHAR *filename,bool force64,bool force32)
 {
+ #if defined(_WIN64)
+	UNREFERENCED_PARAMETER(force64);
+ #endif
+ #if !defined(_WIN64)
+	UNREFERENCED_PARAMETER(force32);
+ #endif
+
  folder[0]=0;
 
  #if defined(_WIN64)
