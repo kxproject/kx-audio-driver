@@ -71,6 +71,14 @@ int get_mixer_folder(TCHAR *folder,const TCHAR *filename,bool force64,bool force
      {
       *p=0;
       _tcscat(folder,filename);
+      if(_tcschr(folder,' ')) // contains spaces?
+      {
+      	TCHAR tmp[MAX_PATH];
+      	tmp[0]='"';
+      	_tcscpy(tmp+1,folder);
+      	_tcscat(tmp,_T("\""));
+      	_tcscpy(folder,tmp);
+      }
      }
  }
 
