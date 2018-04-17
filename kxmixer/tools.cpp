@@ -391,84 +391,96 @@ void g_reset_settings(int force) // 0: generic 1-first-time 2-inv. version
        debug("! kxmixer: sa.minus not registered\n");
 
       // register all the microeffects (.da)
-      TCHAR sdk_path[MAX_PATH]; _stprintf(sdk_path,_T("SDK\\kxfx_kxm120\\da"));
+      // SDK is installed into $PROGRAMFILES/kX Project/SDK folder
+      // on x64 system, x64 version of PM is used
+      bool force64=false;
+      #if !defined(_WIN64)
+        force64=true;   // kxmixer is 32-bit, need to force 64-bit path her
+      #endif
 
-      _stprintf(file_name,"%s\\kxm100.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm100.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm110.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm110.da"),force64,false);
       pm.register_plugin(file_name,0);
-      // _stprintf(file_name,"%s\\kxm120.da",sdk_path);
+      // (kxm120.da is already included with a separate KXL)
+      // get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm120.da"),force64,false);
       // pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm150.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm150.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm160.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm160.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm170.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm170.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm180.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm180.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm190.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm190.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm200.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm200.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm210.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm210.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm220.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm220.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm300.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm300.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm310.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm310.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm320.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm320.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm330.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm330.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm400.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm400.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm500.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm500.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm510.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm510.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm520.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm520.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm550.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm550.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm560.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm560.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm600.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm600.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm700.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm700.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm800.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm800.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm810.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm810.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm820.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm820.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm830.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm830.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm900.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm900.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\kxm910.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\kxm910.da"),force64,false);
       pm.register_plugin(file_name,0);
       
-      _stprintf(file_name,"%s\\matrix4x4_m_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\matrix4x4_m_v1.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microbit_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microbit_v1.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microchorus_v2.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microchorus_v2.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microdelay_m_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microdelay_m_v1.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microdelay_x_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microdelay_x_v1.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\micropan_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microexiter_v1.1.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microphaser_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microlimiter_v1.3.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\microwah-wah_v1.0.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\micropan_v1.0.da"),force64,false);
       pm.register_plugin(file_name,0);
-      _stprintf(file_name,"%s\\space_80_v1.5.da",sdk_path);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microphaser_v1.0.da"),force64,false);
+      pm.register_plugin(file_name,0);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microwidth_v1.0.da"),force64,false);
+      pm.register_plugin(file_name,0);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\microwah-wah_v1.0.da"),force64,false);
+      pm.register_plugin(file_name,0);
+      get_mixer_folder(file_name,_T("SDK\\kxfx_kxm120\\da\\space_80_v1.5.da"),force64,false);
       pm.register_plugin(file_name,0);
   }
 
