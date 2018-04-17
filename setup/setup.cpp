@@ -1,5 +1,5 @@
 // kX Setup
-// Copyright (c) Eugene Gavrilov, 2001-2014.
+// Copyright (c) Eugene Gavrilov, 2001-2018.
 // All rights reserved
 
 /*
@@ -128,6 +128,10 @@ void kx_setup(kWindow *w,int remove_only)
    check_version_and_uninstall(1);
    driver_removed=1;
   }
+ }
+ else
+ {
+  kx_clean_all(); // used to be in kx_install_driver()
  }
 
  // enumerate all the devices
@@ -804,9 +808,10 @@ void register_shell(void)
 
 int kx_install_driver(void)
 {
-    debug(_T("kxsetup: install kx drivers\n"));
+    debug(_T("kxsetup: install kx driver stuff\n"));
 
-    kx_clean_all();
+    // don't clean all here, because system32/drivers/kx.sys is already installed
+    // call kx_clean_all(); earlier in kx_setup() instead
 
     debug(_T("kxsetup: install INF file\n"));
     install_inf_file();
@@ -907,7 +912,7 @@ const TCHAR *file_list[]=
     _T("kxmixer.exe"),
     _T("kxsetup.exe"),
     _T("kxsfi.dll"),
-    _T("sfman32.dll"),
+    // _T("sfman32.dll"), // don't touch sfman32.dll, since we don't install it ourselves anymore
     _T("drivers\\kx.sys"),
     _T("kx.sys"),
     _T("kxefx.kxs"),
