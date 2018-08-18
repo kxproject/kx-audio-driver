@@ -22,6 +22,7 @@
 
 #include "AudioDevice.h"
 #include "AudioEngine.h"
+#include "emu.h"
 
 #define DBGCLASS "kXAudioEngine"
 
@@ -460,13 +461,67 @@ IOAudioStream *kXAudioEngine::createNewAudioStream(int chn,IOAudioStreamDirectio
 			if(sampleBuffer && sampleBufferSize)
 				audioStream->setSampleBuffer(sampleBuffer, sampleBufferSize);
             
-				// This device only allows a single format and a choice of 2 different sample rates
-            rate.fraction = 0;
-            rate.whole = sampling_rate;
-            audioStream->addAvailableFormat(&format, &rate, &rate);
-            
-				// Finally, the IOAudioStream's current format needs to be indicated
-            audioStream->setFormat(&format);
+            if(hw->is_10k2){
+                rate.fraction = 0;
+                rate.whole = sampling_rate;
+                format.fBitDepth = 24;
+                format.fBitWidth = 32;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                // Finally, the IOAudioStream's current format needs to be indicated
+                audioStream->setFormat(&format);
+                
+                rate.whole = 44100;
+                format.fBitDepth = 24;
+                format.fBitWidth = 32;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                if(!hw->is_edsp){
+                    rate.whole = 88200;
+                    format.fBitDepth = 24;
+                    format.fBitWidth = 32;
+                    audioStream->addAvailableFormat(&format, &rate, &rate);
+                    
+                    rate.whole = 96000;
+                    format.fBitDepth = 24;
+                    format.fBitWidth = 32;
+                    audioStream->addAvailableFormat(&format, &rate, &rate);
+                    
+                    rate.whole = 176400;
+                    format.fBitDepth = 24;
+                    format.fBitWidth = 32;
+                    audioStream->addAvailableFormat(&format, &rate, &rate);
+                }
+            }else{
+                rate.fraction = 0;
+                rate.whole = sampling_rate;
+                format.fBitDepth = 16;
+                format.fBitWidth = 16;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                // Finally, the IOAudioStream's current format needs to be indicated
+                audioStream->setFormat(&format);
+                
+                rate.whole = 44100;
+                format.fBitDepth = 16;
+                format.fBitWidth = 16;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                rate.whole = 88200;
+                format.fBitDepth = 16;
+                format.fBitWidth = 16;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                rate.whole = 96000;
+                format.fBitDepth = 16;
+                format.fBitWidth = 16;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+                
+                rate.whole = 176400;
+                format.fBitDepth = 16;
+                format.fBitWidth = 16;
+                audioStream->addAvailableFormat(&format, &rate, &rate);
+            }
         }
     }
     
@@ -651,16 +706,36 @@ IOReturn kXAudioEngine::performFormatChange(IOAudioStream *audioStream, const IO
     
     if (newSampleRate)
     {
-        switch (newSampleRate->whole) {
-            case 48000:
-                debug("\t-> 48kHz selected\n");
-                
-					// Add code to switch hardware to 48kHz
-                break;
-            default:
-					// This should not be possible since we only specified 44100 and 48000 as valid sample rates
-                debug("\t Internal Error - unknown sample rate selected.\n");
-                break;
+        if(!hw->is_edsp){
+            for(int i=0; i<n_channels;i++)
+            {
+                hw->voicetable[i].param.initial_pitch =(word)  kx_srToPitch(kx_sr_coeff(hw,newSampleRate->whole) >> 8);
+                hw->voicetable[i].param.pitch_target  = kx_samplerate_to_linearpitch(kx_sr_coeff(hw,newSampleRate->whole));
+                hw->voicetable[i].sampling_rate = newSampleRate->whole;
+            }
+        }else{
+            switch (newSampleRate->whole) {
+                case 44100:
+                    kx_writefpga(hw,EMU_HANA_UNMUTE,EMU_MUTE);
+                    kx_writefpga(hw,EMU_HANA_DEFCLOCK,EMU_HANA_DEFCLOCK_44_1K);
+                    kx_writefpga(hw,EMU_HANA_WCLOCK,EMU_HANA_WCLOCK_INT_44_1K | EMU_HANA_WCLOCK_1X);
+                    IOSleep(200);
+                    kx_writefpga(hw,EMU_HANA_UNMUTE,EMU_UNMUTE);
+                    break;
+                    
+                case 48000:
+                    kx_writefpga(hw,EMU_HANA_UNMUTE,EMU_MUTE);
+                    kx_writefpga(hw,EMU_HANA_DEFCLOCK,EMU_HANA_DEFCLOCK_48K);
+                    kx_writefpga(hw,EMU_HANA_WCLOCK,EMU_HANA_WCLOCK_INT_48K | EMU_HANA_WCLOCK_1X);
+                    IOSleep(200);
+                    kx_writefpga(hw,EMU_HANA_UNMUTE,EMU_UNMUTE);
+                    break;
+                    
+                default:
+                    // This should not be possible since we only specified 44100 and 48000 as valid sample rates
+                    debug("\t Internal Error - unknown sample rate selected.\n");
+                    break;
+            }
         }
     }
     
