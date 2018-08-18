@@ -64,7 +64,8 @@ bool kXAudioEngine::init(kx_hw *hw_)
 		// Use 4 times the buffer size to prevent some sort of underrun on
 		// Mavericks (related to Timer Coalescing?) causing playback crackle
 		// until streams are restart (e.g. stop/start playback)
-    n_frames = (int)(4 * (hw->mtr_buffer.size * 8 / bps / n_channels));
+//    n_frames = (int)(4 * (hw->mtr_buffer.size * 8 / bps / n_channels));
+     n_frames = (int)(hw->mtr_buffer.size * 8 / bps / n_channels);
 
     debug("kXAudioEngine[%p]::init - n_frames=%d\n", this, n_frames);
     
@@ -125,7 +126,8 @@ bool kXAudioEngine::initHardware(IOService *provider)
     if(hw->is_10k2)
     {
 			// setSampleOffset(28); // 28 samples
-		setSampleLatency(28+1);
+		//setSampleLatency(28+1);
+        setSampleOffset(40);
     }
     else
     {

@@ -65,6 +65,7 @@ public:
 	kx_hw							*hw;
 	IOFilterInterruptEventSource	*interruptEventSource;
 	int								epilog_pgm;
+    int                             prolog_pgm;
 	int								is_muted;
 	dword							master_volume[2];
 	kXAudioEngine					*engine;
@@ -106,7 +107,9 @@ public:
     static void notify_func(void *data,int what);
 	// ---- end of HAL functions
 	
-	
+    static IOReturn gainChangeHandler(IOService *target, IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue);
+    virtual IOReturn gainChanged(IOAudioControl *gainControl, SInt32 oldValue, SInt32 newValue);
+    
 	// volume controls
     static IOReturn volumeChangeHandler(IOService *target, IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
     virtual IOReturn volumeChanged(IOAudioControl *volumeControl, SInt32 oldValue, SInt32 newValue);
