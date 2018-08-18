@@ -30,7 +30,8 @@
 @interface Ac97App : NSObject
 {
     IBOutlet NSTabView *tabView;
-
+    Byte nItem;
+    
     Ac97Controller *ac97;
 }
 

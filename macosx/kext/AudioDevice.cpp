@@ -835,22 +835,22 @@ IOReturn kXAudioDevice::gainChanged(IOAudioControl *gainControl, SInt32 oldValue
         gain=(dword)((newValue+1)*(0x2000));
         
         if(id == 1){
-            kx_set_dsp_register(hw,prolog_pgm,"in0vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in0vol",gain);
         }
         if(id == 2){
-            kx_set_dsp_register(hw,prolog_pgm,"in1vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in1vol",gain);
         }
         if(id == 3){
-            kx_set_dsp_register(hw,prolog_pgm,"in2vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in2vol",gain);
         }
         if(id == 4){
-            kx_set_dsp_register(hw,prolog_pgm,"in3vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in3vol",gain);
         }
         if(id == 5){
-            kx_set_dsp_register(hw,prolog_pgm,"in4vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in4vol",gain);
         }
         if(id == 6){
-            kx_set_dsp_register(hw,prolog_pgm,"in5vol",gain); // these are +12dB volumes
+            kx_set_dsp_register(hw,prolog_pgm,"in5vol",gain);
         }
     }
     
