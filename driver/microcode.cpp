@@ -506,6 +506,16 @@ KX_API(int,kx_dsp_reset(kx_hw *hw))
 	 kx_set_microcode_bypass(hw,eq10a_pgm,1);
 	 kx_disable_microcode(hw,reverblt_pgm);
 	 kx_disable_microcode(hw,stchorus_pgm);
+     if(hw->is_edsp){
+         kx_connect_microcode(hw,prolog_pgm,"in0",epilog_pgm,"asio0");
+         kx_connect_microcode(hw,prolog_pgm,"in1",epilog_pgm,"asio1");
+         kx_connect_microcode(hw,prolog_pgm,"in2",epilog_pgm,"asio2");
+         kx_connect_microcode(hw,prolog_pgm,"in3",epilog_pgm,"asio3");
+         kx_connect_microcode(hw,prolog_pgm,"in4",epilog_pgm,"asio4");
+         kx_connect_microcode(hw,prolog_pgm,"in5",epilog_pgm,"asio5");
+         kx_connect_microcode(hw,prolog_pgm,"in6",epilog_pgm,"asio6");
+         kx_connect_microcode(hw,prolog_pgm,"in7",epilog_pgm,"asio7");
+     }
 #endif
  }
 
