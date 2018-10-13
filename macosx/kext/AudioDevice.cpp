@@ -452,7 +452,6 @@ int kXAudioDevice::create_audio_controls(IOAudioEngine *audioEngine)
             break;
         }
     }
-    kx_lock_release(hw,&hw->dsp_lock,&flags);
     
     for_each_list_entry(item,&hw->microcodes)
     {
@@ -472,6 +471,8 @@ int kXAudioDevice::create_audio_controls(IOAudioEngine *audioEngine)
     kx_set_dsp_register(hw,prolog_pgm,"in3vol",0x2000*65535);
     kx_set_dsp_register(hw,prolog_pgm,"in4vol",0x2000*65535);
     kx_set_dsp_register(hw,prolog_pgm,"in5vol",0x2000*65535);
+    kx_set_dsp_register(hw,prolog_pgm,"in6vol",0x2000*65535);
+    kx_set_dsp_register(hw,prolog_pgm,"in7vol",0x2000*65535);
     
     {
         IOAudioLevelControl *control=NULL;
